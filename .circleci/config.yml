@@ -17,9 +17,9 @@ jobs:
       # Build the site's HTML w/ the base_url for CircleCI artifacts
       - run: gem install bundler
       - run: bundle install
-      - run: bundle exec jekyll build /0/html/
+      - run: bundle exec jekyll build --baseurl /0/html/
 
-      # Tell Circle to store the documentation output in a folder that we can access later
+      # Tell Circle to store the documentation output in a folder we can access later
       - store_artifacts:
           path: _site/
           destination: html
