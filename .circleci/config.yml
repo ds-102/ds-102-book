@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   # Build the site to store artifacts
-  demo_site:
+  build_html:
     docker:
       - image: circleci/ruby:2.6
     steps:
@@ -28,7 +28,7 @@ jobs:
           path: _build/
           destination: _build
 
-  run_tests:
+  build_markdown:
     docker:
       - image: circleci/python:3.6-stretch
     steps:
@@ -69,18 +69,11 @@ workflows:
   version: 2
   default:
     jobs:
-      - run_tests:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
-      - demo_site:
+      - build_markdown
+      - build_html:
           requires:
-            - run_tests
-          filters:
-            branches:
-              ignore:
-                - gh-pages
+            - build_markdown
+
 
 commands:
   copy_built_files:
