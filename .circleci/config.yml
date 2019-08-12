@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   # Build the site to store artifacts
-  build_html:
+  demo_html:
     docker:
       - image: circleci/ruby:2.6
     steps:
@@ -27,6 +27,46 @@ jobs:
       - store_artifacts:
           path: _build/
           destination: _build
+
+  # Push the HTML to the gh-pages branch
+  push_html:
+    docker:
+      - image: circleci/ruby:2.6
+    steps:
+      # Attach the built markdown files
+      - checkout
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+
+      # Install the ghp-import tool
+      - run:
+          name: "Install ghp-import"
+          command: |      
+            export PATH=$PATH:/home/circleci/.local/bin
+            curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+            python get-pip.py --user
+            pip install -U ghp-import --user
+
+      - add_ssh_keys:
+          fingerprints:
+            # The SSH key fingerprint
+            - "4e:f9:a5:62:b0:62:f5:d4:7d:f2:52:0a:53:c9:d6:39"
+
+      # Copy over the built markdown files
+      - copy_built_files
+
+      # Build the site's HTML w/ the base_url for CircleCI artifacts
+      - run: gem install bundler
+      - run: bundle install
+      - run: bundle exec jekyll build
+
+      # Push the `_site` folder to our gh-pages branch
+      - run:
+          name: Push site to gh-pages
+          command: |
+            export PATH=$PATH:/home/circleci/.local/bin
+            ghp-import -p -n -f _site
 
   build_markdown:
     docker:
@@ -70,9 +110,17 @@ workflows:
   default:
     jobs:
       - build_markdown
-      - build_html:
+      - demo_html:
           requires:
             - build_markdown
+
+      - push_html:
+          requires:
+            - build_markdown
+          filters:
+            branches:
+              only:
+                - master
 
 
 commands:
