@@ -1,0 +1,22 @@
+# This file contains the order and numbering for all sections in the book.
+# Each entry has the following schema:
+#
+# - title: mytitle   # Title of chapter or section
+# - file: /myurl  # URL of section relative to the /content/ folder.
+#   sections:  # Contains a list of more entries that make up the chapter's sections
+#   expand_sections: true  # if you'd like the sections of this chapter to always
+#     be expanded in the sidebar.
+
+# Homepage
+- file: content/intro
+  title: Home
+
+# A chapter w/ a collection of sections beneath it
+- file: content/features/features # Chapter intro page
+  title: Features and customization
+  expand_sections: true
+  sections:
+  - file: content/features/markdown
+    title: Markdown files
+  - file: content/features/notebooks
+    title: Jupyter notebooks
