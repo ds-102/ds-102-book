@@ -1,3 +1,6 @@
 # Requirements for the demo notebooks
 # Useful for MyBinder configuration
 jupyter-book
+numpy
+matplotlib
+pandas
