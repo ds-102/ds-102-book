@@ -12,10 +12,24 @@
   title: Home
 
 # A chapter w/ a collection of sections beneath it
-- file: content/features/features # Chapter intro page
-  title: Features and customization
+- file: content/chapters/01/intro
+  title: "Chapter 1: Hypotheses and decisions"
   sections:
-  - file: content/features/markdown
-    title: Markdown files
-  - file: content/features/notebooks
-    title: Jupyter notebooks
+  - file: content/chapters/01/hypotheses_and_decisions
+    title: "Hypotheses and decisions"
+  - file: content/chapters/01/decisions_and_reality
+    title: "Decisions and reality"
+  - file: content/chapters/01/false_discovery_rate
+    title: "False discovery rate"
+  - file: content/chapters/01/repeated_testing
+    title: "Repeated testing"
+  - file: content/chapters/01/online_repeated_testing
+    title: "Online repeated testing"
+  expand_sections: True
+
+- file: content/chapters/02/intro
+  title: Bayesian modeling
+  expand_sections: True
+  sections:
+  - file: content/chapters/02/bayesian_intro
+    title: "Intro to Bayesian modeling"

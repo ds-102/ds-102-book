@@ -17,10 +17,10 @@
 #######################################################################################
 # Jekyll site settings
 title: Data 102 Textbook
-author: YOUR AUTHOR NAME
+author: Data 102 staff
 email: YOUR EMAIL
 description: >-
-  This is an example book built with Jupyter Books.
+  This is a textbook for Data Science 102. It is a work in progress.
 
 baseurl: /ds-102-book               # the subpath of your site, e.g. /blog. If there is no subpath for your site, use an empty string ""
 url: https://ds-102.github.io          # the base hostname & protocol for your site, e.g. http://example.com

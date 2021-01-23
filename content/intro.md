@@ -1,4 +1,8 @@
-# Books with Jupyter and Jekyll
+# Data, Inference, and Decisions
+
+This contains the textbook.
+
+## Books with Jupyter and Jekyll
 
 <img src="https://circleci.com/gh/jupyter/jupyter-book.svg?style=svg" class="left">
 
