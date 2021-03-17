@@ -15,21 +15,37 @@
 - file: content/chapters/01/intro
   title: "Chapter 1: Hypotheses and decisions"
   sections:
-  - file: content/chapters/01/hypotheses_and_decisions
-    title: "Hypotheses and decisions"
-  - file: content/chapters/01/decisions_and_reality
-    title: "Decisions and reality"
-  - file: content/chapters/01/false_discovery_rate
-    title: "False discovery rate"
-  - file: content/chapters/01/repeated_testing
-    title: "Repeated testing"
-  - file: content/chapters/01/online_repeated_testing
-    title: "Online repeated testing"
-  expand_sections: True
+    - file: content/chapters/01/placeholder
+      title: In progress
 
 - file: content/chapters/02/intro
-  title: Bayesian modeling
-  expand_sections: True
+  title: "Chapter 2: Bayesian modeling"
   sections:
-  - file: content/chapters/02/bayesian_intro
-    title: "Intro to Bayesian modeling"
+    - file: content/chapters/02/placeholder
+      title: "Intro to Bayesian modeling"
+
+- file: content/chapters/03/intro
+  title: "Chapter 3: Generalized linear models"
+  sections:
+    - file: content/chapters/03/placeholder
+      title: "Generalized Linear Models"
+
+- file: content/chapters/04/intro
+  title: "Chapter 4: Uncertainty and the bootstrap"
+  sections:
+    - file: content/chapters/04/placeholder
+      title: "Uncertainty and the Bootstrap"
+
+- file: content/chapters/05/intro
+  title: "Chapter 5: Causal Inference"
+  sections:
+    - file: content/chapters/05/01_association_correlation_causation
+      title: "Association, correlation, and causation"
+    - file: content/chapters/05/02_quantifying_association
+      title: "Quantifying Association"
+    - file: content/chapters/05/03_causality
+      title: "Causality"
+    - file: content/chapters/05/04_randomized_experiments
+      title: "Causal Inference in Randomized Experiments"
+    - file: content/chapters/05/05_observational_studies
+      title: "Causal Inference in Observational Studies"

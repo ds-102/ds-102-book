@@ -16,11 +16,11 @@
 
 #######################################################################################
 # Jekyll site settings
-title: Data 102 Textbook
-author: Data 102 staff
+title: "Data, Inference, and Decisions"
+author: "Data 102 Staff"
 email: YOUR EMAIL
 description: >-
-  This is a textbook for Data Science 102. It is a work in progress.
+    "This is a textbook for Data 102: Data, Inference, and Decisions. It is a work in progress."
 
 baseurl: /ds-102-book               # the subpath of your site, e.g. /blog. If there is no subpath for your site, use an empty string ""
 url: https://ds-102.github.io          # the base hostname & protocol for your site, e.g. http://example.com
@@ -36,7 +36,7 @@ use_hide_code_button: true        # If True, a small button appears to the right
 
 # Sidebar settings
 show_sidebar: true                # Show the sidebar. Only set to false if your only wish to host a single page.
-collapse_inactive_chapters: true  # Whether to collapse the inactive chapters in the sidebar
+collapse_inactive_chapters: false  # Whether to collapse the inactive chapters in the sidebar
 textbook_logo: images/logo/logo.png               # A logo to be displayed at the top of your textbook sidebar
 textbook_logo_link: https://jupyter.org/jupyter-book/                    # A link for the logo.
 sidebar_footer_text: Powered by <a href="https://github.com/jupyter/jupyter-book">Jupyter
@@ -146,3 +146,8 @@ plugins:
 
 # Jupyter Book version - DO NOT CHANGE THIS. It is generated when a new book is created
 jupyter_book_version: 0.4.2
+parse:
+  myst_enable_extensions:
+    # don't forget to list any other extensions you want enabled,
+    # including those that are enabled by default!
+    - amsmath
