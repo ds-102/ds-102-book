@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>&lt;no title&gt; &#8212; Data, Inference, and Decisions</title>
     
-  <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link rel="stylesheet" href="../../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../../../_static/js/index.3da636dd464baa7582d2.js">
 
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
@@ -283,6 +283,19 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">e73a92bc9fa1</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;inline&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">daft</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;daft&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -305,8 +318,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-2-771963e1e342&gt;:14: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
-  plt.tight_layout()
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>//anaconda3/lib/python3.7/site-packages/ipykernel_launcher.py:14: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  
 </pre></div>
 </div>
 <img alt="../../../_images/figure_data_generation_1_1.png" src="../../../_images/figure_data_generation_1_1.png" />
@@ -384,8 +397,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-5-519b2b0ff659&gt;:16: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
-  plt.tight_layout()
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>//anaconda3/lib/python3.7/site-packages/ipykernel_launcher.py:16: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  app.launch_new_instance()
 </pre></div>
 </div>
 <img alt="../../../_images/figure_data_generation_4_1.png" src="../../../_images/figure_data_generation_4_1.png" />
@@ -470,20 +483,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="mi">003</span><span class="n">a5ec1f7d3</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Suppose we are trying to measure whether a certain pesticide is effective at killing insects that eat crops. We conduct a randomized controlled trial, and obtain the following data:</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">crops</span> <span class="o">=</span> <span class="n">make_simpson_df</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="p">[</span><span class="s2">&quot;Pesticide&quot;</span><span class="p">,</span> <span class="s2">&quot;Control&quot;</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="p">[</span><span class="s2">&quot;No insects&quot;</span><span class="p">,</span> <span class="s2">&quot;insects&quot;</span><span class="p">],</span>
-
-<span class="ne">NameError</span>: name &#39;make_simpson_df&#39; is not defined
-</pre></div>
-</div>
-</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -533,7 +532,7 @@
     </div>
 
     
-  <script src="../../../_static/js/index.d3f166471bb80abb5163.js"></script>
+  <script src="../../../_static/js/index.3da636dd464baa7582d2.js"></script>
 
 
     
