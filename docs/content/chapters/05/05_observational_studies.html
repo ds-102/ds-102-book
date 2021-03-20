@@ -1,0 +1,577 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Causal Inference in Observational Studies &#8212; Data, Inference, and Decisions</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="Causal Inference in Randomized Experiments" href="04_randomized_experiments.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Data, Inference, and Decisions</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Data, Inference, and Decisions
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../01/intro.html">
+   Chapter 1: Hypotheses and decisions
+  </a>
+  <ul class="simple collapse-ul">
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../02/intro.html">
+   Chapter 2: Bayesian modeling
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02/placeholder.html">
+     Intro to Bayesian modeling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../03/intro.html">
+   Chapter 3: Generalized linear models
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03/placeholder.html">
+     Generalized Linear Models
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../04/intro.html">
+   Chapter 4: Uncertainty and the bootstrap
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/placeholder.html">
+     Uncertainty and the Bootstrap
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   Chapter 5: Causal Inference
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_association_correlation_causation.html">
+     Association, correlation, and causation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_quantifying_association.html">
+     Quantifying Association
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_causality.html">
+     Causality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_randomized_experiments.html">
+     Causal Inference in Randomized Experiments
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Causal Inference in Observational Studies
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/chapters/05/05_observational_studies.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/content/chapters/05/05_observational_studies.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-it-s-hard">
+   Why it’s hard
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#confounding-variables-and-the-superpopulation-model">
+   Confounding variables and the superpopulation model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conditional-average-treatment-effect-and-unconfoundedness">
+   Conditional average treatment effect and unconfoundedness
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#from-cate-to-ate">
+     From CATE to ATE
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#outcome-regression">
+   Outcome Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inverse-propensity-weighting">
+   Inverse propensity weighting
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="causal-inference-in-observational-studies">
+<h1>Causal Inference in Observational Studies<a class="headerlink" href="#causal-inference-in-observational-studies" title="Permalink to this headline">¶</a></h1>
+<p>So far, we’ve looked at ways of measuring association in any dataset. We’ve also looked at how we can draw conclusions about causality in randomized controlled trials. But in many cases, randomized controlled trials are not viable. Some reasons for that might be:</p>
+<ul class="simple">
+<li><p><strong>Ethical considerations</strong>: suppose we believe that a certain treatment might harm people. In order to test this belief in a randomized controlled trial, we would have to subject people to a treatment that we believe would harm them, which is profoundly unethical. In such cases, we need alternative ways of drawing causal conclusions: we have an obligation as data scientists and researchers to avoid making <a class="reference external" href="https://en.wikipedia.org/wiki/Unethical_human_experimentation_in_the_United_States">the mistakes of the past</a>.</p></li>
+<li><p><strong>Cost</strong>: Randomized controlled trials can be expensive to run: we must find randomly chosen individuals that are representative the population; apply a treatment to half of them; and measure the outcomes, potentially over a long range of time. In some cases, this may be infeasible.</p></li>
+<li><p><strong>Sample size</strong>: due to cost considerations, randomized controlled trials may not have enough subjects to draw strong statistical conclusions.</p></li>
+</ul>
+<p>There is a wealth of data available on observational studies. In this section, we’ll look at ways we can use this data to draw causal conclusions. As we saw when looking at association, the most common problem when trying to draw conclusions about causality is the presence of confounding variables. We’ll focus our attention on methods that try to account for these confounding variables.</p>
+<div class="section" id="why-it-s-hard">
+<h2>Why it’s hard<a class="headerlink" href="#why-it-s-hard" title="Permalink to this headline">¶</a></h2>
+<p>When dealing with data from observational studies, we can’t just take the simple difference in means anymore. To see why not, let’s return to our restaurants example. We’ll do the same computations we did before, but this time from the potential outcomes perspective.</p>
+<p>Consider the science table version of the data (where we’ve converted 👍 to 1 and 👎 to 0, so that averages correspond to percentages liked):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">food</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;restaurants_counterfactuals.csv&#39;</span><span class="p">)</span>
+<span class="n">food</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dish rating for A</th>
+      <th>Dish rating for B</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>2019</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2019</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>2020</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>2020</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>2020</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Displaying the data this way requires us to think about it slightly differently, and highlights the implications of the potential outcomes framework! In particular:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Z_i\)</span> corresponds to whether the critic ordered dish <span class="math notranslate nohighlight">\(i\)</span> from restaurant A or B.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_i(B)\)</span> and <span class="math notranslate nohighlight">\(Y_i(A)\)</span> represent what-ifs: <em>if</em> the critics had ordered dish <span class="math notranslate nohighlight">\(i\)</span> from a particular restaurant, would they have liked it?</p></li>
+<li><p>The year is our confound: we’ll use <span class="math notranslate nohighlight">\(X_i\)</span> to denote the year that dish <span class="math notranslate nohighlight">\(i\)</span> was ordered in.</p></li>
+</ul>
+<p>Our representation of the data this way makes it clear that we can’t compute the ATE:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_ATE</span> <span class="o">=</span> <span class="p">(</span><span class="n">food</span><span class="p">[</span><span class="s2">&quot;Dish rating for B&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">food</span><span class="p">[</span><span class="s2">&quot;Dish rating for A&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">food_ATE</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nan
+</pre></div>
+</div>
+</div>
+</div>
+<p>In trying to understand a causal relationship between choice of restaurant and liking the food, naively using the simple difference in observed means (SDO) can mislead us, as we already saw:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_sdo</span> <span class="o">=</span> <span class="n">food</span><span class="p">[</span><span class="s2">&quot;Dish rating for B&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">food</span><span class="p">[</span><span class="s2">&quot;Dish rating for A&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">food_sdo</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.20000000000000007
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="confounding-variables-and-the-superpopulation-model">
+<h2>Confounding variables and the superpopulation model<a class="headerlink" href="#confounding-variables-and-the-superpopulation-model" title="Permalink to this headline">¶</a></h2>
+<p>In the case of a randomized controlled trial, we saw that we could use the difference in means estimator because of the independence between the treatment assignment <span class="math notranslate nohighlight">\(Z_i\)</span> and the potential outcomes <span class="math notranslate nohighlight">\(\big(Y_i(0), Y_i(1)\big)\)</span>. But, in the case of an observational study, this independence assumption no longer holds. We’ve seen a few examples of this in the last few sections, where confounding variables affect both the treatment and the outcome.</p>
+<p>In this section, we’ll focus on a few methods that answer the question: if we also observe the confounding variable, can we determine whether the treatment has an effect on the outcome?</p>
+<p>Our notation will be similar to what we’ve used before, and we’ll add a new variable <span class="math notranslate nohighlight">\(X_i\)</span> for each unit that represents the confounding information. We have tuples <span class="math notranslate nohighlight">\((Z_i, Y_i(0), Y_i(1), X_i)\)</span> for each unit that are i.i.d. (that is, the tuple for one unit is independent from the tuple for the next unit). This is called the <strong>superpopulation model</strong>.</p>
+</div>
+<div class="section" id="conditional-average-treatment-effect-and-unconfoundedness">
+<h2>Conditional average treatment effect and unconfoundedness<a class="headerlink" href="#conditional-average-treatment-effect-and-unconfoundedness" title="Permalink to this headline">¶</a></h2>
+<p>We’ll define a new quantity called the <strong>conditional average treatment effect (CATE)</strong>. This is like the ATE we saw before, but conditioned on a particular value of <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{CATE} = \tau(x) = E[Y(1) - Y(0) | X = x]
+\]</div>
+<p>Introducing the conditioning alone doesn’t help us: if we were to expand this using the tower property to condition on <span class="math notranslate nohighlight">\(Z\)</span>, we’ll still have counterfactual terms. So why did we do it? It turns out that we only need to make one assumption for this to help us. This assumption is called <strong>unconfoundedness</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \big(Y(0), Y(1)\big) \perp \!\!\! \perp Z \mid X
+\]</div>
+<p>This is a statement of conditional independence. The potential outcomes <span class="math notranslate nohighlight">\(Y(0)\)</span> and <span class="math notranslate nohighlight">\(Y(1)\)</span> might not be independent of the treatment decision <span class="math notranslate nohighlight">\(Z\)</span>, but this assumption states that they are conditionally independent <em>if</em> we know the value of a confounding variable <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>In the restaurant example above, unconfoundedness would mean that within each year, the decision whether to order from A or B (treatment) is independent of the ratings that dishes from A and B would get (potential outcomes). It does <em>not</em> state that the restaurant is conditionally independent of the rating: this is a subtle but important distinction.</p>
+<p>If we assume unconfoundedness, then we can safely estimate the CATE using the difference in conditional means:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+    \tau(x) 
+        &amp;= E[Y(1) - Y(0) | X = x] &amp;\\
+        &amp;= E[Y(1) | X = x] - E[Y(0) | X = x] &amp; {\tiny\text{(linearity of (conditional) expectation)}}\\
+        &amp;= E[Y(1) | X = x, Z = 1] - E[Y(0) | X = x, Z = 0] &amp; {\tiny\text{(unconfoundedness)}}
+\end{align}
+\end{split}\]</div>
+<div class="section" id="from-cate-to-ate">
+<h3>From CATE to ATE<a class="headerlink" href="#from-cate-to-ate" title="Permalink to this headline">¶</a></h3>
+<p>In most cases, what we’re really interested in is the ATE. How do we get from the CATE to the ATE? As we’ve done so many times before, we can use the law of iterated expectation (tower property):</p>
+<div class="math notranslate nohighlight">
+\[
+E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
+\]</div>
+<p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+    ATE 
+        &amp;= E[\tau(X)] \\
+        &amp;= \sum_x \tau(x) P(X=x)
+\end{align}
+\end{split}\]</div>
+<p>(where we would use an integral instead of a sum if <span class="math notranslate nohighlight">\(X\)</span> is continuous).</p>
+<p>What does this look like in practice? Let’s go back to the restaurant example. Instead of computing the difference in means for the entire dataset, we’ll do it separately, once for 2020 and once for 2019:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_2020</span> <span class="o">=</span> <span class="n">food</span><span class="p">[</span><span class="n">food</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2020</span><span class="p">]</span>
+<span class="n">food_2019</span> <span class="o">=</span> <span class="n">food</span><span class="p">[</span><span class="n">food</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2019</span><span class="p">]</span>
+
+<span class="n">food_sdo_2020</span> <span class="o">=</span> <span class="n">food_2020</span><span class="p">[</span><span class="s2">&quot;Dish rating for B&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">food_2020</span><span class="p">[</span><span class="s2">&quot;Dish rating for A&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">food_sdo_2019</span> <span class="o">=</span> <span class="n">food_2019</span><span class="p">[</span><span class="s2">&quot;Dish rating for B&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">food_2019</span><span class="p">[</span><span class="s2">&quot;Dish rating for A&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">food_sdo_2020</span><span class="p">,</span> <span class="n">food_sdo_2019</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.05555555555555558 -0.125
+</pre></div>
+</div>
+</div>
+</div>
+<p>These correspond to the CATEs <span class="math notranslate nohighlight">\(\tau(2020)\)</span> and <span class="math notranslate nohighlight">\(\tau(2019)\)</span> respectively. Just like earlier, we see that these values have the opposite sign from the SDO computed on the entire data: Restaurant A was better-liked in 2020 and 2019. But, because the critics ordered from Restaurant A more in 2020 (which had lower ratings overall), Restaurant A looks worse in the aggregate data.</p>
+<p>How do we combine these to estimate the ATE? We need the marginal probabilities <span class="math notranslate nohighlight">\(P(2020)\)</span> and <span class="math notranslate nohighlight">\(P(2019)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_2020</span> <span class="o">=</span> <span class="p">(</span><span class="n">food</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2020</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">p_2019</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">p_2020</span>
+
+<span class="n">est_food_ATE</span> <span class="o">=</span> <span class="n">food_sdo_2020</span> <span class="o">*</span> <span class="n">p_2020</span> <span class="o">+</span> <span class="n">food_sdo_2019</span> <span class="o">*</span> <span class="n">p_2019</span>
+<span class="n">est_food_ATE</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.07870370370370372
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is our first causal inference from observational data! To state it formally:</p>
+<p><strong>If we assume that restaurant choice and the potential outcomes are independent given the year (unconfoundedness), then choosing Restaurant A causes the critics to like dishes about 8% more</strong>.</p>
+<p>Note that we can’t just make a blanket statement about causality: this statement depends heavily on our use of the unconfoundedness assumption. This is true in general: in order to draw causal inferences outside of randomized controlled experiments, we need to make assumptions. When reporting your causal conclusions, it’s always important to communicate the assumptions you made!</p>
+</div>
+</div>
+<div class="section" id="outcome-regression">
+<h2>Outcome Regression<a class="headerlink" href="#outcome-regression" title="Permalink to this headline">¶</a></h2>
+<p><em>In progress</em></p>
+</div>
+<div class="section" id="inverse-propensity-weighting">
+<h2>Inverse propensity weighting<a class="headerlink" href="#inverse-propensity-weighting" title="Permalink to this headline">¶</a></h2>
+<p><em>In progress</em></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content/chapters/05"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="04_randomized_experiments.html" title="previous page">Causal Inference in Randomized Experiments</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Data 102 Staff<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

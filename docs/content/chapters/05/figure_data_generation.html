@@ -1,0 +1,541 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>&lt;no title&gt; &#8212; Data, Inference, and Decisions</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Data, Inference, and Decisions</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Data, Inference, and Decisions
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../01/intro.html">
+   Chapter 1: Hypotheses and decisions
+  </a>
+  <ul class="simple collapse-ul">
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../02/intro.html">
+   Chapter 2: Bayesian modeling
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02/placeholder.html">
+     Intro to Bayesian modeling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../03/intro.html">
+   Chapter 3: Generalized linear models
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03/placeholder.html">
+     Generalized Linear Models
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../04/intro.html">
+   Chapter 4: Uncertainty and the bootstrap
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/placeholder.html">
+     Uncertainty and the Bootstrap
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   Chapter 5: Causal Inference
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_association_correlation_causation.html">
+     Association, correlation, and causation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_quantifying_association.html">
+     Quantifying Association
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_causality.html">
+     Causality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_randomized_experiments.html">
+     Causal Inference in Randomized Experiments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_observational_studies.html">
+     Causal Inference in Observational Studies
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/chapters/05/figure_data_generation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/content/chapters/05/figure_data_generation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="simple nav section-nav flex-column">
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">daft</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">pgm</span> <span class="o">=</span> <span class="n">daft</span><span class="o">.</span><span class="n">PGM</span><span class="p">()</span>
+
+<span class="c1">### Line graph</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Sunburn&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.9</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Ice cream&quot;</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">2.3</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Sun&quot;</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+<span class="c1">#plt.gca().set_xlabel(&#39;(e)&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;sunburn_icecream_.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-2-771963e1e342&gt;:14: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout()
+</pre></div>
+</div>
+<img alt="../../../_images/figure_data_generation_1_1.png" src="../../../_images/figure_data_generation_1_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">pgm</span> <span class="o">=</span> <span class="n">daft</span><span class="o">.</span><span class="n">PGM</span><span class="p">()</span>
+
+<span class="c1">### Line graph</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;account&quot;</span><span class="p">,</span> <span class="s2">&quot;Account popularity/</span><span class="se">\n</span><span class="s2">budget&quot;</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;dslr&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;DSLR&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;likes&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Likes&quot;</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
+
+
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;account&quot;</span><span class="p">,</span> <span class="s2">&quot;dslr&quot;</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;account&quot;</span><span class="p">,</span> <span class="s2">&quot;likes&quot;</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;dslr&quot;</span><span class="p">,</span> <span class="s2">&quot;likes&quot;</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+<span class="c1">#plt.gca().set_xlabel(&#39;(e)&#39;)</span>
+<span class="c1">#plt.tight_layout()</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;instagram_.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/figure_data_generation_2_0.png" src="../../../_images/figure_data_generation_2_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#pgm = daft.PGM(node_ec=None)</span>
+<span class="n">pgm</span> <span class="o">=</span> <span class="n">daft</span><span class="o">.</span><span class="n">PGM</span><span class="p">()</span>
+
+<span class="c1">### Line graph</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;mozz&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Mozzarella&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">2.25</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;phd&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Civil eng. PhDs&quot;</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
+
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+<span class="c1">#plt.gca().set_xlabel(&#39;(e)&#39;)</span>
+<span class="c1">#plt.tight_layout()</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;spurious.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/figure_data_generation_3_0.png" src="../../../_images/figure_data_generation_3_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">pgm</span> <span class="o">=</span> <span class="n">daft</span><span class="o">.</span><span class="n">PGM</span><span class="p">()</span>
+
+<span class="c1">### Line graph</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Rating&quot;</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.9</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;restaurant&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Restaurant&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;restaurant&quot;</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;restaurant&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+<span class="c1">#plt.gca().set_xlabel(&#39;(e)&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;restaurant.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-5-519b2b0ff659&gt;:16: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout()
+</pre></div>
+</div>
+<img alt="../../../_images/figure_data_generation_4_1.png" src="../../../_images/figure_data_generation_4_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="k">def</span> <span class="nf">make_simpson_df_and_science_table</span><span class="p">(</span>
+    <span class="n">treatments</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">,</span> <span class="n">confounds</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">treatment_name</span><span class="p">,</span> <span class="n">outcome_name</span><span class="p">,</span> <span class="n">confound_name</span>
+<span class="p">):</span>
+    <span class="n">agg_rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sample_rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">other</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">treatments</span><span class="p">)</span> <span class="o">-</span> <span class="p">{</span><span class="n">t</span><span class="p">})[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="p">((</span><span class="n">it</span><span class="p">,</span> <span class="n">t</span><span class="p">),</span> <span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">o</span><span class="p">),</span> <span class="p">(</span><span class="n">ic</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span>
+        <span class="o">*</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="p">(</span><span class="n">treatments</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">,</span> <span class="n">confounds</span><span class="p">))</span>
+    <span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">it</span><span class="p">,</span> <span class="n">io</span><span class="p">,</span> <span class="n">ic</span><span class="p">]</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">treatment_name</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span>
+            <span class="n">outcome_name</span><span class="p">:</span> <span class="n">o</span><span class="p">,</span>
+            <span class="n">confound_name</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span>
+            <span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="n">n</span>
+        <span class="p">}</span>
+        <span class="n">agg_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        
+        <span class="n">sample_row</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1">#f&quot;{outcome_name} for {treatment_name}={t}&quot;: io,</span>
+            <span class="c1">#f&quot;{outcome_name} for {treatment_name}={other(t)}&quot;: np.nan,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">outcome_name</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">io</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">outcome_name</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">other</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+            <span class="n">confound_name</span><span class="p">:</span> <span class="n">c</span>
+        <span class="p">}</span>
+        <span class="n">sample_rows</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">sample_row</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">sample_rows</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">agg_rows</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sample_rows</span><span class="p">))</span>
+
+        
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food</span><span class="p">,</span> <span class="n">food_sci</span> <span class="o">=</span> <span class="n">make_simpson_df_and_science_table</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;👎&quot;</span><span class="p">,</span> <span class="s2">&quot;👍&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;2019&quot;</span><span class="p">,</span> <span class="s2">&quot;2020&quot;</span><span class="p">],</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+        <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">10</span><span class="p">]],</span>
+    <span class="p">]),</span>
+    <span class="s2">&quot;Restaurant&quot;</span><span class="p">,</span> <span class="s2">&quot;Dish rating&quot;</span><span class="p">,</span> <span class="s2">&quot;Year&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">food</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;restaurants.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">food_sci</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;restaurants_counterfactuals.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Suppose we are trying to measure whether a certain pesticide is effective at killing insects that eat crops. We conduct a randomized controlled trial, and obtain the following data:</span>
+
+<span class="n">crops</span> <span class="o">=</span> <span class="n">make_simpson_df</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;Pesticide&quot;</span><span class="p">,</span> <span class="s2">&quot;Control&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;No insects&quot;</span><span class="p">,</span> <span class="s2">&quot;insects&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;Dead&quot;</span><span class="p">,</span> <span class="s2">&quot;Alive&quot;</span><span class="p">],</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+        <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">10</span><span class="p">]],</span>
+    <span class="p">]),</span>
+    <span class="s2">&quot;Crop treatment&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;Year&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">food</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;restaurants.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="mi">003</span><span class="n">a5ec1f7d3</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Suppose we are trying to measure whether a certain pesticide is effective at killing insects that eat crops. We conduct a randomized controlled trial, and obtain the following data:</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">crops</span> <span class="o">=</span> <span class="n">make_simpson_df</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="p">[</span><span class="s2">&quot;Pesticide&quot;</span><span class="p">,</span> <span class="s2">&quot;Control&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="p">[</span><span class="s2">&quot;No insects&quot;</span><span class="p">,</span> <span class="s2">&quot;insects&quot;</span><span class="p">],</span>
+
+<span class="ne">NameError</span>: name &#39;make_simpson_df&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content/chapters/05"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Data 102 Staff<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

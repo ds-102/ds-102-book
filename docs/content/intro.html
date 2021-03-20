@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data, Inference, and Decisions &#8212; Data 102 Textbook</title>
+    <title>Data, Inference, and Decisions &#8212; Data, Inference, and Decisions</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -76,7 +76,7 @@
 <a class="navbar-brand text-wrap" href="../index.html">
   
   
-  <h1 class="site-logo" id="site-title">Data 102 Textbook</h1>
+  <h1 class="site-logo" id="site-title">Data, Inference, and Decisions</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -96,30 +96,81 @@
   <a class="reference internal" href="chapters/01/intro.html">
    Chapter 1: Hypotheses and decisions
   </a>
+  <ul class="simple collapse-ul">
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="chapters/02/intro.html">
+   Chapter 2: Bayesian modeling
+  </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="chapters/01/hypotheses_and_decisions.html">
-     Hypotheses and decisions
+    <a class="reference internal" href="chapters/02/placeholder.html">
+     Intro to Bayesian modeling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="chapters/03/intro.html">
+   Chapter 3: Generalized linear models
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="chapters/03/placeholder.html">
+     Generalized Linear Models
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="chapters/04/intro.html">
+   Chapter 4: Uncertainty and the bootstrap
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="chapters/04/placeholder.html">
+     Uncertainty and the Bootstrap
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="chapters/05/intro.html">
+   Chapter 5: Causal Inference
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="chapters/05/01_association_correlation_causation.html">
+     Association, correlation, and causation
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="chapters/01/decisions_and_reality.html">
-     Decisions and reality
+    <a class="reference internal" href="chapters/05/02_quantifying_association.html">
+     Quantifying Association
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="chapters/01/false_discovery_rate.html">
-     False discovery rate
+    <a class="reference internal" href="chapters/05/03_causality.html">
+     Causality
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="chapters/01/repeated_testing.html">
-     Repeated testing
+    <a class="reference internal" href="chapters/05/04_randomized_experiments.html">
+     Causal Inference in Randomized Experiments
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="chapters/01/online_repeated_testing.html">
-     Online repeated testing
+    <a class="reference internal" href="chapters/05/05_observational_studies.html">
+     Causal Inference in Observational Studies
     </a>
    </li>
   </ul>
@@ -197,21 +248,6 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#books-with-jupyter-and-jekyll">
-   Books with Jupyter and Jekyll
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#getting-started">
-   Getting started
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installation">
-   Installation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#acknowledgements">
    Acknowledgements
   </a>
@@ -229,51 +265,10 @@
                 
   <div class="section" id="data-inference-and-decisions">
 <h1>Data, Inference, and Decisions<a class="headerlink" href="#data-inference-and-decisions" title="Permalink to this headline">¶</a></h1>
-<p>This contains the textbook.</p>
-<div class="section" id="books-with-jupyter-and-jekyll">
-<h2>Books with Jupyter and Jekyll<a class="headerlink" href="#books-with-jupyter-and-jekyll" title="Permalink to this headline">¶</a></h2>
-<img src="https://circleci.com/gh/jupyter/jupyter-book.svg?style=svg" class="left">
-<p>Jupyter Books lets you build an online book using a collection of Jupyter Notebooks
-and Markdown files. Its output is similar to the excellent <a class="reference external" href="https://bookdown.org/yihui/bookdown/">Bookdown</a> tool,
-and adds extra functionality for people running a Jupyter stack.</p>
-<p>For an example of a book built with Jupyter Books, see the <a class="reference external" href="https://www.textbook.ds100.org/">textbook for Data 100</a> at UC Berkeley.</p>
-<p>Here are a few features of Jupyter Books</p>
-<ul class="simple">
-<li><p>All course content is written in markdown and Jupyter Notebooks, stored in <code class="docutils literal notranslate"><span class="pre">notebooks/</span></code></p></li>
-<li><p>The Jupyter Book repo comes packaged with helper scripts to convert these into Jekyll pages (in <code class="docutils literal notranslate"><span class="pre">scripts/</span></code>) that can be hosted for free on GitHub</p></li>
-<li><p>Pages can have <a class="reference external" href="https://mybinder.org">Binder</a> or JupyterHub links automatically added for interactivity.</p></li>
-<li><p>The website itself is based on Jekyll, and is highly extensible and can be freely-hosted on GitHub.</p></li>
-<li><p>There are lots of nifty HTML features under-the-hood, such as Turbolinks fast-navigation and
-click-to-copy in code cells.</p></li>
-</ul>
-</div>
-<div class="section" id="getting-started">
-<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>To get started, you may be interested in the following links.
-Here are a few links of interest:</p>
-<ul class="simple">
-<li><p><strong><a class="reference internal" href="features/features.html"><span class="doc std std-doc">Quickstart</span></a></strong> is a quick demo and overview of Jupyter Books.</p></li>
-<li><p><strong><span class="xref myst">The Jupyter Book Guide</span></strong>
-will step you through the process of configuring and building your own Jupyter Book.</p></li>
-<li><p><strong><a class="reference external" href="https://github.com/jupyter/jupyter-book">The Jupyter Book template repo</a></strong> is the template
-repository you’ll use as a start for your Jupyter Book.</p></li>
-<li><p><strong>A demo of the Jupyter Book</strong> can be browsed via the sidebar to the left.</p></li>
-</ul>
-</div>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>Here’s a brief rundown of how to create your own Jupyter Book using this site. For a more
-complete guide, see <span class="xref myst">the Jupyter Book guide</span>.</p>
-<ul class="simple">
-<li><p>Fork the Jupyter Book template repo</p></li>
-<li><p>Replace the demo notebooks in <code class="docutils literal notranslate"><span class="pre">content/</span></code> with your own notebooks and markdown files.</p></li>
-<li><p>Create a Table of Contents yaml file by editing <code class="docutils literal notranslate"><span class="pre">_data/toc.yaml</span></code>.</p></li>
-<li><p>Generate the Jekyll markdown for your notebooks by running <code class="docutils literal notranslate"><span class="pre">scripts/generate_book.py</span></code></p></li>
-<li><p>Push your changes to GitHub (or wherever you host your site)!</p></li>
-</ul>
-</div>
+<p>This is a draft textbook for Data 102, created in Spring 2021 as a supplement to other course material.</p>
 <div class="section" id="acknowledgements">
 <h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
+<p>This course and its content would not be possible without a large team of faculty and students who developed the material.</p>
 <p>Jupyter Books was originally created by <a class="reference external" href="http://www.samlau.me/">Sam Lau</a> and <a class="reference external" href="https://predictablynoisy.com">Chris Holdgraf</a>
 with support of the <strong>UC Berkeley Data Science Education Program and the Berkeley
 Institute for Data Science</strong>.</p>
@@ -317,7 +312,7 @@ Institute for Data Science</strong>.</p>
     <div class="container">
       <p>
         
-          By Data 102 staff<br/>
+          By Data 102 Staff<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

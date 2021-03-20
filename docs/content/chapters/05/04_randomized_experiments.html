@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Causal Inference in Randomized Experiments &#8212; Data, Inference, and Decisions</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Causal Inference in Observational Studies" href="05_observational_studies.html" />
+    <link rel="prev" title="Causality" href="03_causality.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Data, Inference, and Decisions</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Data, Inference, and Decisions
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../01/intro.html">
+   Chapter 1: Hypotheses and decisions
+  </a>
+  <ul class="simple collapse-ul">
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../02/intro.html">
+   Chapter 2: Bayesian modeling
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02/placeholder.html">
+     Intro to Bayesian modeling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../03/intro.html">
+   Chapter 3: Generalized linear models
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03/placeholder.html">
+     Generalized Linear Models
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../04/intro.html">
+   Chapter 4: Uncertainty and the bootstrap
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/placeholder.html">
+     Uncertainty and the Bootstrap
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   Chapter 5: Causal Inference
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_association_correlation_causation.html">
+     Association, correlation, and causation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_quantifying_association.html">
+     Quantifying Association
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_causality.html">
+     Causality
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Causal Inference in Randomized Experiments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_observational_studies.html">
+     Causal Inference in Observational Studies
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/chapters/05/04_randomized_experiments.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/content/chapters/05/04_randomized_experiments.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-of-randomized-experiments">
+   Examples of randomized experiments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#randomized-experiments-and-potential-outcomes">
+   Randomized experiments and potential outcomes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fixed-sample-assumption-fisher-and-neyman">
+   Fixed-sample assumption: Fisher and Neyman
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#properties-of-the-neyman-estimator">
+     Properties of the Neyman estimator
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#confidence-intervals-for-the-ate">
+     Confidence intervals for the ATE
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hypothesis-testing-for-causal-effects">
+     Hypothesis testing for causal effects
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example">
+       Example
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#complications-with-randomized-experiments">
+   Complications with randomized experiments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#compliance">
+     Compliance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#external-validity">
+     External validity
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="causal-inference-in-randomized-experiments">
+<h1>Causal Inference in Randomized Experiments<a class="headerlink" href="#causal-inference-in-randomized-experiments" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we’ll build a deeper understanding of randomized experiments. Recall from the last section the table of potential outcomes:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Unit</p></th>
+<th class="head"><p>Outcome if not treated</p></th>
+<th class="head"><p>Outcome if treated</p></th>
+<th class="head"><p>Treated or not?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_1(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_1=1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_2(0)\)</span></p></td>
+<td><p>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_2=0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_3(0)\)</span></p></td>
+<td><p>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_3=0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_4(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_4=1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_5(0)\)</span></p></td>
+<td><p>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_5=0\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="examples-of-randomized-experiments">
+<h2>Examples of randomized experiments<a class="headerlink" href="#examples-of-randomized-experiments" title="Permalink to this headline">¶</a></h2>
+<p><em>Coming soon</em></p>
+</div>
+<div class="section" id="randomized-experiments-and-potential-outcomes">
+<h2>Randomized experiments and potential outcomes<a class="headerlink" href="#randomized-experiments-and-potential-outcomes" title="Permalink to this headline">¶</a></h2>
+<p><em>You may have seen some of this material before in <a class="reference external" href="https://www.inferentialthinking.com/chapters/12/3/Causality.html">Data 8</a>.</em></p>
+<p>In a randomized experiment, we protect ourselves from dealing with confounding variables by randomizing units into treatment and control. In other words, we choose each <span class="math notranslate nohighlight">\(Z_i\)</span> randomly, and we choose it independent of <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span>. Mathematically, we can write:</p>
+<p>\begin{align}
+\big(Y_i(0), Y_i(1)\big) \perp !!! \perp Z_i
+\end{align}</p>
+<p>Remember, this doesn’t mean that the treatment is independent from the outcome! It only means that the <em>decision on whether or not to treat</em> is independent from the outcome.</p>
+<p>You may remember learning that in a randomized controlled trial, we can determine causality by using the difference in means between the treatment and control groups. Let’s now show mathematically that this is true. Recall from the previous section our definition of the ATE <span class="math notranslate nohighlight">\(\tau\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\tau = E[Y_i(1) - Y_i(0)] = E[Y_i(1)] - E[Y_i(0)]\]</div>
+<p>If <span class="math notranslate nohighlight">\(Z_i\)</span> and <span class="math notranslate nohighlight">\(Y_i\)</span> are independent, then <span class="math notranslate nohighlight">\(E[Y_i(\cdot)] = E[Y_i(\cdot)|Z_i]\)</span>. In other words, conditioning on <span class="math notranslate nohighlight">\(Z_i\)</span> shouldn’t change the expectation, as long as <span class="math notranslate nohighlight">\(Z_i\)</span> and <span class="math notranslate nohighlight">\(Y_i(\cdot)\)</span> are independent.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+    \tau
+        &amp;= E[Y_i(1)] - E[Y_i(0)] \\
+        &amp;= E[Y_i(1)|Z_i=1] - E[Y_i(0)|Z_i=0] \quad{\scriptsize (\text{if }(Y_i(0), Y_i(1)) \perp \!\! \perp Z_i)}
+\end{align}
+\end{split}\]</div>
+<p>These two terms correspond to the mean outcomes in the treatment and control groups, respectively. If we have <span class="math notranslate nohighlight">\(n\)</span> observations <span class="math notranslate nohighlight">\((Z_1, Y_{1,obs}), \ldots, (Z_n, Y_{n,obs})\)</span>, then our empirical estimate for the ATE is just:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+    \hat{\tau}
+        &amp;= \left[\frac{1}{n_1} \sum_{i: Z_i = 1} Y_i\right] - \left[\frac{1}{n_0} \sum_{i: Z_i = 0} Y_i\right]
+\end{align}
+\]</div>
+<p>This quantity, which you’ve most likely seen and used before (e.g., in Data 8), has a few names: it’s called the <strong>difference in means</strong>, the <strong>simple difference in mean outcomes (SDO)</strong>, the <strong>Neyman estimator</strong>, or the <strong>prima facie causal effect</strong> (<em>prima facie</em> is latin for “at first sight”).</p>
+</div>
+<div class="section" id="fixed-sample-assumption-fisher-and-neyman">
+<h2>Fixed-sample assumption: Fisher and Neyman<a class="headerlink" href="#fixed-sample-assumption-fisher-and-neyman" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we’ll analyze randomized experiments and the Neyman estimator under the fixed-sample assumption. Recall that in this setting, we assume that <span class="math notranslate nohighlight">\(Z_i\)</span> is random, but that <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span> are fixed. In this case, the statement of independence above doesn’t really make sense, since <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span> are not random. However, we can still compute the Neyman estimator. We’ll develop some properties of the estimator, then use those to construct a confidence interval for the estimated ATE. Finally, we’ll look at two different hypothesis tests used in randomized experiments.</p>
+<div class="section" id="properties-of-the-neyman-estimator">
+<h3>Properties of the Neyman estimator<a class="headerlink" href="#properties-of-the-neyman-estimator" title="Permalink to this headline">¶</a></h3>
+<p>The Neyman estimator has two useful properties: the first is that it’s unbiased, and the second is that its variance depends on the estimated variances within the two groups:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+E[\hat{\tau}] &amp;= \tau \\
+\text{var}(\hat{\tau}) &amp;\leq \frac{\hat{\sigma}_1^2}{n_1} + \frac{\hat{\sigma}_0^2}{n_0},
+\end{align*}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{\sigma}_k\)</span> is the sample standard deviation of the potential treatment outcomes <span class="math notranslate nohighlight">\(Y_1(k), \ldots, Y_n(k)\)</span>. Since this depends on the counterfactual outcomes that we don’t get to observe, we’ll typically approximate it by replacing the true sample variances with the sample variances within each observed group in our data, and call this <span class="math notranslate nohighlight">\(\hat{V}\)</span>.</p>
+<p>It can be shown that under certain regularity conditions, the quantity <span class="math notranslate nohighlight">\(\frac{\hat{\tau} - \tau}{\sqrt{\hat{V}}} \sim N(0, \sigma^2)\)</span>, where <span class="math notranslate nohighlight">\(\sigma^2 &lt; 1\)</span>.</p>
+</div>
+<div class="section" id="confidence-intervals-for-the-ate">
+<h3>Confidence intervals for the ATE<a class="headerlink" href="#confidence-intervals-for-the-ate" title="Permalink to this headline">¶</a></h3>
+<p>Given the fact above, we can construct an asymptotically valid <span class="math notranslate nohighlight">\(95\%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\tau\)</span> as follows:
+$<span class="math notranslate nohighlight">\(
+\begin{align*}
+    \left(\hat{\tau} - 1.96\sqrt{\hat{V}}, \hat{\tau} + 1.96\sqrt{\hat{V}}\right)
+\end{align*}
+\)</span>$</p>
+</div>
+<div class="section" id="hypothesis-testing-for-causal-effects">
+<h3>Hypothesis testing for causal effects<a class="headerlink" href="#hypothesis-testing-for-causal-effects" title="Permalink to this headline">¶</a></h3>
+<p>In the classic null hypothesis significance testing framework, there are two different null hypotheses commonly used when measuring causal effects in randomized trials:</p>
+<ol class="simple">
+<li><p><strong>Fisher’s strong null</strong> (also known as Fisher’s sharp null) states that for every unit, the treatment effect <span class="math notranslate nohighlight">\(Y_i(1) - Y_i(0) = 0\)</span>.</p></li>
+<li><p><strong>Neyman’s weak null</strong> states that the average treatment effect is 0. In other words, even if some individual treatment effects are positive and some are negative, they average out to 0.</p></li>
+</ol>
+<p>The first is a much stricter null hypothesis (hence the name “strong null”), since it states that all the treatment effects are 0. The second is looser, requiring only that the treatment effects average out to 0. Because of this, the strong null is often easier to reject.</p>
+<p>To test a hypothesis against Neyman’s weak null, we construct the test statistic <span class="math notranslate nohighlight">\(\frac{\hat{\tau}}{\sqrt{\hat{V}}}\)</span>. Under the Neyman weak null hypothesis, this should follow a standard normal distribution.</p>
+<p>To test a hypothessis against Fisher’s strong null, we need some stronger mathematical machinery. We’ll limit ourself to cases where the treatment and outcome are both binary, and use a technique called <strong>permutation testing</strong>. In this technique, we randomly shuffle the treatment/control labels, and use that to build a null distribution for the difference in outcomes (for a refresher on this technique, see the <a class="reference external" href="https://www.inferentialthinking.com/chapters/12/1/AB_Testing.html">Data 8 textbook</a>). Instead of randomly shuffling, however, Fisher’s exact test instead looks at every single possible permutation, and computes a <span class="math notranslate nohighlight">\(p\)</span>-value in closed form.</p>
+<div class="section" id="example">
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># In progress</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="complications-with-randomized-experiments">
+<h2>Complications with randomized experiments<a class="headerlink" href="#complications-with-randomized-experiments" title="Permalink to this headline">¶</a></h2>
+<p><em>In progress</em></p>
+<div class="section" id="compliance">
+<h3>Compliance<a class="headerlink" href="#compliance" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="external-validity">
+<h3>External validity<a class="headerlink" href="#external-validity" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content/chapters/05"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="03_causality.html" title="previous page">Causality</a>
+    <a class='right-next' id="next-link" href="05_observational_studies.html" title="next page">Causal Inference in Observational Studies</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Data 102 Staff<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
