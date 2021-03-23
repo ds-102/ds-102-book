@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Causality &#8212; Data, Inference, and Decisions</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Causal Inference in Randomized Experiments" href="04_randomized_experiments.html" />
+    <link rel="prev" title="Quantifying Association" href="02_quantifying_association.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Data, Inference, and Decisions</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Data, Inference, and Decisions
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../01/intro.html">
+   Chapter 1: Hypotheses and decisions
+  </a>
+  <ul class="simple collapse-ul">
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../02/intro.html">
+   Chapter 2: Bayesian modeling
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02/placeholder.html">
+     Intro to Bayesian modeling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../03/intro.html">
+   Chapter 3: Generalized linear models
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03/placeholder.html">
+     Generalized Linear Models
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../04/intro.html">
+   Chapter 4: Uncertainty and the bootstrap
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/placeholder.html">
+     Uncertainty and the Bootstrap
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   Chapter 5: Causal Inference
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_association_correlation_causation.html">
+     Association, correlation, and causation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_quantifying_association.html">
+     Quantifying Association
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Causality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_randomized_experiments.html">
+     Causal Inference in Randomized Experiments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_observational_studies.html">
+     Causal Inference in Observational Studies
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/chapters/05/03_causality.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/content/chapters/05/03_causality.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-causality">
+   What is causality?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#potential-outcomes-and-counterfactuals">
+   Potential outcomes and counterfactuals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#notation">
+     Notation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#average-treatment-effect">
+   Average treatment effect
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#outcomes-fixed-or-random">
+   Outcomes: fixed or random?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structured-causal-models-causal-dags">
+   Structured Causal Models (Causal DAGs)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stable-unit-treatment-value-assumption-sutva">
+   Stable Unit Treatment Value Assumption (SUTVA)
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="causality">
+<h1>Causality<a class="headerlink" href="#causality" title="Permalink to this headline">¶</a></h1>
+<p>With a firm understanding of association and correlation in hand, we are ready to begin our journey into the world of causal inference. We’ll start with a discussion of the concept of causality. Then, we’ll define a specific way of thinking about causality, using counterfactual reasoning, that will guide the remainder of our study of causal inference.</p>
+<div class="section" id="what-is-causality">
+<h2>What is causality?<a class="headerlink" href="#what-is-causality" title="Permalink to this headline">¶</a></h2>
+<p>We start by thinking about the word “causes,” to understand what it means. Consider the following sentences: all of them use words like “causes” or “because”, and they are all valid sentences in modern English, but the meaning is slightly different in all of them:</p>
+<ol class="simple">
+<li><p>The soccer ball moved because I kicked it.</p></li>
+<li><p>The couple broke up because one of them moved to another country.</p></li>
+<li><p>I am who I am today because of my parents.</p></li>
+<li><p>Gravity causes objects to fall to the Earth.</p></li>
+<li><p>Down Syndrome is caused by having 3 copies of chromosome 21.</p></li>
+<li><p>Humans burning fossil fuels is causing climate change.</p></li>
+<li><p>Barbarian invasions caused the Roman Empire to fall.</p></li>
+<li><p>Smoking causes lung cancer.</p></li>
+</ol>
+<p>Most modern understanding of the word aligns with what the Greek philosopher Aristotle called “agent” or “efficient” cause: where one agent or object brings about change in another. Taking a closer look at the examples above, if we limit ourselves to this understanding, we should eliminate sentences 3 and 4. In sentence 3, the thing being “caused” is “who I am today”, which doesn’t fall under the idea of a “change”. Similarly, in sentence 4, the thing doing the causing is “gravity”, which isn’t a specific thing or object, but rather a conceptual physical theory. Note that this is a subjective determination!</p>
+<p>One way to think about cause is to divide the statements above into <em>deterministic</em> and <em>probabilistic</em> cause. What do these mean? If A is a deterministic cause of B, then whenever A happens, B must happen. In contrast, if A is a probabilistic cause of B, then whenever A happens, the probability of B increases. Going back to our examples above, sentences 1, 5, and 6 are all statements of deterministic causality. This doesn’t mean that the causality in the remaining sentences (2, 7, and 8) isn’t real! For example, most historians believe that the Roman Empire was in a prolonged state of decline before the barbarian invasions. However, those invasions still had a real, tangible impact on the empire’s fall.</p>
+<p>There are many other ways of thinking about causality: for example, we can divide the statements above into instance causality and class causality; single cause and multiple cause; simple action and compound action; and much more.</p>
+</div>
+<div class="section" id="potential-outcomes-and-counterfactuals">
+<h2>Potential outcomes and counterfactuals<a class="headerlink" href="#potential-outcomes-and-counterfactuals" title="Permalink to this headline">¶</a></h2>
+<p><em>You may have seen some of this material before in <a class="reference external" href="https://www.inferentialthinking.com/chapters/12/3/Causality.html#Potential-Outcomes">Data 8</a>.</em></p>
+<p>Suppose you have a fever, and you decide to take an aspirin. If your fever went away an hour later, how can we know whether the aspirin <em>caused</em> your fever to go down? To help us answer this question, consider the following thought experiment: imagine yourself in two parallel universes. In Universe 1, you took the aspirin. In Universe 0, you didn’t take the aspirin. If your fever improved by the same amount in both universes, then that seems like strong evidence that the aspirin did <em>not</em> cause your fever to go down. On the other hand, if your fever went down in Universe 1 and not in Universe 0, then that seems like strong evidence that the aspirin <em>did</em> cause your fever to go down.</p>
+<p>Notationally, we’ll use <span class="math notranslate nohighlight">\(Y(1)\)</span> to denote the outcome (in this case, your temperature) in Universe 1, and <span class="math notranslate nohighlight">\(Y(0)\)</span> for the outcome in Universe 0 <a class="footnote-reference brackets" href="#potential-outcomes-notation" id="id1">1</a>. In any real-world data, we only get to observe one of these: in the example above, if you decided to take the aspirin, then you would only ever observe <span class="math notranslate nohighlight">\(Y(1)\)</span>. For this reason, the other universe is often called the <strong>counterfactual</strong> universe. This brings us to the <strong>fundamental problem of causal inference</strong>: that we can never observe both <span class="math notranslate nohighlight">\(Y(1)\)</span> and <span class="math notranslate nohighlight">\(Y(0)\)</span> for the same individual.</p>
+<div class="section" id="notation">
+<h3>Notation<a class="headerlink" href="#notation" title="Permalink to this headline">¶</a></h3>
+<p>Suppose we’re interested in whether a particular treatment causes a particular outcome. For the rest of this chapter, we’ll limit ourselves to the case where the treatment is  binary. We’re interested in whether applying the treatment to a particular <em>unit</em> causes a change in the outcome. Here, the word <em>unit</em> refers to the individuals in our study. They could be individual people, groups of people, or even inanimate objects (e.g., in a study on whether fertilizer causes increased crop yields, the units might be individual plants). We’ll use the following notation:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span> are the potential outcomes for unit <span class="math notranslate nohighlight">\(i\)</span>: they’re the outcomes for the universe where unit <span class="math notranslate nohighlight">\(i\)</span> wasn’t/was treated, respectively.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Z_i\)</span> tells us whether unit <span class="math notranslate nohighlight">\(i\)</span> was treated or not.</p>
+<ul>
+<li><p>For example, if <span class="math notranslate nohighlight">\(Z_7 = 1\)</span>, that means unit 7 was treated, and we only got to observe <span class="math notranslate nohighlight">\(Y_7(1)\)</span> (and did not get to observe <span class="math notranslate nohighlight">\(Y_7(0)\)</span>).</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(Y_{i, obs}\)</span> is shorthand for “the outcome in the universe that we actually observed”.</p>
+<ul>
+<li><p>In other words, <span class="math notranslate nohighlight">\(Y_{i, obs} = Y_i(Z_i)\)</span>.</p></li>
+<li><p>In cases where <span class="math notranslate nohighlight">\(Z_i\)</span> is binary, we can write <span class="math notranslate nohighlight">\(Y_{i,obs} = Z_i \cdot Y_i(1) + (1-Z_i) \cdot Y_i(0)\)</span>.</p></li>
+<li><p>We’ll sometimes use the notation <span class="math notranslate nohighlight">\(Y_i\)</span> as shorthand for <span class="math notranslate nohighlight">\(Y_{i,obs}\)</span>.</p></li>
+<li><p>We’ll also use the notation <span class="math notranslate nohighlight">\(Y_i(\cdot)\)</span> as shorthand for the pair <span class="math notranslate nohighlight">\(\big(Y_i(0), Y_i(1)\big)\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<p>We can visualize the potential outcomes in a table:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Unit (<span class="math notranslate nohighlight">\(i\)</span>)</p></th>
+<th class="head"><p>Outcome if not treated</p></th>
+<th class="head"><p>Outcome if treated</p></th>
+<th class="head"><p>Treated or not?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_1(0)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_1(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_2(0)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_2(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_3(0)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_3(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_3\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_4(0)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_4(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_4\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_5(0)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_5(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_5\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>In reality, we never get to observe the entire table. Instead, the data we observe look more like:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Unit</p></th>
+<th class="head"><p>Outcome if not treated</p></th>
+<th class="head"><p>Outcome if treated</p></th>
+<th class="head"><p>Treated or not?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_1(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_1=1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_2(0)\)</span></p></td>
+<td><p>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_2=0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_3(0)\)</span></p></td>
+<td><p>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_3=0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_4(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_4=1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y_5(0)\)</span></p></td>
+<td><p>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(Z_5=0\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>It’s important to keep the right intuition in mind for <span class="math notranslate nohighlight">\(Z_i\)</span>: this variable does not represent the treatment itself; instead, it represents the decision on whether or not to treat unit <span class="math notranslate nohighlight">\(i\)</span>. The effect of the treatment itself is captured in the difference between <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span>. Let’s look at two examples that make this distinction clearer. These examples also preview some of the insights we’ll develop further in the next two sections.</p>
+<ul class="simple">
+<li><p>In a randomized controlled trial, we randomly assign units to the treatment and control groups. Because the trial is randomized, the treatment/control assignment <span class="math notranslate nohighlight">\(Z_i\)</span> is independent of the potential outcomes <span class="math notranslate nohighlight">\((Y_i(0), Y_i(1))\)</span>. This doesn’t mean that the treatment is independent of the outcome we observe! (Remeber, the observed outcome is <span class="math notranslate nohighlight">\(Y_{i,obs} = Y_i(Z_i)\)</span>) It only means that in a randomized controlled trial, the <em>decision</em> on whether or not to treat is independent of the potential outcomes. We’ll see in this next section how this fact can be very useful.</p></li>
+<li><p>Suppose we look at an observational study measuring the effect of yacht ownership on attitudes toward taxation. Here, <span class="math notranslate nohighlight">\(Z_i = 1 \)</span> if respondent <span class="math notranslate nohighlight">\(i\)</span> owns a yacht; <span class="math notranslate nohighlight">\(Y_i(0)\)</span> represents respondent <span class="math notranslate nohighlight">\(i\)</span>’s attitude toward taxation if they <em>did not</em> own a yacht; and <span class="math notranslate nohighlight">\(Y_i(0)\)</span> represents respondent <span class="math notranslate nohighlight">\(i\)</span>’s attitude toward taxation if they <em>did</em> own a yacht. In this case, we can intuitively see that if someone is wealthy enough to own a yacht, regardless of whether they do or not (i.e., whether they’re in Universe 1 or Universe 0), they will probably prefer lower taxes.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="average-treatment-effect">
+<h2>Average treatment effect<a class="headerlink" href="#average-treatment-effect" title="Permalink to this headline">¶</a></h2>
+<p>We’ve already seen that we can never know the difference <span class="math notranslate nohighlight">\(Y_i(1) - Y_i(0)\)</span> for an individual unit <span class="math notranslate nohighlight">\(i\)</span>, since we only get to observe one of the two. So, what we’ll do instead is look at the <strong>Average Treatment Effect (ATE)</strong>, which we’ll denote with the greek letter tau <span class="math notranslate nohighlight">\(\tau\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\text{ATE} = \tau = E[Y_i(1) - Y_i(0)]\]</div>
+<p>Remember that the <span class="math notranslate nohighlight">\(Y_i(\cdot)\)</span>s are i.i.d. random variables, so the expectation here is over the randomness in that distribution. We’ll often drop the <span class="math notranslate nohighlight">\(i\)</span> in the notation for convenience.</p>
+<p>If we knew all the data in the table above (including the counterfactual outcomes, marked with “?”), then we could take the difference in means of the two columns to find the ATE. But if we take the average of only the values we actually see, then we’re implicitly conditioning on the the treatment decision. In other words, if we computed the average of the second column (“Outcome if not treated”), it would be <span class="math notranslate nohighlight">\(E[Y(0) | Z = 0]\)</span>. How do we relate this conditional expectation to the unconditional one in the ATE? We’ve already seen how to do this: the tower property (also known as iterated expectation):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+    \tau 
+        &amp;= E[Y(1) - Y(0) | Z = 1]P(Z=1) + E[Y(1) - Y(0)|Z=0]P(Z=0) \\
+        &amp;= \Big(\overbrace{E[Y(1) | Z = 1]}^{\text{observed}} - \overbrace{E[Y(0) | Z = 1]}^{\text{counterfactual}}\Big)P(Z=1) \, + \\
+        &amp;  \quad\,\Big(\underbrace{E[Y(1)|Z=0]}_{\text{counterfactual}} - \underbrace{E[Y(0)|Z=0]}_{\text{observed}}\Big)P(Z=0)
+\end{align}
+\end{split}\]</div>
+<p>Taking a closer look at these four terms, we see that two of them (the first and the last) correspond to data that we got to observe. Unfortunately, the middle two terms are counterfactual terms: if <span class="math notranslate nohighlight">\(Z_i=1\)</span>, then we don’t get to observe <span class="math notranslate nohighlight">\(Y_i(0)\)</span>!</p>
+<p>In the next few sections, we’ll see ways of working around this problem.</p>
+</div>
+<div class="section" id="outcomes-fixed-or-random">
+<h2>Outcomes: fixed or random?<a class="headerlink" href="#outcomes-fixed-or-random" title="Permalink to this headline">¶</a></h2>
+<p>There are two different schools of thought around how to model the potential outcomes <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span>:</p>
+<ol class="simple">
+<li><p>In the <strong>fixed-sample approach</strong>, we assume that the potential outcomes <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span> are fixed, and only <span class="math notranslate nohighlight">\(Z_i\)</span> is random. We observe one outcome <span class="math notranslate nohighlight">\(Y_{i,obs} = Y_i(Z_i)\)</span>, which is fixed and known, and the other is fixed and unknown.</p></li>
+<li><p>In the <strong>superpopulation model</strong>, we assume that the tuples <span class="math notranslate nohighlight">\((Z_i, Y_i(0), Y_i(1))\)</span> are random and i.i.d.: in other words, there’s some joint distribution over treatment and potential outcomes, and each unit’s data (treament decision and potential outcomes) are independent of each other unit’s data.</p></li>
+</ol>
+<p>Historically, the fixed-sample approach was developed to analyze randomized experiments, and is still an active area of research. The superpopulation model is much newer, and has been expanded in the last 30-40 years. It can be applied to both randomized experiments and observational studies.</p>
+</div>
+<div class="section" id="structured-causal-models-causal-dags">
+<h2>Structured Causal Models (Causal DAGs)<a class="headerlink" href="#structured-causal-models-causal-dags" title="Permalink to this headline">¶</a></h2>
+<p><em>In progress</em></p>
+</div>
+<div class="section" id="stable-unit-treatment-value-assumption-sutva">
+<h2>Stable Unit Treatment Value Assumption (SUTVA)<a class="headerlink" href="#stable-unit-treatment-value-assumption-sutva" title="Permalink to this headline">¶</a></h2>
+<p><em>In progress</em></p>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="potential-outcomes-notation"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>You may also see people use superscripts, e.g., <span class="math notranslate nohighlight">\(Y^0\)</span> and <span class="math notranslate nohighlight">\(Y^1\)</span>, but in this book we’ll consistently use <span class="math notranslate nohighlight">\(Y(0)\)</span> and <span class="math notranslate nohighlight">\(Y(1)\)</span>).</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content/chapters/05"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="02_quantifying_association.html" title="previous page">Quantifying Association</a>
+    <a class='right-next' id="next-link" href="04_randomized_experiments.html" title="next page">Causal Inference in Randomized Experiments</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Data 102 Staff<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

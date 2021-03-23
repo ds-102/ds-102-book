@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hypotheses and decisions &#8212; Data, Inference, and Decisions</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Data, Inference, and Decisions</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Data, Inference, and Decisions
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   Chapter 1: Hypotheses and decisions
+  </a>
+  <ul class="simple collapse-ul">
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../02/intro.html">
+   Chapter 2: Bayesian modeling
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02/placeholder.html">
+     Intro to Bayesian modeling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../03/intro.html">
+   Chapter 3: Generalized linear models
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03/placeholder.html">
+     Generalized Linear Models
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../04/intro.html">
+   Chapter 4: Uncertainty and the bootstrap
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/placeholder.html">
+     Uncertainty and the Bootstrap
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../05/intro.html">
+   Chapter 5: Causal Inference
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/01_association_correlation_causation.html">
+     Association, correlation, and causation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/02_quantifying_association.html">
+     Quantifying Association
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/03_causality.html">
+     Causality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/04_randomized_experiments.html">
+     Causal Inference in Randomized Experiments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/05_observational_studies.html">
+     Causal Inference in Observational Studies
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/content/chapters/01/01_hypotheses_and_decisions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/content/chapters/01/01_hypotheses_and_decisions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#different-error-types-is-one-worse-than-the-other">
+   Different error types: is one worse than the other?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#making-multiple-decisions">
+   Making multiple decisions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#from-numbers-to-decisions">
+     From numbers to decisions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#row-wise-error-rates">
+     Row-wise error rates
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classical-hypothesis-testing">
+     Classical hypothesis testing
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="hypotheses-and-decisions">
+<h1>Hypotheses and decisions<a class="headerlink" href="#hypotheses-and-decisions" title="Permalink to this headline">¶</a></h1>
+<p>Many real-world data science problems boil down to making binary decisions:</p>
+<ul class="simple">
+<li><p>Given the outcome of a medical test for a particular disease, does someone have that disease?</p></li>
+<li><p>Given the results of experimenting with a new version of my website, does that version increase the chances that a customer will stay on my website longer and/or buy something?</p></li>
+<li><p>Is there a “statistically significant” association between this pair of variables in my dataset?</p></li>
+</ul>
+<p>We’ll focus on the case of making a binary (0/1) decision, and look at both <em>Reality</em> and our <em>Decision</em>. We’ll  abbreviate Reality and Decision with <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(D\)</span> respectively. Let’s illustrate this with a 2 x 2 table:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(D=0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(D=1\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(R=0\)</span></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(R=1\)</span></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p>Each decision we make must fall into one of the four cells of this table. In most real-world settings, we don’t actually know which <em>row</em> our decision lands up in: we know whether we decided <span class="math notranslate nohighlight">\(D=0\)</span> or <span class="math notranslate nohighlight">\(D=1\)</span> (i.e., which column it’s in), but we don’t know the state of reality.</p>
+<p>This kind of table is often called a <strong>confusion matrix</strong>. There isn’t a standard convention about whether to put reality in the rows or columns, so you may see them flipped in other places. In this book, we’ll always use reality in the rows and the decision in the columns.</p>
+<p>We use the following names for each of the four cases: <strong>true positive</strong> (TP), <strong>false positive</strong> (FP), <strong>true negative</strong> (TN), and <strong>false negative</strong> (FN):</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(D=0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(D=1\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(R=0\)</span></p></td>
+<td><p>TN</p></td>
+<td><p>FP</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(R=1\)</span></p></td>
+<td><p>FN</p></td>
+<td><p>TP</p></td>
+</tr>
+</tbody>
+</table>
+<p>Ideally, our decisions would always land in the top left or bottom right (in other words, our decision would match reality). Of course, in the real world, this is not always true: we may make errors. Depending on the problem, we may prefer to avoid one kind of error more than the other.</p>
+<div class="section" id="different-error-types-is-one-worse-than-the-other">
+<h2>Different error types: is one worse than the other?<a class="headerlink" href="#different-error-types-is-one-worse-than-the-other" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="making-multiple-decisions">
+<h2>Making multiple decisions<a class="headerlink" href="#making-multiple-decisions" title="Permalink to this headline">¶</a></h2>
+<p>Suppose now that we make multiple decisions, and we want to look at all of them collectively. There are several ways this situation could arise:</p>
+<p><em>Testing multiple hypotheses on a single dataset</em>: we could be interested in asking multiple questions from a single dataset. For example, suppose we examine a genomics dataset in an Alzheimer’s study. For each of thousands of genetic markers, we would like to ask whether a mutation at that location is associated with a higher risk of Alzheimer’s.</p>
+<p><em>Testing one hypothesis on multiple datasets</em>: suppose we’re interested in studying whether there is an association between the use of statin drugs and the rate of heart attacks. We could conduct a meta-analysis of many studies that look at this question: each study tests the same hypothesis (i.e., is taking statin drugs associated with lower risk of heart attack?) with a different set of subjects. By looking at the studies as a collection, we can try to draw a stronger conclusion about the presence (or absence) of such a link.</p>
+<div class="section" id="from-numbers-to-decisions">
+<h3>From numbers to decisions<a class="headerlink" href="#from-numbers-to-decisions" title="Permalink to this headline">¶</a></h3>
+<p>Note that in most of these cases, each individual test doesn’t just give us a single yes/no answer: instead, we typically get a <span class="math notranslate nohighlight">\(p\)</span>-value (or some other numerical value, often between 0 and 1).</p>
+<p>Note that we have no requirement that the different tests are independent! In most of the above cases, the tests (and the decisions that arise from them) are not independent.</p>
+</div>
+<div class="section" id="row-wise-error-rates">
+<h3>Row-wise error rates<a class="headerlink" href="#row-wise-error-rates" title="Permalink to this headline">¶</a></h3>
+<p>We’re interested in analyzing our performance. In an ideal Each one will land in one of the four cells: we can count up the total number in each quadrant, and call them <span class="math notranslate nohighlight">\(n_{00}\)</span>, <span class="math notranslate nohighlight">\(n_{01}\)</span>, and so on:</p>
+<p>We’re interested in analyzing our performance. Each one will land in one of the four cells: we can count up the total number in each quadrant, and call them <span class="math notranslate nohighlight">\(n_{00}\)</span>, <span class="math notranslate nohighlight">\(n_{01}\)</span>, and so on:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(D=0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(D=1\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(R=0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{00}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{01}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(R=1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{10}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{11}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>In traditional hypothesis testing and decision-making, we’re often interested in understanding how well we do given that we know the state of reality: looking at this from the point of view of the table, we’re interested in <em>row-wise</em> rates.</p>
+<p>For example, we might want to know: when reality is 0, how often do we correctly make a decision of 0? This quantity is called the <strong>true negative rate (TNR)</strong>. We can define a set of four row-wise rates that capture how well we do relative to reality:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p></p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Formula</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><strong>True negative rate (TNR)</strong></p></td>
+<td><p>When <span class="math notranslate nohighlight">\(R=0\)</span>, how often do we correctly decide <span class="math notranslate nohighlight">\(D=0\)</span>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{n_{00}}{n_{00} + n_{01}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><strong>False positive rate (FPR)</strong></p></td>
+<td><p>When <span class="math notranslate nohighlight">\(R=0\)</span>, how often do we incorrectly decide <span class="math notranslate nohighlight">\(D=1\)</span>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{n_{01}}{n_{00} + n_{01}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><strong>True positive rate (TPR)</strong></p></td>
+<td><p>When <span class="math notranslate nohighlight">\(R=1\)</span>, how often do we correctly decide <span class="math notranslate nohighlight">\(D=0\)</span>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{n_{11}}{n_{10} + n_{11}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><strong>False negative rate (FNR)</strong></p></td>
+<td><p>When <span class="math notranslate nohighlight">\(R=1\)</span>, how often do we incorrectly decide <span class="math notranslate nohighlight">\(D=0\)</span>?</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{n_{10}}{n_{10} + n_{11}}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>These row-wise rates look at the top row and bottom row completely separately, evaluating decisions depending on reality.</p>
+</div>
+<div class="section" id="classical-hypothesis-testing">
+<h3>Classical hypothesis testing<a class="headerlink" href="#classical-hypothesis-testing" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content/chapters/01"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Data 102 Staff<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
