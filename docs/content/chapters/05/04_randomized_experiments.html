@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Causal Inference in Randomized Experiments &#8212; Data, Inference, and Decisions</title>
     
-  <link rel="stylesheet" href="../../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
@@ -379,10 +379,13 @@
 <h2>Randomized experiments and potential outcomes<a class="headerlink" href="#randomized-experiments-and-potential-outcomes" title="Permalink to this headline">¶</a></h2>
 <p><em>You may have seen some of this material before in <a class="reference external" href="https://www.inferentialthinking.com/chapters/12/3/Causality.html">Data 8</a>.</em></p>
 <p>In a randomized experiment, we protect ourselves from dealing with confounding variables by randomizing units into treatment and control. In other words, we choose each <span class="math notranslate nohighlight">\(Z_i\)</span> randomly, and we choose it independent of <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span>. Mathematically, we can write:</p>
-<p>\begin{align}
-\big(Y_i(0), Y_i(1)\big) \perp !!! \perp Z_i
-\end{align}</p>
-<p>Remember, this doesn’t mean that the treatment is independent from the outcome! It only means that the <em>decision on whether or not to treat</em> is independent from the outcome.</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+    \big(Y_i(0), Y_i(1)\big) \perp \!\!\! \perp Z_i
+\end{align}
+\]</div>
+<p>Remember, this doesn’t mean that the treatment is independent from the observed outcome! It only means that the <em>decision on whether or not to treat</em> is independent from the outcome.</p>
 <p>You may remember learning that in a randomized controlled trial, we can determine causality by using the difference in means between the treatment and control groups. Let’s now show mathematically that this is true. Recall from the previous section our definition of the ATE <span class="math notranslate nohighlight">\(\tau\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\tau = E[Y_i(1) - Y_i(0)] = E[Y_i(1)] - E[Y_i(0)]\]</div>
@@ -400,10 +403,10 @@
 \[
 \begin{align}
     \hat{\tau}
-        &amp;= \left[\frac{1}{n_1} \sum_{i: Z_i = 1} Y_i\right] - \left[\frac{1}{n_0} \sum_{i: Z_i = 0} Y_i\right]
+        &amp;= \underbrace{\left[\frac{1}{n_1} \sum_{i: Z_i = 1} Y_i\right]}_{=\bar{Y}_{obs,1}} - \underbrace{\left[\frac{1}{n_0} \sum_{i: Z_i = 0} Y_i\right]}_{=\bar{Y}_{obs,0}},
 \end{align}
 \]</div>
-<p>This quantity, which you’ve most likely seen and used before (e.g., in Data 8), has a few names: it’s called the <strong>difference in means</strong>, the <strong>simple difference in mean outcomes (SDO)</strong>, the <strong>Neyman estimator</strong>, or the <strong>prima facie causal effect</strong> (<em>prima facie</em> is latin for “at first sight”).</p>
+<p>where <span class="math notranslate nohighlight">\(n_1\)</span> is the number of treated units and <span class="math notranslate nohighlight">\(n_0\)</span> is the number of untreated units, and <span class="math notranslate nohighlight">\(\bar{Y}_{obs,1}\)</span> and <span class="math notranslate nohighlight">\(\bar{Y}_{obs,0}\)</span> are the means of the treatment and control groups respectively. This quantity <span class="math notranslate nohighlight">\(\hat{\tau}\)</span>, which you’ve most likely seen and used before (e.g., in Data 8), has a few names: it’s called the <strong>difference in means</strong>, the <strong>simple difference in mean outcomes (SDO)</strong>, the <strong>Neyman estimator</strong>, or the <strong>prima facie causal effect</strong> (<em>prima facie</em> is latin for “at first sight”).</p>
 </div>
 <div class="section" id="fixed-sample-assumption-fisher-and-neyman">
 <h2>Fixed-sample assumption: Fisher and Neyman<a class="headerlink" href="#fixed-sample-assumption-fisher-and-neyman" title="Permalink to this headline">¶</a></h2>
@@ -418,7 +421,29 @@ E[\hat{\tau}] &amp;= \tau \\
 \text{var}(\hat{\tau}) &amp;\leq \frac{\hat{\sigma}_1^2}{n_1} + \frac{\hat{\sigma}_0^2}{n_0},
 \end{align*}
 \end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\hat{\sigma}_k\)</span> is the sample standard deviation of the potential treatment outcomes <span class="math notranslate nohighlight">\(Y_1(k), \ldots, Y_n(k)\)</span>. Since this depends on the counterfactual outcomes that we don’t get to observe, we’ll typically approximate it by replacing the true sample variances with the sample variances within each observed group in our data, and call this <span class="math notranslate nohighlight">\(\hat{V}\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(\hat{\sigma}_k\)</span> is the sample standard deviation of the potential treatment outcomes <span class="math notranslate nohighlight">\(Y_1(k), \ldots, Y_n(k)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+    \hat{\sigma}_k &amp;= 
+            \frac{1}{n - 1} \sum_{i} \big(Y_i(k) - \bar{Y}(k)\big)
+\end{align*}
+\]</div>
+<p>Since this depends on the counterfactual outcomes that we don’t get to observe, we’ll typically approximate it by replacing the true sample variances with the sample variances within each observed group in our data, and call this <span class="math notranslate nohighlight">\(\hat{V}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+    \hat{V} &amp;= 
+    \Bigg[\frac{1}{n_1}
+        \underbrace{%
+            \frac{1}{n_1 - 1} \sum_{i: Z_i = 1} \big(Y_i - \bar{Y}_{obs,1}\big)}_{%
+            \text{sample std. dev. of treatment group}}\Bigg] +
+    \Bigg[\frac{1}{n_0}
+        \underbrace{%
+            \frac{1}{n_0 - 1} \sum_{i: Z_i = 0} \big(Y_i - \bar{Y}_{obs,0}\big)}_{%
+            \text{sample std. dev. of control group}}\Bigg]
+\end{align*}
+\]</div>
 <p>It can be shown that under certain regularity conditions, the quantity <span class="math notranslate nohighlight">\(\frac{\hat{\tau} - \tau}{\sqrt{\hat{V}}} \sim N(0, \sigma^2)\)</span>, where <span class="math notranslate nohighlight">\(\sigma^2 &lt; 1\)</span>.</p>
 </div>
 <div class="section" id="confidence-intervals-for-the-ate">
@@ -513,7 +538,7 @@ $<span class="math notranslate nohighlight">\(
     </div>
 
     
-  <script src="../../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Causality &#8212; Data, Inference, and Decisions</title>
     
-  <link rel="stylesheet" href="../../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
@@ -348,7 +348,14 @@
 <li><p>For example, if <span class="math notranslate nohighlight">\(Z_7 = 1\)</span>, that means unit 7 was treated, and we only got to observe <span class="math notranslate nohighlight">\(Y_7(1)\)</span> (and did not get to observe <span class="math notranslate nohighlight">\(Y_7(0)\)</span>).</p></li>
 </ul>
 </li>
-<li><p><span class="math notranslate nohighlight">\(Y_{i, obs}\)</span> is shorthand for “the outcome in the universe that we actually observed”: in other words, <span class="math notranslate nohighlight">\(Y_{i, obs} = Y_i(Z_i)\)</span>. We’ll sometimes use the notation <span class="math notranslate nohighlight">\(Y_i\)</span> as shorthand for <span class="math notranslate nohighlight">\(Y_{i,obs}\)</span>. We’ll also use the notation <span class="math notranslate nohighlight">\(Y_i(\cdot)\)</span> as shorthand for the pair <span class="math notranslate nohighlight">\(\big(Y_i(0), Y_i(1)\big)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_{i, obs}\)</span> is shorthand for “the outcome in the universe that we actually observed”.</p>
+<ul>
+<li><p>In other words, <span class="math notranslate nohighlight">\(Y_{i, obs} = Y_i(Z_i)\)</span>.</p></li>
+<li><p>In cases where <span class="math notranslate nohighlight">\(Z_i\)</span> is binary, we can write <span class="math notranslate nohighlight">\(Y_{i,obs} = Z_i \cdot Y_i(1) + (1-Z_i) \cdot Y_i(0)\)</span>.</p></li>
+<li><p>We’ll sometimes use the notation <span class="math notranslate nohighlight">\(Y_i\)</span> as shorthand for <span class="math notranslate nohighlight">\(Y_{i,obs}\)</span>.</p></li>
+<li><p>We’ll also use the notation <span class="math notranslate nohighlight">\(Y_i(\cdot)\)</span> as shorthand for the pair <span class="math notranslate nohighlight">\(\big(Y_i(0), Y_i(1)\big)\)</span>.</p></li>
+</ul>
+</li>
 </ul>
 <p>We can visualize the potential outcomes in a table:</p>
 <table class="colwidths-auto table">
@@ -426,7 +433,7 @@
 </table>
 <p>It’s important to keep the right intuition in mind for <span class="math notranslate nohighlight">\(Z_i\)</span>: this variable does not represent the treatment itself; instead, it represents the decision on whether or not to treat unit <span class="math notranslate nohighlight">\(i\)</span>. The effect of the treatment itself is captured in the difference between <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span>. Let’s look at two examples that make this distinction clearer. These examples also preview some of the insights we’ll develop further in the next two sections.</p>
 <ul class="simple">
-<li><p>In a randomized controlled trial, we randomly assign units to the treatment and control groups. Because the trial is randomized, the treatment/control assignment <span class="math notranslate nohighlight">\(Z_i\)</span> is independent of the actual outcome <span class="math notranslate nohighlight">\(Y_{i,obs}\)</span>. This doesn’t mean that the treatment is independent of the outcome! It only means that in a randomized controlled trial, the <em>decision</em> on whether or not to treat is independent of the outcome. We’ll see in this next section how this fact can be very useful.</p></li>
+<li><p>In a randomized controlled trial, we randomly assign units to the treatment and control groups. Because the trial is randomized, the treatment/control assignment <span class="math notranslate nohighlight">\(Z_i\)</span> is independent of the potential outcomes <span class="math notranslate nohighlight">\((Y_i(0), Y_i(1))\)</span>. This doesn’t mean that the treatment is independent of the outcome we observe! (Remeber, the observed outcome is <span class="math notranslate nohighlight">\(Y_{i,obs} = Y_i(Z_i)\)</span>) It only means that in a randomized controlled trial, the <em>decision</em> on whether or not to treat is independent of the potential outcomes. We’ll see in this next section how this fact can be very useful.</p></li>
 <li><p>Suppose we look at an observational study measuring the effect of yacht ownership on attitudes toward taxation. Here, <span class="math notranslate nohighlight">\(Z_i = 1 \)</span> if respondent <span class="math notranslate nohighlight">\(i\)</span> owns a yacht; <span class="math notranslate nohighlight">\(Y_i(0)\)</span> represents respondent <span class="math notranslate nohighlight">\(i\)</span>’s attitude toward taxation if they <em>did not</em> own a yacht; and <span class="math notranslate nohighlight">\(Y_i(0)\)</span> represents respondent <span class="math notranslate nohighlight">\(i\)</span>’s attitude toward taxation if they <em>did</em> own a yacht. In this case, we can intuitively see that if someone is wealthy enough to own a yacht, regardless of whether they do or not (i.e., whether they’re in Universe 1 or Universe 0), they will probably prefer lower taxes.</p></li>
 </ul>
 </div>
@@ -524,7 +531,7 @@
     </div>
 
     
-  <script src="../../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     
