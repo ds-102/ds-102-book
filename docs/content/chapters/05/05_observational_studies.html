@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Causal Inference in Observational Studies &#8212; Data, Inference, and Decisions</title>
     
-  <link rel="stylesheet" href="../../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
@@ -388,11 +388,12 @@
 </table>
 </div></div></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values indicate missing counterfactual outcomes that we don’t get to observe: for example, dish 0 was ordered from Restaurant A, so we don’t know what rating the critics would have given a dish from Restaurant B on that day.</p>
 <p>Displaying the data this way requires us to think about it slightly differently, and highlights the implications of the potential outcomes framework! In particular:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(Z_i\)</span> corresponds to whether the critic ordered dish <span class="math notranslate nohighlight">\(i\)</span> from restaurant A or B.</p></li>
 <li><p><span class="math notranslate nohighlight">\(Y_i(B)\)</span> and <span class="math notranslate nohighlight">\(Y_i(A)\)</span> represent what-ifs: <em>if</em> the critics had ordered dish <span class="math notranslate nohighlight">\(i\)</span> from a particular restaurant, would they have liked it?</p></li>
-<li><p>The year is our confound: we’ll use <span class="math notranslate nohighlight">\(X_i\)</span> to denote the year that dish <span class="math notranslate nohighlight">\(i\)</span> was ordered in.</p></li>
+<li><p>The year is our confounder (or “confounding variable”): we’ll use <span class="math notranslate nohighlight">\(X_i\)</span> to denote the year that dish <span class="math notranslate nohighlight">\(i\)</span> was ordered in.</p></li>
 </ul>
 <p>Our representation of the data this way makes it clear that we can’t compute the ATE:</p>
 <div class="cell docutils container">
@@ -569,7 +570,7 @@ E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
     </div>
 
     
-  <script src="../../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     
