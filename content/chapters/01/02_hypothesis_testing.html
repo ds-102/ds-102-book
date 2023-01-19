@@ -377,11 +377,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#hypothesis-testing-and-binary-decision-making">
    Hypothesis testing and binary decision-making
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-p-value-thresholds-for-e-commerce-website-optimization">
-   Example: p-value thresholds for e-commerce website optimization
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-p-value-thresholds-for-e-commerce-website-optimization">
+     Example: p-value thresholds for e-commerce website optimization
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#from-p-values-to-decisions">
@@ -411,11 +413,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#hypothesis-testing-and-binary-decision-making">
    Hypothesis testing and binary decision-making
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-p-value-thresholds-for-e-commerce-website-optimization">
-   Example: p-value thresholds for e-commerce website optimization
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-p-value-thresholds-for-e-commerce-website-optimization">
+     Example: p-value thresholds for e-commerce website optimization
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#from-p-values-to-decisions">
@@ -432,7 +436,9 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing">
+<h1>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this headline">#</a></h1>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -450,8 +456,6 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing">
-<h1>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this headline">#</a></h1>
 <p><em>You may find it helpful to review <a class="reference external" href="https://inferentialthinking.com/chapters/11/Testing_Hypotheses.html">Chapter 11</a> and <a class="reference external" href="https://inferentialthinking.com/chapters/12/Comparing_Two_Samples.html">Chapter 12</a> of the Data 8 textbook, which cover the basics of hypothesis testing.</em></p>
 <p>Hypothesis testing is a specific kind of binary decision-making problem. Although the null hypothesis statistical test (NHST) framework has been criticized in recent years, it still provides a useful framework for making decisions from data. We’ll explore these criticisms later, but to start, here’s a quick refresher on how the process works:</p>
 <ol class="simple">
@@ -482,9 +486,8 @@ title="Print to PDF"
 </ul>
 </li>
 </ul>
-</section>
 <section id="example-p-value-thresholds-for-e-commerce-website-optimization">
-<h2>Example: p-value thresholds for e-commerce website optimization<a class="headerlink" href="#example-p-value-thresholds-for-e-commerce-website-optimization" title="Permalink to this headline">#</a></h2>
+<h3>Example: p-value thresholds for e-commerce website optimization<a class="headerlink" href="#example-p-value-thresholds-for-e-commerce-website-optimization" title="Permalink to this headline">#</a></h3>
 <p>Suppose we are exploring ways to make our e-commerce site more appealing to customers. We make 100 different changes to the website (different colors, fonts, page layouts, etc.), and for each one, we use an A/B test to see whether customers are more likely to make a purchase. We define the following null and alternative hypotheses:</p>
 <ul class="simple">
 <li><p>Null hypothesis: the change to the website has no effect on whether or not customers make a purchase.</p></li>
@@ -666,6 +669,7 @@ title="Print to PDF"
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>
+</section>
 </section>
 <section id="from-p-values-to-decisions">
 <h2>From p-values to decisions<a class="headerlink" href="#from-p-values-to-decisions" title="Permalink to this headline">#</a></h2>

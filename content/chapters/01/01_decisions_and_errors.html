@@ -586,7 +586,7 @@ FPR = \frac{n_{01}}{n_{00} + n_{01}} \\
 FNR = \frac{n_{10}}{n_{10} + n_{11}}
 \end{split}\]</div>
 <p>We can visualize these rates with the rows that they correspond to in our 2x2 table:</p>
-<p><img alt="image-3.png" src="content/chapters/01/attachment:image-3.png" /></p>
+<p><img alt="row_wise_rates.png" src="../../../_images/row_wise_rates.png" /></p>
 <p>As an example, suppose we’re predicting whether or not a customer will buy a product. In this case, 0 corresponds to a customer not buying, and 1 corresponds to the customer buying. Here’s how we’d interpret the four rates defined above:</p>
 <ul class="simple">
 <li><p>TNR: when the customer <strong>did not</strong> buy the product, how often did we (correctly) predict that they would not?</p></li>
@@ -598,7 +598,7 @@ FNR = \frac{n_{10}}{n_{10} + n_{11}}
 <section id="column-wise-rates">
 <h3>Column-wise rates<a class="headerlink" href="#column-wise-rates" title="Permalink to this headline">#</a></h3>
 <p>Row-wise rates measure how well we do in each case of reality: in other words, in each row of the table. We can also quantify our performance when we make specific decisions. We’ll focus on the <strong>false discovery proportion</strong> (FDP), which quantifies how often we’re wrong when we make a decision of 1:</p>
-<p><img alt="image.png" src="content/chapters/01/attachment:image.png" /></p>
+<p><img alt="fdp.png" src="../../../_images/fdp.png" /></p>
 <p>We also define the <strong>false omission proportion</strong> (FOP), which quantifies how often we’re wrong when we make a decision of 0:</p>
 <div class="math notranslate nohighlight">
 \[
