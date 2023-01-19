@@ -1,4 +1,4 @@
-name: deploy
+name: newdeploy
 
 on:
   # Trigger the workflow on push to main branch
@@ -8,7 +8,7 @@ on:
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
-  build-and-deploy-book:
+  build-deploy-book-v2:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
