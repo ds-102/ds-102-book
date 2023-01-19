@@ -7,10 +7,9 @@
 #   expand_sections: true  # if you'd like the sections of this chapter to always
 #     be expanded in the sidebar.
 
-# Homepage
-- file: content/intro
-  title: Home
-
+format: jb-book
+root: content/intro
+chapters:
 # A chapter w/ a collection of sections beneath it
 - file: content/chapters/01/intro
   title: "Chapter 1: Binary Decision-Making"

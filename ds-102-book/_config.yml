@@ -18,13 +18,6 @@
 # Jekyll site settings
 title: "Data, Inference, and Decisions"
 author: "Data 102 Staff"
-email: YOUR EMAIL
-description: >-
-    "This is a textbook for Data 102: Data, Inference, and Decisions. It is a work in progress."
-
-baseurl: /ds-102-book               # the subpath of your site, e.g. /blog. If there is no subpath for your site, use an empty string ""
-url: https://ds-102.github.io          # the base hostname & protocol for your site, e.g. http://example.com
-
 
 #######################################################################################
 # New settings
@@ -37,7 +30,7 @@ execute:
 
 # Information about where the book exists on the web
 repository:
-  url: https://ds-102.github.io  # Online location of your book
+  url: https://github.com/ds-102/ds-102-book  # Online location of your book
   path_to_book: ds-102-book  # Optional path to your book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
   #
