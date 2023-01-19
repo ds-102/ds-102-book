@@ -31,11 +31,11 @@ chapters:
     - file: content/chapters/03/placeholder
       title: "Generalized Linear Models"
 
-- file: content/chapters/05/intro
-  title: "Chapter 4: Causal Inference"
-  sections:
-    - file: content/chapters/05/01_association_correlation_causation
-      title: "Association, correlation, and causation"
+# - file: content/chapters/05/intro
+#   title: "Chapter 4: Causal Inference"
+#   sections:
+#     - file: content/chapters/05/01_association_correlation_causation
+#       title: "Association, correlation, and causation"
     # - file: content/chapters/05/02_quantifying_association
     #   title: "Quantifying Association"
     # - file: content/chapters/05/03_causality
