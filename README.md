@@ -1,38 +1,31 @@
-# Lecture Notes for Data 102
+# Data, Inference, and Decisions
 
-## Repository overview
+Textbook for Berkeley's Data 102 course
 
-Here are some relevant files in the repository:
+## Usage
 
-- The content is in the directory called: `./content`. That is the directory where all Markdown and Notebook files should be put into.
+### Building the book
 
-- The Table of Contents file is at `_data/toc.yml`.
+If you'd like to develop and/or build the Data, Inference, and Decisions book, you should:
 
-- The configuration file is at `_config.yml`.
+1. Clone this repository
+2. Run `pip install -r requirements.txt` (it is recommended you do this within a virtual environment)
+3. (Optional) Edit the books source files located in the `ds-102-book/` directory
+4. Run `jupyter-book clean ds-102-book/` to remove any existing builds
+5. Run `jupyter-book build ds-102-book/`
 
-- The `content/features` directory showcases a few features of the Jupyter Books tool which for now we'll leave in place until we're all familiar with them (like input/code hiding, etc).
+A fully-rendered HTML version of the book will be built in `ds-102-book/_build/html/`.
 
-## Making changes to the book
+### Hosting the book
 
-This repository uses a tool called [Jupyter Book](https://jupyter.org/jupyter-book) to build
-the textbook. This should all happen *automatically* when new changes are made to anything
-in the `content/` folder. Here are the steps to follow:
+Please see the [Jupyter Book documentation](https://jupyterbook.org/publish/web.html) to discover options for deploying a book online using services such as GitHub, GitLab, or Netlify.
 
-1. **Make sure you have the latest changes from this repository**. You can pull in the latest
-   changes with:
+For GitHub and GitLab deployment specifically, the [cookiecutter-jupyter-book](https://github.com/executablebooks/cookiecutter-jupyter-book) includes templates for, and information about, optional continuous integration (CI) workflow files to help easily and automatically deploy books online with GitHub or GitLab. For example, if you chose `github` for the `include_ci` cookiecutter option, your book template was created with a GitHub actions workflow file that, once pushed to GitHub, automatically renders and pushes your book to the `gh-pages` branch of your repo and hosts it on GitHub Pages when a push or pull request is made to the main branch.
 
-   ```
-   git pull upstream master
-   ```
-2. **Make changes to the textbook**. This is everything in the `content/` directory.
-3. **Make a pull-request for these changes**. This will allow others to take a look at
-   your proposed changes to the book.
-4. **For bigger changes, demo the book within the PR**. If your changes are significant,
-   you may want to demo what they'll look like before merging. To do this, click on
-   `show all checks`, then the **`Details`** link under `demo_html`. This will take you
-   to a CircleCI page for the PR. Click on **`Artifacts`**, and you'll see a list of HTML
-   files. Click one and you'll preview the page using the content in that pull-request.
-5. **Deploy the changes to the live textbook**. This is simply accomplished by merging
-   the PR into the master branch. Whenever the master branch changes, we automatically
-   re-build the book and push the latest versions to the live website. This is done
-   [with this circleci script](./.circleci/config.yml)
+## Contributors
+
+We welcome and recognize all contributions. You can see a list of current contributors in the [contributors tab](https://github.com/rameshvs/ds-102-book/graphs/contributors).
+
+## Credits
+
+This project is created using the excellent open source [Jupyter Book project](https://jupyterbook.org/) and the [executablebooks/cookiecutter-jupyter-book template](https://github.com/executablebooks/cookiecutter-jupyter-book).
