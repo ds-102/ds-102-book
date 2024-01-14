@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Binary Decision-Making and Error Rates &#8212; Data, Inference, and Decisions</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,56 +64,98 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/01/01_decisions_and_errors';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Hypothesis Testing" href="02_hypothesis_testing.html" />
     <link rel="prev" title="Chapter 1: Decisions and Hypothesis testing" href="intro.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../../index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">Data, Inference, and Decisions</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Data, Inference, and Decisions</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -111,401 +165,261 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="intro.html">
-   Chapter 1: Binary Decision-Making
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Binary Decision-Making and Error Rates
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_hypothesis_testing.html">
-     Hypothesis Testing and p-Values
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../02/intro.html">
-   Chapter 2: Bayesian modeling
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../02/placeholder.html">
-     Intro to Bayesian modeling
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../03/intro.html">
-   Chapter 3: Generalized linear models
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../03/placeholder.html">
-     Generalized Linear Models
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 1: Binary Decision-Making</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Binary Decision-Making and Error Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02/placeholder.html">Intro to Bayesian modeling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Generalized linear models</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/placeholder.html">Generalized Linear Models</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/ds-102/ds-102-book/master?urlpath=tree/ds-102-book/content/chapters/01/01_decisions_and_errors.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../../../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/01/01_decisions_and_errors.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/chapters/01/01_decisions_and_errors.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/ds-102/ds-102-book"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/01/01_decisions_and_errors.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../../_sources/content/chapters/01/01_decisions_and_errors.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#making-multiple-decisions">
-   Making multiple decisions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#modifying-the-2x2-table">
-     Modifying the 2x2 table
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#row-wise-rates-quantifying-how-well-we-do-when-reality-is-known">
-     Row-wise rates: quantifying how well we do when reality is known
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#column-wise-rates">
-     Column-wise rates
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-interpreting-row-wise-and-column-wise-rates">
-     Example: interpreting row-wise and column-wise rates
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#conditional-probabilities">
-     Conditional probabilities
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#relating-row-wise-and-column-wise-error-rates">
-     Relating row-wise and column-wise error rates
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-relating-row-wise-and-column-wise-rates-quantitatively">
-     Example: relating row-wise and column-wise rates quantitatively
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#different-error-types-is-one-worse-than-the-other">
-     Different error types: is one worse than the other?
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Binary Decision-Making and Error Rates</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#making-multiple-decisions">
-   Making multiple decisions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#modifying-the-2x2-table">
-     Modifying the 2x2 table
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#row-wise-rates-quantifying-how-well-we-do-when-reality-is-known">
-     Row-wise rates: quantifying how well we do when reality is known
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#column-wise-rates">
-     Column-wise rates
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-interpreting-row-wise-and-column-wise-rates">
-     Example: interpreting row-wise and column-wise rates
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#conditional-probabilities">
-     Conditional probabilities
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#relating-row-wise-and-column-wise-error-rates">
-     Relating row-wise and column-wise error rates
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-relating-row-wise-and-column-wise-rates-quantitatively">
-     Example: relating row-wise and column-wise rates quantitatively
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#different-error-types-is-one-worse-than-the-other">
-     Different error types: is one worse than the other?
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Binary Decision-Making and Error Rates</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
-  <section class="tex2jax_ignore mathjax_ignore" id="binary-decision-making-and-error-rates">
-<h1>Binary Decision-Making and Error Rates<a class="headerlink" href="#binary-decision-making-and-error-rates" title="Permalink to this headline">#</a></h1>
-<p>Many real-world data science problems boil down to making binary decisions:</p>
-<ul class="simple">
-<li><p>Given the outcome of a medical test for a particular disease, does someone have that disease?</p></li>
-<li><p>Given the results of experimenting with a new version of my website, does that version increase the chances that a customer will stay on my website longer and/or buy something?</p></li>
-<li><p>Is there a “statistically significant” association between this pair of variables in my dataset?</p></li>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-multiple-decisions">Making multiple decisions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-2x2-table">Modifying the 2x2 table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#row-wise-rates-quantifying-how-well-we-do-when-reality-is-known">Row-wise rates: quantifying how well we do when reality is known</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#column-wise-rates">Column-wise rates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-interpreting-row-wise-and-column-wise-rates">Example: interpreting row-wise and column-wise rates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probabilities">Conditional probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relating-row-wise-and-column-wise-error-rates">Relating row-wise and column-wise error rates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-relating-row-wise-and-column-wise-rates-quantitatively">Example: relating row-wise and column-wise rates quantitatively</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-error-types-is-one-worse-than-the-other">Different error types: is one worse than the other?</a></li>
 </ul>
-<p>We’ll focus on the case of making a binary (0/1) decision. For each decision, we’ll assume there’s some <em>Reality</em> or truth that’s either 0 or 1. We gather data, and make a binary <em>Decision</em> based on the data: the decision is our best guess for reality. We’ll  abbreviate Reality and Decision with <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(D\)</span> respectively. Since both are binary, we can visualize all possible outcomes using a 2 x 2 table:</p>
-<table class="colwidths-auto table">
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="binary-decision-making-and-error-rates">
+<h1>Binary Decision-Making and Error Rates<a class="headerlink" href="#binary-decision-making-and-error-rates" title="Permalink to this heading">#</a></h1>
+<p>Many real-world data science problems boil down to making binary decisions. For example:</p>
+<ul class="simple">
+<li><p>Given the outcome of medical tests for some disease on a population of patients, which patients have that disease?</p></li>
+<li><p>Given the results of experimenting with a new version of my website, does that version increase the chances that a customer will stay on my website longer and/or buy something?</p></li>
+<li><p>Are there “statistically significant” associations between certain pairs of variables in my dataset?</p></li>
+</ul>
+<p>In particular, in most real-world settings, we don’t just want to analyze a single decision: we want to evaluate what happens when making multiple decisions. Toward that end, we’ll focus on frameworks we can use that help us understand the consequences of making multiple (usually related) decisions.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/tLPImMr5C-E"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<p>In this chapter, we’ll focus on the case of making binary (0/1) decisions. For each decision we make, we’ll assume there’s some <em>Reality</em> or truth that’s either 0 or 1. We gather data, and make a binary <em>Decision</em> based on the data: the decision is our best guess for reality. We’ll abbreviate Reality and Decision with <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(D\)</span> respectively. Since both are binary, we can visualize all possible outcomes using a 2 x 2 table:</p>
+<table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(D=0\)</span></p></th>
@@ -526,7 +440,7 @@ title="Print to PDF"
 <p>Each decision we make must fall into one of the four cells of this table. In most real-world settings, we don’t actually know which <em>row</em> our decision lands up in: we know whether we decided <span class="math notranslate nohighlight">\(D=0\)</span> or <span class="math notranslate nohighlight">\(D=1\)</span> (i.e., which column it’s in), but we don’t know the state of reality.</p>
 <p>This kind of table is often called a <strong>confusion matrix</strong>. There isn’t a standard convention about whether to put reality in the rows or columns, so you may see them flipped in other places. In this book, we’ll always use reality in the rows and the decision in the columns.</p>
 <p>We use the following names for each of the four cases: <strong>true positive</strong> (TP), <strong>false positive</strong> (FP), <strong>true negative</strong> (TN), and <strong>false negative</strong> (FN).</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(D=0\)</span></p></th>
@@ -544,17 +458,31 @@ title="Print to PDF"
 </tr>
 </tbody>
 </table>
-<p>The first word in each name tells us whether or not the decision was correct (“true”) or incorrect (“false”). The second word tells us whether the decision was a 1 (“positive”) or 0 (“negative”).</p>
+<p>The first word in each name tells us whether or not the decision was correct (“true”) or incorrect (“false”). The second word tells us whether the decision was a 1 (“positive”) or 0 (“negative”). For example, a “false positive” is a decision where <span class="math notranslate nohighlight">\(D=1\)</span> (because it was a ‘positive’) and was incorrect, so <span class="math notranslate nohighlight">\(R=0\)</span> (because it was ‘false’).</p>
 <p>Ideally, our decisions would always match reality, and land in the top left (true negatives) or bottom right (false positives) cells of our table. In the real world, this is not always possible: we may make errors. Depending on the problem, we may prefer to avoid one kind of error more than the other. In the rest of this section, we’ll define several different ways to quantify the errors we make, and understand the relationship between them.</p>
+<p>There’s a lot of rich analysis we can do on a single decision, which we’ll explore in the next section on hypothesis testing. For now, we’ll start with the case of making multiple decisions, which will be our focus for most of this chapter.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/6HksEjoX2RI"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
 <section id="making-multiple-decisions">
-<h2>Making multiple decisions<a class="headerlink" href="#making-multiple-decisions" title="Permalink to this headline">#</a></h2>
+<h2>Making multiple decisions<a class="headerlink" href="#making-multiple-decisions" title="Permalink to this heading">#</a></h2>
 <p>Suppose now that we make multiple decisions, and we want to look at all of them collectively. There are several ways this situation could arise:</p>
 <p><em>Testing multiple hypotheses on a single dataset</em>: we could be interested in asking multiple questions from a single dataset. For example, suppose we examine a genomics dataset in an Alzheimer’s study. For each of thousands of genetic markers, we would like to ask whether a mutation at that location is associated with a higher risk of Alzheimer’s.</p>
 <p><em>Testing one hypothesis on multiple datasets</em>: suppose we’re interested in studying whether there is an association between the use of statin drugs and the rate of heart attacks. We could conduct a meta-analysis of many studies that look at this question: each study tests the same hypothesis (i.e., is taking statin drugs associated with lower risk of heart attack?) with a different set of subjects. By looking at the studies as a collection, we can try to draw a stronger conclusion about the presence (or absence) of such a link.</p>
 <section id="modifying-the-2x2-table">
-<h3>Modifying the 2x2 table<a class="headerlink" href="#modifying-the-2x2-table" title="Permalink to this headline">#</a></h3>
+<h3>Modifying the 2x2 table<a class="headerlink" href="#modifying-the-2x2-table" title="Permalink to this heading">#</a></h3>
 <p>When we make multiple decisions, we may have multiple false positives, true negatives, and so on. So, we’ll use the same 2x2 table, but now each cell will contain a count of how many times that condition happened:</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(D=0\)</span></p></th>
@@ -576,7 +504,7 @@ title="Print to PDF"
 <p>There are many ways to quantify how well (or how badly) our decisions match up with reality. In this book, we’ll focus on <strong>row-wise rates</strong>, which quantify our performance in each row (i.e., when reality is 0 and when reality is 1), and <strong>column-wise rates</strong>, which quantify our performance in each column (i.e., when the decision is 0 or the decision is 1).</p>
 </section>
 <section id="row-wise-rates-quantifying-how-well-we-do-when-reality-is-known">
-<h3>Row-wise rates: quantifying how well we do when reality is known<a class="headerlink" href="#row-wise-rates-quantifying-how-well-we-do-when-reality-is-known" title="Permalink to this headline">#</a></h3>
+<h3>Row-wise rates: quantifying how well we do when reality is known<a class="headerlink" href="#row-wise-rates-quantifying-how-well-we-do-when-reality-is-known" title="Permalink to this heading">#</a></h3>
 <p>Suppose we want to evaluate how good our decision-making process is in cases where reality is 0. In this case, we’re interested in the top row of the 2x2 table above. In particular, we can quantify how often we’re correct in this situation using the fraction <span class="math notranslate nohighlight">\(\frac{n_{00}}{n_{00} + n_{01}}\)</span>. We’ll call this row-wise rate the <strong>true negative rate</strong> (TNR): it quantifies how often we make true negative decisions in cases where reality is 0.</p>
 <p>We can also evaluate our decision-making process in cases where reality is 1. In this case, we can quantify how often we’re correct using <span class="math notranslate nohighlight">\(\frac{n_{11}}{n_{10} + n_{11}}\)</span>. This is called the <strong>true positive rate</strong> (TPR): it measures how often we make true positive decisions in cases where reality is 0.</p>
 <p>We can define corresponding <strong>error rates</strong> for the two cases above, which we’ll call false positive rate (FPR) and false negative rate (FNR):</p>
@@ -594,9 +522,22 @@ FNR = \frac{n_{10}}{n_{10} + n_{11}}
 <li><p>TPR: when the customer <strong>did</strong> buy the product, how often did we (correctly) predict that they would buy it?</p></li>
 <li><p>FNR: when the customer <strong>did</strong> buy the product, how often did we (incorrectly) predict that they would not?</p></li>
 </ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/gmLZVBa9T3k"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
 </section>
 <section id="column-wise-rates">
-<h3>Column-wise rates<a class="headerlink" href="#column-wise-rates" title="Permalink to this headline">#</a></h3>
+<h3>Column-wise rates<a class="headerlink" href="#column-wise-rates" title="Permalink to this heading">#</a></h3>
 <p>Row-wise rates measure how well we do in each case of reality: in other words, in each row of the table. We can also quantify our performance when we make specific decisions. We’ll focus on the <strong>false discovery proportion</strong> (FDP), which quantifies how often we’re wrong when we make a decision of 1:</p>
 <p><img alt="fdp.png" src="../../../_images/fdp.png" /></p>
 <p>We also define the <strong>false omission proportion</strong> (FOP), which quantifies how often we’re wrong when we make a decision of 0:</p>
@@ -611,9 +552,22 @@ FOP = \frac{n_{10}}{n_{00} + n_{10}}
 <li><p>FOP: when we predicted the customer <strong>would not buy</strong> the product, how often did they end up buying it?</p></li>
 </ul>
 <p>Throughout this book, we’ll focus primarily on FDP as the column-wise rate we’re most interested in.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/4FnHLfdHmJE"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
 </section>
 <section id="example-interpreting-row-wise-and-column-wise-rates">
-<h3>Example: interpreting row-wise and column-wise rates<a class="headerlink" href="#example-interpreting-row-wise-and-column-wise-rates" title="Permalink to this headline">#</a></h3>
+<h3>Example: interpreting row-wise and column-wise rates<a class="headerlink" href="#example-interpreting-row-wise-and-column-wise-rates" title="Permalink to this heading">#</a></h3>
 <p>Suppose we’re testing a large number of patients for a disease. We’ll use 1 to indicate that a patient has the disease, and 0 to indicate that they don’t. This corresponds to standard medical terminology, where a “positive” test indicates that we think someone has the disease, while a “negative” test means we think they don’t have it.</p>
 <p>Let’s interpret some of the definitions we’ve learned for this specific example. Recall that for this example, a <strong>false positive</strong> occurs when the test comes back positive (i.e., the test says the patient has the disease), but the patient is healthy.</p>
 <ul class="simple">
@@ -625,46 +579,72 @@ FOP = \frac{n_{10}}{n_{00} + n_{10}}
 <p>Intuitively, the row-wise error rates (FPR and FNR) describe properties of the test itself: they tell us how well the test does on healthy patients and sick patients, respectively. As a specific example, the COVID-19 rapid (antigen) tests have an estimated FPR of 0.2% and an FNR of 38% for the Omicron BA.1 variant (<a class="reference external" href="https://www.medrxiv.org/content/10.1101/2022.06.13.22276325v1">source</a>). The FPR and FNR are a property of the testing technique and the disease itself, and are the same regardless of whether the test is used during a surge in cases or during a low period (fewer cases), as long as the test technology and variant are the same.</p>
 <p>On the other hand, the column-wise rates must depend on the population. As a specific example, let’s examine the FDP for COVID-19 rapid (antigen) tests. During a lull, when the virus is less common in the population, we should expect a relatively small number of people with COVID, and a relatively large number of healthy patients. This means that some moderate percentage of positive tests will be incorrect (false positives), and so our FDR could be moderately high. But during a surge in cases, many more people are sick, and we should expect more of the positive tests to come from people with COVID rather than healthy people. Therefore, our FDP will be lower, even if the test itself stays exactly the same.</p>
 <p>Next, we’ll quantify this intuition for the relationship between row-wise rates and column-wise rates.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/4V7bZ4z4jWg"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
 </section>
 <section id="conditional-probabilities">
-<h3>Conditional probabilities<a class="headerlink" href="#conditional-probabilities" title="Permalink to this headline">#</a></h3>
+<h3>Conditional probabilities<a class="headerlink" href="#conditional-probabilities" title="Permalink to this heading">#</a></h3>
 <p>Each of the rates defined above was based on the idea of limiting ourselves to half of the table. In the case of row-wise rates, we defined quantities based on looking only at <span class="math notranslate nohighlight">\(R=0\)</span> (FPR and TNR) or <span class="math notranslate nohighlight">\(R=1\)</span> (TPR and FNR). In the case of column-wise rates, we defined FDP based only on <span class="math notranslate nohighlight">\(D=1\)</span>.</p>
 <p>This idea, of making computations based on a limited set of outcomes, should be familiar: it’s an idea you’ve likely seen before when thinking about conditional probabilities. Consider events <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>. While <span class="math notranslate nohighlight">\(P(A)\)</span> describes the probability that event <span class="math notranslate nohighlight">\(A\)</span> occurs, <span class="math notranslate nohighlight">\(P(A|B)\)</span> describes the conditional probability of event <span class="math notranslate nohighlight">\(A\)</span> given event <span class="math notranslate nohighlight">\(B\)</span>: in other words, if we restrict ourselves to the case where event <span class="math notranslate nohighlight">\(B\)</span> has occurred, what is the probability of event <span class="math notranslate nohighlight">\(A\)</span> occuring?</p>
 <p>From this idea, we can interpret our row-wise rates as conditional probabilities. Since each is defined within a particular case for reality, we know that they are probabilities of particular decisions conditioned on reality: for example, the true positive rate (TPR) is <span class="math notranslate nohighlight">\(P(D=1|R=1)\)</span>.</p>
 <p>Similarly, the false positive rate (FPR), which measures how often our answers are incorrect (<span class="math notranslate nohighlight">\(D=1\)</span>) when reality is 0 (<span class="math notranslate nohighlight">\(R = 0\)</span>), can be interpreted as the conditional probability <span class="math notranslate nohighlight">\(P(D=1|R=0)\)</span>.</p>
 <p>Column-wise rates, on the other hand, are defined conditioned on a particular decision. The false discovery proportion, which looks at our positive decisions (<span class="math notranslate nohighlight">\(D=1\)</span>) and measures how often they are incorrect (<span class="math notranslate nohighlight">\(R=0\)</span>), can be interpreted as the conditional probability <span class="math notranslate nohighlight">\(P(R=0|D=1)\)</span>. Similarly, the false omission proportion (FOP) is <span class="math notranslate nohighlight">\(P(R=1|D=0)\)</span>.</p>
 <p>To summarize:</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>Error rate</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Error rate</p></th>
 <th class="head"><p>Conditional probability</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p><strong>True negative rate (TNR)</strong></p></td>
+<tr class="row-even"><td class="text-left"><p><strong>True negative rate (TNR)</strong></p></td>
 <td><p>$P(D=0</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><strong>False positive rate (FPR)</strong></p></td>
+<tr class="row-odd"><td class="text-left"><p><strong>False positive rate (FPR)</strong></p></td>
 <td><p>$P(D=1</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><strong>True positive rate (TPR)</strong></p></td>
+<tr class="row-even"><td class="text-left"><p><strong>True positive rate (TPR)</strong></p></td>
 <td><p>$P(D=1</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><strong>False negative rate (FNR)</strong></p></td>
+<tr class="row-odd"><td class="text-left"><p><strong>False negative rate (FNR)</strong></p></td>
 <td><p>$P(D=0</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><strong>False discovery proportion (FDP)</strong></p></td>
+<tr class="row-even"><td class="text-left"><p><strong>False discovery proportion (FDP)</strong></p></td>
 <td><p>$P(R=0</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><strong>False omission proportion (FOP)</strong></p></td>
+<tr class="row-odd"><td class="text-left"><p><strong>False omission proportion (FOP)</strong></p></td>
 <td><p>$P(R=1</p></td>
 </tr>
 </tbody>
 </table>
 <p>Interpreting these row-wise and column-wise rates as conditional probabilities is useful because it lets us apply everything we know about conditional probability to better our understanding of these rates. Earlier, with our COVID-19 testing example, we explored an intuitive connection between the row-wise rates and column-wise rates, and introduced the idea that the connection also depends on how common “<span class="math notranslate nohighlight">\(R=1\)</span>” is. We can formalize this intuition by applying Bayes’ rule.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/qqiPlQ1w_WE"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
 </section>
 <section id="relating-row-wise-and-column-wise-error-rates">
-<h3>Relating row-wise and column-wise error rates<a class="headerlink" href="#relating-row-wise-and-column-wise-error-rates" title="Permalink to this headline">#</a></h3>
+<h3>Relating row-wise and column-wise error rates<a class="headerlink" href="#relating-row-wise-and-column-wise-error-rates" title="Permalink to this heading">#</a></h3>
 <p>Consider the false discovery proportion (FDP), <span class="math notranslate nohighlight">\(P(R=0|D=1)\)</span> and false positive rate (FPR), <span class="math notranslate nohighlight">\(P(D=1|R=0)\)</span>. In order to quantify the connection between them, we can apply Bayes’ rule. As we’ll see, the connection depends on how common it is for reality to be “1”. We’ll call this quantity the <strong>prevalence</strong> or <strong>base rate</strong>, and use the notation <span class="math notranslate nohighlight">\(\pi_1\)</span>: <span class="math notranslate nohighlight">\(\pi_1 = P(R=1)\)</span>. We’ll also define <span class="math notranslate nohighlight">\(\pi_0 = P(R=0) = 1 - \pi_1\)</span>.</p>
 <p>Now we can quantify the relationship between these two rates that we began exploring earlier. We’ll use Bayes’ rule and the law of total probability:</p>
 <div class="math notranslate nohighlight">
@@ -679,9 +659,22 @@ FDP
 \end{align*}
 \end{split}\]</div>
 <p>For a refresher on calculations like these, you can refer to <a class="reference external" href="http://prob140.org/textbook/content/Chapter_02/05_Updating_Probabilities.html">Section 2.5 of the Data 140 textbook</a>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/IFTY4ogb2_s"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
 </section>
 <section id="example-relating-row-wise-and-column-wise-rates-quantitatively">
-<h3>Example: relating row-wise and column-wise rates quantitatively<a class="headerlink" href="#example-relating-row-wise-and-column-wise-rates-quantitatively" title="Permalink to this headline">#</a></h3>
+<h3>Example: relating row-wise and column-wise rates quantitatively<a class="headerlink" href="#example-relating-row-wise-and-column-wise-rates-quantitatively" title="Permalink to this heading">#</a></h3>
 <p>Suppose we’re trying to build a model that predicts whether or not it will rain. To ensure it performs well, we’ll apply our algorithm in Berkeley (where it almost never rains in the summer) and in Miami, FL (where it rains about half the time in the summer).</p>
 <p>You work with a team of data scientists, and one of them provides you with a good prediction model: on days that it rains, the model gets it right <span class="math notranslate nohighlight">\(97\%\)</span> of the time, and on days that it doesn’t rain, the model gets it right <span class="math notranslate nohighlight">\(96\%\)</span> of the time. You present the model to a meteorologist, who tells you that the question they’re really interested in is: <strong>when the model predicts rain, how often is it right</strong>? This is important for people to trust the model: if the model’s rainy-day predictions are mostly incorrect, then people won’t believe it.</p>
 <p>We start by interpreting these three quantities into the framework that we’ve already built up. We’ll use 1 to indicate rain, and 0 to indicate no rain.</p>
@@ -738,20 +731,33 @@ FDP
 FDP = \frac{1}{1 + \frac{TPR}{FPR} \frac{\pi_1}{\pi_0}}
 \]</div>
 <ul class="simple">
-<li><p>As the prevalence <span class="math notranslate nohighlight">\(\pi_1\)</span> becomes very small, the fraction <span class="math notranslate nohighlight">\(\pi_1/\pi_0\)</span> approaches 0, and the FDP approaches <span class="math notranslate nohighlight">\(1/(1+0) = 1\)</span>.</p></li>
-<li><p>As the prevalence <span class="math notranslate nohighlight">\(\pi_1\)</span> becomes close to 1, the fraction <span class="math notranslate nohighlight">\(\pi_1/\pi_0\)</span> approaches <span class="math notranslate nohighlight">\(\infty\)</span>, and the FDP approaches 0.</p></li>
+<li><p>As the prevalence <span class="math notranslate nohighlight">\(\pi_1\)</span> becomes very small (close to 0), the fraction <span class="math notranslate nohighlight">\(\pi_1/\pi_0\)</span> approaches 0, and the FDP approaches <span class="math notranslate nohighlight">\(1/(1+0) = 1\)</span>.</p></li>
+<li><p>As the prevalence <span class="math notranslate nohighlight">\(\pi_1\)</span> becomes very big (close to 1), the fraction <span class="math notranslate nohighlight">\(\pi_1/\pi_0\)</span> approaches <span class="math notranslate nohighlight">\(\infty\)</span>, and the FDP approaches 0.</p></li>
 </ul>
 <p>Similarly, we can see that larger values of the true positive rate (TPR) and smaller values of the false positive rate (FPR) lead to a lower false discovery proportion (FDP).</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/aVwtgw0tQHI"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
 </section>
 <section id="different-error-types-is-one-worse-than-the-other">
-<h3>Different error types: is one worse than the other?<a class="headerlink" href="#different-error-types-is-one-worse-than-the-other" title="Permalink to this headline">#</a></h3>
+<h3>Different error types: is one worse than the other?<a class="headerlink" href="#different-error-types-is-one-worse-than-the-other" title="Permalink to this heading">#</a></h3>
 <p>False positives and false negatives are both errors. In general, we’d like to make as few errors as possible, but as we’ll see later, we often end up in situations where we must trade off between making more false positives and fewer false negatives, or vice versa. In such cases, it’s important to understand which one is preferable (or “less bad”).</p>
 <p>For example: suppose Spotify is trying to predict which customers will renew their subscriptions (1 corresponds to renewing, 0 corresponds to not renewing). For customers predicted to not renew, they plan to send a $1 coupon off their next month’s subscription. In this case:</p>
 <ul class="simple">
 <li><p>A false positive corresponds to predicting a customer will renew (and therefore not sending a coupon), but then the customer doesn’t renew (and Spotify loses a customer paying $10 per month, every month).</p></li>
 <li><p>A false negative corresponds to predicting a customer won’t renew (and therefore sending them a coupon), but then the customer would have renewed anyway (and so the coupon was unnecessary, costing Spotify $1).</p></li>
 </ul>
-<p>In this example, we could probably argue that a false positive is worse than a false negative: a false negative means that they wasted $1, but a false positive means that they lost a paying customer who they might have been able to retain with a coupon.</p>
+<p>In this example, we could probably argue that a false positive is worse than a false negative: a false negative means that Spotify will waste $1, but a false positive means that they will lose a paying customer who they might have been able to retain with a coupon.</p>
 </section>
 </section>
 </section>
@@ -768,7 +774,7 @@ FDP = \frac{1}{1 + \frac{TPR}{FPR} \frac{\pi_1}{\pi_0}}
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./content/chapters/01"
         },
         predefinedOutput: true
@@ -776,50 +782,112 @@ FDP = \frac{1}{1 + \frac{TPR}{FPR} \frac{\pi_1}{\pi_0}}
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Chapter 1: Decisions and Hypothesis testing</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 1: Decisions and Hypothesis testing</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="02_hypothesis_testing.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="02_hypothesis_testing.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Hypothesis Testing</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-multiple-decisions">Making multiple decisions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-2x2-table">Modifying the 2x2 table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#row-wise-rates-quantifying-how-well-we-do-when-reality-is-known">Row-wise rates: quantifying how well we do when reality is known</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#column-wise-rates">Column-wise rates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-interpreting-row-wise-and-column-wise-rates">Example: interpreting row-wise and column-wise rates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probabilities">Conditional probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relating-row-wise-and-column-wise-error-rates">Relating row-wise and column-wise error rates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-relating-row-wise-and-column-wise-rates-quantitatively">Example: relating row-wise and column-wise rates quantitatively</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-error-types-is-one-worse-than-the-other">Different error types: is one worse than the other?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Data 102 Staff<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Data 102 Staff
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
