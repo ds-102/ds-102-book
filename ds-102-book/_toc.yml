@@ -18,6 +18,10 @@ chapters:
       title: "Binary Decision-Making and Error Rates"
     - file: content/chapters/01/02_hypothesis_testing
       title: "Hypothesis Testing and p-Values"
+    - file: content/chapters/01/03_multiple_tests
+      title: "Multiple Hypothesis Testing"
+    - file: content/chapters/01/04_binary_classsification
+      title: "Binary Classification"
 
 - file: content/chapters/02/intro
   title: "Chapter 2: Bayesian modeling"

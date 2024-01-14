@@ -4,3 +4,4 @@ numpy
 seaborn
 pandas
 ghp-import
+scipy
