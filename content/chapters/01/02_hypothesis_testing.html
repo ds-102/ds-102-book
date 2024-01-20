@@ -375,6 +375,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-and-binary-decision-making">Hypothesis testing and binary decision-making</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-binary-outlook-on-hypothesis-testing">Limitations of binary outlook on hypothesis testing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-p-values-with-false-positive-rate">Connecting <span class="math notranslate nohighlight">\(p\)</span>-values with false positive rate</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-uniformity-of-p-values-under-the-null-distribution">Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-p-value-thresholds-for-e-commerce-website-optimization">Example: p-value thresholds for e-commerce website optimization</a></li>
@@ -452,7 +453,8 @@ document.write(`
 </div>
 <section id="hypothesis-testing-and-binary-decision-making">
 <h2>Hypothesis testing and binary decision-making<a class="headerlink" href="#hypothesis-testing-and-binary-decision-making" title="Permalink to this heading">#</a></h2>
-<p>We can see that hypothesis testing (as we’ve defined it above) is a binary decision-making problem: we must decide between the null and alternative hypotheses, and we’re assuming that there is some underlying true hypothesis. In this case, <strong>reality</strong> corresponds to which hypothesis is actually true, and we make our <strong>decision</strong> based on the p-values.</p>
+<p><em>Note: the following paragraphs are under active development by course staff and are subject to change in the next week.</em></p>
+<p>We’ll frame hypothesis testing as a binary decision-making problem, where we decide between the null and alternative hypotheses, and we assume that one of them is true (note that this framing is flawed; see below for more). In this case, <strong>reality</strong> corresponds to which hypothesis is actually true, and we make our <strong>decision</strong> based on the p-values.</p>
 <p>In order to translate the p-values into binary decisions, we’ll have to decide on some threshold(s) for doing so: we’ll spend the rest of this chapter analyzing different ways to pick this threshold (or thresholds), and what assumptions are encoded in each one.</p>
 <p>Here are some important notes about conventions and vocabulary:</p>
 <ul class="simple">
@@ -465,6 +467,18 @@ document.write(`
 </ul>
 </li>
 </ul>
+<section id="limitations-of-binary-outlook-on-hypothesis-testing">
+<h3>Limitations of binary outlook on hypothesis testing<a class="headerlink" href="#limitations-of-binary-outlook-on-hypothesis-testing" title="Permalink to this heading">#</a></h3>
+<p>In many cases, the null and alternative hypotheses are not necessarily mutually exclusive! When we make a discovery, or equivalently, reject the null hypothesis, this only means that <strong>the data we observed are unlikely if the null hypothesis is true</strong>. In many cases, this doesn’t necessarily mean that the alternative hypothesis is true! A rejection of the null hypothesis is often only one step toward showing an alternative hypothesis that we’re interested in.</p>
+<p>For example, consider a hypothesis test for a blood pressure drug trial, where the null hypothesis is “the drug has no effect on blood pressure” and the alternative hypothesis is “the drug decreases blood pressure”. Consider the following possible outcomes: for each one, would you reject the null hypothesis? If so, would you conclude the alternative hypothesis is true? And going even further, would you declare the drug trial successful?</p>
+<ul class="simple">
+<li><p>The drug consistently lowers blood pressure, but by an amount that is medically insignificant (i.e., the decrease has no meaningful impact on any other biological processes in the body, or any other clinical outcomes).</p></li>
+<li><p>The drug raises blood pressure.</p></li>
+<li><p>The drug lowers blood pressure by an amount that is potentially dangerous in certain individuals.</p></li>
+<li><p>The drug was originally designed to lower cholesterol, but after expensive and unsuccessful trials on cholesterol, the pharmaceutical company’s researchers decided to look at ten other factors, and found that blood pressure happened to be lower in the treatment group.</p></li>
+</ul>
+<p>From these examples, we can see that conducting a hypothesis test is not a decisive statement: instead, it should be viewed as one step within a larger process.</p>
+</section>
 <section id="connecting-p-values-with-false-positive-rate">
 <h3>Connecting <span class="math notranslate nohighlight">\(p\)</span>-values with false positive rate<a class="headerlink" href="#connecting-p-values-with-false-positive-rate" title="Permalink to this heading">#</a></h3>
 <p><em>You may find it helpful to review <a class="reference external" href="http://prob140.org/textbook/content/Chapter_15/01_Density_and_CDF.html">Chapter 15</a> of the Data 140 textbook, which covers continuous random variables.</em></p>
@@ -490,7 +504,7 @@ document.write(`
 <li><p>Chose a test statistic value <span class="math notranslate nohighlight">\(a\)</span> such that the area under the the null distribution to the right of <span class="math notranslate nohighlight">\(a\)</span> is 0.05</p></li>
 <li><p>Determined that “obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than or equal to 0.05” is exactly equivalent to “obtaining a test statistic greater than or equal to <span class="math notranslate nohighlight">\(a\)</span>”</p></li>
 <li><p>Computed that if the null is true, the probability of “obtaining a test statistic greater than or equal to <span class="math notranslate nohighlight">\(a\)</span>” is 0.05</p></li>
-<li><p>Found (by combining 2 and 3) that if the null is true, the probability of “obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than or equal to 0.05$ is 0.05.</p></li>
+<li><p>Found (by combining 2 and 3) that if the null is true, the probability of “obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than or equal to 0.05 is 0.05.</p></li>
 </ol>
 <p><strong>Exercise 3</strong>: Suppose the null hypothesis is true. In this case, what is the probability of obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than <span class="math notranslate nohighlight">\(\gamma\)</span> (assuming <span class="math notranslate nohighlight">\(0 &lt; \gamma \leq 1\)</span>)? <em>Note this is a generalization of the previous question, using <span class="math notranslate nohighlight">\(\gamma\)</span> instead of the specific value <span class="math notranslate nohighlight">\(0.05\)</span>.</em></p>
 <p>Throughout our solution to the last exercise, there was nothing special about the value of 0.05 that we used. All of our conclusions are still valid even if we choose any other threshold between 0 and 1. So, we can safely conclude that this probability is <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
@@ -591,7 +605,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/27f9080ceba58de126bb6fd088107bcec011dc1a22d264843c8f17f283eea3f2.png" src="../../../_images/27f9080ceba58de126bb6fd088107bcec011dc1a22d264843c8f17f283eea3f2.png" />
+<img alt="../../../_images/092d26bb9a7d42e7edb972b2ef25f875e960624828efa5c579a20f27144a1982.png" src="../../../_images/092d26bb9a7d42e7edb972b2ef25f875e960624828efa5c579a20f27144a1982.png" />
 </div>
 </div>
 <p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
@@ -651,7 +665,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">p_values</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pvalue&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> 
+    <span class="n">data</span><span class="o">=</span><span class="n">p_values</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pvalue&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> 
     <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">orient</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;P-values, with ground truth labels&#39;</span><span class="p">);</span>
@@ -663,14 +677,14 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.049319194537530316, 1.035869189459966, 1.5, -0.5)
 </pre></div>
 </div>
-<img alt="../../../_images/d2abf0e1fdfc435be65cfdbbb29a41d75d025c69b6c609b7163fc4c47c078af9.png" src="../../../_images/d2abf0e1fdfc435be65cfdbbb29a41d75d025c69b6c609b7163fc4c47c078af9.png" />
+<img alt="../../../_images/fdcd057d93eb9de96d0992f8207c76fb2073d2cc55e25d7e1b774b49440ffad3.png" src="../../../_images/fdcd057d93eb9de96d0992f8207c76fb2073d2cc55e25d7e1b774b49440ffad3.png" />
 </div>
 </div>
 <p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">p_values</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pvalue&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> 
+    <span class="n">data</span><span class="o">=</span><span class="n">p_values</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pvalue&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span>
     <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">orient</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
@@ -680,7 +694,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/324f8fec0ce5e90d41074ce9c08d71a17e86d063ce0333b2173b31d7f516833b.png" src="../../../_images/324f8fec0ce5e90d41074ce9c08d71a17e86d063ce0333b2173b31d7f516833b.png" />
+<img alt="../../../_images/9ed17cff7e0f1a16980e5dd4909fe0c019f07d5e1eee92a784fecd0f06f808e8.png" src="../../../_images/9ed17cff7e0f1a16980e5dd4909fe0c019f07d5e1eee92a784fecd0f06f808e8.png" />
 </div>
 </div>
 <p>For p-values smaller than our threshold (to the right of the line), our decision is 1. So:</p>
@@ -694,7 +708,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">p_values</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pvalue&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> 
+    <span class="n">data</span><span class="o">=</span><span class="n">p_values</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pvalue&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> 
     <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">orient</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="mf">0.42</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
@@ -704,7 +718,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/81858fe3a631949aff12569117381146b8b211a3fcfaadbb41c4b566c4a50806.png" src="../../../_images/81858fe3a631949aff12569117381146b8b211a3fcfaadbb41c4b566c4a50806.png" />
+<img alt="../../../_images/74ee20bd68e41dc7636d601250b6c2b4278f85be31dcb2ef1ff56a8256d91b57.png" src="../../../_images/74ee20bd68e41dc7636d601250b6c2b4278f85be31dcb2ef1ff56a8256d91b57.png" />
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>
@@ -815,6 +829,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-and-binary-decision-making">Hypothesis testing and binary decision-making</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-binary-outlook-on-hypothesis-testing">Limitations of binary outlook on hypothesis testing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-p-values-with-false-positive-rate">Connecting <span class="math notranslate nohighlight">\(p\)</span>-values with false positive rate</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-uniformity-of-p-values-under-the-null-distribution">Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-p-value-thresholds-for-e-commerce-website-optimization">Example: p-value thresholds for e-commerce website optimization</a></li>
