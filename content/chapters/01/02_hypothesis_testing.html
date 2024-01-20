@@ -377,7 +377,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-and-binary-decision-making">Hypothesis testing and binary decision-making</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-binary-outlook-on-hypothesis-testing">Limitations of binary outlook on hypothesis testing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-p-values-with-false-positive-rate">Connecting <span class="math notranslate nohighlight">\(p\)</span>-values with false positive rate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-uniformity-of-p-values-under-the-null-distribution">Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-uniformity-of-p-values-under-the-null-distribution-optional">Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#short-version">Short version</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-p-value-thresholds-for-e-commerce-website-optimization">Example: p-value thresholds for e-commerce website optimization</a></li>
 </ul>
 </li>
@@ -534,9 +537,66 @@ document.write(`
         </div></div>
 </div>
 </section>
-<section id="proof-of-uniformity-of-p-values-under-the-null-distribution">
-<h3>Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution<a class="headerlink" href="#proof-of-uniformity-of-p-values-under-the-null-distribution" title="Permalink to this heading">#</a></h3>
-<p><em>Coming soon</em></p>
+<section id="proof-of-uniformity-of-p-values-under-the-null-distribution-optional">
+<h3>Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution (optional)<a class="headerlink" href="#proof-of-uniformity-of-p-values-under-the-null-distribution-optional" title="Permalink to this heading">#</a></h3>
+<p><em>For this subsection only, we’ll use more precise notation: random variables will be denoted with capital letters, values they can take on will be denoted with lowercase letters, and density functions and cumulative distribution functions will be subscripted with the corresponding random variables. For a refresher on this notation, see the Data 140 textbook.</em></p>
+<p><em>Additionally, note carefully the difference between the notation for random variable <span class="math notranslate nohighlight">\(P\)</span> and probability <span class="math notranslate nohighlight">\(\mathbb{P}\)</span>.</em></p>
+<p>Let <span class="math notranslate nohighlight">\(T\)</span> be a continuous random variable denoting our test statistic, and let <span class="math notranslate nohighlight">\(F_T\)</span> be the CDF of <span class="math notranslate nohighlight">\(T\)</span> under the null hypothesis: in other words, <span class="math notranslate nohighlight">\(F_T(t) = \mathbb{P}(T \leq t)\)</span>. Let <span class="math notranslate nohighlight">\(G_T\)</span> be the <em>tail CDF</em>: <span class="math notranslate nohighlight">\(G_T(t) = 1 - F_T(t) = \mathbb{P}(T \geq t)\)</span> (we’re being imprecise with the equality here since <span class="math notranslate nohighlight">\(T\)</span> is a continuous random variable).</p>
+<p><span class="math notranslate nohighlight">\(G_T\)</span> is a tail cumulative distribution function, but we can also view it as just a function: we can plug in any number and obtain a number between 0 and 1. In general, we can apply any function to a random variable and, in doing so, obtain another random variable. For example, if we apply the function <span class="math notranslate nohighlight">\(h(x) = 7x\)</span> to <span class="math notranslate nohighlight">\(T\)</span>, we’d obtain a new random variable <span class="math notranslate nohighlight">\(h(T)\)</span> that takes on values seven times what <span class="math notranslate nohighlight">\(T\)</span> would. So, if we apply the function <span class="math notranslate nohighlight">\(G_T\)</span> to the random variable <span class="math notranslate nohighlight">\(T\)</span>, we get another random variable. Note the difference between <span class="math notranslate nohighlight">\(G_T(t)\)</span>, which is the function applied to a specific number <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(G_T(T)\)</span>, which is the function applied to the random variable <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p>The <span class="math notranslate nohighlight">\(p\)</span>-value associated with a particular test statistic <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(\mathbb{P}(T \geq t)\)</span>: this is simply <span class="math notranslate nohighlight">\(G_T(t)\)</span>. The <span class="math notranslate nohighlight">\(p\)</span>-value is a random variable <span class="math notranslate nohighlight">\(P\)</span> that depends on the random variable <span class="math notranslate nohighlight">\(T\)</span>: <span class="math notranslate nohighlight">\(P = G_T(T)\)</span>.</p>
+<p>What is the CDF of this random variable <span class="math notranslate nohighlight">\(P\)</span>?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+F_P(p) 
+    &amp;= \mathbb{P}(P \leq p) \\
+    &amp;= \mathbb{P}(G_T(T) \leq p)
+\end{align*}
+\end{split}\]</div>
+<p>Consider the function <span class="math notranslate nohighlight">\(G_T^{-1}\)</span>, the inverse of <span class="math notranslate nohighlight">\(G_T\)</span>. Both <span class="math notranslate nohighlight">\(G_T\)</span> and its inverse are monotonically non-increasing: in other words, if <span class="math notranslate nohighlight">\(a &gt; b\)</span>, then <span class="math notranslate nohighlight">\(G_T(a) \leq G_T(b)\)</span>, and <span class="math notranslate nohighlight">\(G_T^{-1}(a) \leq G_T^{-1}(b)\)</span>. The same is true of its inverse, <span class="math notranslate nohighlight">\(G^{-1}\)</span>. So, we can apply the function <span class="math notranslate nohighlight">\(G^{-1}\)</span> to both sides of the inequality above, which flips the inequality:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+F_P(p) 
+    &amp;= \mathbb{P}(G_T(T) \leq p) \\
+    &amp;= \mathbb{P}(G_T^{-1}(G_T(T)) \geq G_T^{-1}(p)) \\
+    &amp;= \mathbb{P}(T \geq G_T^{-1}(p))
+\end{align*}
+\end{split}\]</div>
+<p>This is the probability that <span class="math notranslate nohighlight">\(T\)</span> is greater than some amount: that’s the definition of the tail CDF <span class="math notranslate nohighlight">\(G_T\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+F_P(p) 
+    &amp;= \mathbb{P}(T \geq G_T^{-1}(p)) \\
+    &amp;= G_T(G_T^{-1}(p)) \\
+    &amp;= p, \text{  for }0 \leq p \leq 1
+\end{align*}
+\end{split}\]</div>
+<p>We can then find the probability density function for random variable <span class="math notranslate nohighlight">\(P\)</span> by differentiating, which gives us that <span class="math notranslate nohighlight">\(f_P(p) = 1\)</span>, for <span class="math notranslate nohighlight">\(0 \leq p \leq 1\)</span>: in other words, under the null hypothesis, <span class="math notranslate nohighlight">\(P\)</span> is a uniform random variable.</p>
+<p>Note that we made no assumptions about the distribution of the test statistic: this is true regardless of which test statistic we choose.</p>
+<section id="short-version">
+<h4>Short version<a class="headerlink" href="#short-version" title="Permalink to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+G_T(t) 
+    &amp;= \mathbb{P}(T \geq t) &amp; \text{(definition of tail CDF)}\\
+P
+    &amp;= G_T(T) &amp; \text{(definition of p-value)} \\
+F_P(p)
+    &amp;= \mathbb{P}(P \leq p)  &amp; \text{(definition of CDF)}\\
+    &amp;= \mathbb{P}(G_T(T) \leq p) &amp; \\
+    &amp;= \mathbb{P}(G_T^{-1}(G_T(T)) \geq G_T^{-1}(p)) &amp; \text{(applying }G_T^{-1}\text{ to both sides)} \\
+    &amp;= \mathbb{P}(T \geq G_T^{-1}(p)) &amp; \\
+    &amp;= G_T(G_T^{-1}(p))) &amp; \text{(using definition of }G_T\text{)} \\
+    &amp;= p, \quad 0 \leq p \leq 1 \\
+f_P(p)
+    &amp;= \frac{d}{dp}F_P(p) \\
+    &amp;= 1, \quad 0 \leq p \leq 1
+\end{align*}
+\end{split}\]</div>
+</section>
 </section>
 <section id="example-p-value-thresholds-for-e-commerce-website-optimization">
 <h3>Example: p-value thresholds for e-commerce website optimization<a class="headerlink" href="#example-p-value-thresholds-for-e-commerce-website-optimization" title="Permalink to this heading">#</a></h3>
@@ -605,7 +665,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/092d26bb9a7d42e7edb972b2ef25f875e960624828efa5c579a20f27144a1982.png" src="../../../_images/092d26bb9a7d42e7edb972b2ef25f875e960624828efa5c579a20f27144a1982.png" />
+<img alt="../../../_images/7a32510108de400732f5e3ef5f6f3b693d8a8d5e196d5fa9f6ecee6bb53efcde.png" src="../../../_images/7a32510108de400732f5e3ef5f6f3b693d8a8d5e196d5fa9f6ecee6bb53efcde.png" />
 </div>
 </div>
 <p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
@@ -677,7 +737,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.049319194537530316, 1.035869189459966, 1.5, -0.5)
 </pre></div>
 </div>
-<img alt="../../../_images/fdcd057d93eb9de96d0992f8207c76fb2073d2cc55e25d7e1b774b49440ffad3.png" src="../../../_images/fdcd057d93eb9de96d0992f8207c76fb2073d2cc55e25d7e1b774b49440ffad3.png" />
+<img alt="../../../_images/4c50a3788c0dfcea7fb3dd28a00fb920a498d1275014afb83d522dc6f58877c0.png" src="../../../_images/4c50a3788c0dfcea7fb3dd28a00fb920a498d1275014afb83d522dc6f58877c0.png" />
 </div>
 </div>
 <p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
@@ -694,7 +754,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/9ed17cff7e0f1a16980e5dd4909fe0c019f07d5e1eee92a784fecd0f06f808e8.png" src="../../../_images/9ed17cff7e0f1a16980e5dd4909fe0c019f07d5e1eee92a784fecd0f06f808e8.png" />
+<img alt="../../../_images/0a2010bcbbdfa0210e4d69722bdffb3b24d6ba4f92ae947bdc41699730d03004.png" src="../../../_images/0a2010bcbbdfa0210e4d69722bdffb3b24d6ba4f92ae947bdc41699730d03004.png" />
 </div>
 </div>
 <p>For p-values smaller than our threshold (to the right of the line), our decision is 1. So:</p>
@@ -718,7 +778,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/74ee20bd68e41dc7636d601250b6c2b4278f85be31dcb2ef1ff56a8256d91b57.png" src="../../../_images/74ee20bd68e41dc7636d601250b6c2b4278f85be31dcb2ef1ff56a8256d91b57.png" />
+<img alt="../../../_images/47124fe4779231cee45ded60c813cab0878165274dc773eb44281809eda6b984.png" src="../../../_images/47124fe4779231cee45ded60c813cab0878165274dc773eb44281809eda6b984.png" />
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>
@@ -831,7 +891,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-and-binary-decision-making">Hypothesis testing and binary decision-making</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-binary-outlook-on-hypothesis-testing">Limitations of binary outlook on hypothesis testing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-p-values-with-false-positive-rate">Connecting <span class="math notranslate nohighlight">\(p\)</span>-values with false positive rate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-uniformity-of-p-values-under-the-null-distribution">Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-uniformity-of-p-values-under-the-null-distribution-optional">Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#short-version">Short version</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-p-value-thresholds-for-e-commerce-website-optimization">Example: p-value thresholds for e-commerce website optimization</a></li>
 </ul>
 </li>
