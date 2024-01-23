@@ -456,7 +456,6 @@ document.write(`
 </div>
 <section id="hypothesis-testing-and-binary-decision-making">
 <h2>Hypothesis testing and binary decision-making<a class="headerlink" href="#hypothesis-testing-and-binary-decision-making" title="Permalink to this heading">#</a></h2>
-<p><em>Note: the following paragraphs are under active development by course staff and are subject to change in the next week.</em></p>
 <p>We’ll frame hypothesis testing as a binary decision-making problem, where we decide between the null and alternative hypotheses, and we assume that one of them is true (note that this framing is flawed; see below for more). In this case, <strong>reality</strong> corresponds to which hypothesis is actually true, and we make our <strong>decision</strong> based on the p-values.</p>
 <p>In order to translate the p-values into binary decisions, we’ll have to decide on some threshold(s) for doing so: we’ll spend the rest of this chapter analyzing different ways to pick this threshold (or thresholds), and what assumptions are encoded in each one.</p>
 <p>Here are some important notes about conventions and vocabulary:</p>
@@ -473,13 +472,26 @@ document.write(`
 <section id="limitations-of-binary-outlook-on-hypothesis-testing">
 <h3>Limitations of binary outlook on hypothesis testing<a class="headerlink" href="#limitations-of-binary-outlook-on-hypothesis-testing" title="Permalink to this heading">#</a></h3>
 <p>In many cases, the null and alternative hypotheses are not necessarily mutually exclusive! When we make a discovery, or equivalently, reject the null hypothesis, this only means that <strong>the data we observed are unlikely if the null hypothesis is true</strong>. In many cases, this doesn’t necessarily mean that the alternative hypothesis is true! A rejection of the null hypothesis is often only one step toward showing an alternative hypothesis that we’re interested in.</p>
-<p>For example, consider a hypothesis test for a blood pressure drug trial, where the null hypothesis is “the drug has no effect on blood pressure” and the alternative hypothesis is “the drug decreases blood pressure”. Consider the following possible outcomes: for each one, would you reject the null hypothesis? If so, would you conclude the alternative hypothesis is true? And going even further, would you declare the drug trial successful?</p>
-<ul class="simple">
+<p>For example, consider a blood pressure drug trial, where researchers want to show that the drug lowers blood pressure. They conduct a randomized experiment to measure the drug’s effects. They precisely state their null hypothesis, that the drug has no effect on blood pressure, as “there is no difference in the distribution of blood pressure changes between the population of people who take the drug and the population of people who don’t”. Since they’re interested in showing a decrease (rather than just a change), they state their alternative hypothesis, that the drug lowers blood pressure, as “the distribution of blood pressure changes in people who take the drug  is lower than the distribution for people who don’t”.</p>
+<p>In general, in this situation, consider the following four statements:</p>
+<ol class="arabic simple">
+<li><p>The null hypothesis: <em>the outcomes for treatment/control follow the same distribution</em></p></li>
+<li><p>The logical complement of the null hypothesis: <em>the outcomes for treatment/control do <strong>not</strong> follow the same distribution</em> (direct logical inversion of the null hypothesis)</p></li>
+<li><p>The alternative hypothesis: <em>the outcomes if treated follow a lower-mean distribution than the outcomes if untreated</em></p></li>
+<li><p>What the researchers actually want to show: <em>the drug lowers blood pressure in a clinically meaningful and beneficial way</em></p></li>
+</ol>
+<p>Let’s visualize the space of possible outcomes to help us understand the relationship between these four statements:</p>
+<p><img alt="nhst_outcomes_diagram.png" src="content/chapters/01/nhst_outcomes_diagram.png" /></p>
+<p>Consider the case where we reject the null hypothesis. Without knowing any other information, if we want to make a binary decision, we can only decide that statement 2 is true (i.e., that the truth lies somewhere in the entire blue-colored region on the right side). But in practice, we want to make a binary decision between statements 1 (orange-colored left side) and 4 (smallest dark blue oval): in other words, we want to show that either there is no effect, or there is a meaningful effect in the direction that we’re interested in. In order to do this, we must rule out all the other possibilities.</p>
+<p>We can rule out some of these possibilities through smart statistical choices. For example, the researchers decided on a one-tailed test (i.e., using the alternative hypothesis “the outcome is lower”) rather than a two-tailed test (i.e., using the alternative hypothesis “the outcome is different”), and chose a test statistic that reflects that (e.g., difference between treatment/control means, rather than absolute difference). This ensures that our binary decision is between statement 1, the null hypothesis (orange area on the left), and statement 3, the alternative hypothesis they chose (larger blue ellipse on the right).</p>
+<p>In order for our binary decision to be meaningful, we need to eliminate possibilities outside statement 4 (the small blue oval). In order to do this, we must ensure <strong>good experimental design</strong> and <strong>good statistical practices</strong>. This includes avoiding confounding variables, ensuring that our effect sizes are meaningful in the real world, avoiding practices such as p-hacking and multiple testing (see the next section for more on these), and so on.</p>
+<p><em>Exercise</em>: For each of the possible outcomes below, determine where they fall on the diagram above.</p>
+<ol class="arabic simple">
 <li><p>The drug consistently lowers blood pressure, but by an amount that is medically insignificant (i.e., the decrease has no meaningful impact on any other biological processes in the body, or any other clinical outcomes).</p></li>
 <li><p>The drug raises blood pressure.</p></li>
 <li><p>The drug lowers blood pressure by an amount that is potentially dangerous in certain individuals.</p></li>
-<li><p>The drug was originally designed to lower cholesterol, but after expensive and unsuccessful trials on cholesterol, the pharmaceutical company’s researchers decided to look at ten other factors, and found that blood pressure happened to be lower in the treatment group.</p></li>
-</ul>
+<li><p>The drug was originally designed to lower cholesterol, but after expensive and unsuccessful trials on cholesterol, the pharmaceutical company’s researchers decided to look at ten other factors, and found that blood pressure happened to be lower in the treatment group. However, this finding was due to chance.</p></li>
+</ol>
 <p>From these examples, we can see that conducting a hypothesis test is not a decisive statement: instead, it should be viewed as one step within a larger process.</p>
 </section>
 <section id="connecting-p-values-with-false-positive-rate">
@@ -665,7 +677,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/7a32510108de400732f5e3ef5f6f3b693d8a8d5e196d5fa9f6ecee6bb53efcde.png" src="../../../_images/7a32510108de400732f5e3ef5f6f3b693d8a8d5e196d5fa9f6ecee6bb53efcde.png" />
+<img alt="../../../_images/5d55da8b8770af42885ecdca2492a298666207d484193a19e9798c84b0534509.png" src="../../../_images/5d55da8b8770af42885ecdca2492a298666207d484193a19e9798c84b0534509.png" />
 </div>
 </div>
 <p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
@@ -737,7 +749,7 @@ f_P(p)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.049319194537530316, 1.035869189459966, 1.5, -0.5)
 </pre></div>
 </div>
-<img alt="../../../_images/4c50a3788c0dfcea7fb3dd28a00fb920a498d1275014afb83d522dc6f58877c0.png" src="../../../_images/4c50a3788c0dfcea7fb3dd28a00fb920a498d1275014afb83d522dc6f58877c0.png" />
+<img alt="../../../_images/d9b36478ef29a1bda8e3204b20b072b142b6991831dce80f60c09121e85eef3c.png" src="../../../_images/d9b36478ef29a1bda8e3204b20b072b142b6991831dce80f60c09121e85eef3c.png" />
 </div>
 </div>
 <p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
@@ -754,7 +766,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/0a2010bcbbdfa0210e4d69722bdffb3b24d6ba4f92ae947bdc41699730d03004.png" src="../../../_images/0a2010bcbbdfa0210e4d69722bdffb3b24d6ba4f92ae947bdc41699730d03004.png" />
+<img alt="../../../_images/d7d715a9b0c878f7616a5ce86e205dcdb9ef37892d1c8c11313b69da6b667626.png" src="../../../_images/d7d715a9b0c878f7616a5ce86e205dcdb9ef37892d1c8c11313b69da6b667626.png" />
 </div>
 </div>
 <p>For p-values smaller than our threshold (to the right of the line), our decision is 1. So:</p>
@@ -778,7 +790,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/47124fe4779231cee45ded60c813cab0878165274dc773eb44281809eda6b984.png" src="../../../_images/47124fe4779231cee45ded60c813cab0878165274dc773eb44281809eda6b984.png" />
+<img alt="../../../_images/04be640c337ecdf806d4436443eff79806888c24b9170c189757b77ad495d3a3.png" src="../../../_images/04be640c337ecdf806d4436443eff79806888c24b9170c189757b77ad495d3a3.png" />
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>
