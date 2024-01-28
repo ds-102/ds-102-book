@@ -22,6 +22,8 @@ chapters:
       title: "Multiple Hypothesis Testing"
     - file: content/chapters/01/04_binary_classsification
       title: "Binary Classification"
+    - file: content/chapters/01/05_decision_theory
+      title: "Decision Theory"
 
 - file: content/chapters/02/intro
   title: "Chapter 2: Bayesian modeling"
