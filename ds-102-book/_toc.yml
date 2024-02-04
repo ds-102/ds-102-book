@@ -20,7 +20,7 @@ chapters:
       title: "Hypothesis Testing and p-Values"
     - file: content/chapters/01/03_multiple_tests
       title: "Multiple Hypothesis Testing"
-    - file: content/chapters/01/04_binary_classsification
+    - file: content/chapters/01/04_binary_classification
       title: "Binary Classification"
     - file: content/chapters/01/05_decision_theory
       title: "Decision Theory"
@@ -28,8 +28,8 @@ chapters:
 - file: content/chapters/02/intro
   title: "Chapter 2: Bayesian modeling"
   sections:
-    - file: content/chapters/02/placeholder
-      title: "Intro to Bayesian modeling"
+    - file: content/chapters/02/01_parameter_estimation
+      title: "Parameter estimation and Bayesian Inference Fundamentals"
 
 - file: content/chapters/03/intro
   title: "Chapter 3: Generalized linear models"
