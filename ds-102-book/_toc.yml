@@ -24,13 +24,13 @@ chapters:
       title: "Binary Classification"
     - file: content/chapters/01/05_decision_theory
       title: "Decision Theory"
-
 - file: content/chapters/02/intro
   title: "Chapter 2: Bayesian modeling"
   sections:
     - file: content/chapters/02/01_parameter_estimation
-      title: "Parameter estimation and Bayesian Inference Fundamentals"
-
+      title: "Parameter Estimation and Bayesian Inference Fundamentals"
+    - file: content/chapters/02/02_hierarchical_models
+      title: "Hierarchical Bayesian Models"
 - file: content/chapters/03/intro
   title: "Chapter 3: Generalized linear models"
   sections:
