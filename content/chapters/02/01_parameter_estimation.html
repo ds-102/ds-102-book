@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Data, Inference, and Decisions</title>
+    <title>Parameter estimation and Bayesian Inference Fundamentals &#8212; Data, Inference, and Decisions</title>
   
   
   
@@ -67,6 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/02/01_parameter_estimation';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Bayesian Hierarchical Models" href="02_hierarchical_models.html" />
+    <link rel="prev" title="Chapter 2: Bayesian Inference" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -162,16 +164,18 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../01/01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/04_binary_classification.html">Binary Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/05_decision_theory.html">Decision Theory</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="intro.html">Chapter 2: Bayesian modeling</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="placeholder.html">Intro to Bayesian modeling</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 2: Bayesian modeling</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Generalized linear models</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -279,7 +283,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../../_sources/content/chapters/02/01_parameter_estimation.md" target="_blank"
+      <li><a href="../../../_sources/content/chapters/02/01_parameter_estimation.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -289,7 +293,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -363,7 +367,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Parameter estimation and Bayesian Inference Fundamentals</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -372,9 +376,35 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-and-computation">Intuition and computation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-parameter-estimation-maximum-likelihood">Frequentist parameter estimation: maximum likelihood</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-the-likelihood">1. Writing the likelihood</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#taking-the-log">2. Taking the log</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximizing">3. Maximizing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-a-maximum">4. Verifying a maximum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-maximum-likelihood-estimate">Applying the maximum likelihood estimate</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-different-way-bayesian-inference">A different way: Bayesian inference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-prior-beta-distributions">Choosing a prior: Beta distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizing-the-beta-distribution-optional">Normalizing the Beta distribution (optional)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-for-the-beta-distribution">Intuition for the Beta distribution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-posterior">Computing the posterior</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-prior-and-posterior-betas">Demo: prior and posterior Betas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#point-estimates">Point estimates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-prior-parameters">Choosing the prior parameters</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-attempt-a-non-conjugate-prior">Another attempt: a non-conjugate prior</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-continuous-example-estimating-heights">A continuous example: estimating heights</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mle-for-the-gaussian-likelihood">MLE for the Gaussian likelihood</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-inference-for-heights">Bayesian inference for heights</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
@@ -385,8 +415,756 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <p>We begin by looking at parameter estimation. Our setup is as follows: we
-observe some data <span class="math notranslate nohighlight">\(x\)</span>, and we wish to observe multiple</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="parameter-estimation-and-bayesian-inference-fundamentals">
+<h1>Parameter estimation and Bayesian Inference Fundamentals<a class="headerlink" href="#parameter-estimation-and-bayesian-inference-fundamentals" title="Permalink to this heading">#</a></h1>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p><em>You may find it helpful to read <a class="reference external" href="http://prob140.org/textbook/content/Chapter_20/00_Approaches_to_Estimation.html">Chapter 20</a> and <a class="reference external" href="http://prob140.org/textbook/content/Chapter_21/00_The_Beta_and_the_Binomial.html">Chapter 21</a> of the Data 140 textbook, which present a different exposition of similar material, but are <strong>not</strong> required prerequisites for this chapter.</em></p>
+<p>We’ll begin our exploration of Bayesian and frequentist modeling with a simple example that highlights some key differences between the two approaches. Recall our setup: we observe some data <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>, and we’ll use them to estimate some parameter <span class="math notranslate nohighlight">\(\theta\)</span> of interest. In this and the following sections, we’ll focus on two simple examples to help us build intuition:</p>
+<ul class="simple">
+<li><p><strong>Estimating product quality</strong>: <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> are the reviews (👍/0 or 👎/1) for a product being sold online, and <span class="math notranslate nohighlight">\(\theta\)</span> is a number between 0 and 1 that represents the probability of someone leaving a good review. Intuitively, <span class="math notranslate nohighlight">\(\theta\)</span> represents our estimate of the quality of the product.</p></li>
+<li><p><strong>Estimating average height</strong>: <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> are the heights of <span class="math notranslate nohighlight">\(n\)</span> individuals in a random sample, and <span class="math notranslate nohighlight">\(\theta\)</span> is the average height of individuals in the population.</p></li>
+</ul>
+<p>We’ll start with the first example.</p>
+<section id="intuition-and-computation">
+<h2>Intuition and computation<a class="headerlink" href="#intuition-and-computation" title="Permalink to this heading">#</a></h2>
+<p>Suppose you’re shopping for a new microwave. You find two choices, both of which cost about the same amount:</p>
+<ul class="simple">
+<li><p>Microwave A has three positive reviews and no negative reviews</p></li>
+<li><p>Microwave B has 19 positive reviews and 1 negative review</p></li>
+</ul>
+<p>Which one should you buy?</p>
+<p>Intuitively, there isn’t necessarily a right or wrong answer. But, in a scenario like this, most shoppers would probably prefer microwave B. Seeing more data points, even if one is negative, reassures us that the results we’re seeing in the reviews are consistent.</p>
+<p>We’ll approach this question computationally from a frequentist and then a Bayesian perspective, and see how well each one can incorporate the intuition above.</p>
+<p>When formulating a statistical model (regardless of choosing a Bayesian or frequentist approach), it’s important to choose a model so that the parameter we’re estimating satisfies the following criteria:</p>
+<ul class="simple">
+<li><p>The parameter should reflect the underlying quantity that we’re interested in estimating. In this case, we’ll quantify how “good” each microwave is using <span class="math notranslate nohighlight">\(\theta\)</span>, and then we can just pick the microwave that’s “better” (i.e., has a higher value of <span class="math notranslate nohighlight">\(\theta\)</span>). Our choice above, the probability of leaving a positive review, satisfies this, since better products should be more likely to get positive reviews than worse products.</p></li>
+<li><p>The parameter should fit clearly within our probability model: in other words, our probability model should relate the observed data and the parameter. We’ll see more about how this works shortly.</p></li>
+</ul>
+<p>Our goal will be to estimate and draw conclusions about the parameter <span class="math notranslate nohighlight">\(\theta\)</span> based on the observed data <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/P501SLnYtIE"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="frequentist-parameter-estimation-maximum-likelihood">
+<h2>Frequentist parameter estimation: maximum likelihood<a class="headerlink" href="#frequentist-parameter-estimation-maximum-likelihood" title="Permalink to this heading">#</a></h2>
+<p>Before we can actually do any parameter estimation, we need to first specify the relevant probability distributions. Recall that in the frequentist setting, we’re assuming that the data (our binary reviews, <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>) are random, but that the parameter (the probability of generating a positive review <span class="math notranslate nohighlight">\(\theta\)</span>) is fixed and unknown.</p>
+<p>To set up a probability model in the frequentist setting, all we need is a <strong>likelihood</strong> <span class="math notranslate nohighlight">\(p(x_i|\theta)\)</span>. This tells us how likely a data point is, given a certain value of <span class="math notranslate nohighlight">\(\theta\)</span>. Since our data are binary and our parameter is a number between 0 and 1, a natural choice is a <strong>Bernoulli distribution</strong> (for more on Bernoulli distributions, see the <a class="reference external" href="http://prob140.org/textbook/content/Chapter_03/02_Distributions.html#named-distributions">Data 140 textbook</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Wikipedia</a>):</p>
+<div class="math notranslate nohighlight">
+\[
+x_i | \theta \sim \mathrm{Bernoulli}(\theta)
+\]</div>
+<p>This notation means “conditioned on <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\(x_i\)</span> follows a Bernoulli distribution with parameter <span class="math notranslate nohighlight">\(\theta\)</span>”. In other words:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+p(x_i|\theta) = \begin{cases}
+    \theta &amp; \text{ if }x_i = 1 \\
+    1-\theta &amp; \text{ if }x_i = 0
+\end{cases}
+\end{split}\]</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/ur6V1UyKChY"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<p>While the underlying probability should be familiar to you, there are some important conceptual leaps that we’ve taken:</p>
+<ul class="simple">
+<li><p>This notation represents a <strong>parametric family</strong> of distributions: different values of <span class="math notranslate nohighlight">\(\theta\)</span> lead to different distributions for <span class="math notranslate nohighlight">\(x_i\)</span>, but they all fall within the Bernoulli family of distributions.</p></li>
+<li><p>Since our goal in this process is to find a “good” value of <span class="math notranslate nohighlight">\(\theta\)</span> using the observed data <span class="math notranslate nohighlight">\(x_i\)</span>, we can view this as a function of <span class="math notranslate nohighlight">\(\theta\)</span>: for any value of <span class="math notranslate nohighlight">\(\theta\)</span> that we consider, we can plug in our data and get the probability of observing it, if that value of <span class="math notranslate nohighlight">\(\theta\)</span> were true.</p></li>
+</ul>
+<p>The simplest way to estimate <span class="math notranslate nohighlight">\(\theta\)</span> in the frequentist setting is to use <strong>maximum likelihood estimation (MLE)</strong> and choose the value of <span class="math notranslate nohighlight">\(\theta\)</span> that maximizes the likelihood: in other words, we’ll pick the value of <span class="math notranslate nohighlight">\(\theta\)</span> that makes our data look as likely as possible.</p>
+<p>Here’s how we’ll go about it:</p>
+<ol class="arabic simple">
+<li><p>We’ll write the likelihood for all the data points, <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> (we already did it for a single point above)</p></li>
+<li><p>We’ll use the log-likelihood instead of the likelihood. This will make things a little easier computationally. Why is this okay? Because <span class="math notranslate nohighlight">\(\log\)</span> is a monotonically increasing function, so the same value of <span class="math notranslate nohighlight">\(\theta\)</span> that maximizes <span class="math notranslate nohighlight">\(\log(p(x|\theta))\)</span> also maximizes <span class="math notranslate nohighlight">\(p(x|\theta)\)</span>.</p></li>
+<li><p>To find the best value of <span class="math notranslate nohighlight">\(\theta\)</span>, we’ll take the derivative of the log-likelihood with respect to <span class="math notranslate nohighlight">\(\theta\)</span>, set it equal to 0, and solve.</p></li>
+<li><p>We’ll confirm that step 3 gave us a maximum (rather than a minimum) by computing the second derivative and confirming that it’s negative, and checking the boundaries.</p></li>
+</ol>
+<section id="writing-the-likelihood">
+<h3>1. Writing the likelihood<a class="headerlink" href="#writing-the-likelihood" title="Permalink to this heading">#</a></h3>
+<p>Our likelihood for all the data points is:</p>
+<div class="math notranslate nohighlight">
+\[
+p(x_1, \ldots, x_n | \theta)
+\]</div>
+<p>We’ll assume that our samples are conditionally i.i.d. (independent and identically distributed) given the parameter <span class="math notranslate nohighlight">\(\theta\)</span>. In our example, this means that <strong>if</strong> we know how good the product is, then knowing one review doesn’t tell us anything about the other reviews. This means we can simplify our likelihood:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+p(x_1, \ldots, x_n|\theta) &amp;= \prod_{i=1}^n p(x_i|\theta)
+\end{align}
+\]</div>
+<p>Next, we need to figure out a more mathematically convenient way to write the likelihood for an individual point, <span class="math notranslate nohighlight">\(p(x_i|\theta)\)</span>, than the version we wrote in the previous section. Here’s an alternative way of writing it that means the same thing:</p>
+<div class="math notranslate nohighlight">
+\[
+p(x_i|\theta) = \theta^{x_i}(1-\theta)^{1-x_i}
+\]</div>
+<p>Convince yourself that this is the same by plugging in <span class="math notranslate nohighlight">\(x_i=1\)</span> and <span class="math notranslate nohighlight">\(x_i=0\)</span>.</p>
+<p>Now that we have this notationally convenient way of writing it, when we multiply all of them together, the exponents add:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+p(x_1, \ldots, x_n|\theta) 
+    &amp;= \prod_{i=1}^n p(x_i|\theta) \\
+    &amp;= \prod_{i=1}^n \theta^{x_i}(1-\theta)^{1-x_i} \\
+    &amp;= \theta^{\left[\sum_i x_i\right]}(1-\theta)^{\left[\sum_i (1-x_i)\right]} \\
+\end{align}
+\end{split}\]</div>
+<p>The first exponent is simply the number of positive reviews, and the second exponent is simply the number of negative reviews. To simplify our expression, we’ll <strong>let <span class="math notranslate nohighlight">\(k\)</span> be the number of positive reviews</strong> <span class="math notranslate nohighlight">\(\left(k = \sum_i x_i\right)\)</span>, so that this becomes:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+p(x_1, \ldots, x_n|\theta) 
+    &amp;= \theta^{k}(1-\theta)^{n-k} \\
+\end{align}
+\end{split}\]</div>
+</section>
+<section id="taking-the-log">
+<h3>2. Taking the log<a class="headerlink" href="#taking-the-log" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\log p(x_1, \ldots, x_n|\theta) 
+    &amp;= 
+        k\log\theta + 
+        (n-k)\log(1-\theta)
+\end{align}
+\]</div>
+</section>
+<section id="maximizing">
+<h3>3. Maximizing<a class="headerlink" href="#maximizing" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{d}{d\theta} \log p(x_1, \ldots, x_n|\theta) &amp;= 0 \\
+\frac{d}{d\theta} \left[k\log\theta + (n-k)\log(1-\theta)\right] &amp;= 0 \\
+\frac{k}{\theta} - \frac{n-k}{1-\theta} &amp;= 0 \\
+\theta &amp;= \frac{k}{n}
+\end{align}
+\end{split}\]</div>
+<p>Finally, we’ve arrived at our maximum likelihood estimate for the Bernoulli likelihood: it’s simply the fraction of total reviews that are positive. This is a very intuitive result!</p>
+<p>At this point, we can see why we chose to use the log likelihood: it was easier to differentiate the expression from step 2 than it would have been to differentiate the expression from step 1 (if you need to, convince yourself that this is true by computing the derivative).</p>
+</section>
+<section id="verifying-a-maximum">
+<h3>4. Verifying a maximum<a class="headerlink" href="#verifying-a-maximum" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{d^2}{d\theta^2} \log p(x_1, \ldots, x_n|\theta) 
+    &amp;= \frac{d}{d\theta} \left[\frac{k}{\theta} - \frac{n-k}{1-\theta}\right]\\
+    &amp;= -\frac{k}{\theta^2} - \frac{n-k}{(1-\theta)^2}\\
+&amp;&lt; 0,
+\end{align}
+\end{split}\]</div>
+<p>where the last statement is true because <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(k\)</span>, and <span class="math notranslate nohighlight">\(\theta\)</span> are all positive, and <span class="math notranslate nohighlight">\(n \geq k\)</span>.</p>
+<p>In many cases, it may also be necessary to check the boundary values, especially if the likelihood function is monotonically increasing or decreasing over the range of possible <span class="math notranslate nohighlight">\(\theta\)</span> values.</p>
+</section>
+<section id="applying-the-maximum-likelihood-estimate">
+<h3>Applying the maximum likelihood estimate<a class="headerlink" href="#applying-the-maximum-likelihood-estimate" title="Permalink to this heading">#</a></h3>
+<p>Let’s return to our example comparing microwaves A and B. If we apply maximum likelihood for each one, we get that <span class="math notranslate nohighlight">\(\hat{\theta}_{A, \text{MLE}} = 3/3 = 1\)</span> and <span class="math notranslate nohighlight">\(\hat{\theta}_{B,\text{MLE}} = 19/20 = 0.95\)</span>: in other words, MLE tells us that Microwave A is the better choice.</p>
+<p>In other words, the value of <span class="math notranslate nohighlight">\(\theta\)</span> that makes “3 positive reviews only” as likely as possible is <span class="math notranslate nohighlight">\(\theta=1\)</span>. Similarly, the value of <span class="math notranslate nohighlight">\(\theta\)</span> that makes “19 positive reviews and 1 negative review” as likely as possible is <span class="math notranslate nohighlight">\(\theta=0.95\)</span>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/W5Dq3VReuuQ"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+</section>
+<section id="a-different-way-bayesian-inference">
+<h2>A different way: Bayesian inference<a class="headerlink" href="#a-different-way-bayesian-inference" title="Permalink to this heading">#</a></h2>
+<p>In the Bayesian setting, we’ll assume that the unknown parameter <span class="math notranslate nohighlight">\(\theta\)</span> is a random variable. Now, instead of looking for a single estimate, we’ll consider the probability distribution for <span class="math notranslate nohighlight">\(\theta\)</span> after observing the data <span class="math notranslate nohighlight">\(x\)</span>. This is the conditional distribution <span class="math notranslate nohighlight">\(p(\theta|x)\)</span>, which we call the <strong>posterior distribution</strong>. Throughout the rest of this chapter, we’ll learn how to compute and interpret this distribution. It represents our understanding of the randomness in <span class="math notranslate nohighlight">\(\theta\)</span> after seeing the data <span class="math notranslate nohighlight">\(x\)</span>. We’ll compute it using Bayes’ rule:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\underbrace{p(\theta|x)}_{\text{posterior}} 
+    &amp;= 
+    \frac{\overbrace{p(x|\theta)}^{\text{likelihood}}\,\,
+          \overbrace{p(\theta)}^{\text{prior}}}{p(x)}
+\end{align}
+\]</div>
+<p>When we set up a probability model in the previous section, we chose a likelihood that described the connection between our parameter <span class="math notranslate nohighlight">\(\theta\)</span> and our data <span class="math notranslate nohighlight">\(x\)</span>. In the Bayesian formulation, we need to choose one more thing: a <strong>prior</strong> <span class="math notranslate nohighlight">\(p(\theta)\)</span>, which represents our belief about <span class="math notranslate nohighlight">\(\theta\)</span> before we get to see any data. Typically, we choose a prior based on domain knowledge and/or computational convenience: we’ll see a few examples of this in the next sections.</p>
+<p>Note that we can treat the denominator here as a constant, because <span class="math notranslate nohighlight">\(p(\theta|x)\)</span> is a distribution over values of <span class="math notranslate nohighlight">\(\theta\)</span>, and the denominator <span class="math notranslate nohighlight">\(p(x)\)</span> doesn’t depend on <span class="math notranslate nohighlight">\(\theta\)</span>. So, we’ll often write the posterior as follows (recall that the symbol <span class="math notranslate nohighlight">\(\propto\)</span> means “is proportional to”):</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+p(\theta|x) &amp;\propto p(x|\theta)p(\theta)
+\end{align}
+\]</div>
+<p>Even though the denominator is a constant, it still matters: more on this later. For now, we’ll just try to find ways to get away without computing it.</p>
+<p>We have two important questions left to answer before we can compute a Bayesian estimate:</p>
+<ol class="arabic simple">
+<li><p>How do we choose the prior <span class="math notranslate nohighlight">\(p(\theta)\)</span>?</p></li>
+<li><p>Once we get the posterior distribution <span class="math notranslate nohighlight">\(p(\theta|x)\)</span>, how do we use that to choose a single value of <span class="math notranslate nohighlight">\(\theta\)</span> as our estimate?</p></li>
+</ol>
+<p>We’ll answer these two questions in the next section.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/p1lLJg98j-8"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<section id="choosing-a-prior-beta-distributions">
+<h3>Choosing a prior: Beta distributions<a class="headerlink" href="#choosing-a-prior-beta-distributions" title="Permalink to this heading">#</a></h3>
+<p>Let’s return to our product review example. For our prior <span class="math notranslate nohighlight">\(p(\theta)\)</span>, which represents our belief about the unknown product quality <span class="math notranslate nohighlight">\(\theta\)</span> before seeing any data, we’ll choose the <a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">Beta distribution</a>. This isn’t the only distribution we can choose, but it happens to be a particularly convenient choice: we’ll see why later. The Beta distribution has two parameters, <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. It’s defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta) \propto \theta^{\alpha-1} (1-\theta)^{\beta-1}
+\]</div>
+<p>The normalization constant is quite complicated, but we don’t need to know what it is to use the Beta distribution. Since this is a well-studied distribution, we can find out any facts about it that we need just by looking them up. Try it yourself: without doing any computation, what is the expectation of a Beta-distributed random variable? What is the mode?</p>
+<section id="normalizing-the-beta-distribution-optional">
+<h4>Normalizing the Beta distribution (optional)<a class="headerlink" href="#normalizing-the-beta-distribution-optional" title="Permalink to this heading">#</a></h4>
+<p>How would we go about computing the normalization constant for this distribution? We know that the formula above is missing a constant of proportionality, which we’ll call <span class="math notranslate nohighlight">\(Z\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta) = \frac{1}{Z} \theta^{\alpha-1} (1-\theta)^{\beta-1}
+\]</div>
+<p>We’ll need to solve for <span class="math notranslate nohighlight">\(Z\)</span>. As a probability density function (PDF), we know that the distribution <span class="math notranslate nohighlight">\(p(\theta)\)</span> should integrate to 1. So,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\int_0^1 \frac{1}{Z} \theta^{\alpha-1} (1-\theta)^{\beta-1} \, d\theta &amp;= 1 \\
+\int_0^1 \theta^{\alpha-1} (1-\theta)^{\beta-1} \, d\theta &amp;= Z
+\end{align*}
+\end{split}\]</div>
+<p>This integral is difficult to compute, but we can look up that the result is something called the <a class="reference external" href="https://en.wikipedia.org/wiki/Beta_function">Beta function</a>. Details about this function are beyond the scope of this class, but it’s related to the Gamma function (an extension of the factorial function to non-integer values).</p>
+<p>In other words, no matter what the values of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are, the denominator will always have the same form: a beta function. This is why we typically ignore it, and only write out the proportionality.</p>
+<p>Also note that <span class="math notranslate nohighlight">\(Z\)</span> does not depend on <span class="math notranslate nohighlight">\(\theta\)</span>, but it does depend on the parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+</section>
+<section id="intuition-for-the-beta-distribution">
+<h4>Intuition for the Beta distribution<a class="headerlink" href="#intuition-for-the-beta-distribution" title="Permalink to this heading">#</a></h4>
+<p>Before we compute the posterior, let’s build some intuition for how the Beta distribution works. The <a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">Wikipedia page</a> has some helpful examples of what it looks like for different values of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. Let’s look at a few of those examples. Recall that we can use the distributions in <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> to compute and visualize probability density functions (PDFs):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">beta_11</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">thetas</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">beta_72</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">thetas</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">beta_34</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">thetas</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">thetas</span><span class="p">,</span> <span class="n">beta_11</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\alpha = 1, \beta = 1$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">thetas</span><span class="p">,</span> <span class="n">beta_34</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\alpha = 3, \beta = 4$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">thetas</span><span class="p">,</span> <span class="n">beta_72</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\alpha = 7, \beta = 2$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/a55f935ddfb1333d607fead19d9b47ea08422487155cdaa1283a6a6cd1760915.png" src="../../../_images/a55f935ddfb1333d607fead19d9b47ea08422487155cdaa1283a6a6cd1760915.png" />
+</div>
+</div>
+<p>We can see that different values of the parameters lead to different shapes for the Beta distribution. In particular, when <span class="math notranslate nohighlight">\(\alpha\)</span> is larger than <span class="math notranslate nohighlight">\(\beta\)</span>, we see that smaller values of <span class="math notranslate nohighlight">\(\theta\)</span> are more likely, and vice versa. We can also see that Beta<span class="math notranslate nohighlight">\((1, 1)\)</span> is the same as the Uniform distribution over <span class="math notranslate nohighlight">\([0, 1]\)</span>. Try experimenting with different values: what changes as <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> get larger?</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/TAxSkVmFfg0"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="computing-the-posterior">
+<h4>Computing the posterior<a class="headerlink" href="#computing-the-posterior" title="Permalink to this heading">#</a></h4>
+<p>Now that we’ve set up the prior, we can compute the posterior distribution:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+p(\theta|x) 
+    &amp;\propto p(x|\theta)p(\theta) \\
+    &amp;\propto \Bigg[\theta^{\left[\sum_i x_i\right]}(1-\theta)^{\left[\sum_i (1-x_i)\right]}\Bigg]\Big[\theta^{\alpha-1} (1-\theta)^{\beta-1}\Big] \\
+    &amp;\propto \theta^{\alpha + \left[\sum_i x_i\right] - 1}(1-\theta)^{\beta + \left[\sum_i (1-x_i)\right] - 1}
+\end{align}
+\end{split}\]</div>
+<p>We can see that this is also a Beta distribution, because it looks like <span class="math notranslate nohighlight">\(\theta^{\text{stuff}}(1-\theta)^{\text{other stuff}}\)</span>. It has parameters <span class="math notranslate nohighlight">\(\alpha + \sum_i x_i\)</span> and <span class="math notranslate nohighlight">\(\beta + \sum_i (1-x_i)\)</span>, so we can write the posterior as</p>
+<div class="math notranslate nohighlight">
+\[
+\theta|x \sim \mathrm{Beta}\Bigg(\alpha + \sum_i x_i\,,\,\, \beta + \sum_i (1-x_i)\Bigg)
+\]</div>
+<p>By making this observation, we avoided having to compute the denominator <span class="math notranslate nohighlight">\(p(x)\)</span>!</p>
+<p>This is because the Beta distribution is the <strong>conjugate prior</strong> for the Bernoulli distribution. This means that whenever we have a Bernoulli likelihood, if we choose a prior from the Beta family, then the posterior distribution will also be in the Beta family.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/ogpPyznMcus"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="demo-prior-and-posterior-betas">
+<h4>Demo: prior and posterior Betas<a class="headerlink" href="#demo-prior-and-posterior-betas" title="Permalink to this heading">#</a></h4>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">FIGURE_SIZE</span> <span class="o">=</span> <span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
+<span class="c1">#def plot_beta_prior_and_posterior(r, s, m, y, show_map=False, show_lmse=False):</span>
+<span class="k">def</span> <span class="nf">plot_beta_prior_and_posterior</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">pos_obs</span><span class="p">,</span> <span class="n">neg_obs</span><span class="p">,</span> <span class="n">show_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_lmse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>   
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">prior</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+    
+    <span class="n">alpha_new</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">pos_obs</span>
+    <span class="n">beta_new</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">+</span> <span class="n">neg_obs</span>
+    <span class="n">posterior</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha_new</span><span class="p">,</span> <span class="n">beta_new</span><span class="p">)</span>
+    
+    <span class="c1"># You never have to memorize these: when making this notebook,</span>
+    <span class="c1"># I found them on the wikipedia page for the Beta distribution:</span>
+    <span class="c1"># https://en.wikipedia.org/wiki/Beta_distribution</span>
+
+    <span class="k">if</span> <span class="n">show_lmse</span><span class="p">:</span>
+        <span class="n">x_lmse</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha_new</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_new</span> <span class="o">+</span> <span class="n">beta_new</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x_lmse</span> <span class="o">=</span> <span class="kc">None</span>
+        
+    <span class="k">if</span> <span class="n">show_map</span><span class="p">:</span>
+        <span class="n">x_map</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha_new</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha_new</span> <span class="o">+</span> <span class="n">beta_new</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x_map</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">plot_prior_posterior</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prior</span><span class="p">,</span> <span class="n">posterior</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">),</span>
+                         <span class="n">prior_label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Prior: Beta(</span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span>
+                         <span class="n">posterior_label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Posterior: Beta(</span><span class="si">{</span><span class="n">alpha_new</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">beta_new</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span>
+                         <span class="n">x_map</span><span class="o">=</span><span class="n">x_map</span><span class="p">,</span> <span class="n">x_lmse</span><span class="o">=</span><span class="n">x_lmse</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">plot_prior_posterior</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prior</span><span class="p">,</span> <span class="n">posterior</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> 
+                         <span class="n">prior_label</span><span class="p">,</span> <span class="n">posterior_label</span><span class="p">,</span>
+                         <span class="n">x_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_lmse</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="n">FIGURE_SIZE</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prior</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">prior_label</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">posterior</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">posterior_label</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x_map</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">map_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_map</span><span class="p">))</span>
+        <span class="n">posterior_map</span> <span class="o">=</span> <span class="n">posterior</span><span class="p">[</span><span class="n">map_index</span><span class="p">]</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;MAP estimate: </span><span class="si">{</span><span class="n">x_map</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_map</span><span class="p">,</span> <span class="n">x_map</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">posterior_map</span><span class="p">],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x_lmse</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">lmse_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_lmse</span><span class="p">))</span>
+        <span class="n">posterior_lmse</span> <span class="o">=</span> <span class="n">posterior</span><span class="p">[</span><span class="n">lmse_index</span><span class="p">]</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;LMSE estimate: </span><span class="si">{</span><span class="n">x_lmse</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_lmse</span><span class="p">,</span> <span class="n">x_lmse</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">posterior_lmse</span><span class="p">],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="c1">#plt.legend(bbox_to_anchor=(1.32, 1.02))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ymax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">prior</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">prior</span><span class="p">)]),</span> <span class="nb">max</span><span class="p">(</span><span class="n">posterior</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">posterior</span><span class="p">)]))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">ymax</span><span class="o">+</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">xlim</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Prior $p(\theta)$ and posterior given observed data $x$: $p(\theta|x)$&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Let’s visualize some examples of prior and posterior Beta distributions. We’ll use the <code class="docutils literal notranslate"><span class="pre">plot_beta_prior_and_posterior</span></code> function, which takes in the parameters of the prior (<span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>) as well as the number of positive and negative observations (<span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(n-k\)</span>), and shows the prior and posterior distributions for <span class="math notranslate nohighlight">\(\theta\)</span> on the same graph.</p>
+<p>We’ll start with Microwave A, which had 3 positive reviews and 0 negative reviews. For now, we’ll just explore a few different choices and look at the outcomes. Later, we’ll discuss which choice of prior could be a better fit for this particular problem.</p>
+<p>First, what happens if we use a <span class="math notranslate nohighlight">\(\mathrm{Beta}(1, 1)\)</span> prior? We saw earlier that this is the same as a uniform prior. Intuitively, this prior represents the belief that before observing any reviews, all values of <span class="math notranslate nohighlight">\(\theta\)</span> (between 0 and 1) should be equally likely.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots a Beta distribution with a Beta(1, 1) prior (the first two arguments) </span>
+<span class="c1"># and 3 positive observations and 0 negative observations (the second two arguments)</span>
+<span class="n">plot_beta_prior_and_posterior</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/025726f3ab2815666473d9f501edc7afe413cc32bff488fa70b61b218cfaea9b.png" src="../../../_images/025726f3ab2815666473d9f501edc7afe413cc32bff488fa70b61b218cfaea9b.png" />
+</div>
+</div>
+<p>Looking at the orange density, it assigns higher probability to larger values of <span class="math notranslate nohighlight">\(\theta\)</span>. What if we use a different prior? We’ll try a Beta<span class="math notranslate nohighlight">\((1, 5)\)</span> prior, which represents the belief that before we observe any reviews, smaller values of <span class="math notranslate nohighlight">\(\theta\)</span> are more likely than larger ones (i.e., we are skeptical of product quality before we see any reviews).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_beta_prior_and_posterior</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/0dba9bed96a9b9b0a694ccb14dfa69f222c19040f0095ad6e2969f76c20a0f99.png" src="../../../_images/0dba9bed96a9b9b0a694ccb14dfa69f222c19040f0095ad6e2969f76c20a0f99.png" />
+</div>
+</div>
+<p>Changing the prior distribution has dramatically changed the posterior distribution. What if we had used an even more “skeptical” prior?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_beta_prior_and_posterior</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/9dfe89d8fea7f904ba9ee44af01c1ef70702acc306715b7c4e942dc20ed5a337.png" src="../../../_images/9dfe89d8fea7f904ba9ee44af01c1ef70702acc306715b7c4e942dc20ed5a337.png" />
+</div>
+</div>
+<p>We can see that for microwave A, our choice of prior has a significant effect on the posterior distribution. What about for microwave B?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_beta_prior_and_posterior</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plot_beta_prior_and_posterior</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plot_beta_prior_and_posterior</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/f95279ce864c9e0d4e505e265dd871ba9acc199d016c9fc192e770d903ed868f.png" src="../../../_images/f95279ce864c9e0d4e505e265dd871ba9acc199d016c9fc192e770d903ed868f.png" />
+<img alt="../../../_images/4596d82afd64bc9ef10d7ba0fb56e59b3e0673c0a04daa44f7bb285f799f2d1d.png" src="../../../_images/4596d82afd64bc9ef10d7ba0fb56e59b3e0673c0a04daa44f7bb285f799f2d1d.png" />
+<img alt="../../../_images/b2b98f8efc6ec09fd0acc8ba84123c6ab42cb088c1bcf03daa674b59ec4d0a5b.png" src="../../../_images/b2b98f8efc6ec09fd0acc8ba84123c6ab42cb088c1bcf03daa674b59ec4d0a5b.png" />
+</div>
+</div>
+<p>Here, the prior still has an effect on the posterior distribution: the more “skeptical” the prior is, the more the posterior shifts to the left. But, the effect of the prior is much smaller than it was for Microwave A. This illustrates a general trend in Bayesian inference: <strong>with less data, the prior usually has a stronger effect on the posterior</strong>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/2ky2q4NldHM"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="point-estimates">
+<h4>Point estimates<a class="headerlink" href="#point-estimates" title="Permalink to this heading">#</a></h4>
+<p>Once we have a posterior distribution, we will often want to answer the question: how do we use the distribution to get a single estimate for <span class="math notranslate nohighlight">\(\theta\)</span>? This single number is typically called a <strong>point estimate</strong>.</p>
+<p>We’ll start with two answers for question 1: the <strong>Maximum a Posteriori (MAP) estimate</strong> and the <strong>Minimum/Least Mean Squared Error (MMSE/LMSE) Estimate</strong>.</p>
+<p>The <strong>MAP estimate</strong> is the estimate that maximizes the posterior distribution. Remember that the posterior distribution represents our belief about the unknown parameter <span class="math notranslate nohighlight">\(\theta\)</span>. Intuitively, the MAP estimate is the <span class="math notranslate nohighlight">\(\theta\)</span> value that is most likely according to that belief. For a Beta<span class="math notranslate nohighlight">\((\alpha, \beta)\)</span> distribution, we can look up the maximum value (mode) of the distribution to find that it’s <span class="math notranslate nohighlight">\(\frac{\alpha-1}{\alpha+\beta-2}\)</span>.</p>
+<p><strong>Optional exercise</strong>: derive the mode of the Beta distribution. <em>Hint: instead of maximizing the Beta density with respect to <span class="math notranslate nohighlight">\(\theta\)</span>, try taking the log first, just like we did before.</em></p>
+<p>The <strong>LMSE estimate</strong> is simply the mean of the posterior distribution. It has this name because we can show that the mean of the posterior distribution minimizes the mean squared error:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\text{argmin}_a E_{p(\theta|x)}\left[(a-\theta)^2\right] = E_{p(\theta|x)}\left[\theta\right]
+\end{align}
+\]</div>
+<p>The mean of a Beta<span class="math notranslate nohighlight">\((\alpha, \beta)\)</span>-distributed random variable is <span class="math notranslate nohighlight">\(\frac{\alpha}{\alpha+\beta}\)</span>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/mx-zCxomd-8"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/rmziJOMmlu4"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="choosing-the-prior-parameters">
+<h4>Choosing the prior parameters<a class="headerlink" href="#choosing-the-prior-parameters" title="Permalink to this heading">#</a></h4>
+<p>Returning to our microwave example, we can see that our choice of prior encodes our beliefs about products and reviews.</p>
+<p>For example, if we think that most products are good until proven otherwise by the review data, then we could choose a more “optimistic” prior, such as Beta<span class="math notranslate nohighlight">\((5, 1)\)</span>, which favors (assigns higher probability to)  larger values of <span class="math notranslate nohighlight">\(\theta\)</span>. In this case:</p>
+<ul class="simple">
+<li><p>The posterior for the quality of microwave A is Beta<span class="math notranslate nohighlight">\((8, 1)\)</span>, and the MAP estimate is 1.</p></li>
+<li><p>The posterior for the quality of microwave B is Beta<span class="math notranslate nohighlight">\((24, 2)\)</span>, and the MAP estimate is 0.96.
+Under this prior, microwave A looks better.</p></li>
+</ul>
+<p>But, if we believe that most products are bad until proven otherwise by the review data, we may choose a Beta<span class="math notranslate nohighlight">\((1, 5)\)</span> prior, which favors smaller values of <span class="math notranslate nohighlight">\(\theta\)</span>. In this case:</p>
+<ul class="simple">
+<li><p>The posterior for the quality of microwave A is Beta<span class="math notranslate nohighlight">\((4, 5)\)</span>: if we compute the MAP estimate, we get 0.43.</p></li>
+<li><p>The posterior for the quality of microwave B is Beta<span class="math notranslate nohighlight">\((20, 6)\)</span>, and the MAP estimate is 0.79.
+So, under this prior, microwave B looks better.</p></li>
+</ul>
+<p>From this, we can take away that <strong>our choice of prior can often have a significant effect on our results</strong>. So, it’s important to choose priors that capture your assumptions and belief about the world, and to be explicit about communicating those assumptions with others when sharing your results.</p>
+</section>
+</section>
+<section id="another-attempt-a-non-conjugate-prior">
+<h3>Another attempt: a non-conjugate prior<a class="headerlink" href="#another-attempt-a-non-conjugate-prior" title="Permalink to this heading">#</a></h3>
+<p>To see why the conjugate prior is so helpful, let’s see what would have happened if we chose a different prior.</p>
+<p>Suppose we instead choose the prior <span class="math notranslate nohighlight">\(p(\theta) = \frac{\pi}{2} \cos\left(\frac{\pi}{2} \theta\right), \, \theta \in [0, 1]\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">thetas</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">thetas</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\pi/2\cos(\pi \theta/2)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p(\theta)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/41aeebde3b0eea7a334dc5ed921eeb9444c4355101196f8d7dc3a6a0113e95d3.png" src="../../../_images/41aeebde3b0eea7a334dc5ed921eeb9444c4355101196f8d7dc3a6a0113e95d3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">thetas</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="n">thetas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9999991742330661
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can try to compute the posterior just as we did before:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+p(\theta|x) 
+    &amp;\propto p(x|\theta)p(\theta) \\
+    &amp;\propto \Bigg[\theta^{\left[\sum_i x_i\right]}(1-\theta)^{\left[\sum_i (1-x_i)\right]}\Bigg]\cos\left(\frac{\pi}{2}\theta\right)
+\end{align}
+\end{split}\]</div>
+<p>This distribution looks much more complicated: we can’t reduce it to a known distribution at all. Furthermore, there is no way to compute the normalizing constant in closed form: we’ll need to use numerical integration.</p>
+<p>This makes it hard to reason about the distribution or use intuition about known distributions. It also means that if we want to compute quantities of interest about it (e.g., the mean/mode of the posterior for the LMSE/MAP estimates respectively), then we have to apply numerical integration.</p>
+</section>
+</section>
+<section id="a-continuous-example-estimating-heights">
+<h2>A continuous example: estimating heights<a class="headerlink" href="#a-continuous-example-estimating-heights" title="Permalink to this heading">#</a></h2>
+<p>Suppose instead that now our parameter of interest <span class="math notranslate nohighlight">\(\theta\)</span> is the average height of a population, and our data <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> are heights of individuals in a sample. A Bernoulli distribution no longer makes sense for these continuous data. There are many options we could choose, but for simplicity we’ll use a normal distribution:</p>
+<div class="math notranslate nohighlight">
+\[
+x_i|\theta \sim \mathcal{N}(\theta, \sigma^2)
+\]</div>
+<section id="mle-for-the-gaussian-likelihood">
+<h3>MLE for the Gaussian likelihood<a class="headerlink" href="#mle-for-the-gaussian-likelihood" title="Permalink to this heading">#</a></h3>
+<p>We can go through a similar process as before to find the MLE for the Gaussian likelihood. Because the normalizing constant <span class="math notranslate nohighlight">\(\frac{1}{\sigma\sqrt{2\pi}}\)</span> doesn’t depend on <span class="math notranslate nohighlight">\(\theta\)</span> (and our goal is to optimize for <span class="math notranslate nohighlight">\(\theta\)</span>, we’ll leave it out for now.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+p(x_i|\theta) &amp; \frac{1}{\sigma\sqrt{2\pi}} \exp\left\{\frac{1}{2\sigma^2}(x_i-\theta)^2\right\} \\
+p(x_1, \ldots, x_n|\theta) &amp;= \left(\frac{1}{\sigma\sqrt{2\pi}}\right)^n \exp\left\{\sum_{i=1}^n \frac{1}{2\sigma^2}(x_i-\theta)^2\right\}
+\end{align}
+\end{split}\]</div>
+<p>The log-likelihood is:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\log p(x_1, \ldots, x_n|\theta) &amp;= n\log\left(\frac{1}{\sigma\sqrt{2\pi}}\right) + \sum_{i=1}^n \frac{1}{2\sigma^2}(x_i-\theta)^2
+\end{align}
+\]</div>
+<p>Differentiating with respect to <span class="math notranslate nohighlight">\(\theta\)</span> and solving is straightforward:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\sum_{i=1}^n -\frac{1}{\sigma^2}(x_i-\theta) &amp;= 0 \\
+\theta &amp;= \frac{1}{n} \sum_i x_i
+\end{align}
+\end{split}\]</div>
+<p>Once again, MLE has given us a very intuitive answer: the value for our parameter (population height average) that makes the data most likely is simply the mean of the sample heights. Note that our answer didn’t depend on <span class="math notranslate nohighlight">\(\sigma\)</span>!</p>
+<p><strong>Exercise</strong>: Suppose instead of the population average, we had been interested in the population standard deviation. What is the MLE for the population standard deviation?</p>
+</section>
+<section id="bayesian-inference-for-heights">
+<h3>Bayesian inference for heights<a class="headerlink" href="#bayesian-inference-for-heights" title="Permalink to this heading">#</a></h3>
+<p>Now suppose we instead take a Bayesian approach, and treat <span class="math notranslate nohighlight">\(\theta\)</span> as random. Just like before, we’re interested in the posterior distribution:</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \ldots, x_n)}
+\]</div>
+<p>Since our parameter of interest is also a continuous variable, we could try using a normal distribution for the prior as well:</p>
+<div class="math notranslate nohighlight">
+\[
+\theta \sim \mathcal{N}(\mu_0, \sigma_0^2)
+\]</div>
+<p>Note that the parameters of this distribution, <span class="math notranslate nohighlight">\(\mu_0\)</span> and <span class="math notranslate nohighlight">\(\sigma_0^2\)</span>, are different from the parameters in the likelihood! This says that our parameter <span class="math notranslate nohighlight">\(\theta\)</span>, the mean of the population, follows a normal distribution with some mean <span class="math notranslate nohighlight">\(\mu_0\)</span> and some variance <span class="math notranslate nohighlight">\(\sigma_0^2\)</span>.</p>
+<p>Although the algebra is a bit more involved, we can show that the normal distribution is the conjugate prior for the mean of a normal distribution. In other words, the posterior distribution for <span class="math notranslate nohighlight">\(\theta\)</span> is also normal.</p>
+<div class="math notranslate nohighlight">
+\[
+\theta | x_1, \ldots x_n  \sim \mathcal{N}\left(
+    \frac{1}{\frac{1}{\sigma_0^2} + \frac{n}{\sigma^2}}\left(\frac{\mu_0}{\sigma_0^2} + \frac{\sum_{i=1}^n x_i}{\sigma^2}\right),
+    \left(\frac{1}{\sigma_0^2} + \frac{n}{\sigma^2}\right)^{-1} 
+\right)
+\]</div>
+<p>It’s not quite as easy to read a quick interpretation from this as it was from the Beta posterior update. Let’s try to visualize some priors and posteriors and see if we can build intuition:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/R_iqK9iFC1s"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># You don&#39;t need to understand how this function is implemented.</span>
+
+<span class="k">def</span> <span class="nf">plot_gaussian_prior_and_posterior</span><span class="p">(</span><span class="n">μ_0</span><span class="p">,</span> <span class="n">σ_0</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">range_in_σs</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">show_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_lmse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots prior and posterior Normaly distribution</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        μ_0, σ_0: parameters (mean, SD) of the prior distribution</span>
+<span class="sd">        xs: list or array of observations</span>
+<span class="sd">        σ: SD of the likelihood</span>
+<span class="sd">        range_in_σs: how many SDs away from the mean to show on the plot</span>
+<span class="sd">        show_map: whether or not to show the MAP estimate as a vertical line</span>
+<span class="sd">        show_lmse: whether or not to show the LMSE/MMSE estimate as a vertical line</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="n">posterior_σ</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">σ_0</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="n">σ</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">posterior_mean</span> <span class="o">=</span> <span class="p">(</span><span class="n">posterior_σ</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">μ_0</span><span class="o">/</span><span class="p">(</span><span class="n">σ_0</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">σ</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    
+    <span class="c1"># Compute range for plot</span>
+    <span class="n">posterior_min</span> <span class="o">=</span> <span class="n">posterior_mean</span> <span class="o">-</span> <span class="p">(</span><span class="n">range_in_σs</span> <span class="o">*</span> <span class="n">posterior_σ</span><span class="p">)</span>
+    <span class="n">posterior_max</span> <span class="o">=</span> <span class="n">posterior_mean</span> <span class="o">+</span> <span class="p">(</span><span class="n">range_in_σs</span> <span class="o">*</span> <span class="n">posterior_σ</span><span class="p">)</span>
+    <span class="n">prior_min</span> <span class="o">=</span> <span class="n">μ_0</span> <span class="o">-</span> <span class="p">(</span><span class="n">range_in_σs</span> <span class="o">*</span> <span class="n">σ</span><span class="p">)</span>
+    <span class="n">prior_max</span> <span class="o">=</span> <span class="n">μ_0</span> <span class="o">+</span> <span class="p">(</span><span class="n">range_in_σs</span> <span class="o">*</span> <span class="n">σ</span><span class="p">)</span>
+    
+    <span class="n">xmin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">posterior_min</span><span class="p">,</span> <span class="n">prior_min</span><span class="p">)</span>
+    <span class="n">xmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">posterior_max</span><span class="p">,</span> <span class="n">prior_max</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">show_lmse</span><span class="p">:</span>
+        <span class="n">x_lmse</span> <span class="o">=</span> <span class="n">posterior_mean</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x_lmse</span> <span class="o">=</span> <span class="kc">None</span>
+        
+    <span class="k">if</span> <span class="n">show_map</span><span class="p">:</span>
+        <span class="n">x_map</span> <span class="o">=</span> <span class="n">posterior_mean</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x_map</span> <span class="o">=</span> <span class="kc">None</span>
+
+    
+    <span class="n">prior</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">μ_0</span><span class="p">,</span> <span class="n">σ_0</span><span class="p">)</span>
+    <span class="n">posterior</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">posterior_mean</span><span class="p">,</span> <span class="n">posterior_σ</span><span class="p">)</span>
+    
+    
+    <span class="n">plot_prior_posterior</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prior</span><span class="p">,</span> <span class="n">posterior</span><span class="p">,</span> <span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">),</span> <span class="s1">&#39;Prior&#39;</span><span class="p">,</span> <span class="s1">&#39;Posterior&#39;</span><span class="p">,</span>
+                         <span class="n">x_map</span><span class="o">=</span><span class="n">x_map</span><span class="p">,</span> <span class="n">x_lmse</span><span class="o">=</span><span class="n">x_lmse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">small_sample</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="o">*</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">larger_sample</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="o">*</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="mi">9</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_gaussian_prior_and_posterior</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">small_sample</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/b6aaf5f4375026de391db90add2b41d9b792af5719f0d34ac14a31ee6b9804b3.png" src="../../../_images/b6aaf5f4375026de391db90add2b41d9b792af5719f0d34ac14a31ee6b9804b3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_gaussian_prior_and_posterior</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="mi">12</span><span class="o">+</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">larger_sample</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/1cb1040ce879b38c26751d04db50e4e01947e4248ea7d94bfa6031fdd9695599.png" src="../../../_images/1cb1040ce879b38c26751d04db50e4e01947e4248ea7d94bfa6031fdd9695599.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_gaussian_prior_and_posterior</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">small_sample</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/002bb1465c9f26cd0f4e335843839583f5a8097268c5b74d55be7445e1453620.png" src="../../../_images/002bb1465c9f26cd0f4e335843839583f5a8097268c5b74d55be7445e1453620.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_gaussian_prior_and_posterior</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">larger_sample</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/97bd32bb3ec16d42c9b2c3a170a3cd30fde8cc353fc548ef2e4eead42e3bbf5e.png" src="../../../_images/97bd32bb3ec16d42c9b2c3a170a3cd30fde8cc353fc548ef2e4eead42e3bbf5e.png" />
+</div>
+</div>
+<p>Just as before, we can observe that the prior has a stronger effect when we have less data. We can also see that the posterior distribution becomes narrower as the amount of data increases. This is another general fact: <strong>the more data we observe, the narrower our posterior distribution becomes.</strong></p>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -418,6 +1196,24 @@ observe some data <span class="math notranslate nohighlight">\(x\)</span>, and w
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 2: Bayesian Inference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_hierarchical_models.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bayesian Hierarchical Models</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -432,9 +1228,35 @@ observe some data <span class="math notranslate nohighlight">\(x\)</span>, and w
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-and-computation">Intuition and computation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-parameter-estimation-maximum-likelihood">Frequentist parameter estimation: maximum likelihood</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-the-likelihood">1. Writing the likelihood</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#taking-the-log">2. Taking the log</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximizing">3. Maximizing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-a-maximum">4. Verifying a maximum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-maximum-likelihood-estimate">Applying the maximum likelihood estimate</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-different-way-bayesian-inference">A different way: Bayesian inference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-prior-beta-distributions">Choosing a prior: Beta distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizing-the-beta-distribution-optional">Normalizing the Beta distribution (optional)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-for-the-beta-distribution">Intuition for the Beta distribution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-posterior">Computing the posterior</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-prior-and-posterior-betas">Demo: prior and posterior Betas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#point-estimates">Point estimates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-prior-parameters">Choosing the prior parameters</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-attempt-a-non-conjugate-prior">Another attempt: a non-conjugate prior</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-continuous-example-estimating-heights">A continuous example: estimating heights</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mle-for-the-gaussian-likelihood">MLE for the Gaussian likelihood</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-inference-for-heights">Bayesian inference for heights</a></li>
+</ul>
+</li>
+</ul>
   </nav></div>
 
 </div></div>

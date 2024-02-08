@@ -169,11 +169,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Hypothesis Testing and p-Values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_binary_classification.html">Binary Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_decision_theory.html">Decision Theory</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../02/placeholder.html">Intro to Bayesian modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Generalized linear models</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -678,7 +680,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/4b34c3fefa8b661b6f8cbcecfe79976a6bd0a92be53c7bc93fa0e0ef78fa4e2b.png" src="../../../_images/4b34c3fefa8b661b6f8cbcecfe79976a6bd0a92be53c7bc93fa0e0ef78fa4e2b.png" />
+<img alt="../../../_images/f6c5379436b92c9c0bdbcc93f5a3595ba5a795515d71097f26b101456d7cf6d7.png" src="../../../_images/f6c5379436b92c9c0bdbcc93f5a3595ba5a795515d71097f26b101456d7cf6d7.png" />
 </div>
 </div>
 <p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
@@ -750,7 +752,7 @@ f_P(p)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.049319194537530316, 1.035869189459966, 1.5, -0.5)
 </pre></div>
 </div>
-<img alt="../../../_images/9cf4c068802c6da44b0862c4d0d3f5301c3654e8b8114e31bd29755f55382442.png" src="../../../_images/9cf4c068802c6da44b0862c4d0d3f5301c3654e8b8114e31bd29755f55382442.png" />
+<img alt="../../../_images/a0412f7800755c8602c685c05746db135ce2211713fad1477d3496464888bdf2.png" src="../../../_images/a0412f7800755c8602c685c05746db135ce2211713fad1477d3496464888bdf2.png" />
 </div>
 </div>
 <p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
@@ -767,7 +769,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/784c367e6e4d83e8ea6343bbd4b9cac81ea39465b3b9f2af4acafcd71151eb1b.png" src="../../../_images/784c367e6e4d83e8ea6343bbd4b9cac81ea39465b3b9f2af4acafcd71151eb1b.png" />
+<img alt="../../../_images/0efaaad7460f0a6f41297a42a5e724934bc871f391ef7afda43a2907304618d4.png" src="../../../_images/0efaaad7460f0a6f41297a42a5e724934bc871f391ef7afda43a2907304618d4.png" />
 </div>
 </div>
 <p>For p-values smaller than our threshold (to the right of the line), our decision is 1. So:</p>
@@ -791,7 +793,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/4bf2af6658699b1afa7700fa8a700e821de31a5565dec70927363db5713f26bd.png" src="../../../_images/4bf2af6658699b1afa7700fa8a700e821de31a5565dec70927363db5713f26bd.png" />
+<img alt="../../../_images/082eb31420f2e9df786549c9c5e5ed0cd5f9c27fb4c8ce84aa690802e4d4bf66.png" src="../../../_images/082eb31420f2e9df786549c9c5e5ed0cd5f9c27fb4c8ce84aa690802e4d4bf66.png" />
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>
