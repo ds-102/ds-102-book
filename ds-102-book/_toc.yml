@@ -31,6 +31,10 @@ chapters:
       title: "Parameter Estimation and Bayesian Inference Fundamentals"
     - file: content/chapters/02/02_hierarchical_models
       title: "Hierarchical Bayesian Models"
+    - file: content/chapters/02/03_graphical_models
+      title: "Graphical Models"
+    - file: content/chapters/02/04_inference_sampling
+      title: "Bayesian Inference and Sampling"
 - file: content/chapters/03/intro
   title: "Chapter 3: Generalized linear models"
   sections:
