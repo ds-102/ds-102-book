@@ -614,10 +614,10 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f8094a7b5e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f3fb6aba250&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/5d43de4680e32b2e83f0e4b9f58a64b3c131d846d2f716f319c23dbe69338f46.png" src="../../../_images/5d43de4680e32b2e83f0e4b9f58a64b3c131d846d2f716f319c23dbe69338f46.png" />
+<img alt="../../../_images/d0a42305e17c639af377468b7aa7d7954187c070fdf1f03af97f741610a3af75.png" src="../../../_images/d0a42305e17c639af377468b7aa7d7954187c070fdf1f03af97f741610a3af75.png" />
 </div>
 </div>
 <p>We can see that the samples are a good representation for the distribution, as long as we have enough. We can use the mean of the samples to approximate the mean of the distribution:</p>
@@ -632,7 +632,7 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42857142857142855 0.42760394337844726
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42857142857142855 0.42424308577268427
 </pre></div>
 </div>
 </div>
@@ -679,10 +679,10 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of x1 (estimated from samples): 0.238
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of x1 (estimated from samples): 0.243
 </pre></div>
 </div>
-<img alt="../../../_images/ad950b928f3ee487705733afd0aec23af9ad7bfa2acf48d968d3c2a5672546fe.png" src="../../../_images/ad950b928f3ee487705733afd0aec23af9ad7bfa2acf48d968d3c2a5672546fe.png" />
+<img alt="../../../_images/6e1914025ab4d78258e41538308d10607c2acb13fc52aa7f8eb84b87a415864e.png" src="../../../_images/6e1914025ab4d78258e41538308d10607c2acb13fc52aa7f8eb84b87a415864e.png" />
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
@@ -778,13 +778,13 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max accept prob: 0.638
-Accepted 36397 out of 100000 proposals
+Accepted 36256 out of 100000 proposals
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f8094987b80&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f3fb6a958b0&gt;]
 </pre></div>
 </div>
-<img alt="../../../_images/2284166f51aeeedbe568906e06d0dc392c66d10c2df868e6d6e4b944e5b9683b.png" src="../../../_images/2284166f51aeeedbe568906e06d0dc392c66d10c2df868e6d6e4b944e5b9683b.png" />
+<img alt="../../../_images/97f256ce812697a63250ad01a72e2c8d8ad1523203c0bdd5c3898d3fa2e29bf5.png" src="../../../_images/97f256ce812697a63250ad01a72e2c8d8ad1523203c0bdd5c3898d3fa2e29bf5.png" />
 </div>
 </div>
 <p>As a final example, what happens if we want to sample across the entire real line? For instance, suppose our density is <span class="math notranslate nohighlight">\(p(\theta|x) \propto \exp(-\theta) |\sin(2\theta)|\)</span> for <span class="math notranslate nohighlight">\(\theta \in [0, \infty)\)</span>. We certainly can’t use a uniform proposal distribution, but using the exponential distribution works just fine.</p>
@@ -822,10 +822,10 @@ Accepted 36397 out of 100000 proposals
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accepted 55 out of 100 proposals
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accepted 53 out of 100 proposals
 </pre></div>
 </div>
-<img alt="../../../_images/779f672db7e3e28e6d5512aaddb2c0f7e3dc5cd873f310a5454a974dba1537c0.png" src="../../../_images/779f672db7e3e28e6d5512aaddb2c0f7e3dc5cd873f310a5454a974dba1537c0.png" />
+<img alt="../../../_images/181525886e5da7edf3f7479b01a364673a1a2c618bb993952a9f06425d3f1333.png" src="../../../_images/181525886e5da7edf3f7479b01a364673a1a2c618bb993952a9f06425d3f1333.png" />
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
@@ -856,6 +856,7 @@ Accepted 36397 out of 100000 proposals
 </section>
 <section id="implementing-models-in-pymc">
 <h2>Implementing models in PyMC<a class="headerlink" href="#implementing-models-in-pymc" title="Permalink to this heading">#</a></h2>
+<p><em>This section is under development and is subject to change substantially in the next week.</em></p>
 <p>We spent a lot of time doing algebra and computation for the review model. At this point, you might be asking: couldn’t we do a lot of that work computationally? It turns out the answer is yes! PyMC is a Python library for Bayesian inference. You specify a probabilistic model (like the three we’ve just seen), and it will compute the posterior distribution over all unknown variables.</p>
 <p>Let’s try it out on the product review model:</p>
 <div class="math notranslate nohighlight">
