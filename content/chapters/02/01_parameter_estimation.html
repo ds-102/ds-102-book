@@ -176,6 +176,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 2: Bayesian modeling</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_graphical_models.html">Graphical Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Generalized linear models</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -427,6 +429,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
@@ -438,7 +441,7 @@ document.write(`
 <p><em>You may find it helpful to read <a class="reference external" href="http://prob140.org/textbook/content/Chapter_20/00_Approaches_to_Estimation.html">Chapter 20</a> and <a class="reference external" href="http://prob140.org/textbook/content/Chapter_21/00_The_Beta_and_the_Binomial.html">Chapter 21</a> of the Data 140 textbook, which present a different exposition of similar material, but are <strong>not</strong> required prerequisites for this chapter.</em></p>
 <p>We’ll begin our exploration of Bayesian and frequentist modeling with a simple example that highlights some key differences between the two approaches. Recall our setup: we observe some data <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>, and we’ll use them to estimate some parameter <span class="math notranslate nohighlight">\(\theta\)</span> of interest. In this and the following sections, we’ll focus on two simple examples to help us build intuition:</p>
 <ul class="simple">
-<li><p><strong>Estimating product quality</strong>: <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> are the reviews (👍/0 or 👎/1) for a product being sold online, and <span class="math notranslate nohighlight">\(\theta\)</span> is a number between 0 and 1 that represents the probability of someone leaving a good review. Intuitively, <span class="math notranslate nohighlight">\(\theta\)</span> represents our estimate of the quality of the product.</p></li>
+<li><p><strong>Estimating product quality</strong>: <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> are the reviews (👍/1 or 👎/0) for a product being sold online, and <span class="math notranslate nohighlight">\(\theta\)</span> is a number between 0 and 1 that represents the probability of someone leaving a good review. Intuitively, <span class="math notranslate nohighlight">\(\theta\)</span> represents our estimate of the quality of the product.</p></li>
 <li><p><strong>Estimating average height</strong>: <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> are the heights of <span class="math notranslate nohighlight">\(n\)</span> individuals in a random sample, and <span class="math notranslate nohighlight">\(\theta\)</span> is the average height of individuals in the population.</p></li>
 </ul>
 <p>We’ll start with the first example.</p>
