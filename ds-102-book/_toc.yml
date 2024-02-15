@@ -38,8 +38,8 @@ chapters:
 - file: content/chapters/03/intro
   title: "Chapter 3: Generalized linear models"
   sections:
-    - file: content/chapters/03/placeholder
-      title: "Generalized Linear Models"
+    - file: content/chapters/03/00_regression_review
+      title: "Multiple Linear Regression Review"
 
 # - file: content/chapters/05/intro
 #   title: "Chapter 4: Causal Inference"
