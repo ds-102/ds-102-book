@@ -181,7 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Generalized linear models</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../03/placeholder.html">Generalized Linear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/00_regression_review.html">Multiple Linear Regression Review</a></li>
 </ul>
 </li>
 </ul>
@@ -682,7 +682,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/ad39f39769c5af2917005b2b33c4aa616c353d3bea9a30f47a82efc819acf1cb.png" src="../../../_images/ad39f39769c5af2917005b2b33c4aa616c353d3bea9a30f47a82efc819acf1cb.png" />
+<img alt="../../../_images/d6b4eab2bc33bc68beb03f270bbea111d711ee2d36115a294306542a1c329774.png" src="../../../_images/d6b4eab2bc33bc68beb03f270bbea111d711ee2d36115a294306542a1c329774.png" />
 </div>
 </div>
 <p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
@@ -754,7 +754,7 @@ f_P(p)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.049319194537530316, 1.035869189459966, 1.5, -0.5)
 </pre></div>
 </div>
-<img alt="../../../_images/f361a936f8decff1e3daff874ffc86870ed284c557993dd1febbc7d32c07518e.png" src="../../../_images/f361a936f8decff1e3daff874ffc86870ed284c557993dd1febbc7d32c07518e.png" />
+<img alt="../../../_images/122fa58c8c107b450e6bd67ed152e473dd5c6c47cdd91cc208f68cdb419bc3cb.png" src="../../../_images/122fa58c8c107b450e6bd67ed152e473dd5c6c47cdd91cc208f68cdb419bc3cb.png" />
 </div>
 </div>
 <p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
@@ -771,7 +771,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/991316b94cb947ed74623a91fc8a6ebbaabf40759b62209ef255478b6412bbd8.png" src="../../../_images/991316b94cb947ed74623a91fc8a6ebbaabf40759b62209ef255478b6412bbd8.png" />
+<img alt="../../../_images/1c0a47c2ad494bda6f19933bbea8029492955333b63faa00e29ec3b30487d4f2.png" src="../../../_images/1c0a47c2ad494bda6f19933bbea8029492955333b63faa00e29ec3b30487d4f2.png" />
 </div>
 </div>
 <p>For p-values smaller than our threshold (to the right of the line), our decision is 1. So:</p>
@@ -795,7 +795,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/0431efeed75050cd71039eff621f8458e654c4dd7c1eff2d46ede131933c8af0.png" src="../../../_images/0431efeed75050cd71039eff621f8458e654c4dd7c1eff2d46ede131933c8af0.png" />
+<img alt="../../../_images/2aac6c8d8493fbf7f7375fe9dcdc570cce4f7efea536760afb6ee15a072830b2.png" src="../../../_images/2aac6c8d8493fbf7f7375fe9dcdc570cce4f7efea536760afb6ee15a072830b2.png" />
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>

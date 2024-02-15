@@ -181,7 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Generalized linear models</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../03/placeholder.html">Generalized Linear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/00_regression_review.html">Multiple Linear Regression Review</a></li>
 </ul>
 </li>
 </ul>
@@ -614,10 +614,10 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f3fb6aba250&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fe340ef86a0&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/d0a42305e17c639af377468b7aa7d7954187c070fdf1f03af97f741610a3af75.png" src="../../../_images/d0a42305e17c639af377468b7aa7d7954187c070fdf1f03af97f741610a3af75.png" />
+<img alt="../../../_images/c00323daf42c8eb8edef44b4bfc0aa75229ede36a6939015a9bf9e3cc49912b4.png" src="../../../_images/c00323daf42c8eb8edef44b4bfc0aa75229ede36a6939015a9bf9e3cc49912b4.png" />
 </div>
 </div>
 <p>We can see that the samples are a good representation for the distribution, as long as we have enough. We can use the mean of the samples to approximate the mean of the distribution:</p>
@@ -632,7 +632,7 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42857142857142855 0.42424308577268427
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42857142857142855 0.4240424446776433
 </pre></div>
 </div>
 </div>
@@ -679,10 +679,10 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of x1 (estimated from samples): 0.243
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of x1 (estimated from samples): 0.222
 </pre></div>
 </div>
-<img alt="../../../_images/6e1914025ab4d78258e41538308d10607c2acb13fc52aa7f8eb84b87a415864e.png" src="../../../_images/6e1914025ab4d78258e41538308d10607c2acb13fc52aa7f8eb84b87a415864e.png" />
+<img alt="../../../_images/72ecdaa064accfd54b61c23c1398c21446d89a424ce9ab50c76488836f5dd3fd.png" src="../../../_images/72ecdaa064accfd54b61c23c1398c21446d89a424ce9ab50c76488836f5dd3fd.png" />
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
@@ -778,13 +778,13 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max accept prob: 0.638
-Accepted 36256 out of 100000 proposals
+Accepted 36308 out of 100000 proposals
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f3fb6a958b0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe340db2c40&gt;]
 </pre></div>
 </div>
-<img alt="../../../_images/97f256ce812697a63250ad01a72e2c8d8ad1523203c0bdd5c3898d3fa2e29bf5.png" src="../../../_images/97f256ce812697a63250ad01a72e2c8d8ad1523203c0bdd5c3898d3fa2e29bf5.png" />
+<img alt="../../../_images/8d6d11d1c408609be3af25ee5241f328f7a5c69ae3a657d58ba3d87448ee0aaf.png" src="../../../_images/8d6d11d1c408609be3af25ee5241f328f7a5c69ae3a657d58ba3d87448ee0aaf.png" />
 </div>
 </div>
 <p>As a final example, what happens if we want to sample across the entire real line? For instance, suppose our density is <span class="math notranslate nohighlight">\(p(\theta|x) \propto \exp(-\theta) |\sin(2\theta)|\)</span> for <span class="math notranslate nohighlight">\(\theta \in [0, \infty)\)</span>. We certainly can’t use a uniform proposal distribution, but using the exponential distribution works just fine.</p>
@@ -822,10 +822,10 @@ Accepted 36256 out of 100000 proposals
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accepted 53 out of 100 proposals
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accepted 54 out of 100 proposals
 </pre></div>
 </div>
-<img alt="../../../_images/181525886e5da7edf3f7479b01a364673a1a2c618bb993952a9f06425d3f1333.png" src="../../../_images/181525886e5da7edf3f7479b01a364673a1a2c618bb993952a9f06425d3f1333.png" />
+<img alt="../../../_images/b7b917c980789da3ebb639af304bf57d2cc6443e1251e925b7d9743b1a87606e.png" src="../../../_images/b7b917c980789da3ebb639af304bf57d2cc6443e1251e925b7d9743b1a87606e.png" />
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
