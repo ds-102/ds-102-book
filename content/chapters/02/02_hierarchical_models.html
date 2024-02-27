@@ -528,7 +528,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;rate_nopool&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/bb507f83b56d3cd48e862906c7f0e45f8333d06d9af4f2b670614cb300acf626.png" src="../../../_images/bb507f83b56d3cd48e862906c7f0e45f8333d06d9af4f2b670614cb300acf626.png" />
+<img alt="../../../_images/185843f0c70f6d3e8193c42fdf9d4432184d4f012f343d2e4f66af00ee1b8d92.png" src="../../../_images/185843f0c70f6d3e8193c42fdf9d4432184d4f012f343d2e4f66af00ee1b8d92.png" />
 </div>
 </div>
 <p>From this, it appears that most counties have a rate between 1 in 100,000 (<span class="math notranslate nohighlight">\(0.00001\)</span>) and 1 in 10,000 (<span class="math notranslate nohighlight">\(0.0001\)</span>), but a sizeable number have a rate of 0.</p>
@@ -541,7 +541,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/a2f8389e7ce81380965cb5fe2f2b94b1dfaf0efcef9139f99b8da8516a2c4870.png" src="../../../_images/a2f8389e7ce81380965cb5fe2f2b94b1dfaf0efcef9139f99b8da8516a2c4870.png" />
+<img alt="../../../_images/26081f5b96f11efc0bb56fb59b121b978ccf6b205c4ed617f80359df177d44e6.png" src="../../../_images/26081f5b96f11efc0bb56fb59b121b978ccf6b205c4ed617f80359df177d44e6.png" />
 </div>
 </div>
 <p>For larger counties, our estimates are consistently between <span class="math notranslate nohighlight">\(0.00002\)</span> and <span class="math notranslate nohighlight">\(0.00008\)</span>, but for the small counties, the estimates have much higher variability.</p>
@@ -627,7 +627,7 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2ea9e1fdf34d1269ee08e465fe7ab9c3457ad21899b7e2aedc35bc3b1a9cbc70.png" src="../../../_images/2ea9e1fdf34d1269ee08e465fe7ab9c3457ad21899b7e2aedc35bc3b1a9cbc70.png" />
+<img alt="../../../_images/4aed49315a9fe7c3168e4be53886a1f8ce4cf3f92ab854d653dd54a1669dc727.png" src="../../../_images/4aed49315a9fe7c3168e4be53886a1f8ce4cf3f92ab854d653dd54a1669dc727.png" />
 </div>
 </div>
 <p>Based on this, we’ll use 300,000 as a cutoff (the dotted line), and ignore counties smaller than this when estimating the parameters of the prior:</p>
@@ -642,7 +642,7 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;rate_nopool&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/cec97b0b84ea25cf2855fa52e9edc3b288b8658513add2caac61997b10953525.png" src="../../../_images/cec97b0b84ea25cf2855fa52e9edc3b288b8658513add2caac61997b10953525.png" />
+<img alt="../../../_images/6716554430f97a2d326f22fc526d5c2f7282ff568714f15aca28c91af80ab5ff.png" src="../../../_images/6716554430f97a2d326f22fc526d5c2f7282ff568714f15aca28c91af80ab5ff.png" />
 </div>
 </div>
 <p>We’ll use this empirical distribution (or rather, a close approximation of it) as our prior: this is where the “empirical” in empirical Bayes comes from. Since we want to use a Beta prior, we need to fit a Beta distribution to this data. In other words, we need to find parameters <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> that are a good fit for this sequence of observations (in the histogram above).</p>
@@ -699,10 +699,10 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7feb16deb4c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd5be3c2eb0&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/060f009bb55ce8f0db92b78cfa588a32a69a684bde5e734860474457757fe0bf.png" src="../../../_images/060f009bb55ce8f0db92b78cfa588a32a69a684bde5e734860474457757fe0bf.png" />
+<img alt="../../../_images/efcab97becf7f1ab7349502d0be862dae56056ed22b26c37750207154e696dce.png" src="../../../_images/efcab97becf7f1ab7349502d0be862dae56056ed22b26c37750207154e696dce.png" />
 </div>
 </div>
 <p>In both cases, we no longer see estimates of 0. Note that because the empirical Bayes prior was stronger (i.e., less variable due to larger values of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>), the posterior estimates fall in a narrower range.</p>

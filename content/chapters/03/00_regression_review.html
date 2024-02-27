@@ -489,24 +489,33 @@ y = X\beta + \epsilon,
 y | \beta \sim N(X\beta, \sigma^2 I_n).
 \]</div>
 <p>Under this model, one reasonable way to estimate <span class="math notranslate nohighlight">\(\beta\)</span> is to choose the value that maximizes the likelihood. When choosing a value of <span class="math notranslate nohighlight">\(\beta\)</span> to maximize the likelihood, we note that we don’t actually care about the normalizing constant in the normal distribution. So, we can write:</p>
-<p>\begin{align}
-\hat{\beta}
-&amp;= \text{argmax}<em>\beta \exp\left{-\frac{1}{2}(y - X\beta)^T(\sigma^2 I_n)^{-1}(y-X\beta)^T\right} \
-&amp;= \text{argmax}</em>\beta \exp\left{-\frac{1}{2\sigma^2}|y - X\beta|_2^2\right}
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\hat{\beta} 
+    &amp;= \text{argmax}_\beta \exp\left\{-\frac{1}{2}(y - X\beta)^T(\sigma^2 I_n)^{-1}(y-X\beta)^T\right\} \\
+    &amp;= \text{argmax}_\beta \exp\left\{-\frac{1}{2\sigma^2}\|y - X\beta\|_2^2\right\}
+\end{align}
+\end{split}\]</div>
 <p>Maximizing a quantity inside an exponential is hard. So, we’ll take advantage of the fact that the <span class="math notranslate nohighlight">\(\log\)</span> function is monotonically increasing. Furthermore, we’ll make this a minimization rather than a maximization. In general, for any well-behaved function <span class="math notranslate nohighlight">\(f\)</span>:</p>
-<p>\begin{align}
-\text{argmax}<em>\theta f(\theta)
-&amp;= \text{argmax}</em>\theta \log(f(\theta)) \
-&amp;= \text{argmin}_\theta \left[-\log(f(\theta))\right] \
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\text{argmax}_\theta f(\theta) 
+&amp;= \text{argmax}_\theta \log(f(\theta)) \\
+&amp;= \text{argmin}_\theta \left[-\log(f(\theta))\right] \\
+\end{align}
+\end{split}\]</div>
 <p>So, we can write:</p>
-<p>\begin{align}
-\hat{\beta}
-&amp;= \text{argmax}_\beta \exp\left{-\frac{1}{2\sigma^2}|y - X\beta|<em>2^2\right} \
-&amp;= \text{argmin}</em>\beta \left[\frac{1}{2\sigma^2}|y - X\beta|<em>2^2 \right]\
-&amp;= \text{argmin}</em>\beta |y - X\beta|_2^2
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\hat{\beta} 
+    &amp;= \text{argmax}_\beta \exp\left\{-\frac{1}{2\sigma^2}\|y - X\beta\|_2^2\right\} \\
+    &amp;= \text{argmin}_\beta \left[\frac{1}{2\sigma^2}\|y - X\beta\|_2^2 \right]\\
+    &amp;= \text{argmin}_\beta \|y - X\beta\|_2^2
+\end{align}
+\end{split}\]</div>
 <p>So, we’ve found that maximizing the Gaussian likelihood of the data is exactly equivalent to minimizing the squared loss. This is true in general for regression problems: we can arrive at the same answer by either choosing a loss function and minimizing it, or choosing a corresponding likelihood and maximizing it.</p>
 </section>
 </section>
