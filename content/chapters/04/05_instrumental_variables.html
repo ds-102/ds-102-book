@@ -1,0 +1,716 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Instrumental variables &#8212; Data, Inference, and Decisions</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/04/05_instrumental_variables';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Data, Inference, and Decisions</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data, Inference, and Decisions
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/04_binary_classification.html">Binary Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/05_decision_theory.html">Decision Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02/01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/03_graphical_models.html">Graphical Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_association_correlation_causation.html">Understanding Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_causality.html">Causality and Potential Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/04/05_instrumental_variables.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/chapters/04/05_instrumental_variables.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Instrumental variables</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-and-introduction">Review and introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-structural-model-lsm">Linear structural model (LSM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-graphs-and-lsms">Causal graphs and LSMs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-and-omitted-variable-bias">Confounding and omitted variable bias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Instrumental Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-graph-for-instrumental-variables">Causal graph for instrumental variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-instrumental-variables">Examples of instrumental variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions">Extensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-treatments-instruments-and-two-stage-least-squares">Multiple treatments / instruments, and two-stage least squares.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-a-non-parametric-perspective-on-instrumental-variables">(Optional) A non-parametric perspective on instrumental variables</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="instrumental-variables">
+<h1>Instrumental variables<a class="headerlink" href="#instrumental-variables" title="Permalink to this heading">#</a></h1>
+<section id="review-and-introduction">
+<h2>Review and introduction<a class="headerlink" href="#review-and-introduction" title="Permalink to this heading">#</a></h2>
+<p>To briefly recap what we have learnt so far:</p>
+<ol class="arabic simple">
+<li><p>We defined a <em>non-parametric</em> superpopulation model, i.e. a distribution for <span class="math notranslate nohighlight">\((X,Z,Y(0),Y(1))\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Z\)</span> is the (binary) treatment decision,</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y(0)\)</span> and <span class="math notranslate nohighlight">\(Y(1)\)</span> are the potential outcomes in the universes where the unit wasn’t/was treated,</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> is a confounding variable (in other words, it has a causal effect on <span class="math notranslate nohighlight">\(Z\)</span> and on <span class="math notranslate nohighlight">\(Y\)</span>)</p></li>
+<li><p>So far, we haven’t needed to make any assumptions about the distribution in general (only that it exists)</p></li>
+</ul>
+</li>
+<li><p>We defined a quantity of interest, the average treatment effect (ATE): <span class="math notranslate nohighlight">\(\tau = \mathbb{E}[Y(1) - Y(0)]\)</span>, which is impossible to estimate unless we make further assumptions</p></li>
+<li><p>We saw that in a randomized experiment, we have the following:</p>
+<ul class="simple">
+<li><p>The treatment decisions are random, and independent of the potential outcomes</p></li>
+<li><p>In other words, <span class="math notranslate nohighlight">\(\big(Y(0),Y(1)\big)\perp\!\!\perp Z\)</span></p></li>
+</ul>
+</li>
+</ol>
+<p>In this section, we’ll investigate how we can estimate the ATE in situations where we have unknown confounding variables. We’ll rely on <strong>natural experiments</strong> to help us. Note that you’ve probably seen <a class="reference external" href="https://inferentialthinking.com/chapters/02/2/snow-s-grand-experiment.html">natural experiments before in Data 8 when learning about John Snow’s study of cholera</a>.</p>
+</section>
+<section id="linear-structural-model-lsm">
+<h2>Linear structural model (LSM)<a class="headerlink" href="#linear-structural-model-lsm" title="Permalink to this heading">#</a></h2>
+<p>In some fields (such as economics), it is typical to work with <em>structural models</em>, which place some restrictions on the joint distribution of all the variables, but also make it easier to estimate the parameters of the model.</p>
+<p><strong>Definition</strong>: We will work with the <em>linear structural model</em>
+$<span class="math notranslate nohighlight">\(
+Y = \alpha + \tau Z + \beta^TX + \epsilon,
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> has mean zero, and is independent of <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(X\)</span> (in economics, we say that <span class="math notranslate nohighlight">\(\epsilon\)</span> is <em>exogenous</em>). We sometimes further assume that <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal{N}(0,\sigma^2)\)</span>, but this is not necessary for any of the analysis we’re going to do. <span class="math notranslate nohighlight">\(Y\)</span> is still our outcome variable, <span class="math notranslate nohighlight">\(Z\)</span> is our treatment variable of interest (typically binary), and <span class="math notranslate nohighlight">\(X\)</span> is a confounding variable (or variables).</p>
+<p><em>Note: We usually add the further structural equation <span class="math notranslate nohighlight">\(Z = f(X, \delta)\)</span> where <span class="math notranslate nohighlight">\(\delta\)</span> is an exogenous noise variable, and <span class="math notranslate nohighlight">\(f\)</span> encodes the structural relationship between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Z\)</span>, but all you need to know for now is that we allow for <span class="math notranslate nohighlight">\(\textrm{Cov}(Z,X) \neq 0\)</span>.</em></p>
+<p>This is not the same as the <em>linear model</em> that we have seen when we learned about GLMs, and that you’ve seen in previous classes. In those settings, we were assuming a model about the joint distribution of the variables, which is a statement about associations and predictions.</p>
+<p>On the other hand, a linear structural model encodes an assumption about <em>intervention</em>. It assumes that if for unit <span class="math notranslate nohighlight">\(i\)</span>, if we could set <span class="math notranslate nohighlight">\(Z_i = 1\)</span>, we will observe <span class="math notranslate nohighlight">\(Y_i(1) = \tau + \beta^TX_i + \epsilon_i\)</span>, and if we could set <span class="math notranslate nohighlight">\(Z_i = 0\)</span>, we will observe <span class="math notranslate nohighlight">\(Y_i(0) = \beta^TX_i + \epsilon_i\)</span>. If <span class="math notranslate nohighlight">\(Z\)</span> is not binary, then there will be a potential outcome for each possible value of <span class="math notranslate nohighlight">\(Z\)</span>. This is a subtle but important point, that also situates the linear structural model as a special case of the potential outcomes framework.</p>
+<p>From this, we see that the average treatment effect in this model is <span class="math notranslate nohighlight">\(\tau\)</span> (can you show this is true?), and furthermore, that the individual treatment effect for every unit is</p>
+<div class="math notranslate nohighlight">
+\[Y_i(1) - Y_i(0) = \tau.\]</div>
+<p>In other words, the linear structural model is making an implicit assumption that the treatment effect is constant.</p>
+<section id="causal-graphs-and-lsms">
+<h3>Causal graphs and LSMs<a class="headerlink" href="#causal-graphs-and-lsms" title="Permalink to this heading">#</a></h3>
+<p>Apart from the causal effect of <span class="math notranslate nohighlight">\(Z\)</span> on <span class="math notranslate nohighlight">\(Y\)</span>, the linear structural model also does something new from before. It asserts the causal relationships between the other variables, i.e. it tells us how <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> change if we manipulate <span class="math notranslate nohighlight">\(X\)</span>. The above linear structural model can be represented graphically as follows:</p>
+<img src="causal_graph1.png" align="center"/>
+<p>As a reminder, the arrows from <span class="math notranslate nohighlight">\(X\)</span> into <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> assert that <span class="math notranslate nohighlight">\(X\)</span> causes both <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> (i.e. intervening on <span class="math notranslate nohighlight">\(Z\)</span> changes the values of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>), and the arrow from <span class="math notranslate nohighlight">\(Z\)</span> into <span class="math notranslate nohighlight">\(Y\)</span> asserts that <span class="math notranslate nohighlight">\(Z\)</span> causes <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+</section>
+</section>
+<section id="confounding-and-omitted-variable-bias">
+<h2>Confounding and omitted variable bias<a class="headerlink" href="#confounding-and-omitted-variable-bias" title="Permalink to this heading">#</a></h2>
+<p>In many scenarios, confounding is complicated and involves many different variables, and it may be impossible to describe all of them. In that case (i.e., if we don’t observe <span class="math notranslate nohighlight">\(X\)</span>), then we are in trouble because of <em>confounding</em>. Since we’re assuming a linear model, let’s see what happens when we try to fit a linear regression to <span class="math notranslate nohighlight">\(Y\)</span> using <span class="math notranslate nohighlight">\(Z\)</span>. We <span class="math notranslate nohighlight">\(\tau_{OLS}\)</span> be the solution of the least squares problem <span class="math notranslate nohighlight">\(\min_{\tau,\alpha} \mathbb{E}[(\alpha + \tau Z - Y)^2]\)</span>. We then get
+$<span class="math notranslate nohighlight">\(
+\begin{align}
+    \tau_{OLS} &amp; = \frac{\text{Cov}(Y,Z)}{\text{Var}(Z)} \\
+    &amp; = \frac{\text{Cov}(\alpha + \tau Z + \beta^TX + \epsilon,Z)}{\text{Var}(Z)} \\
+    &amp; = \frac{\text{Cov}(\tau Z,Z)}{\text{Var}(Z)} + \frac{\text{Cov}(\beta^TX,Z)}{\text{Var}(Z)} \\
+    &amp; = \tau + \beta^T\frac{\text{Cov}(X,Z)}{\text{Var}(Z)}.
+\end{align}
+\)</span>$</p>
+<p>The first term is the true ATE. The second term is a bias in the <span class="math notranslate nohighlight">\(\tau_{OLS}\)</span> estimator, There is hence the bias term <span class="math notranslate nohighlight">\(\beta^T\frac{\text{Cov}(X,Z)}{\text{Var}(Z)}\)</span>, which we call the <em>omitted variable bias</em>.</p>
+<p><em>Remark: <span class="math notranslate nohighlight">\(\frac{\text{Cov}(Y,Z)}{\text{Var}(Z)}\)</span> is the infinite population version of the typical formula <span class="math notranslate nohighlight">\(\hat{\tau}_{OLS} = (Z^TZ)^{-1}Z^TY\)</span>, where we now use <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> to denote matrices/vectors.</em></p>
+<p>Here are some examples:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Treatment <span class="math notranslate nohighlight">\(Z\)</span></p></th>
+<th class="head"><p>Outcome <span class="math notranslate nohighlight">\(Y\)</span></p></th>
+<th class="head"><p>Possible confounder(s) <span class="math notranslate nohighlight">\(X\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Health insurance</p></td>
+<td><p>Health outcomes</p></td>
+<td><p>Socioeconomic background</p></td>
+</tr>
+<tr class="row-odd"><td><p>Military service</p></td>
+<td><p>Salary</p></td>
+<td><p>Socioeconomic background</p></td>
+</tr>
+<tr class="row-even"><td><p>Family size</p></td>
+<td><p>Whether the mother is in the labor force</p></td>
+<td><p>Socioeconomic background</p></td>
+</tr>
+<tr class="row-odd"><td><p>Years of schooling</p></td>
+<td><p>Salary</p></td>
+<td><p>Socioeconomic background</p></td>
+</tr>
+<tr class="row-even"><td><p>Smoking</p></td>
+<td><p>Lung cancer</p></td>
+<td><p>Socioeconomic background</p></td>
+</tr>
+</tbody>
+</table>
+<p>Note that in most of these examples, socioeconomic background is a confounder. This is particularly common in economics and econometrics, where most of the methods in this section originated.</p>
+<p><strong>Why can’t we just adjust for confounding?</strong> Having such confounders is problematic because in order to avoid omitted variable bias, we need to have observed them, and added them to our regression (collection of such data may not always be feasible for a number of reasons.) Furthermore, there could always be <em>other</em> confounders that we are unaware of, which leaves our causal conclusions under an inescapable cloud of doubt.</p>
+</section>
+<section id="id1">
+<h2>Instrumental Variables<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>Is there a middle way between a randomized experiment and assuming unconfoundedness, which is sometimes unrealistic?</p>
+<p>One way forward is when nature provides us with a “partial” natural experiment, i.e. we have a truly randomized “instrument” that injects an element of partial randomization into the treatment variable of interest. This is the idea of instrumental variables. We will first define the concept mathematically, and then illustrate what it means for a few examples.</p>
+<p><strong>Definition:</strong> Assume the linear structural model defined above. We further assume a variable <span class="math notranslate nohighlight">\(W\)</span> such that <span class="math notranslate nohighlight">\(Z = \alpha' + \gamma W + (\beta')^TX + \delta\)</span>, with <span class="math notranslate nohighlight">\(\gamma \neq 0\)</span> (relevance), <span class="math notranslate nohighlight">\(W\)</span> independent of <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(\delta\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span> (exogeneity). Such a <span class="math notranslate nohighlight">\(W\)</span> is called an <em>instrumental variable</em>.</p>
+<p><em>Remark:</em> This replaces the earlier equation from before that <span class="math notranslate nohighlight">\(Z = f(X,\delta)\)</span>.</p>
+<p>Let us now see how to use <span class="math notranslate nohighlight">\(W\)</span> to identify the ATE <span class="math notranslate nohighlight">\(\tau\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+    \textrm{Cov}(Y,W) &amp; = \textrm{Cov}(\alpha + \tau Z + \beta^TX + \epsilon,W) \\
+    &amp; = \tau \textrm{Cov}(Z,W) \\
+    &amp; = \tau \textrm{Cov}(\alpha' + \gamma W + (\beta')^TX + \delta, W) \\
+    &amp; = \tau\gamma \textrm{Var}(W).
+\end{align}
+\end{split}\]</div>
+<p>Where the second equality follows from the exogeneity of <span class="math notranslate nohighlight">\(W\)</span>. Meanwhile, a similar computation with <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(W\)</span> gives us
+$<span class="math notranslate nohighlight">\(
+\textrm{Cov}(Z,W) = \gamma\textrm{Var}(W).
+\)</span>$</p>
+<p>Putting everything together gives
+$<span class="math notranslate nohighlight">\(
+\tau = \frac{\frac{\textrm{Cov}(Y,W)}{\textrm{Var}(W)}}{\frac{\textrm{Cov}(Z,W)}{\textrm{Var}(W)}}.
+\)</span>$</p>
+<p>In other words, <span class="math notranslate nohighlight">\(\tau\)</span> is the ratio between the (infinite population) regression coefficient of <span class="math notranslate nohighlight">\(W\)</span> on <span class="math notranslate nohighlight">\(Y\)</span>, and that of <span class="math notranslate nohighlight">\(W\)</span> on <span class="math notranslate nohighlight">\(Z\)</span>.</p>
+<p>This motivates the <strong>instrumental variable estimator</strong> of the ATE in finite samples:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\tau}_{IV} = \frac{\overbrace{(W^TW)^{-1}W^TY}^{\text{OLS coeff. of W for Y}}}{\underbrace{(W^TW)^{-1}W^TZ}_{\text{OLS coeff. of W for Z}}},
+\]</div>
+<p>where again, abusing notation, <span class="math notranslate nohighlight">\(W\)</span>, <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> refer to the vectors of observations. If <span class="math notranslate nohighlight">\(\alpha' = 0\)</span>, then this is a plug-in estimator of <span class="math notranslate nohighlight">\(\tau\)</span>, and is consistent.</p>
+<p><strong>Further interpretation for binary <span class="math notranslate nohighlight">\(W\)</span>:</strong> When <span class="math notranslate nohighlight">\(W\)</span> is binary, we can show that
+$<span class="math notranslate nohighlight">\(
+\tau = \frac{\mathbb{E}[Y|W=1] - \mathbb{E}[Y|W=0]}{\mathbb{E}[Z|W=1] - \mathbb{E}[Z|W=0]}.
+\)</span><span class="math notranslate nohighlight">\(
+Hence, we can think of IV as measuring the ratio of the prima facie treatment effect of \)</span>W<span class="math notranslate nohighlight">\( on \)</span>Y<span class="math notranslate nohighlight">\( and that of \)</span>W<span class="math notranslate nohighlight">\( on \)</span>Z$.</p>
+<section id="causal-graph-for-instrumental-variables">
+<h3>Causal graph for instrumental variables<a class="headerlink" href="#causal-graph-for-instrumental-variables" title="Permalink to this heading">#</a></h3>
+<p>The relationships between <span class="math notranslate nohighlight">\(W, Z, X\)</span>, and <span class="math notranslate nohighlight">\(Y\)</span> can be represented as the following causal graph:</p>
+<img src="causal_graph2.png" align="center"/>
+<p>How to read this graph:</p>
+<ul class="simple">
+<li><p>The arrow from <span class="math notranslate nohighlight">\(W\)</span> into <span class="math notranslate nohighlight">\(Z\)</span> shows that <span class="math notranslate nohighlight">\(W\)</span> has a causal effect on <span class="math notranslate nohighlight">\(Z\)</span></p></li>
+<li><p>The absence of any arrow into <span class="math notranslate nohighlight">\(W\)</span> means that <span class="math notranslate nohighlight">\(W\)</span> is exogeneous, i.e. no variable in the diagram causes <span class="math notranslate nohighlight">\(W\)</span>, and in particular <span class="math notranslate nohighlight">\(W\)</span> is independent of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>The absence of an arrow from <span class="math notranslate nohighlight">\(W\)</span> into <span class="math notranslate nohighlight">\(Y\)</span> means that the only effect of <span class="math notranslate nohighlight">\(W\)</span> on <span class="math notranslate nohighlight">\(Y\)</span> is through <span class="math notranslate nohighlight">\(Z\)</span>.</p></li>
+<li><p>We shaded in <span class="math notranslate nohighlight">\(W\)</span>, <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> because these nodes are observed, but <span class="math notranslate nohighlight">\(X\)</span> is unshaded because it is latent (unobserved).</p></li>
+</ul>
+<p>Note that we do not need to know or even be aware of what <span class="math notranslate nohighlight">\(X\)</span> is in order for instrumental variables to work! It doesn’t matter how many confounders there are, or whether we’re even able to list all of them: as long as we can guarantee that they do not have any causal relationship to the instrument (exclusion restriction), instrumental variables will work.</p>
+</section>
+</section>
+<section id="examples-of-instrumental-variables">
+<h2>Examples of instrumental variables<a class="headerlink" href="#examples-of-instrumental-variables" title="Permalink to this heading">#</a></h2>
+<p>Let’s examine what we might use as instrumental variables for the five examples from the table in the previous section. The first four are taken from the econometrics literature:</p>
+<p><strong>Example 1:</strong> <span class="math notranslate nohighlight">\(Z\)</span> is health insurance, <span class="math notranslate nohighlight">\(Y\)</span> is health outcomes, <span class="math notranslate nohighlight">\(X\)</span> is socioeconomic background. Baicker et al. (2013) used the 2008 expansion of Medicaid in Oregon via lottery. The instrument <span class="math notranslate nohighlight">\(W\)</span> here was the lottery assignment. We previously talked about why this was an imperfect experiment because of compliance reasons (only a fraction of individuals who won the lottery enrolled into Medicaid), so IV provides a way of overcoming this limitation.</p>
+<p><strong>Example 2:</strong> <span class="math notranslate nohighlight">\(Z\)</span> is military service, <span class="math notranslate nohighlight">\(Y\)</span> is salary, <span class="math notranslate nohighlight">\(X\)</span> is socioeconomic background. Angrist (1990) used the Vietnam era draft lottery as the instrument <span class="math notranslate nohighlight">\(W\)</span>, and found that among white veterans, there was a 15% drop in earnings compared to non-veterans.</p>
+<p><strong>Example 3:</strong> <span class="math notranslate nohighlight">\(Z\)</span> is family size, <span class="math notranslate nohighlight">\(Y\)</span> is mother’s employment, <span class="math notranslate nohighlight">\(X\)</span> is socioeconomic background. Angrist and Evans (1998) used sibling sex decomposition (in other words, the assigned sexes at birth of a sibling) as the IV. This is plausible because of the pseudo randomization of the sibling sex composition. This is based on the fact that parents in the US with two children of the same sex are more likely to have a third child than those parents with two children of different sex.</p>
+<p><strong>Example 4:</strong> <span class="math notranslate nohighlight">\(Z\)</span> is years of schooling, <span class="math notranslate nohighlight">\(Y\)</span> is salary, <span class="math notranslate nohighlight">\(X\)</span> is socioeconomic background. Card (1993) used geographical variation in college proximity as the instrumental variable.</p>
+<p><strong>Example 5:</strong> <span class="math notranslate nohighlight">\(Z\)</span> is smoking, <span class="math notranslate nohighlight">\(Y\)</span> is lung cancer, <span class="math notranslate nohighlight">\(X\)</span> is socioeconomic background. Unfortunately, this example does not lend itself well to an instrumental variable: despite decades of searching, nobody has yet found one that is convincing.</p>
+<p>As we see in these examples, sometimes you need to be quite ingenious to come up with an appropriate instrumental variable. Joshua Angrist, David Card, and Guido Imbens, who is named in several of these examples, are phenomenally good at this: in fact, they won the Nobel Prize in economics for their collected body of work!</p>
+</section>
+<section id="extensions">
+<h2>Extensions<a class="headerlink" href="#extensions" title="Permalink to this heading">#</a></h2>
+<section id="multiple-treatments-instruments-and-two-stage-least-squares">
+<h3>Multiple treatments / instruments, and two-stage least squares.<a class="headerlink" href="#multiple-treatments-instruments-and-two-stage-least-squares" title="Permalink to this heading">#</a></h3>
+<p>So far, we have considered scalar treatment and instrumental variables <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(W\)</span>. It is also possible to consider vector-valued instruments and treatments. To generalize IV to this setting, we need to recast the IV estimator in the previous sections as follows.</p>
+<p>First define the conditional expectation <span class="math notranslate nohighlight">\(\tilde{Z} = \mathbb{E}[Z|W]\)</span>, and observe that <span class="math notranslate nohighlight">\(\tilde{Z} = \alpha' + W\gamma\)</span>.</p>
+<p>If we regress <span class="math notranslate nohighlight">\(Y\)</span> on <span class="math notranslate nohighlight">\(\tilde{Z}\)</span>, the regression coefficient we obtain is
+$<span class="math notranslate nohighlight">\(
+\begin{align}
+\frac{\textrm{Cov}(\tilde{Z},Y)}{\textrm{Var}(\tilde{Z})} &amp; = \frac{\textrm{Cov}(\tilde{Z}, \alpha + \tau Z + \beta^TX + \epsilon)}{\textrm{Var}(\tilde{Z})} \\
+&amp; = \frac{\textrm{Cov}(\tilde{Z}, \tau Z)}{\textrm{Var}(\tilde{Z})} \\
+&amp; = \tau\frac{\textrm{Cov}(\tilde{Z},  Z)}{\textrm{Var}(\tilde{Z})} \\
+&amp; = \tau.
+\end{align}
+\)</span>$</p>
+<p>Here, the 2nd equality holds because <span class="math notranslate nohighlight">\(W\)</span> is independent of all <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span>, while the 4th equality holds because of a property of conditional expectations (one can also check this by hand by expanding out <span class="math notranslate nohighlight">\(Z = \alpha' + \gamma W + (\beta')^TX + \delta\)</span>.)</p>
+<p>In finite samples, we thus arrive at the following algorithm:</p>
+<p><strong>Two-stage least squares algorithm (2SLS):</strong></p>
+<ul class="simple">
+<li><p>Step 1: Regress <span class="math notranslate nohighlight">\(Z\)</span> on <span class="math notranslate nohighlight">\(W\)</span> to get <span class="math notranslate nohighlight">\(\tilde{Z} = W\hat{\gamma} = W(W^TW)^{-1}W^TZ\)</span>.</p></li>
+<li><p>Step 2: Regress <span class="math notranslate nohighlight">\(Y\)</span> on <span class="math notranslate nohighlight">\(\tilde{Z}\)</span> to get <span class="math notranslate nohighlight">\(\hat{\tau}_{2SLS} = (\tilde{Z}^T\tilde{Z})^{-1}\tilde{Z}^TY\)</span>.</p></li>
+</ul>
+<p>For the scalar setting, it is easy to see that <span class="math notranslate nohighlight">\(\hat{\tau}_{2SLS} = \hat{\tau}_{IV}\)</span>, but the benefit of this formulation is that it directly applies for vector-valued <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(W\)</span>.</p>
+</section>
+<section id="optional-a-non-parametric-perspective-on-instrumental-variables">
+<h3>(Optional) A non-parametric perspective on instrumental variables<a class="headerlink" href="#optional-a-non-parametric-perspective-on-instrumental-variables" title="Permalink to this heading">#</a></h3>
+<p>In this notebook, we have introduced instrumental variables in the context of structural linear models. What if our model is nonlinear?</p>
+<p>In an amazing coincidence, for binary treatment <span class="math notranslate nohighlight">\(Z\)</span>, the expression</p>
+<div class="math notranslate nohighlight">
+\[
+\tau = \frac{\mathbb{E}[Y|W=1] - \mathbb{E}[Y|W=0]}{\mathbb{E}[Z|W=1] - \mathbb{E}[Z|W=0]}.
+\]</div>
+<p>has a meaning beyond the linear model setting. This is the subject of this groundbreaking <a class="reference external" href="https://www.jstor.org/stable/2291629?seq=1">paper</a> by Angrist and Imbens in 1996.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/chapters/04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-and-introduction">Review and introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-structural-model-lsm">Linear structural model (LSM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-graphs-and-lsms">Causal graphs and LSMs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-and-omitted-variable-bias">Confounding and omitted variable bias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Instrumental Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#causal-graph-for-instrumental-variables">Causal graph for instrumental variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-instrumental-variables">Examples of instrumental variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions">Extensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-treatments-instruments-and-two-stage-least-squares">Multiple treatments / instruments, and two-stage least squares.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-a-non-parametric-perspective-on-instrumental-variables">(Optional) A non-parametric perspective on instrumental variables</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Data 102 Staff
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

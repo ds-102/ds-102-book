@@ -1,0 +1,839 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; Data, Inference, and Decisions</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/04/figure_data_generation';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Data, Inference, and Decisions</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data, Inference, and Decisions
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/04_binary_classification.html">Binary Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/05_decision_theory.html">Decision Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02/01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/03_graphical_models.html">Graphical Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_association_correlation_causation.html">Understanding Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_causality.html">Causality and Potential Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/04/figure_data_generation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/chapters/04/figure_data_generation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">daft</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;inline&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">daft</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;daft&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import seaborn as sns</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">103</span><span class="p">)</span>
+<span class="n">flavor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">appearance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">flavor</span><span class="p">,</span> <span class="n">appearance</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="c1">#plt.axis(&#39;off&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;flavor&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;appearance&#39;</span><span class="p">)</span>
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">flavor</span> <span class="o">+</span> <span class="n">appearance</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">flavor</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">appearance</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;On display&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.45</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">flavor</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">],</span> <span class="n">appearance</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;In the back&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.45</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;flavor&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;appearance&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;appearance&#39;)
+</pre></div>
+</div>
+<img alt="../../../_images/47211ce144a351fb3cef83fc4dd716178d4392fc2c0d68ac6bbb3fc7ca10c7f2.png" src="../../../_images/47211ce144a351fb3cef83fc4dd716178d4392fc2c0d68ac6bbb3fc7ca10c7f2.png" />
+<img alt="../../../_images/1d59f2d0aecebd0ccb8bcec825e6478ea8b0d59748c102753ee492555c10fa23.png" src="../../../_images/1d59f2d0aecebd0ccb8bcec825e6478ea8b0d59748c102753ee492555c10fa23.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">pgm</span> <span class="o">=</span> <span class="n">daft</span><span class="o">.</span><span class="n">PGM</span><span class="p">()</span>
+
+<span class="c1">### Line graph</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;rain&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;umbrella&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;wet&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;umbrella&quot;</span><span class="p">,</span> <span class="s2">&quot;rain&quot;</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;wet&quot;</span><span class="p">,</span> <span class="s2">&quot;rain&quot;</span><span class="p">,</span> <span class="p">)</span>
+<span class="c1">#pgm.add_edge(&quot;umbrella&quot;, &quot;wet&quot;)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="c1">#plt.gca().set_xlabel(&#39;(e)&#39;)</span>
+<span class="c1">#plt.tight_layout()</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;berkson.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/bd257c8773bfa926e956ea29e9f584e13153600773c38f4c2666d80bcd8af2f4.png" src="../../../_images/bd257c8773bfa926e956ea29e9f584e13153600773c38f4c2666d80bcd8af2f4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pgm.render<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">pgm</span> <span class="o">=</span> <span class="n">daft</span><span class="o">.</span><span class="n">PGM</span><span class="p">()</span>
+
+<span class="c1">### Line graph</span>
+<span class="c1">#pgm.add_node(&quot;rain&quot;, &quot;Pandemic&quot;, 0.75, 1, aspect=2.1)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;umbrella&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Restaurant&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">2.2</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;wet&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Review&quot;</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.6</span><span class="p">)</span>
+
+
+
+<span class="c1">#pgm.add_edge(&quot;rain&quot;, &quot;umbrella&quot;)</span>
+<span class="c1">#pgm.add_edge(&quot;rain&quot;, &quot;wet&quot;)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;umbrella&quot;</span><span class="p">,</span> <span class="s2">&quot;wet&quot;</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="c1">#plt.gca().set_xlabel(&#39;(e)&#39;)</span>
+<span class="c1">#plt.tight_layout()</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;restaurants3.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/6a1c01bee8946134280afed5f68dfcde51478b9a60a03a723c49a7f8b3af7c62.png" src="../../../_images/6a1c01bee8946134280afed5f68dfcde51478b9a60a03a723c49a7f8b3af7c62.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">pgm</span> <span class="o">=</span> <span class="n">daft</span><span class="o">.</span><span class="n">PGM</span><span class="p">()</span>
+
+<span class="c1">### Line graph</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;rain&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;umbrella&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;wet&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;W&quot;</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;rain&quot;</span><span class="p">,</span> <span class="s2">&quot;umbrella&quot;</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;rain&quot;</span><span class="p">,</span> <span class="s2">&quot;wet&quot;</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;umbrella&quot;</span><span class="p">,</span> <span class="s2">&quot;wet&quot;</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="c1">#plt.gca().set_xlabel(&#39;(e)&#39;)</span>
+<span class="c1">#plt.tight_layout()</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;rain_.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/aa21cd05522418e55fdc05e85bf038b7a0ffad49bffad034be5fba210251eb13.png" src="../../../_images/aa21cd05522418e55fdc05e85bf038b7a0ffad49bffad034be5fba210251eb13.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">pgm</span> <span class="o">=</span> <span class="n">daft</span><span class="o">.</span><span class="n">PGM</span><span class="p">()</span>
+
+<span class="c1">### Line graph</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Sunburn&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.9</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Ice cream&quot;</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">2.3</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Sun&quot;</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+<span class="c1">#plt.gca().set_xlabel(&#39;(e)&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;sunburn_icecream_.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>//anaconda3/lib/python3.7/site-packages/ipykernel_launcher.py:14: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  
+</pre></div>
+</div>
+<img alt="../../../_images/f11c328b1f57d9e5d65e94c4ae9482e41f7654ffd9cb85c6ba89cd18912b42d1.png" src="../../../_images/f11c328b1f57d9e5d65e94c4ae9482e41f7654ffd9cb85c6ba89cd18912b42d1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">pgm</span> <span class="o">=</span> <span class="n">daft</span><span class="o">.</span><span class="n">PGM</span><span class="p">()</span>
+
+<span class="c1">### Line graph</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;account&quot;</span><span class="p">,</span> <span class="s2">&quot;Account popularity/</span><span class="se">\n</span><span class="s2">budget&quot;</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;dslr&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;DSLR&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;likes&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Likes&quot;</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
+
+
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;account&quot;</span><span class="p">,</span> <span class="s2">&quot;dslr&quot;</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;account&quot;</span><span class="p">,</span> <span class="s2">&quot;likes&quot;</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;dslr&quot;</span><span class="p">,</span> <span class="s2">&quot;likes&quot;</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+<span class="c1">#plt.gca().set_xlabel(&#39;(e)&#39;)</span>
+<span class="c1">#plt.tight_layout()</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;instagram_.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/cedc383f097e0284407016e42841c9260d4b273d39d630b65ea10923d0d5bae0.png" src="../../../_images/cedc383f097e0284407016e42841c9260d4b273d39d630b65ea10923d0d5bae0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#pgm = daft.PGM(node_ec=None)</span>
+<span class="n">pgm</span> <span class="o">=</span> <span class="n">daft</span><span class="o">.</span><span class="n">PGM</span><span class="p">()</span>
+
+<span class="c1">### Line graph</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;mozz&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Mozzarella&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">2.25</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;phd&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Civil eng. PhDs&quot;</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
+
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+<span class="c1">#plt.gca().set_xlabel(&#39;(e)&#39;)</span>
+<span class="c1">#plt.tight_layout()</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;spurious.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/9c305bc8fc93e9ed8c450110eb75e57dc3b3c0f8b9680d1b9ef32bf8dc32b598.png" src="../../../_images/9c305bc8fc93e9ed8c450110eb75e57dc3b3c0f8b9680d1b9ef32bf8dc32b598.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">pgm</span> <span class="o">=</span> <span class="n">daft</span><span class="o">.</span><span class="n">PGM</span><span class="p">()</span>
+
+<span class="c1">### Line graph</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Rating&quot;</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.9</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;restaurant&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Restaurant&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">)</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;restaurant&quot;</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;restaurant&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">)</span>
+
+<span class="n">pgm</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+<span class="c1">#plt.gca().set_xlabel(&#39;(e)&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">pgm</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;restaurant.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>//anaconda3/lib/python3.7/site-packages/ipykernel_launcher.py:16: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  app.launch_new_instance()
+</pre></div>
+</div>
+<img alt="../../../_images/0e94e31fd232f3e77094b984e7354512a3509c82b0dd41a6cad66cb0a3f311c8.png" src="../../../_images/0e94e31fd232f3e77094b984e7354512a3509c82b0dd41a6cad66cb0a3f311c8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="k">def</span> <span class="nf">make_simpson_df_and_science_table</span><span class="p">(</span>
+    <span class="n">treatments</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">,</span> <span class="n">confounds</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">treatment_name</span><span class="p">,</span> <span class="n">outcome_name</span><span class="p">,</span> <span class="n">confound_name</span>
+<span class="p">):</span>
+    <span class="n">agg_rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sample_rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">other</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">treatments</span><span class="p">)</span> <span class="o">-</span> <span class="p">{</span><span class="n">t</span><span class="p">})[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="p">((</span><span class="n">it</span><span class="p">,</span> <span class="n">t</span><span class="p">),</span> <span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">o</span><span class="p">),</span> <span class="p">(</span><span class="n">ic</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span>
+        <span class="o">*</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="p">(</span><span class="n">treatments</span><span class="p">,</span> <span class="n">outcomes</span><span class="p">,</span> <span class="n">confounds</span><span class="p">))</span>
+    <span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">it</span><span class="p">,</span> <span class="n">io</span><span class="p">,</span> <span class="n">ic</span><span class="p">]</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">treatment_name</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span>
+            <span class="n">outcome_name</span><span class="p">:</span> <span class="n">o</span><span class="p">,</span>
+            <span class="n">confound_name</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span>
+            <span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="n">n</span>
+        <span class="p">}</span>
+        <span class="n">agg_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        
+        <span class="n">sample_row</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1">#f&quot;{outcome_name} for {treatment_name}={t}&quot;: io,</span>
+            <span class="c1">#f&quot;{outcome_name} for {treatment_name}={other(t)}&quot;: np.nan,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">outcome_name</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">io</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">outcome_name</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">other</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+            <span class="n">confound_name</span><span class="p">:</span> <span class="n">c</span>
+        <span class="p">}</span>
+        <span class="n">sample_rows</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">sample_row</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">sample_rows</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">agg_rows</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sample_rows</span><span class="p">))</span>
+
+        
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food</span><span class="p">,</span> <span class="n">food_sci</span> <span class="o">=</span> <span class="n">make_simpson_df_and_science_table</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;👎&quot;</span><span class="p">,</span> <span class="s2">&quot;👍&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;2019&quot;</span><span class="p">,</span> <span class="s2">&quot;2020&quot;</span><span class="p">],</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+        <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">10</span><span class="p">]],</span>
+    <span class="p">]),</span>
+    <span class="s2">&quot;Restaurant&quot;</span><span class="p">,</span> <span class="s2">&quot;Dish rating&quot;</span><span class="p">,</span> <span class="s2">&quot;Year&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">food</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;restaurants.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">food_sci</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;restaurants_counterfactuals.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Suppose we are trying to measure whether a certain pesticide is effective at killing insects that eat crops. We conduct a randomized controlled trial, and obtain the following data:</span>
+
+<span class="n">crops</span> <span class="o">=</span> <span class="n">make_simpson_df</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;Pesticide&quot;</span><span class="p">,</span> <span class="s2">&quot;Control&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;No insects&quot;</span><span class="p">,</span> <span class="s2">&quot;insects&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;Dead&quot;</span><span class="p">,</span> <span class="s2">&quot;Alive&quot;</span><span class="p">],</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+        <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">10</span><span class="p">]],</span>
+    <span class="p">]),</span>
+    <span class="s2">&quot;Crop treatment&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;Year&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">food</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;restaurants.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/chapters/04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Data 102 Staff
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

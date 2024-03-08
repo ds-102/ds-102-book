@@ -1,0 +1,625 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Quantifying Association &#8212; Data, Inference, and Decisions</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/04/02_quantifying_association';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Causality" href="03_causality.html" />
+    <link rel="prev" title="Association, Correlation, and Causation" href="01_association_correlation_causation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Data, Inference, and Decisions</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data, Inference, and Decisions
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/04_binary_classification.html">Binary Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/05_decision_theory.html">Decision Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02/01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/03_graphical_models.html">Graphical Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_association_correlation_causation.html">Understanding Association</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_causality.html">Causality and Potential Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/04/02_quantifying_association.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/chapters/04/02_quantifying_association.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Quantifying Association</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-data-correlation-and-regression">Continuous Data: Correlation and Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-coefficient">Correlation coefficient</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple linear regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-data-a-different-kind-of-risk">Binary Data: (A Different Kind of) Risk</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="quantifying-association">
+<h1>Quantifying Association<a class="headerlink" href="#quantifying-association" title="Permalink to this heading">#</a></h1>
+<p>We’ll start our journey into causal inference by looking at several ways of quantifying association.</p>
+<p>Throughout, we’ll assume we have two random variables, <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, and sometimes a third variable <span class="math notranslate nohighlight">\(X\)</span>. Although most of the methods we’ll describe can be used regardless of how we interpret them, it will be helpful when we move to causality to think of <span class="math notranslate nohighlight">\(Z\)</span> as either a treatment or covariate, to think of <span class="math notranslate nohighlight">\(Y\)</span> as an outcome, and to think of <span class="math notranslate nohighlight">\(X\)</span> as a potential confounding variable.</p>
+<section id="continuous-data-correlation-and-regression">
+<h2>Continuous Data: Correlation and Regression<a class="headerlink" href="#continuous-data-correlation-and-regression" title="Permalink to this heading">#</a></h2>
+<section id="correlation-coefficient">
+<h3>Correlation coefficient<a class="headerlink" href="#correlation-coefficient" title="Permalink to this heading">#</a></h3>
+<p>There are a few different ways to measure correlation. The most common is the <strong>Pearson correlation</strong> (also called the correlation coefficient), usually denoted with <span class="math notranslate nohighlight">\(r\)</span> or <span class="math notranslate nohighlight">\(\rho\)</span> (the greek letter <em>rho</em>):</p>
+<div class="math notranslate nohighlight">
+\[
+    \rho_{ZY} = \frac{\text{cov}(Z, Y)}{\sqrt{\text{var}(Z)\text{var}(Y)}}
+\]</div>
+<p>This is a good measure of the linear association between <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. For a refresher on Pearson correlation, see the <a class="reference external" href="https://www.inferentialthinking.com/chapters/15/1/Correlation.html">Data 8 textbook</a> and the <a class="reference external" href="http://prob140.org/textbook/content/Chapter_13/01_Covariance.html#correlation">Data 140 textbook</a>.</p>
+</section>
+<section id="linear-regression">
+<h3>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">#</a></h3>
+<p>If we were to fit a linear model to predict <span class="math notranslate nohighlight">\(Y\)</span> from <span class="math notranslate nohighlight">\(Z\)</span>, it would look something like:</p>
+<div class="math notranslate nohighlight">
+\[Y = \alpha + \beta Z + \varepsilon.\]</div>
+<p>As usual, we assume that <span class="math notranslate nohighlight">\(\varepsilon\)</span> is zero-mean noise, with the additional property that cov<span class="math notranslate nohighlight">\((Z, \varepsilon) = 0\)</span>. We’ve talked a lot about how to interpret this equation as a predictive model, but now we’ll look at it slightly differently.</p>
+<p>We’ll think of this equation as simply a descriptive explanation of a relationship between <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, where the most important part of the relationship is <span class="math notranslate nohighlight">\(\beta\)</span>. We can use all the same computational machinery we’ve already developed to fit the model and compute <span class="math notranslate nohighlight">\(\beta\)</span>, and the interpretation is subject to the limitations we’ve already learned about (e.g., it doesn’t capture nonlinear association, it can be impacted by outliers, etc.). While it’s common to describe <span class="math notranslate nohighlight">\(\beta\)</span> as quantifying the “effect” of <span class="math notranslate nohighlight">\(Z\)</span> on <span class="math notranslate nohighlight">\(Y\)</span>, it’s important to understand the limitations of the word “effect” here: linear regression can only tell us the <em>predictive</em> effect, rather than the causal effect.</p>
+<p>So, we’ll use the coefficient <span class="math notranslate nohighlight">\(\beta\)</span> as a means to quantify the relationship between <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(y\)</span>. Starting from our assumption that cov<span class="math notranslate nohighlight">\((Z, \varepsilon) = 0\)</span> and using properties of covariance, we can show that <span class="math notranslate nohighlight">\(\beta = \frac{\text{cov}(Z, Y)}{\text{var}(Z)}\)</span>. From here, we can also show that <span class="math notranslate nohighlight">\(\beta = \rho_{ZY} \sqrt{\frac{\text{var}(Y)}{\text{var}(Z)}}\)</span> (as you may have seen empirically in Data 8).</p>
+<p>For example, suppose we’re interested in quantifying the relationship between the number of years of schooling an individual has received (<span class="math notranslate nohighlight">\(Z\)</span>) and their income (<span class="math notranslate nohighlight">\(Y\)</span>). If we were to compute the coefficient <span class="math notranslate nohighlight">\(\beta\)</span>, it would provide a way of quantifying the association between these two variables.</p>
+</section>
+<section id="multiple-linear-regression">
+<h3>Multiple linear regression<a class="headerlink" href="#multiple-linear-regression" title="Permalink to this heading">#</a></h3>
+<p>Suppose we are now interested in quantifying the relationship between two variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, but we also want to account for or “control for” the effect of a third variable, <span class="math notranslate nohighlight">\(w\)</span>. Assuming a linear relationship between them, we can extend our earlier relationship:</p>
+<div class="math notranslate nohighlight">
+\[Y = \alpha + \beta Z + \gamma X + \varepsilon.\]</div>
+<p>In this case, we can interpret <span class="math notranslate nohighlight">\(\beta\)</span> as a measure of association between <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> while <strong>controlling for</strong> or <strong>adjusting for</strong> the effect of a third variable <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>Here are some refresher resources on linear regression:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://prob140.org/textbook/content/Chapter_24/00_Simple_Linear_Regression.html">Prob 140 textbook Chapter 24</a></p></li>
+<li><p>Data 100 textbook: <a class="reference external" href="https://www.textbook.ds100.org/ch/14/linear_models.html">Chapter 14</a> and <a class="reference external" href="https://www.textbook.ds100.org/ch/18/mult_model.html">Chapter 18</a></p></li>
+</ul>
+</section>
+</section>
+<section id="binary-data-a-different-kind-of-risk">
+<h2>Binary Data: (A Different Kind of) Risk<a class="headerlink" href="#binary-data-a-different-kind-of-risk" title="Permalink to this heading">#</a></h2>
+<p>Correlation and regression coefficients are a fine way to measure association between continuous numerical variables, but what if our data are categorical? We’ll restrict ourselves to binary data in this section for simplicity. We’ll look at three commonly used metrics for these cases: risk difference (RD), risk ratio (RR), and odds ratio (OR).</p>
+<p>When dealing with categorical data, we’ll often start by visualizing the data in a contingency table.  We’ve already seen an example of this when we looked at Simpson’s Paradox.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(y=0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(y=1\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(z=0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{00}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{01}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(z=1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{10}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n_{11}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Note that these are different from the 2x2 tables that we used at the beginning of the course: there, the rows and columns represented reality and our decisions, respectively. Here, they represent two different observed variables in our data. Just as with those tables, there’s no standard convention about what to put in the rows vs the columns.</p>
+<p>For example, suppose we are interested in examining the relationship between receiving a vaccine (<span class="math notranslate nohighlight">\(z\)</span>) for a particular virus and being infected with that virus (<span class="math notranslate nohighlight">\(y\)</span>). We’ll look at a study conducted on that vaccine. We’ll use <span class="math notranslate nohighlight">\(z=1\)</span> to indicate getting the vaccine, and <span class="math notranslate nohighlight">\(y=1\)</span> to indicate being infected with the virus. In this case, for example, <span class="math notranslate nohighlight">\(n_{10}\)</span> would represent the number of people in the study who received the vaccine and did not get infected.</p>
+<p>Most of the metrics we’ll discuss are based on the <strong>risk</strong>, which represents the probability of <span class="math notranslate nohighlight">\(y=1\)</span> given a particular value of <span class="math notranslate nohighlight">\(z\)</span>: The risk for <span class="math notranslate nohighlight">\(z=1\)</span> is <span class="math notranslate nohighlight">\(P(y=1 | z=1)\)</span> and the risk for <span class="math notranslate nohighlight">\(z=0\)</span> is <span class="math notranslate nohighlight">\(P(y=1|z=0)\)</span>. Note that this definition is completely unrelated to the risk that we learned about in Chapter 1.</p>
+<p>In our vaccination example, the term <em>risk</em> has an intuitive interpretation: it represents your risk of being infected given whether or not you were vaccinated.</p>
+<p>The <strong>risk difference (RD)</strong> is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+RD 
+    &amp;= \underbrace{P(Y=1 \mid Z=1)}_{\text{risk for }Z=1}
+       - \underbrace{P(Y=1 \mid Z=0)}_{\text{risk for }Z=0} \\
+    &amp;= \quad\,\overbrace{\frac{n_{11}}{n_{10} + n_{11}}}^{} \quad\,\,-\quad\, \overbrace{\frac{n_{01}}{n_{00} + n_{01}}}^{}
+\end{align}
+\end{split}\]</div>
+<p>Returning to the vaccine example: if the vaccine works as intended (i.e., there’s a strong association between being vaccinated and being infected), your risk of being infected should decrease after being vaccinated, and the risk difference should be a negative number far from 0. On the other hand, if there’s little to no relationship between vaccination and infection, then the two terms should be very similar, and the risk difference should be close to 0.</p>
+<p>We can see the same fact mathematically. If <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent, then <span class="math notranslate nohighlight">\(P(Y=1 \mid Z=1) = P(Y=1 \mid Z=0) = P(Y=1)\)</span>, so the two terms are equal. This means that they cancel and that the risk difference is 0.</p>
+<p>The <strong>risk ratio (RR)</strong>, also sometimes called the relative risk, is defined similarly as the ratio (instead of the difference) between the two quantities above:</p>
+<div class="math notranslate nohighlight">
+\[
+RR = \frac{P(Y=1 \mid Z=1)}{P(Y=1 \mid Z=0)}
+\]</div>
+<p>We can use similar reasoning as above to conclude that this ratio should 1 when <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent.</p>
+<p>The third commonly used measure is the <strong>odds ratio (OR)</strong>. It’s the ratio of two odds, where each odds is itself a ratio:</p>
+<div class="math notranslate nohighlight">
+\[
+OR = \frac{%
+        \overbrace{P(Y=1|Z=1)/P(Y=0|Z=1)}^{\text{odds of }y\text{ in the presence of }Z}}{%
+        \underbrace{P(Y=1|Z=0)/P(Y=0|Z=0)}_{\text{odds of }y\text{ in the absence of }Z}}
+\]</div>
+<p>While this looks more complicated, we can show that it simplifies to:</p>
+<div class="math notranslate nohighlight">
+\[
+OR = \frac{n_{00}}{n_{10}} \cdot \frac{n_{11}}{n_{01}}
+\]</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/chapters/04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_association_correlation_causation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Association, Correlation, and Causation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_causality.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Causality</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-data-correlation-and-regression">Continuous Data: Correlation and Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-coefficient">Correlation coefficient</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple linear regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-data-a-different-kind-of-risk">Binary Data: (A Different Kind of) Risk</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Data 102 Staff
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

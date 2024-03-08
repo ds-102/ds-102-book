@@ -180,8 +180,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../02/04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Generalized linear models</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../03/00_regression_review.html">Multiple Linear Regression Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/03_causality.html">Causality and Potential Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
 </ul>
 </li>
 </ul>
@@ -682,7 +686,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/a9d992960109ebe29432ef0d297afb6fb8d49514c980d3326e6265210626d956.png" src="../../../_images/a9d992960109ebe29432ef0d297afb6fb8d49514c980d3326e6265210626d956.png" />
+<img alt="../../../_images/a1cb53c1f52254e1e68c5e5e027db3949257a11474ba8fd10b385783802205e4.png" src="../../../_images/a1cb53c1f52254e1e68c5e5e027db3949257a11474ba8fd10b385783802205e4.png" />
 </div>
 </div>
 <p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
@@ -754,7 +758,7 @@ f_P(p)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.049319194537530316, 1.035869189459966, 1.5, -0.5)
 </pre></div>
 </div>
-<img alt="../../../_images/0c0c16cfe7bf9054d528be6eb934a3238ac5d6d06322d0bacc3150f44b230dd0.png" src="../../../_images/0c0c16cfe7bf9054d528be6eb934a3238ac5d6d06322d0bacc3150f44b230dd0.png" />
+<img alt="../../../_images/8531785f11263df3a5a3a81c6df77a50a5e60b59c6b88b1b60b0bff18c16425f.png" src="../../../_images/8531785f11263df3a5a3a81c6df77a50a5e60b59c6b88b1b60b0bff18c16425f.png" />
 </div>
 </div>
 <p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
@@ -771,7 +775,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/39c5bbabc05c308d737b39ea70199ab1d09a5aaec6ef1ee77819ea28d714cbb4.png" src="../../../_images/39c5bbabc05c308d737b39ea70199ab1d09a5aaec6ef1ee77819ea28d714cbb4.png" />
+<img alt="../../../_images/d47b38c6b7d48803bc0413b8c4b97878e45efad87181ab5ae31789b66f5ab8f0.png" src="../../../_images/d47b38c6b7d48803bc0413b8c4b97878e45efad87181ab5ae31789b66f5ab8f0.png" />
 </div>
 </div>
 <p>For p-values smaller than our threshold (to the right of the line), our decision is 1. So:</p>
@@ -795,7 +799,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/0bf5154c30da7328445b984bfcaec14db3af2615c752a342180b9ddb18fd08cd.png" src="../../../_images/0bf5154c30da7328445b984bfcaec14db3af2615c752a342180b9ddb18fd08cd.png" />
+<img alt="../../../_images/f4b23e7ca86613cb02f6d940da260edf3c8d0107c3cdeb0c2616f5e26818f93d.png" src="../../../_images/f4b23e7ca86613cb02f6d940da260edf3c8d0107c3cdeb0c2616f5e26818f93d.png" />
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>
