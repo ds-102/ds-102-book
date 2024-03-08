@@ -36,21 +36,20 @@ chapters:
     - file: content/chapters/02/04_inference_sampling
       title: "Bayesian Inference and Sampling"
 - file: content/chapters/03/intro
-  title: "Chapter 3: Generalized linear models"
+  title: "Chapter 3: Prediction"
+  # sections:
+  #   - file: content/chapters/03/00_regression_review
+  #     title: "Multiple Linear Regression Review"
+  #   - file: content/chapters/03/01_glms
+  #     title: "Generalized Linear Models"
+- file: content/chapters/04/intro
+  title: "Chapter 4: Causal Inference"
   sections:
-    - file: content/chapters/03/00_regression_review
-      title: "Multiple Linear Regression Review"
-
-# - file: content/chapters/05/intro
-#   title: "Chapter 4: Causal Inference"
-#   sections:
-#     - file: content/chapters/05/01_association_correlation_causation
-#       title: "Association, correlation, and causation"
-    # - file: content/chapters/05/02_quantifying_association
-    #   title: "Quantifying Association"
-    # - file: content/chapters/05/03_causality
-    #   title: "Causality"
-    # - file: content/chapters/05/04_randomized_experiments
-    #   title: "Causal Inference in Randomized Experiments"
-    # - file: content/chapters/05/05_observational_studies
-    #   title: "Causal Inference in Observational Studies"
+    - file: content/chapters/04/01_association_correlation_causation
+      title: "Understanding Association"
+    - file: content/chapters/04/02_quantifying_association
+      title: "Quantifying Association"
+    - file: content/chapters/04/03_causality
+      title: "Causality and Potential Outcomes"
+    - file: content/chapters/04/04_randomized_experiments
+      title: "Causality in Randomized Experiments"
