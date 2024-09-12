@@ -393,7 +393,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-p-value-thresholds-for-e-commerce-website-optimization">Example: p-value thresholds for e-commerce website optimization</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-p-values-to-decisions">From p-values to decisions</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-and-composite-hypotheses">Simple and Composite Hypotheses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-p-values-to-decisions">From p-values to decisions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trading-off-between-different-row-wise-rates">Trading off between different row-wise rates</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-pearson">Neyman-Pearson</a></li>
 </ul>
 </li>
@@ -436,7 +438,7 @@ document.write(`
 </details>
 </div>
 <p><em>You may find it helpful to review <a class="reference external" href="https://inferentialthinking.com/chapters/11/Testing_Hypotheses.html">Chapter 11</a> and <a class="reference external" href="https://inferentialthinking.com/chapters/12/Comparing_Two_Samples.html">Chapter 12</a> of the Data 8 textbook, which cover the basics of hypothesis testing.</em></p>
-<p>Hypothesis testing is a specific kind of binary decision-making problem. Although the null hypothesis statistical test (NHST) framework has been criticized in recent years, it still provides a useful framework for making decisions from data. We’ll explore these criticisms later, but to start, here’s a quick refresher on how the process works:</p>
+<p>Hypothesis testing is a specific kind of binary decision-making problem. Although the <strong>null hypothesis statistical test (NHST)</strong> framework has been criticized in recent years, it still provides a useful framework for making decisions from data. We’ll explore these criticisms later, but to start, here’s a quick refresher on how the process works:</p>
 <ol class="arabic simple">
 <li><p>Determine the viewpoint that you want to test, and decide on:</p>
 <ul class="simple">
@@ -508,7 +510,7 @@ document.write(`
 <p><em>You may find it helpful to review <a class="reference external" href="http://prob140.org/textbook/content/Chapter_15/01_Density_and_CDF.html">Chapter 15</a> of the Data 140 textbook, which covers continuous random variables.</em></p>
 <p>We’ll work through a few exercises to help us understand the connection between <span class="math notranslate nohighlight">\(p\)</span>-values and the error rates described in the previous section. In the process, we’ll get some practice reasoning about probabilities, and learn some important facts about the distribution of <span class="math notranslate nohighlight">\(p\)</span>-values under the null hypothesis.</p>
 <p><strong>Exercise 1</strong>: Suppose the null hypothesis is true. In this case, what is the probability of obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than 0.05?</p>
-<p>In order to answer this question, we’ll look at the distribution of the test statistic under the null hypothesis, and use what we know about probabilities. If the null hypothesis is true, then the test statistic comes from some distribution that we can either simulate or analytically compute. We’ll represent it visually as follows. Note that everything we’re about to conclude is true even if the shape of the distribution is very different: we’re only making it to facilitate easy visualization.</p>
+<p><strong>Solution</strong>: In order to answer this question, we’ll look at the distribution of the test statistic under the null hypothesis, and use what we know about probabilities. If the null hypothesis is true, then the test statistic comes from some distribution that we can either simulate or analytically compute. We’ll represent it visually as follows. Note that everything we’re about to conclude is true even if the shape of the distribution is very different: we’re only making it to facilitate easy visualization.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../../../_images/08757020e750079cc41bf3dc34243ea076851f6ba76c6c4f056892a00e1a7e47.png" src="../../../_images/08757020e750079cc41bf3dc34243ea076851f6ba76c6c4f056892a00e1a7e47.png" />
@@ -531,9 +533,9 @@ document.write(`
 <li><p>Found (by combining 2 and 3) that if the null is true, the probability of “obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than or equal to 0.05 is 0.05.</p></li>
 </ol>
 <p><strong>Exercise 3</strong>: Suppose the null hypothesis is true. In this case, what is the probability of obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than <span class="math notranslate nohighlight">\(\gamma\)</span> (assuming <span class="math notranslate nohighlight">\(0 &lt; \gamma \leq 1\)</span>)? <em>Note this is a generalization of the previous question, using <span class="math notranslate nohighlight">\(\gamma\)</span> instead of the specific value <span class="math notranslate nohighlight">\(0.05\)</span>.</em></p>
-<p>Throughout our solution to the last exercise, there was nothing special about the value of 0.05 that we used. All of our conclusions are still valid even if we choose any other threshold between 0 and 1. So, we can safely conclude that this probability is <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
+<p><strong>Solution</strong>: Throughout our solution to the last exercise, there was nothing special about the value of 0.05 that we used. All of our conclusions are still valid even if we choose any other threshold between 0 and 1. So, we can safely conclude that this probability is <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
 <p><strong>Exercise 4</strong>: Suppose our <span class="math notranslate nohighlight">\(p\)</span>-value threshold is <span class="math notranslate nohighlight">\(\gamma\)</span>. What is the false positive rate for this test?</p>
-<p>We know the following things:</p>
+<p><strong>Solution</strong>: We know the following things:</p>
 <ul class="simple">
 <li><p>The false positive rate is <span class="math notranslate nohighlight">\(P(D=1 | R=0)\)</span>.</p></li>
 <li><p>In hypothesis testing, this is the probability of rejecting the null hypothesis given that the null hypothesis is true.</p></li>
@@ -542,7 +544,7 @@ document.write(`
 </ul>
 <p>Putting these facts together, the false positive rate is <span class="math notranslate nohighlight">\(\gamma\)</span>: in other words, <strong>the p-value threshold that we use for a test is the false positive rate for that test</strong>.</p>
 <p><strong>Exercise 5</strong>: If the null hypothesis is true, what is the distribution of the <span class="math notranslate nohighlight">\(p\)</span>-value? <em>Hint: the answer is a well-known distribution.</em></p>
-<p>Let <span class="math notranslate nohighlight">\(p\)</span> be the <span class="math notranslate nohighlight">\(p\)</span>-value (this is a random variable).</p>
+<p><strong>Solution</strong>: Let <span class="math notranslate nohighlight">\(p\)</span> be the <span class="math notranslate nohighlight">\(p\)</span>-value (this is a random variable).</p>
 <p>In Exercise 3, we showed that if the null hypothesis is true, <span class="math notranslate nohighlight">\(P(p \leq \gamma) = \gamma\)</span>. This is precisely the CDF of the random variable <span class="math notranslate nohighlight">\(p\)</span>! In other words, <span class="math notranslate nohighlight">\(F_p(p) = p\)</span>, as long as <span class="math notranslate nohighlight">\(0 \leq p \leq 1\)</span>. This is exactly the CDF of the uniform distribution! Therefore, we can conclude that if the null hypothesis is true, the <span class="math notranslate nohighlight">\(p\)</span>-value has a uniform distribution.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -562,7 +564,7 @@ document.write(`
 <h3>Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution (optional)<a class="headerlink" href="#proof-of-uniformity-of-p-values-under-the-null-distribution-optional" title="Permalink to this heading">#</a></h3>
 <p><em>For this subsection only, we’ll use more precise notation: random variables will be denoted with capital letters, values they can take on will be denoted with lowercase letters, and density functions and cumulative distribution functions will be subscripted with the corresponding random variables. For a refresher on this notation, see the Data 140 textbook.</em></p>
 <p><em>Additionally, note carefully the difference between the notation for random variable <span class="math notranslate nohighlight">\(P\)</span> and probability <span class="math notranslate nohighlight">\(\mathbb{P}\)</span>.</em></p>
-<p>Let <span class="math notranslate nohighlight">\(T\)</span> be a continuous random variable denoting our test statistic, and let <span class="math notranslate nohighlight">\(F_T\)</span> be the CDF of <span class="math notranslate nohighlight">\(T\)</span> under the null hypothesis: in other words, <span class="math notranslate nohighlight">\(F_T(t) = \mathbb{P}(T \leq t)\)</span>. Let <span class="math notranslate nohighlight">\(G_T\)</span> be the <em>tail CDF</em>: <span class="math notranslate nohighlight">\(G_T(t) = 1 - F_T(t) = \mathbb{P}(T \geq t)\)</span> (we’re being imprecise with the equality here since <span class="math notranslate nohighlight">\(T\)</span> is a continuous random variable).</p>
+<p>Let <span class="math notranslate nohighlight">\(T\)</span> be a continuous random variable denoting our test statistic, and let <span class="math notranslate nohighlight">\(F_T\)</span> be the CDF of <span class="math notranslate nohighlight">\(T\)</span> under the null hypothesis: in other words, <span class="math notranslate nohighlight">\(F_T(t) = \mathbb{P}(T \leq t)\)</span>. Let <span class="math notranslate nohighlight">\(G_T\)</span> be the <em>tail CDF</em>: <span class="math notranslate nohighlight">\(G_T(t) = 1 - F_T(t) = \mathbb{P}(T \geq t)\)</span>. We’re being imprecise with our use of <span class="math notranslate nohighlight">\(\geq\)</span> rather than <span class="math notranslate nohighlight">\(&gt;\)</span> here, but the equality is still true since <span class="math notranslate nohighlight">\(T\)</span> is a continuous random variable and therefore <span class="math notranslate nohighlight">\(\mathbb{P}(T = t) = 0\)</span>.</p>
 <p><span class="math notranslate nohighlight">\(G_T\)</span> is a tail cumulative distribution function, but we can also view it as just a function: we can plug in any number and obtain a number between 0 and 1. In general, we can apply any function to a random variable and, in doing so, obtain another random variable. For example, if we apply the function <span class="math notranslate nohighlight">\(h(x) = 7x\)</span> to <span class="math notranslate nohighlight">\(T\)</span>, we’d obtain a new random variable <span class="math notranslate nohighlight">\(h(T)\)</span> that takes on values seven times what <span class="math notranslate nohighlight">\(T\)</span> would. So, if we apply the function <span class="math notranslate nohighlight">\(G_T\)</span> to the random variable <span class="math notranslate nohighlight">\(T\)</span>, we get another random variable. Note the difference between <span class="math notranslate nohighlight">\(G_T(t)\)</span>, which is the function applied to a specific number <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(G_T(T)\)</span>, which is the function applied to the random variable <span class="math notranslate nohighlight">\(T\)</span>.</p>
 <p>The <span class="math notranslate nohighlight">\(p\)</span>-value associated with a particular test statistic <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(\mathbb{P}(T \geq t)\)</span>: this is simply <span class="math notranslate nohighlight">\(G_T(t)\)</span>. The <span class="math notranslate nohighlight">\(p\)</span>-value is a random variable <span class="math notranslate nohighlight">\(P\)</span> that depends on the random variable <span class="math notranslate nohighlight">\(T\)</span>: <span class="math notranslate nohighlight">\(P = G_T(T)\)</span>.</p>
 <p>What is the CDF of this random variable <span class="math notranslate nohighlight">\(P\)</span>?</p>
@@ -574,7 +576,7 @@ F_P(p)
     &amp;= \mathbb{P}(G_T(T) \leq p)
 \end{align*}
 \end{split}\]</div>
-<p>Consider the function <span class="math notranslate nohighlight">\(G_T^{-1}\)</span>, the inverse of <span class="math notranslate nohighlight">\(G_T\)</span>. Both <span class="math notranslate nohighlight">\(G_T\)</span> and its inverse are monotonically non-increasing: in other words, if <span class="math notranslate nohighlight">\(a &gt; b\)</span>, then <span class="math notranslate nohighlight">\(G_T(a) \leq G_T(b)\)</span>, and <span class="math notranslate nohighlight">\(G_T^{-1}(a) \leq G_T^{-1}(b)\)</span>. The same is true of its inverse, <span class="math notranslate nohighlight">\(G^{-1}\)</span>. So, we can apply the function <span class="math notranslate nohighlight">\(G^{-1}\)</span> to both sides of the inequality above, which flips the inequality:</p>
+<p>Consider the function <span class="math notranslate nohighlight">\(G_T^{-1}\)</span>, the inverse of <span class="math notranslate nohighlight">\(G_T\)</span>. Both <span class="math notranslate nohighlight">\(G_T\)</span> and its inverse are monotonically non-increasing: in other words, if <span class="math notranslate nohighlight">\(a &gt; b\)</span>, then <span class="math notranslate nohighlight">\(G_T(a) \leq G_T(b)\)</span>, and <span class="math notranslate nohighlight">\(G_T^{-1}(a) \leq G_T^{-1}(b)\)</span>. So, we can apply the function <span class="math notranslate nohighlight">\(G_T^{-1}\)</span> to both sides of the inequality above, which flips the inequality:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
@@ -614,7 +616,9 @@ F_P(p)
     &amp;= p, \quad 0 \leq p \leq 1 \\
 f_P(p)
     &amp;= \frac{d}{dp}F_P(p) \\
-    &amp;= 1, \quad 0 \leq p \leq 1
+    &amp;= 1, \quad 0 \leq p \leq 1 \\
+P
+    &amp;\sim \mathrm{Uniform}(0, 1)
 \end{align*}
 \end{split}\]</div>
 </section>
@@ -686,7 +690,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/a1cb53c1f52254e1e68c5e5e027db3949257a11474ba8fd10b385783802205e4.png" src="../../../_images/a1cb53c1f52254e1e68c5e5e027db3949257a11474ba8fd10b385783802205e4.png" />
+<img alt="../../../_images/fb4db2419350919bca1964761c0dfeafcb0310b8592b6d4f45d2df2d55e59828.png" src="../../../_images/fb4db2419350919bca1964761c0dfeafcb0310b8592b6d4f45d2df2d55e59828.png" />
 </div>
 </div>
 <p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
@@ -758,7 +762,7 @@ f_P(p)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.049319194537530316, 1.035869189459966, 1.5, -0.5)
 </pre></div>
 </div>
-<img alt="../../../_images/8531785f11263df3a5a3a81c6df77a50a5e60b59c6b88b1b60b0bff18c16425f.png" src="../../../_images/8531785f11263df3a5a3a81c6df77a50a5e60b59c6b88b1b60b0bff18c16425f.png" />
+<img alt="../../../_images/34d2949dc17ea41871001a7fb5d109964fba55b0281954dfabb5f874e6bbd036.png" src="../../../_images/34d2949dc17ea41871001a7fb5d109964fba55b0281954dfabb5f874e6bbd036.png" />
 </div>
 </div>
 <p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
@@ -775,7 +779,7 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/d47b38c6b7d48803bc0413b8c4b97878e45efad87181ab5ae31789b66f5ab8f0.png" src="../../../_images/d47b38c6b7d48803bc0413b8c4b97878e45efad87181ab5ae31789b66f5ab8f0.png" />
+<img alt="../../../_images/f3a76ce7a58b6e5e0b9f2db8a471495128a5d7795014ad4c3c42ae2364161e33.png" src="../../../_images/f3a76ce7a58b6e5e0b9f2db8a471495128a5d7795014ad4c3c42ae2364161e33.png" />
 </div>
 </div>
 <p>For p-values smaller than our threshold (to the right of the line), our decision is 1. So:</p>
@@ -799,18 +803,27 @@ f_P(p)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/f4b23e7ca86613cb02f6d940da260edf3c8d0107c3cdeb0c2616f5e26818f93d.png" src="../../../_images/f4b23e7ca86613cb02f6d940da260edf3c8d0107c3cdeb0c2616f5e26818f93d.png" />
+<img alt="../../../_images/289b44966748ea2c09e66211bf9bb44785a53f32370e7ba643dda8f3f8529416.png" src="../../../_images/289b44966748ea2c09e66211bf9bb44785a53f32370e7ba643dda8f3f8529416.png" />
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>
 </section>
 </section>
+<section id="simple-and-composite-hypotheses">
+<h2>Simple and Composite Hypotheses<a class="headerlink" href="#simple-and-composite-hypotheses" title="Permalink to this heading">#</a></h2>
+<p>When conducting hypothesis testing, our null and alternative hypotheses fall into one of two categories:</p>
+<ul class="simple">
+<li><p>A <strong>simple</strong> hypothesis is precise, and states that the test statistic takes on a particular value. For example, hypotheses such as “there is no difference between the average values in the two groups (<span class="math notranslate nohighlight">\(\mu_1 - \mu_2 = 0\)</span>)” or “the true proportion is 0.5 (<span class="math notranslate nohighlight">\(q = 0.5\)</span>)” provide one single value for the test statistic.</p></li>
+<li><p>In contrast, a <strong>composite</strong> hypothesis is less specific, and usually describes the test statistic as being greater than, less than, or not equal to some reference value. For example, hypotheses such as “the average of the first group is greater than the average of the second group (<span class="math notranslate nohighlight">\(\mu_1 - \mu_2 &gt; 0\)</span>)” or “the true proportion is not equal to 0.5 (<span class="math notranslate nohighlight">\(q \neq 0.5\)</span>)” are composite.</p></li>
+</ul>
+<p>In most hypothesis tests you’ve seen so far, you’ve likely worked with a simple null hypothesis (i.e., one that’s specific that we can simulate or calculate under), and a composite alternative hypothesis. Later, we’ll explore what happens when we use a simple alternative hypothesis as well.</p>
+</section>
 <section id="from-p-values-to-decisions">
 <h2>From p-values to decisions<a class="headerlink" href="#from-p-values-to-decisions" title="Permalink to this heading">#</a></h2>
 <p>We’ve seen above that in order to make a binary decision from a single p-value, we must use some threshold. We’ll see several different ways to choose such a threshold:</p>
 <ul class="simple">
-<li><p>Classical null hypothesis significance testing (NHST): here, we choose a threshold based on our desired false positive rate. For example, the traditional (arbitrary) threshold of 0.05 corresponds to a 5% chance of making a false positive with each hypothesis test we conduct. In this setting, our null hypothesis will usually be clearly specified, but we usually use “vague” alternative hypotheses such as ‘there is no difference between the two groups’. This means that we can precisely analyze what happens when the null is true (<span class="math notranslate nohighlight">\(R=0\)</span>), and reason about the false positive rate and true negative rate. However, because we don’t have a precisely defined alternative hypothesis, we typically don’t reason about the true positive rate and false negative rate (i.e., the rates corresponding to <span class="math notranslate nohighlight">\(R=1\)</span>).</p></li>
-<li><p>In the Neyman-Pearson framework, we choose a more precise alternative hypothesis, and reason about the true positive rate. We’ll discuss this briefly below.</p></li>
+<li><p>Classical null hypothesis significance testing (NHST): here, we choose a threshold based on our desired false positive rate. For example, the traditional (arbitrary) threshold of 0.05 corresponds to a 5% chance of making a false positive with each hypothesis test we conduct. In this setting, our null hypothesis will usually be a clearly specified simple hypothesis, but we usually use “vague” composite alternative hypotheses such as ‘there is no difference between the two groups’. This means that we can precisely analyze what happens when the null is true (<span class="math notranslate nohighlight">\(R=0\)</span>), and reason about the false positive rate and true negative rate. However, because our alternative hypothesis is composite, we can’t precisely define what happens in the alternative case, so we typically don’t reason about the true positive rate and false negative rate (i.e., the rates corresponding to <span class="math notranslate nohighlight">\(R=1\)</span>).</p></li>
+<li><p>In the Neyman-Pearson framework, we choose a simple alternative hypothesis, and reason about the true positive rate.</p></li>
 <li><p>When making multiple tests, we’ll need to choose thresholds that take into account error rates involving all the tests we conduct. We’ll examine these error rates and why they’re important in the next section.</p></li>
 </ul>
 <div class="cell tag_remove-input docutils container">
@@ -826,22 +839,19 @@ f_P(p)
         ></iframe>
         </div></div>
 </div>
+</section>
+<section id="trading-off-between-different-row-wise-rates">
+<h2>Trading off between different row-wise rates<a class="headerlink" href="#trading-off-between-different-row-wise-rates" title="Permalink to this heading">#</a></h2>
+<p>Analysis of <span class="math notranslate nohighlight">\(p\)</span>-values helps us understand what happens if the null is true: we saw earlier that the <span class="math notranslate nohighlight">\(p\)</span>-value threshold we choose is the false positive rate for the test. But what about if the alternative is true? For example, we may be interested in constructing a test where we want the false negative rate to be less than <span class="math notranslate nohighlight">\(0.1\)</span>, or we may want to numerically quantify how much the false negative rate would increase if we reduced our false positive rate by <span class="math notranslate nohighlight">\(0.01\)</span>.</p>
+<p>Composite alternative hypotheses don’t support the kind of analysis we did above: we can only reason about the alternative case if we choose a simple alternative hypothesis. So, for the remainder of this section, we’ll only consider the case where <strong>both the null and alternative hypotheses are simple</strong>.</p>
+<p>While there are different ways to analyze the tradeoff, we’ll focus on two.</p>
+<ul class="simple">
+<li><p>The first is: <strong>how do we quantify the tradeoff between false positive rate and false negative rate?</strong> In other words, how do we measure the tradeoff between the row-wise rates for <span class="math notranslate nohighlight">\(R=0\)</span> and the row-wise rates for <span class="math notranslate nohighlight">\(R=1\)</span>? We’ll use a receiver operating characteristic curve, commonly known as an <strong>ROC curve</strong>, to answer this. For more, see the binary classification section.</p></li>
+<li><p>The second is: <strong>for a given false positive rate (i.e., significance threshold or <span class="math notranslate nohighlight">\(p\)</span>-value threshold), what test statistic should we choose to maximize the power, or true positive rate?</strong> In other words, if we fix a desired level of error for the case where <span class="math notranslate nohighlight">\(R=0\)</span>, how do we get the best possible performance when <span class="math notranslate nohighlight">\(R=1\)</span>? This is what we’ll turn our attention to now.</p></li>
+</ul>
 <section id="neyman-pearson">
 <h3>Neyman-Pearson<a class="headerlink" href="#neyman-pearson" title="Permalink to this heading">#</a></h3>
 <p><em>Coming soon</em></p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output text_html">
-        <iframe
-            width="400"
-            height="300"
-            src="https://www.youtube.com/embed/8vOzVcqQy5Y"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
-</div>
 </section>
 </section>
 </section>
@@ -919,7 +929,9 @@ f_P(p)
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-p-value-thresholds-for-e-commerce-website-optimization">Example: p-value thresholds for e-commerce website optimization</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-p-values-to-decisions">From p-values to decisions</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-and-composite-hypotheses">Simple and Composite Hypotheses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-p-values-to-decisions">From p-values to decisions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trading-off-between-different-row-wise-rates">Trading off between different row-wise rates</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-pearson">Neyman-Pearson</a></li>
 </ul>
 </li>

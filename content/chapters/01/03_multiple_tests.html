@@ -387,10 +387,17 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-approaches-to-multiple-testing">Different approaches to multiple testing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomness-fwer-fdr-and-fdp">Randomness, FWER, FDR, and FDP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomness-fwer-fdr-and-fdp">Randomness, FWER, FDR, and FDP</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#known-and-unknown">Known and Unknown</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonferroni-correction">Bonferroni correction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-benjamini-hochberg-procedure">The Benjamini-Hochberg Procedure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-visual-representation-of-naive-thresholding-bonferroni-and-benjamini-hochberg">A Visual Representation of Naive thresholding, Bonferroni, and Benjamini-Hochberg</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-fdr">Controlling FDR</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-control-fdr-instead-of-fwer">Why control FDR instead of FWER?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-benjamini-hochberg-procedure">The Benjamini-Hochberg Procedure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-visual-comparison-of-naive-thresholding-bonferroni-and-benjamini-hochberg">A Visual Comparison of Naive thresholding, Bonferroni, and Benjamini-Hochberg</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-benjamini-hochberg-control-fdr">Why does Benjamini-Hochberg Control FDR?</a></li>
 </ul>
 </li>
@@ -434,7 +441,23 @@ document.write(`
 </div>
 <section id="multiple-testing-and-the-replication-crisis">
 <h2>Multiple testing and the replication crisis<a class="headerlink" href="#multiple-testing-and-the-replication-crisis" title="Permalink to this heading">#</a></h2>
-<p><em>Coming soon</em></p>
+<p>So far, we’ve looked at false positive rate (FPR) and true positive rate (TPR, or power) when evaluating a single hypothesis test. We saw that when using the traditional null hypothesis significance testing (NHST) framework, we choose a p-value threshold, which is our FPR for each test. If we choose a simple alternative hypothesis, we can compute the TPR by looking at the probability of making a discovery under that alternative hypothesis (i.e., the probability that our test statistic is above our decision threshold under that simple alternative hypothesis).</p>
+<p>But in many cases, controlling the false positive rate might not be enough to give us the desired level of errors. To help illustrate this, we’ll consider three researchers conducting hypothetical studies of associations between how much margarine people eat and how many books they read in a year:</p>
+<ul class="simple">
+<li><p>Researcher Nat conducts one test, looking at a random sample of all individuals in the US.</p></li>
+<li><p>Researcher Stan conducts fifty tests, looking at fifty random samples, one from each state in the US.</p></li>
+<li><p>Researcher Colin conducts 3,244 tests, looking at 3,244 random samples, one from each county in the US.</p></li>
+</ul>
+<p>Suppose all three of them use a p-value threshold of 0.02: this means that they should have only a <span class="math notranslate nohighlight">\(2\%\)</span> chance of finding false positives. Also, since the premise of the study is somewhat absurd, we can safely assume that <em>in every test, the null hypothesis is true</em>: in other words, there is no correlation between margarine consumption and divorce rate. If that’s the case, what is the expected number of false positives each one will find?</p>
+<p>The number of FPs each researcher finds is a Bernoulli random variable with parameter <span class="math notranslate nohighlight">\(p=0.02\)</span> and <span class="math notranslate nohighlight">\(n \in \{1, 50, 3244\}\)</span> depending on the researcher. So, the expected number of false positives is <span class="math notranslate nohighlight">\(np\)</span>:</p>
+<ul class="simple">
+<li><p>Nat’s expected number of false positives is <span class="math notranslate nohighlight">\(0.05 \times 1 = 0.05\)</span>: this is very close to 0.</p></li>
+<li><p>Stan’s expected number of false positives is <span class="math notranslate nohighlight">\(0.05 \times 50 = 2.5\)</span>: in other words, even though the null hypothesis is true, Stan should expect to have 2-3 states come up as false positives.</p></li>
+<li><p>Colin’s expected number of false positives is <span class="math notranslate nohighlight">\(0.05 \times 3244 = 162.2\)</span>: Colin should expect to have, on average, 162 counties come up as false positives.</p></li>
+</ul>
+<p>These false positives could have serious impacts! Stan’s study, if covered poorly in the news, could result in dramatic headlines like “California and Idaho show strong link between margarine consumption and reading: should elementary schools serve more margarine to improve reading rates?” While this example seems somewhat silly since it’s obvious that the associations are spurious, this happens often when researchers use poor statistical practices.</p>
+<p>A <span class="math notranslate nohighlight">\(p\)</span>-value threshold of <span class="math notranslate nohighlight">\(0.05\)</span> means that we should expect that when the null hypothesis is true, <span class="math notranslate nohighlight">\(5\%\)</span> of the time, we’ll incorrectly make a discovery. This adds up when doing lots of tests.</p>
+<p>This issue can often come up when researchers are deciding which associations to test. For example, a researcher might be interested in the effect of Vitamin D supplements on overall health. If an initial analysis of the data returns no results, the researcher might try to see if the effects are different for people of different genders. If that turns up no results, the researcher might think that Vitamin D absorption from the sun depends on melanin in skin, so they might look at the effect for all six different <a class="reference external" href="https://en.wikipedia.org/wiki/Fitzpatrick_scale">Fitzpatrick skin types</a>. At this point, in what might be a fairly innocuous sequence of tests, the researcher has already conducted 9 different tests, and the probability of making at least one false positive is<span class="math notranslate nohighlight">\(~1 - \left(1-0.05\right)^9 \approx 0.37\)</span>.</p>
 <section id="different-approaches-to-multiple-testing">
 <h3>Different approaches to multiple testing<a class="headerlink" href="#different-approaches-to-multiple-testing" title="Permalink to this heading">#</a></h3>
 <p>We’ve seen that when we conduct multiple hypothesis tests at a fixed <span class="math notranslate nohighlight">\(p\)</span>-value threshold, we can control the FPR of each test, but we don’t necessarily control the rate of making errors across multiple tests. In order to address this, we’ll define error rates involving all the tests we conduct, and find algorithms that control those error rates. We’ll let <span class="math notranslate nohighlight">\(m\)</span> be the number of hypothesis tests, and define two error rates:</p>
@@ -473,7 +496,19 @@ document.write(`
 </section>
 <section id="randomness-fwer-fdr-and-fdp">
 <h2>Randomness, FWER, FDR, and FDP<a class="headerlink" href="#randomness-fwer-fdr-and-fdp" title="Permalink to this heading">#</a></h2>
-<p><em>Coming soon</em></p>
+<p>Up until now, we’ve focused primarily on the false discovery <em>proportion</em> (FDP). From now on, we’ll look more at the false discovery <em>rate</em> (FDR), so it’s important to understand the distinction between the two. Throughout this section, we’ll take a frequentist approach, and assume that our data are random (and because our decisions are based on our data, they’re random too), and that reality is fixed and unknown.</p>
+<ul class="simple">
+<li><p>The FDP is the value that we obtain for any particular dataset: we obtain data, make a series of decisions, and then the false discovery proportion is based on those particular decisions.</p></li>
+<li><p>The FDR is the expectation of the FDP, where the expectation is taken over the randomness in the data. In other words, the FDR is the average FDP, averaged across all possible datasets (and weighted by how likely each one is).</p></li>
+<li><p>Similarly, for any particular dataset, we can define the event “at least one false positive happened”. This event either occurs or it doesn’t for any particular series of decisions. The family-wise error rate (FWER) is the probability of this event occurring for any dataset.</p></li>
+</ul>
+<p>In other words, the false discovery <strong>proportion</strong> is based on any particular dataset, while the false discovery <strong>rate</strong> is the average FDP across all possible datasets.</p>
+<section id="known-and-unknown">
+<h3>Known and Unknown<a class="headerlink" href="#known-and-unknown" title="Permalink to this heading">#</a></h3>
+<p>Throughout this section, we’ll discuss FDP, FDR, and FWER as metrics to help us evaluate a decision-making process. But recall that in reality, we only ever observe the data and the decisions we make based on the data: reality is unknown to us. That means that in many real-world scenarios, we can’t actually compute the FDP for any particular series of decisions, because it requires us to know when <span class="math notranslate nohighlight">\(R=0\)</span> and when <span class="math notranslate nohighlight">\(R=1\)</span>.</p>
+<p>So if we can’t actually compute the FDP, why are we analyzing it?</p>
+<p>The key is that the FDR (average FDP) provides a way of evaluating an algorithm. We’ll discuss several procedures, and show that on average, they perform well: in other words, if we look at the performance of these procedures averaged over the randomness in the data, we can mathematically show that the FDR or FWER will be below a certain level. For example, we’ll look at a procedure called Bonferroni correction and show that if we use it, our FWER, or probability of making a false positive, will be less than a particular threshold that we get to specify.</p>
+<p>This process, of first defining algorithms that operate on the observed data to make decisions, then theoretically evaluating those algorithms using metrics that depend on unknown variables, is something we’ll see over and over throughout this course.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
@@ -488,16 +523,18 @@ document.write(`
         </div></div>
 </div>
 </section>
+</section>
 <section id="bonferroni-correction">
 <h2>Bonferroni correction<a class="headerlink" href="#bonferroni-correction" title="Permalink to this heading">#</a></h2>
-<p>Bonferroni correction is very simple: it says that if we want to guarantee that our FWER for <span class="math notranslate nohighlight">\(m\)</span> tests will be less than or equal to some value we choose (we’ll call it <span class="math notranslate nohighlight">\(\alpha\)</span>), then we just need to use a <span class="math notranslate nohighlight">\(p\)</span>-value threshold of <span class="math notranslate nohighlight">\(\alpha/m\)</span> to make a decision for each test. For example, if we want to guarantee an FWER of <span class="math notranslate nohighlight">\(0.01\)</span> for <span class="math notranslate nohighlight">\(500\)</span> tests, we should use a <span class="math notranslate nohighlight">\(p\)</span>-value threshold for each test of <span class="math notranslate nohighlight">\(0.01 / 5000 = 2 \times 10^{-6}\)</span>.</p>
+<p>Bonferroni correction is a technique for controlling the FWER. In this context, when we use the term “<strong>controlling</strong> the FWER at level <span class="math notranslate nohighlight">\(\alpha\)</span>”, this just means that we want the FWER to be less than or equal to some value <span class="math notranslate nohighlight">\(\alpha\)</span> that we choose.</p>
+<p>The procedure itself is very simple: it says that if we want to guarantee that our FWER for <span class="math notranslate nohighlight">\(m\)</span> tests will be less than or equal to <span class="math notranslate nohighlight">\(\alpha\)</span>, then we just need to use a <span class="math notranslate nohighlight">\(p\)</span>-value threshold of <span class="math notranslate nohighlight">\(\alpha/m\)</span> to make a decision for each test. For example, if we want to guarantee an FWER of <span class="math notranslate nohighlight">\(0.01\)</span> for <span class="math notranslate nohighlight">\(500\)</span> tests, we should use a <span class="math notranslate nohighlight">\(p\)</span>-value threshold for each test of <span class="math notranslate nohighlight">\(0.01 / 5000 = 2 \times 10^{-6}\)</span>.</p>
 <p>Let’s show why this formula works. We’ll start by establishing some facts and definitions that we need.</p>
 <p>To start, we’ll need to use the <a class="reference external" href="https://en.wikipedia.org/wiki/Boole%27s_inequality">union bound</a>, which states that for events <span class="math notranslate nohighlight">\(A_1, \ldots, A_m\)</span>, that
 $<span class="math notranslate nohighlight">\(
 P\left(\bigcup_{i=1}^m A_i\right) \leq \sum_{i=1}^m P(A_i).
 \)</span>$</p>
 <p>Informally, this says that if we add up the independent probabilities of the events occuring, the result will always be greater than or equal to the probability of the union of those events. Intuitively, this is true because when computing the probability of the union, we have to effectively subtract off the overlap between probabilities.</p>
-<p>We’ll also define the indicator variables <span class="math notranslate nohighlight">\(T_1, \ldots, T_m\)</span>, where <span class="math notranslate nohighlight">\(T_i\)</span> is the event that test <span class="math notranslate nohighlight">\(i\)</span> results in a false positive. The family-wise error rate is the probability that any one of the tests is a false positive: in other words,  <span class="math notranslate nohighlight">\(FWER = P(T_1 \cup T_2 \cup T_3 \cdots \cup T_m)\)</span>. We know from the previous section that if we use the same <span class="math notranslate nohighlight">\(p\)</span>-value threshold <span class="math notranslate nohighlight">\(\gamma\)</span> for each test, then <span class="math notranslate nohighlight">\(P(T_i) = \gamma\)</span>.</p>
+<p>To use the union bound, we’ll define the indicator variables <span class="math notranslate nohighlight">\(T_1, \ldots, T_m\)</span>, where <span class="math notranslate nohighlight">\(T_i\)</span> is the event that test <span class="math notranslate nohighlight">\(i\)</span> results in a false positive. The family-wise error rate is the probability that any one of the tests is a false positive: in other words,  <span class="math notranslate nohighlight">\(FWER = P(T_1 \cup T_2 \cup T_3 \cdots \cup T_m)\)</span>. We know from the previous section that if we use the same <span class="math notranslate nohighlight">\(p\)</span>-value threshold <span class="math notranslate nohighlight">\(\gamma\)</span> for each test, then <span class="math notranslate nohighlight">\(P(T_i) = \gamma\)</span>.</p>
 <p>Putting it all together, we have:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -523,13 +560,20 @@ FWER
         </div></div>
 </div>
 </section>
+<section id="controlling-fdr">
+<h2>Controlling FDR<a class="headerlink" href="#controlling-fdr" title="Permalink to this heading">#</a></h2>
+<section id="why-control-fdr-instead-of-fwer">
+<h3>Why control FDR instead of FWER?<a class="headerlink" href="#why-control-fdr-instead-of-fwer" title="Permalink to this heading">#</a></h3>
+<p>Suppose we conduct 1,000,000 tests, and we want to control the FWER at level <span class="math notranslate nohighlight">\(0.01\)</span>. If we use the Bonferroni procedure, our <span class="math notranslate nohighlight">\(p\)</span>-value threshold will be <span class="math notranslate nohighlight">\(10^{-8}\)</span>: we will only make discoveries if the <span class="math notranslate nohighlight">\(p\)</span>-values are incredibly small! This is because FWER is a very strict criterion. Controlling FWER means we want the probability of making <strong>any</strong> false positives in <span class="math notranslate nohighlight">\(m\)</span> tests to be less than or equal to <span class="math notranslate nohighlight">\(\alpha\)</span>: this requirement gets harder and harder to satisfy the larger <span class="math notranslate nohighlight">\(m\)</span> gets. This is why the <span class="math notranslate nohighlight">\(p\)</span>-value threshold from Bonferroni correction gets smaller as <span class="math notranslate nohighlight">\(m\)</span> increases.</p>
+<p>Controlling FDR, on the other hand, is much more forgiving of a small number of errors. In our example above, controlling FDR at level <span class="math notranslate nohighlight">\(0.01\)</span> means that out of the discoveries we make, we want <span class="math notranslate nohighlight">\(1\%\)</span> or fewer of them to be wrong. This is still a much stricter criterion than just controlling FPR as we saw with naive thresholding, but it’s easier to satisfy as <span class="math notranslate nohighlight">\(m\)</span> grows without imposing such a drastically low <span class="math notranslate nohighlight">\(p\)</span>-value threshold. Next, we’ll see an algorithm that strikes this middle ground.</p>
+</section>
 <section id="the-benjamini-hochberg-procedure">
-<h2>The Benjamini-Hochberg Procedure<a class="headerlink" href="#the-benjamini-hochberg-procedure" title="Permalink to this heading">#</a></h2>
-<p>The Benjamini-Hochberg (often abbreviated to B-H) procedure is slightly more complicated, but it also uses the same <span class="math notranslate nohighlight">\(p\)</span>-value threshold for all tests. The key is that we use the <span class="math notranslate nohighlight">\(p\)</span>-values themselves to determine the threshold. Here’s how it works, for a desired FDR <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
+<h3>The Benjamini-Hochberg Procedure<a class="headerlink" href="#the-benjamini-hochberg-procedure" title="Permalink to this heading">#</a></h3>
+<p>The Benjamini-Hochberg (often abbreviated to B-H) procedure is slightly more complicated than Bonferroni correction, but it also uses the same <span class="math notranslate nohighlight">\(p\)</span>-value threshold for all tests. The key is that we use the <span class="math notranslate nohighlight">\(p\)</span>-values themselves to determine the threshold. Here’s how it works, for a desired FDR <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
 <ul class="simple">
 <li><p>First, sort the <span class="math notranslate nohighlight">\(p\)</span>-values, and index them by <span class="math notranslate nohighlight">\(k\)</span> (i.e., the first one corresponds to <span class="math notranslate nohighlight">\(k=1\)</span>, the second one corresponds to <span class="math notranslate nohighlight">\(k=2\)</span>, and so on, until the last one corresponds to <span class="math notranslate nohighlight">\(k=m\)</span>)</p></li>
-<li><p>For each sorted <span class="math notranslate nohighlight">\(p\)</span>-value, compare it to the value <span class="math notranslate nohighlight">\(k\alpha/m\)</span> (i.e., the first one gets compared to <span class="math notranslate nohighlight">\(\alpha/m\)</span>, the second one gets compared to <span class="math notranslate nohighlight">\(2\alpha/m\)</span>, and so on, until the last one gets compared to <span class="math notranslate nohighlight">\(\alpha\)</span>)</p></li>
-<li><p>Find the largest sorted <span class="math notranslate nohighlight">\(p\)</span>-value that’s still below the comparison value</p></li>
+<li><p>For each sorted <span class="math notranslate nohighlight">\(p\)</span>-value, compare it to the value <span class="math notranslate nohighlight">\(\frac{k\alpha}{m}\)</span> (i.e., the smallest p-value gets compared to <span class="math notranslate nohighlight">\(\alpha/m\)</span>, the second-smallest gets compared to <span class="math notranslate nohighlight">\(2\alpha/m\)</span>, and so on, until the largest one gets compared to <span class="math notranslate nohighlight">\(\alpha\)</span>)</p></li>
+<li><p>Find the largest sorted <span class="math notranslate nohighlight">\(p\)</span>-value that’s still below its comparison value</p></li>
 <li><p>Use that <span class="math notranslate nohighlight">\(p\)</span>-value as the threshold</p></li>
 </ul>
 <div class="cell tag_remove-input docutils container">
@@ -546,8 +590,9 @@ FWER
         </div></div>
 </div>
 </section>
-<section id="a-visual-representation-of-naive-thresholding-bonferroni-and-benjamini-hochberg">
-<h2>A Visual Representation of Naive thresholding, Bonferroni, and Benjamini-Hochberg<a class="headerlink" href="#a-visual-representation-of-naive-thresholding-bonferroni-and-benjamini-hochberg" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="a-visual-comparison-of-naive-thresholding-bonferroni-and-benjamini-hochberg">
+<h2>A Visual Comparison of Naive thresholding, Bonferroni, and Benjamini-Hochberg<a class="headerlink" href="#a-visual-comparison-of-naive-thresholding-bonferroni-and-benjamini-hochberg" title="Permalink to this heading">#</a></h2>
 <p>Consider the <span class="math notranslate nohighlight">\(p\)</span>-values we looked at in the last section. We’ll add a column <code class="docutils literal notranslate"><span class="pre">k</span></code> that provides the index after being sorted:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -660,53 +705,84 @@ FWER
 <p>We can visualize the <span class="math notranslate nohighlight">\(p\)</span>-values in sorted order:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">p_sorted</span><span class="p">[</span><span class="s1">&#39;pvalue&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">p_sorted</span><span class="p">[</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">]);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">p_sorted</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;pvalue&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/5c0ea4cc8300689f4135cce300cf1dedd10ad76fcb046b70907b90955c091071.png" src="../../../_images/5c0ea4cc8300689f4135cce300cf1dedd10ad76fcb046b70907b90955c091071.png" />
+<img alt="../../../_images/3776b058df09b2bf8cb0e198461329b426dbb8cc6bc1e60607848d206d92a7b9.png" src="../../../_images/3776b058df09b2bf8cb0e198461329b426dbb8cc6bc1e60607848d206d92a7b9.png" />
 </div>
 </div>
 <p>Here, the <span class="math notranslate nohighlight">\(x\)</span>-axis is <span class="math notranslate nohighlight">\(k\)</span>, the index, and the <span class="math notranslate nohighlight">\(y\)</span>-axis represents the <span class="math notranslate nohighlight">\(p\)</span>-value. We can visualize the results of two techniques:</p>
 <ul class="simple">
 <li><p>If we use a naive <span class="math notranslate nohighlight">\(p\)</span>-value threshold of 0.05 for all tests, we will obtain an FPR of 0.05. This threshold is the black line below.</p></li>
-<li><p>If we use Bonferroni correction and want a FWER of 0.05 (i.e., the probability of making any false positives at all is 0.05), then we should use a <span class="math notranslate nohighlight">\(p\)</span>-value threshold of <span class="math notranslate nohighlight">\(\frac{0.05}{100} = 0.0005\)</span>. This threshold is the red line below:</p></li>
+<li><p>If we use Bonferroni correction and want a FWER of 0.05 (i.e., the probability of making any false positives at all is 0.05), then we should use a <span class="math notranslate nohighlight">\(p\)</span>-value threshold of <span class="math notranslate nohighlight">\(\frac{0.05}{100} = 0.0005\)</span>. This threshold is the red dashed line below.</p></li>
 </ul>
+<p>We can see that by using the more conservative Bonferroni threshold (in red), we leave</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">desired_fwer</span> <span class="o">=</span> <span class="mf">0.05</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">p_sorted</span><span class="p">[</span><span class="s1">&#39;pvalue&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">p_sorted</span><span class="p">[</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;No correction&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">desired_fwer</span> <span class="o">/</span> <span class="n">m</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bonferroni&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Naive thresholding&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">desired_fwer</span> <span class="o">/</span> <span class="n">m</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bonferroni&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/7c4446dc4b8470d9ad9b84966fcfe38d24835aff11b9207a2d2496060d4d48af.png" src="../../../_images/7c4446dc4b8470d9ad9b84966fcfe38d24835aff11b9207a2d2496060d4d48af.png" />
+<img alt="../../../_images/3dccb5a54a696198330cc9c41f8d1784a3a1a96bcf70eb0e7021e281c7bb9d0f.png" src="../../../_images/3dccb5a54a696198330cc9c41f8d1784a3a1a96bcf70eb0e7021e281c7bb9d0f.png" />
 </div>
 </div>
-<p>In this visualization, how does the Benjamini-Hochberg procedure work? We compare each <span class="math notranslate nohighlight">\(p\)</span>-value to the comparison value <span class="math notranslate nohighlight">\(k\alpha/m\)</span>, which in this visualization is a line. In order to better see what’s going on, we’ll also zoom in on a narrower range of <span class="math notranslate nohighlight">\(p\)</span>-values:</p>
+<p>In this visualization, how does the Benjamini-Hochberg procedure work? We compare each <span class="math notranslate nohighlight">\(p\)</span>-value to the comparison value <span class="math notranslate nohighlight">\(\frac{k\alpha}{m}\)</span>, which in this visualization is a diagonal line. In order to better see what’s going on, we’ll also zoom in on a narrower range of <span class="math notranslate nohighlight">\(p\)</span>-values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">desired_fdr</span> <span class="o">=</span> <span class="mf">0.05</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">p_sorted</span><span class="p">[</span><span class="s1">&#39;pvalue&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">p_sorted</span><span class="p">[</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="o">/</span><span class="n">m</span> <span class="o">*</span> <span class="n">desired_fdr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;B-H guide&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cyan&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0005</span><span class="p">,</span> <span class="mf">0.0405</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="o">/</span><span class="n">m</span> <span class="o">*</span> <span class="n">desired_fdr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;B-H guide&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0005</span><span class="p">,</span> <span class="mf">0.0305</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/5b12182310c5fca932f3fa3dc661a8935a0905a755bc757a112f021c65990539.png" src="../../../_images/5b12182310c5fca932f3fa3dc661a8935a0905a755bc757a112f021c65990539.png" />
+<img alt="../../../_images/164b3bb7fbb683b6e8afd498f487f7a6ae394940e9323fc1caf7130a4d8cd267.png" src="../../../_images/164b3bb7fbb683b6e8afd498f487f7a6ae394940e9323fc1caf7130a4d8cd267.png" />
 </div>
 </div>
-<p>The Bonferroni procedure says to take the largest <span class="math notranslate nohighlight">\(p\)</span>-value that’s below the comparison value: in this case, that’s the point at index 16. This becomes our <span class="math notranslate nohighlight">\(p\)</span>-value threshold, so we choose to reject the null hypothesis for the first 16 <span class="math notranslate nohighlight">\(p\)</span>-values (after being sorted).</p>
+<p>The Benjamini-Hochberg procedure says to take the largest <span class="math notranslate nohighlight">\(p\)</span>-value that’s below the comparison value <span class="math notranslate nohighlight">\(\frac{k\alpha}{m}\)</span>: in this case, that’s the point at index 16. This becomes our <span class="math notranslate nohighlight">\(p\)</span>-value threshold, so we choose to reject the null hypothesis for the first 16 <span class="math notranslate nohighlight">\(p\)</span>-values (after being sorted). The graph below shows all three thresholds:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">desired_fdr</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">desired_fwer</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="c1"># From visually inspecting the graph above, we saw that the 16th p-value was</span>
+<span class="c1"># the last one below the reference value (line)</span>
+<span class="n">bh_threshold</span> <span class="o">=</span> <span class="n">p_sorted</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">p_sorted</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span>
+    <span class="n">bh_threshold</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;B-H threshold (FDR=</span><span class="si">{</span><span class="n">desired_fdr</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span>
+    <span class="mf">0.05</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Naive threshold (FPR=0.05)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span>
+    <span class="n">desired_fwer</span> <span class="o">/</span> <span class="n">m</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Bonferroni (FWER=</span><span class="si">{</span><span class="n">desired_fwer</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span>
+<span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">p_sorted</span><span class="p">[</span><span class="s1">&#39;pvalue&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">p_sorted</span><span class="p">[</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="o">/</span><span class="n">m</span> <span class="o">*</span> <span class="n">desired_fdr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;B-H guide&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">42.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/bcafb757af39c8491fc37aa5d4605097df609f3dffbad78462a9c1fa00dcf163.png" src="../../../_images/bcafb757af39c8491fc37aa5d4605097df609f3dffbad78462a9c1fa00dcf163.png" />
+</div>
+</div>
 <section id="why-does-benjamini-hochberg-control-fdr">
 <h3>Why does Benjamini-Hochberg Control FDR?<a class="headerlink" href="#why-does-benjamini-hochberg-control-fdr" title="Permalink to this heading">#</a></h3>
-<p><em>Coming soon</em></p>
+<p><em>Text coming soon: see video</em></p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
@@ -724,7 +800,20 @@ FWER
 </section>
 <section id="comparing-and-contrasting-fwer-and-fdr">
 <h2>Comparing and Contrasting FWER and FDR<a class="headerlink" href="#comparing-and-contrasting-fwer-and-fdr" title="Permalink to this heading">#</a></h2>
-<p><em>Coming soon</em></p>
+<p>Now that we’ve seen how we might control FWER and FDR, we’ll build a better understanding of when each one might be better suited for a particular problem. Recall the definitions:</p>
+<ul class="simple">
+<li><p>Family-wise error rate (FWER) is the probability that any of the <span class="math notranslate nohighlight">\(m\)</span> tests is a false positive.</p></li>
+<li><p>False discovery rate (FDR) is the expected FDP, or equivalently, the expected fraction of discoveries that are incorrect.</p></li>
+</ul>
+<p>Suppose we conduct 1,000,000 tests (<span class="math notranslate nohighlight">\(m=1000000\)</span>).</p>
+<p>If we want a FWER of <span class="math notranslate nohighlight">\(0.05\)</span>, this means that we want the probability of any one of the 1,000,000 tests being a false positive to be 0.05 or less. In order to control this probability, we’ll need to be very conservative: after all, even a single false positive will mean that we’ve failed. In other words, controlling FWER requires us to be very conservative, and use very small <span class="math notranslate nohighlight">\(p\)</span>-value thresholds. This typically leads to very low power, or true positive rate (TPR), because our <span class="math notranslate nohighlight">\(p\)</span>-value threshold is so low that we miss many true positives.</p>
+<p>On the other hand, if we want a FDR of <span class="math notranslate nohighlight">\(0.05\)</span>, this just means that out of the discoveries we make in the 1,000,000 tests, on average, we want <span class="math notranslate nohighlight">\(95\%\)</span> or more of them to be correct. We can achieve this with a much less conservative threshold. In other words, when we control FDR, we accept some more false positives, and in return we can achieve a higher true positive rate (i.e., do better in the case where <span class="math notranslate nohighlight">\(R=1\)</span>).</p>
+<p>How do these interpretations translate into choosing a rate to control in real-world applications? We’ll look at two examples to help illustrate the difference.</p>
+<ul class="simple">
+<li><p>Consider a medical test for a rare condition where the only treatment is a dangerous surgery. In this case, a false positive could subject a patient to unnecessarily undergo the procedure, putting the patient’s life needlessly at risk and potentially inducing medical trauma. A false negative, on the other hand, while still potentially harmful due to lack of treatment, may not be as bad. In this case, or any similar case where a false positive is much worse than a false negative, controlling FWER is likely a better choice, since controlling FWER favors false negatives over false positives.</p></li>
+<li><p>Consider an online retailer who is interested in conducting many A/B tests to measure whether various website changes improve the chances that shoppers will buy products. In this case, the harm of a false positive is not particularly severe, and we can likely tolerate that <span class="math notranslate nohighlight">\(5\%\)</span> of our discoveries could be wrong, especially if it means a better chance of finding changes that increase product purchases.</p></li>
+</ul>
+<p>Note that both of these examples are somewhat ambiguous! In the first example, the cost of a false negative depends strongly on how much the treatment improves the prognosis for patients with the condition, whether follow-on tests exist, and so on. Similarly, in the second example, if the website changes have auxiliary costs (time and money spent by developers to make the changes, changes in user opinion about the website based on the changes, etc.), then this could affect whether we might prefer one over the other.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
@@ -808,10 +897,17 @@ FWER
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-approaches-to-multiple-testing">Different approaches to multiple testing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomness-fwer-fdr-and-fdp">Randomness, FWER, FDR, and FDP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomness-fwer-fdr-and-fdp">Randomness, FWER, FDR, and FDP</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#known-and-unknown">Known and Unknown</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonferroni-correction">Bonferroni correction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-benjamini-hochberg-procedure">The Benjamini-Hochberg Procedure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-visual-representation-of-naive-thresholding-bonferroni-and-benjamini-hochberg">A Visual Representation of Naive thresholding, Bonferroni, and Benjamini-Hochberg</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-fdr">Controlling FDR</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-control-fdr-instead-of-fwer">Why control FDR instead of FWER?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-benjamini-hochberg-procedure">The Benjamini-Hochberg Procedure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-visual-comparison-of-naive-thresholding-bonferroni-and-benjamini-hochberg">A Visual Comparison of Naive thresholding, Bonferroni, and Benjamini-Hochberg</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-benjamini-hochberg-control-fdr">Why does Benjamini-Hochberg Control FDR?</a></li>
 </ul>
 </li>

@@ -522,7 +522,7 @@ If both kinds of error (false positive and false negative) are equally bad, we c
         &amp;= E_{x|\theta}\left[\ell(\delta(x), \theta)\right] \\
         &amp;= \begin{cases} 
                 \displaystyle \sum_x \ell(\delta(x), \theta) p(x|\theta) &amp; \text{if $x$ discrete} \\
-                \displaystyle \int \ell(\delta(x), \theta) p(x|\theta) d\theta &amp; \text{if $x$ continuous} 
+                \displaystyle \int \ell(\delta(x), \theta) p(x|\theta) dx &amp; \text{if $x$ continuous} 
            \end{cases}
 \end{align*}
 \end{split}\]</div>
