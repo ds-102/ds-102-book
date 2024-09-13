@@ -618,10 +618,10 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f5e5ed71460&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f94e3661580&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/1fcc991c2f789c18addad28d027f5084b89ba0a27944743d3704233aa22d9142.png" src="../../../_images/1fcc991c2f789c18addad28d027f5084b89ba0a27944743d3704233aa22d9142.png" />
+<img alt="../../../_images/1419b7438ffbb8b8249b8aca9afb8a44c3b99c27918ef5bd87a9ddc284a77c10.png" src="../../../_images/1419b7438ffbb8b8249b8aca9afb8a44c3b99c27918ef5bd87a9ddc284a77c10.png" />
 </div>
 </div>
 <p>We can see that the samples are a good representation for the distribution, as long as we have enough. We can use the mean of the samples to approximate the mean of the distribution:</p>
@@ -636,7 +636,7 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42857142857142855 0.43056319316592506
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42857142857142855 0.4223991702497055
 </pre></div>
 </div>
 </div>
@@ -683,10 +683,10 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of x1 (estimated from samples): 0.241
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of x1 (estimated from samples): 0.270
 </pre></div>
 </div>
-<img alt="../../../_images/a89a3b56d8d157bfc454c14339300cdb6f1740c510815ce6248e65dbea36fe46.png" src="../../../_images/a89a3b56d8d157bfc454c14339300cdb6f1740c510815ce6248e65dbea36fe46.png" />
+<img alt="../../../_images/8e0ac998cf4ebb20fb0ff9b710b8f19a9ceb763d788d0ed171c3381c70b12eb0.png" src="../../../_images/8e0ac998cf4ebb20fb0ff9b710b8f19a9ceb763d788d0ed171c3381c70b12eb0.png" />
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
@@ -782,13 +782,13 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max accept prob: 0.638
-Accepted 36410 out of 100000 proposals
+Accepted 36134 out of 100000 proposals
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f5e59abefd0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f94e3534ee0&gt;]
 </pre></div>
 </div>
-<img alt="../../../_images/b71542dfb83c3b5e51af92fbb4ec249edc15f048a7aadbae8a583c7eb4ac6793.png" src="../../../_images/b71542dfb83c3b5e51af92fbb4ec249edc15f048a7aadbae8a583c7eb4ac6793.png" />
+<img alt="../../../_images/47e50e4be68993ee7268a95cbd9ff2bb4f98d36b3397cffebe05b4c0d2c8f99d.png" src="../../../_images/47e50e4be68993ee7268a95cbd9ff2bb4f98d36b3397cffebe05b4c0d2c8f99d.png" />
 </div>
 </div>
 <p>As a final example, what happens if we want to sample across the entire real line? For instance, suppose our density is <span class="math notranslate nohighlight">\(p(\theta|x) \propto \exp(-\theta) |\sin(2\theta)|\)</span> for <span class="math notranslate nohighlight">\(\theta \in [0, \infty)\)</span>. We certainly can’t use a uniform proposal distribution, but using the exponential distribution works just fine.</p>
@@ -826,10 +826,10 @@ Accepted 36410 out of 100000 proposals
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accepted 63 out of 100 proposals
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accepted 61 out of 100 proposals
 </pre></div>
 </div>
-<img alt="../../../_images/0325d4e73e13533fc33d2579df5682ab4f0bc649eee0d1f378d32261c93c36ff.png" src="../../../_images/0325d4e73e13533fc33d2579df5682ab4f0bc649eee0d1f378d32261c93c36ff.png" />
+<img alt="../../../_images/38097458015c0ca5376f38a67d4e6a035824d33c8f4d209d5752e580ca8d56bf.png" src="../../../_images/38097458015c0ca5376f38a67d4e6a035824d33c8f4d209d5752e580ca8d56bf.png" />
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
