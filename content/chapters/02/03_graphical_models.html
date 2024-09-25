@@ -474,12 +474,7 @@ y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots, C\}
 <section id="example-graphical-model-for-exoplanet-model">
 <h3>Example: Graphical Model for Exoplanet Model<a class="headerlink" href="#example-graphical-model-for-exoplanet-model" title="Permalink to this heading">#</a></h3>
 <p><em>Text coming soon: see video</em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">&#39;e6CoEsLiMXc&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
@@ -503,12 +498,7 @@ y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots, C\}
 p(a, b, \theta_1, \ldots, \theta_C, y_1, \ldots, y_C) = p(a)p(b) \prod_{i=1}^C p(\theta_i\mid a, b) p(y_i\mid\theta_i)
 \]</div>
 <p>Factoring the distribution this way helps us understand and mathematically demonstrate the independence and dependence relationships in our graphical models, as we’ll see shortly.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">&#39;TzY3-EYwipk&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
@@ -538,12 +528,7 @@ p(a, b, \theta_1, \ldots, \theta_C, y_1, \ldots, y_C) = p(a)p(b) \prod_{i=1}^C p
 <li><p><span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are conditionally independent given <span class="math notranslate nohighlight">\(\mu\)</span>: <span class="math notranslate nohighlight">\(x_1 \perp\!\!\!\perp x_2 \mid \mu\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are not unconditionally independent: it is not true that <span class="math notranslate nohighlight">\(x_1 \perp\!\!\!\perp x_2\)</span>.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">&#39;WhqyUmqkSE8&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
@@ -601,12 +586,7 @@ p(x_1, x_2 \mid \mu)
 <p>Now, suppose I wake up one morning with a stuffy nose (i.e., <span class="math notranslate nohighlight">\(y=1\)</span>), and I’m trying to determine whether I’m sick or have allergies. I call my friend who usually has allergies around the same time of the year as me, and my friend tells me that they are having severe allergies right now. As soon as I hear this information, I’m a lot more certain that <span class="math notranslate nohighlight">\(z=1\)</span>. But, even though my friend didn’t tell me anything about whether or not I’m sick, my belief that I’m sick drops significantly: my symptoms have been <strong>explained away</strong> by the explanation that I probably have allergies. In other words, conditioned on a value of <span class="math notranslate nohighlight">\(y\)</span>, knowing something about <span class="math notranslate nohighlight">\(z\)</span> gives me information about the distribution of <span class="math notranslate nohighlight">\(x\)</span>. This is precisely the definition of conditional dependence.</p>
 <p><em><strong>Exercise</strong>: mathematically prove the results above.</em></p>
 <p>These results can be formalized and generalized in the <strong>d-separation</strong> or <strong>Bayes’ ball</strong> algorithm. While this algorithm is beyond the scope of this textbook, we’ll look at a variant of it in a few chapters when we talk about causality.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">&#39;lpujKeK90RM&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
