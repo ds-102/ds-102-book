@@ -479,13 +479,16 @@ P(\theta &gt; 0.7 | x)
 </section>
 <section id="map-estimation">
 <h3>MAP Estimation<a class="headerlink" href="#map-estimation" title="Permalink to this heading">#</a></h3>
-<p>Suppose we want to compute the MAP estimate:
+<p>Suppose we want to compute the MAP estimate:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{align}
-\hat{\theta}_{MAP}
-&amp;= \underset{\theta}{\operatorname{argmax}} p(\theta|x) \
-&amp;= \underset{\theta}{\operatorname{argmax}} \frac{p(x|\theta)p(\theta)}{p(x)} \
-&amp;= \underset{\theta}{\operatorname{argmax}} p(x|\theta)p(\theta) \
-\end{align}</p>
+\hat{\theta}_{MAP} 
+&amp;= \underset{\theta}{\operatorname{argmax}} p(\theta|x) \\
+&amp;= \underset{\theta}{\operatorname{argmax}} \frac{p(x|\theta)p(\theta)}{p(x)} \\
+&amp;= \underset{\theta}{\operatorname{argmax}} p(x|\theta)p(\theta) \\
+\end{align}
+\end{split}\]</div>
 <p>In the last step, we used the fact that p(x) doesn’t depend on <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 <p>If <span class="math notranslate nohighlight">\(\theta\)</span> is low-dimensional and continuous, we can easily optimize this either analytically or sometimes numerically. If <span class="math notranslate nohighlight">\(\theta\)</span> is discrete and doesn’t take on too many different values, we can search over all possible values. However, if <span class="math notranslate nohighlight">\(\theta\)</span> is discrete and takes on an intractably large number of possible values, then we’d need to search over all of them, which would be impossible.</p>
 <p>To summarize: for low-dimensional continuous variables, or discrete random variables with a low number of possible values, we can compute the MAP estimate without needing to know the exact posterior. For higher-dimensional random variables and/or discrete random variables with many possible values, this won’t work.</p>
@@ -493,13 +496,16 @@ P(\theta &gt; 0.7 | x)
 <section id="lmse-estimation">
 <h3>LMSE Estimation<a class="headerlink" href="#lmse-estimation" title="Permalink to this heading">#</a></h3>
 <p>Suppose we want to compute the LMSE estimate. Recall the definition of conditional expectation (see Data 140 textbook, <a class="reference external" href="http://prob140.org/textbook/content/Chapter_09/02_Expectation_by_Conditioning.html">Chapter 9</a> and <a class="reference external" href="http://prob140.org/textbook/content/Chapter_15/03_Expectation.html">Chapter 15</a>):</p>
-<p>\begin{align}
-\hat{\theta}<em>{LMSE}
-&amp;= E</em>{\theta|x}[\theta] \
-&amp;= \int \theta \cdot p(\theta|x) , d\theta \
-&amp;= \int \theta \cdot \frac{p(x|\theta)p(\theta)}{p(x)} , d\theta \
-&amp;= \frac{1}{p(x)} \int \theta \cdot p(x|\theta)p(\theta), d\theta
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\hat{\theta}_{LMSE} 
+&amp;= E_{\theta|x}[\theta] \\
+&amp;= \int \theta \cdot p(\theta|x) \, d\theta \\
+&amp;= \int \theta \cdot \frac{p(x|\theta)p(\theta)}{p(x)} \, d\theta \\
+&amp;= \frac{1}{p(x)} \int \theta \cdot p(x|\theta)p(\theta)\, d\theta 
+\end{align}
+\end{split}\]</div>
 <p>In order to compute the LMSE estimate, we need to compute the denominator, <span class="math notranslate nohighlight">\(p(x)\)</span>. If we don’t know it, then our estimate will be off by a multiplicative factor that we don’t know, making it effectively useless.</p>
 <p>The same is true for computing the expected value of any other function of <span class="math notranslate nohighlight">\(\theta\)</span>, or any other probability involving the posterior distribution. For example, answering the question “according to the posterior distribution, what is the variance of <span class="math notranslate nohighlight">\(\theta\)</span>?” will lead to the same problem.</p>
 <p>To summarize: any computations involving the posteriors (probabilities, expectations, etc.) require us to have the full normalized distribution: the numerator in Bayes’ rule isn’t enough.</p>
@@ -618,10 +624,10 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fedef30f3a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f17e63002b0&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/b29cf494d5a6977fbe0d9c659d39d83eb293a9ae12b9a240495ec67a73c7ea1b.png" src="../../../_images/b29cf494d5a6977fbe0d9c659d39d83eb293a9ae12b9a240495ec67a73c7ea1b.png" />
+<img alt="../../../_images/5569871744b35e9beaa541db5207c25d0f834247aba93c36ee198f2649c5c7d2.png" src="../../../_images/5569871744b35e9beaa541db5207c25d0f834247aba93c36ee198f2649c5c7d2.png" />
 </div>
 </div>
 <p>We can see that the samples are a good representation for the distribution, as long as we have enough. We can use the mean of the samples to approximate the mean of the distribution:</p>
@@ -636,7 +642,7 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42857142857142855 0.4379861217636928
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42857142857142855 0.43232109570953753
 </pre></div>
 </div>
 </div>
@@ -683,10 +689,10 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of x1 (estimated from samples): 0.243
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of x1 (estimated from samples): 0.271
 </pre></div>
 </div>
-<img alt="../../../_images/a32fe7c34749550b6b1f86ca643b72cf18039fcb112a984f18d9708759ba5848.png" src="../../../_images/a32fe7c34749550b6b1f86ca643b72cf18039fcb112a984f18d9708759ba5848.png" />
+<img alt="../../../_images/2aea93646820e2d803f48c127b22d8d4c068c52b1e4202967cd3c201454e3eb6.png" src="../../../_images/2aea93646820e2d803f48c127b22d8d4c068c52b1e4202967cd3c201454e3eb6.png" />
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
@@ -782,13 +788,13 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max accept prob: 0.638
-Accepted 36192 out of 100000 proposals
+Accepted 36057 out of 100000 proposals
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fedeedfba60&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f17e5dbaa30&gt;]
 </pre></div>
 </div>
-<img alt="../../../_images/7ea85c34ed9e8143382c2af7ad98bd9ff4ffb2e58083ab378ade2505519d2b4f.png" src="../../../_images/7ea85c34ed9e8143382c2af7ad98bd9ff4ffb2e58083ab378ade2505519d2b4f.png" />
+<img alt="../../../_images/8ce485d26a33782bc130f43bb490dbc4f1cbcb546780a7d900c296d0941908f8.png" src="../../../_images/8ce485d26a33782bc130f43bb490dbc4f1cbcb546780a7d900c296d0941908f8.png" />
 </div>
 </div>
 <p>As a final example, what happens if we want to sample across the entire real line? For instance, suppose our density is <span class="math notranslate nohighlight">\(p(\theta|x) \propto \exp(-\theta) |\sin(2\theta)|\)</span> for <span class="math notranslate nohighlight">\(\theta \in [0, \infty)\)</span>. We certainly can’t use a uniform proposal distribution, but using the exponential distribution works just fine.</p>
@@ -826,10 +832,10 @@ Accepted 36192 out of 100000 proposals
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accepted 61 out of 100 proposals
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accepted 63 out of 100 proposals
 </pre></div>
 </div>
-<img alt="../../../_images/f3ad5aa7896cde69610d45cc37343c1d95bf1e8ec6d29d1c1c7b0eef09c72e1a.png" src="../../../_images/f3ad5aa7896cde69610d45cc37343c1d95bf1e8ec6d29d1c1c7b0eef09c72e1a.png" />
+<img alt="../../../_images/40a7ebb642410049a3657d02c3f6a1aad110118c818ac08cb5455b9ff4993495.png" src="../../../_images/40a7ebb642410049a3657d02c3f6a1aad110118c818ac08cb5455b9ff4993495.png" />
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
