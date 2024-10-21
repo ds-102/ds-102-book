@@ -180,8 +180,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Bayesian Inference and Sampling</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/03_causality.html">Causality and Potential Outcomes</a></li>
@@ -624,10 +631,10 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f17e63002b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f882f6fa4c0&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/5569871744b35e9beaa541db5207c25d0f834247aba93c36ee198f2649c5c7d2.png" src="../../../_images/5569871744b35e9beaa541db5207c25d0f834247aba93c36ee198f2649c5c7d2.png" />
+<img alt="../../../_images/37dea3089fedb2589213c25ba93daee566d5d57a92152106049f16ddb6fa8fc8.png" src="../../../_images/37dea3089fedb2589213c25ba93daee566d5d57a92152106049f16ddb6fa8fc8.png" />
 </div>
 </div>
 <p>We can see that the samples are a good representation for the distribution, as long as we have enough. We can use the mean of the samples to approximate the mean of the distribution:</p>
@@ -642,7 +649,7 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42857142857142855 0.43232109570953753
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42857142857142855 0.4226637788601297
 </pre></div>
 </div>
 </div>
@@ -689,10 +696,10 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of x1 (estimated from samples): 0.271
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of x1 (estimated from samples): 0.245
 </pre></div>
 </div>
-<img alt="../../../_images/2aea93646820e2d803f48c127b22d8d4c068c52b1e4202967cd3c201454e3eb6.png" src="../../../_images/2aea93646820e2d803f48c127b22d8d4c068c52b1e4202967cd3c201454e3eb6.png" />
+<img alt="../../../_images/39eb4bf57cbb10ac809703f046f16bd60d24e9a69d2a56351037cc09f7efc2b3.png" src="../../../_images/39eb4bf57cbb10ac809703f046f16bd60d24e9a69d2a56351037cc09f7efc2b3.png" />
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
@@ -788,13 +795,13 @@ p(x_{1:n}) &amp;= \sum_{z_1=0}^1 \sum_{z_2=0}^1 \ldots \sum_{z_n=0}^1 \int \int 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max accept prob: 0.638
-Accepted 36057 out of 100000 proposals
+Accepted 36280 out of 100000 proposals
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f17e5dbaa30&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f882c421b20&gt;]
 </pre></div>
 </div>
-<img alt="../../../_images/8ce485d26a33782bc130f43bb490dbc4f1cbcb546780a7d900c296d0941908f8.png" src="../../../_images/8ce485d26a33782bc130f43bb490dbc4f1cbcb546780a7d900c296d0941908f8.png" />
+<img alt="../../../_images/02dd078766a816b47db6e62c1171f36a7987875e3573d99977b3e349080f53f1.png" src="../../../_images/02dd078766a816b47db6e62c1171f36a7987875e3573d99977b3e349080f53f1.png" />
 </div>
 </div>
 <p>As a final example, what happens if we want to sample across the entire real line? For instance, suppose our density is <span class="math notranslate nohighlight">\(p(\theta|x) \propto \exp(-\theta) |\sin(2\theta)|\)</span> for <span class="math notranslate nohighlight">\(\theta \in [0, \infty)\)</span>. We certainly can’t use a uniform proposal distribution, but using the exponential distribution works just fine.</p>
@@ -832,10 +839,10 @@ Accepted 36057 out of 100000 proposals
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accepted 63 out of 100 proposals
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accepted 64 out of 100 proposals
 </pre></div>
 </div>
-<img alt="../../../_images/40a7ebb642410049a3657d02c3f6a1aad110118c818ac08cb5455b9ff4993495.png" src="../../../_images/40a7ebb642410049a3657d02c3f6a1aad110118c818ac08cb5455b9ff4993495.png" />
+<img alt="../../../_images/9dde6a89b98af32e41fad17f146bf7e8bb10964b6e2c4e321d13620a42728316.png" src="../../../_images/9dde6a89b98af32e41fad17f146bf7e8bb10964b6e2c4e321d13620a42728316.png" />
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">

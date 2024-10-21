@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Generalized Linear Models &#8212; Data, Inference, and Decisions</title>
+    <title>Uncertainty Quantification &#8212; Data, Inference, and Decisions</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/03/intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/03/05_uncertainty_quantification';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Prediction" href="01_prediction.html" />
-    <link rel="prev" title="Bayesian Inference and Sampling" href="../02/04_inference_sampling.html" />
+    <link rel="next" title="Chapter 4: Causal Inference" href="../04/intro.html" />
+    <link rel="prev" title="Model Checking and Evaluation" href="04_model_checking.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,12 +178,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../02/04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Chapter 3: Prediction</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 3: Prediction</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_prediction.html">Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_regression_review.html">Linear Regression Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_glms.html">Generalized Linear Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_model_checking.html">Model Checking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Uncertainty Quantification</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -264,7 +264,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/03/intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/03/05_uncertainty_quantification.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -294,7 +294,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../../_sources/content/chapters/03/intro.md" target="_blank"
+      <li><a href="../../../_sources/content/chapters/03/05_uncertainty_quantification.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -304,7 +304,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -376,7 +376,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Generalized Linear Models</h1>
+    <h1>Uncertainty Quantification</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -390,11 +390,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="generalized-linear-models">
-<h1>Generalized Linear Models<a class="headerlink" href="#generalized-linear-models" title="Permalink to this heading">#</a></h1>
-<p>This chapter will cover generalized linear models.</p>
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="uncertainty-quantification">
+<h1>Uncertainty Quantification<a class="headerlink" href="#uncertainty-quantification" title="Permalink to this heading">#</a></h1>
+<p><em>Coming soon</em></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -428,20 +426,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../02/04_inference_sampling.html"
+       href="04_model_checking.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Bayesian Inference and Sampling</p>
+        <p class="prev-next-title">Model Checking and Evaluation</p>
       </div>
     </a>
     <a class="right-next"
-       href="01_prediction.html"
+       href="../04/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Prediction</p>
+        <p class="prev-next-title">Chapter 4: Causal Inference</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

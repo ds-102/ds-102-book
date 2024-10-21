@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Generalized Linear Models &#8212; Data, Inference, and Decisions</title>
+    <title>Prediction &#8212; Data, Inference, and Decisions</title>
   
   
   
@@ -62,11 +62,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/03/intro';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/03/01_prediction';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Prediction" href="01_prediction.html" />
-    <link rel="prev" title="Bayesian Inference and Sampling" href="../02/04_inference_sampling.html" />
+    <link rel="next" title="Regression review" href="02_regression_review.html" />
+    <link rel="prev" title="Generalized Linear Models" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,8 +180,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../02/04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Chapter 3: Prediction</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_prediction.html">Prediction</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 3: Prediction</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_regression_review.html">Linear Regression Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_glms.html">Generalized Linear Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_model_checking.html">Model Checking</a></li>
@@ -264,7 +266,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/03/intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/03/01_prediction.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -294,7 +296,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../../_sources/content/chapters/03/intro.md" target="_blank"
+      <li><a href="../../../_sources/content/chapters/03/01_prediction.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -304,7 +306,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -376,7 +378,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Generalized Linear Models</h1>
+    <h1>Prediction</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -390,11 +392,22 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="generalized-linear-models">
-<h1>Generalized Linear Models<a class="headerlink" href="#generalized-linear-models" title="Permalink to this heading">#</a></h1>
-<p>This chapter will cover generalized linear models.</p>
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="prediction">
+<h1>Prediction<a class="headerlink" href="#prediction" title="Permalink to this heading">#</a></h1>
+<p><em>You may find it helpful to review <a class="reference external" href="https://inferentialthinking.com/chapters/15/Prediction.html">Chapter 15 of the Data 8 textbook</a>, which looks at prediction using linear regression and <span class="math notranslate nohighlight">\(k\)</span>-nearest neighbors.</em></p>
+<p>In many cases, our goal is <strong>prediction</strong>: to predict one variable from several others. We’ll usually call the prediction variable <span class="math notranslate nohighlight">\(y\)</span>, and the other variables <span class="math notranslate nohighlight">\(x\)</span>. Here are a few examples of prediction in real-world settings:</p>
+<ul class="simple">
+<li><p>A subscription-based company might be interested in predicting whether a certain customer will renew their subscription next month (<span class="math notranslate nohighlight">\(y\)</span>), using demographic information, historical usage data, and general market trends (<span class="math notranslate nohighlight">\(x\)</span>). This information will help them make important business decisions on whether to send promotions to that customer, or by aggregating many predictions, to estimate how much revenue the company will bring in over the next month.</p></li>
+<li><p>A YouTube content producer might be interested in predicting the number of views on their next video (<span class="math notranslate nohighlight">\(y\)</span>), using information about their YouTube channel (follower count, etc.) and information about the video itself (length, number of guest stars, production cost, etc.) (<span class="math notranslate nohighlight">\(x\)</span>). This information could be useful when looking for advertisers who want to understand how many people will see the ad if they watch the video.</p></li>
+</ul>
+<p>In each of these examples, we can see that we have multiple predictors <span class="math notranslate nohighlight">\(x\)</span> (usually we write these as <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_d\)</span>, or just as a vector <span class="math notranslate nohighlight">\(x\)</span>), and we’re predicting a single target variable <span class="math notranslate nohighlight">\(y\)</span> (usually scalar-valued). The predictions can be binary, otherwise discrete, or continuous.</p>
+<p>Here’s the general framework that we’ll use: we’ll start by assuming that we have some pairs of known examples, <span class="math notranslate nohighlight">\((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\)</span>, where each pair contains a vector <span class="math notranslate nohighlight">\(x_i\)</span> of predictors for data point <span class="math notranslate nohighlight">\(i\)</span>, and a known value of the prediction target for data point <span class="math notranslate nohighlight">\(i\)</span>. In the examples above, this might be historical information on customers who did and didn’t renew in the past, or data on previously released videos with known view counts and channel information at the time of release. We’ll use these points to learn a relationship between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, and then apply what we learned to new points <span class="math notranslate nohighlight">\(x_{n+1}, x_{n+2}, \ldots\)</span>. Any points we use to learn that relationship are referred to as the training set.</p>
+<p>You’ve already seen this pattern used several times before:</p>
+<ul class="simple">
+<li><p>…in linear regression, where we <strong>fit</strong> or <strong>train</strong> a linear model using <span class="math notranslate nohighlight">\((x_1, y_1), \ldots, (x_n, y_n)\)</span> and then use the learned coefficients to make predictions on new data points.</p></li>
+<li><p>…in <span class="math notranslate nohighlight">\(k\)</span>-nearest neighbors classification, where we store the entire training set, and then when classifying (i.e., predicting classification labels for) new points, we find the <span class="math notranslate nohighlight">\(k\)</span> closest points in the training set, and then use a majority vote of their labels as our prediction.</p></li>
+</ul>
+<p>Note that prediction is not necessarily the same as causality! A YouTuber might find that the view count on their most recent video is a strong predictor of the view count for their next video, but one doesn’t necesarily have a causal relationship to the other. This doesn’t mean it’s any less useful for prediction, though. So, we’ll limit ourselves to the world of making and understanding predictions, and avoid making any conclusions about causality or lack thereof for now. In the next chapter, we’ll build a better understanding of the distinction between the two, and discover when we can in fact reason about causality.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -428,20 +441,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../02/04_inference_sampling.html"
+       href="intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Bayesian Inference and Sampling</p>
+        <p class="prev-next-title">Generalized Linear Models</p>
       </div>
     </a>
     <a class="right-next"
-       href="01_prediction.html"
+       href="02_regression_review.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Prediction</p>
+        <p class="prev-next-title">Regression review</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

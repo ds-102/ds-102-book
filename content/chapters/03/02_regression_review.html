@@ -64,9 +64,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/03/00_regression_review';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/03/02_regression_review';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Generalized Linear Models" href="03_glms.html" />
+    <link rel="prev" title="Prediction" href="01_prediction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -162,7 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../01/01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
@@ -178,8 +180,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../02/04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Chapter 3: Prediction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 3: Prediction</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_prediction.html">Prediction</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Linear Regression Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_glms.html">Generalized Linear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_model_checking.html">Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/03_causality.html">Causality and Potential Outcomes</a></li>
@@ -257,7 +266,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/03/00_regression_review.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/03/02_regression_review.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -287,7 +296,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../../_sources/content/chapters/03/00_regression_review.ipynb" target="_blank"
+      <li><a href="../../../_sources/content/chapters/03/02_regression_review.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -386,10 +395,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihoods-and-loss-functions">Likelihoods and loss functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-functions">Loss functions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-and-noise">Likelihood and noise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-in-regression-predictions">Uncertainty in Regression Predictions</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-models-with-scikit-learn">Fitting models with <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#known-unknown-random-and-fixed">Known, unknown, random, and fixed</a></li>
 </ul>
             </nav>
         </div>
@@ -401,8 +412,22 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="regression-review">
+  <div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="regression-review">
 <h1>Regression review<a class="headerlink" href="#regression-review" title="Permalink to this heading">#</a></h1>
+<p><em>This section is a review of linear regression. You may find it helpful to review <a class="reference external" href="https://learningds.org/ch/15/linear_multi.html">Section 15.4 of the Data 100 textbook</a>, which covers the corresponding material.</em></p>
 <p>Recall that regression is a form of supervised learning. Given some data <span class="math notranslate nohighlight">\(x\)</span> (typically a scalar or a vector), we’re trying to predict a single value <span class="math notranslate nohighlight">\(y\)</span>. You’ve seen cases where <span class="math notranslate nohighlight">\(y\)</span> is a real number (linear regression) or a binary value <span class="math notranslate nohighlight">\(\in \{0, 1\}\)</span> (logistic regression). Let’s briefly review the setup for linear regression.</p>
 <p>We have a collection of data <span class="math notranslate nohighlight">\((x_1, y_1), \ldots, (x_n, y_n)\)</span>. We’re trying to predict <span class="math notranslate nohighlight">\(y_i\)</span> from <span class="math notranslate nohighlight">\(x_i\)</span>, but our prediction won’t be perfect. We’ll use the notation <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> to represent the predicted value for data point <span class="math notranslate nohighlight">\(i\)</span>. We start by discussing how to get the predictions, and then move on to the relationship between the predictions and the actual observed values.</p>
 <section id="one-dimension">
@@ -421,13 +446,13 @@ document.write(`
 \[
 x_i = \left(x_{i1}, x_{i2}, \ldots, x_{id}\right)
 \]</div>
-<p>Each entry of this vector corresponds to a different feature that we’re using in our prediction. See the examples section below for some concrete examples of what this might look like.</p>
-<p>In multiple linear regression, we form our prediction for data point <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(y_i\)</span>, as follows:</p>
+<p>Each entry of this vector corresponds to a different aspect of this data point that we’re using in our prediction. We call each of these a <strong>predictor</strong> or <strong>feature</strong>.</p>
+<p>In multiple linear regression, we form our prediction for data point <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(\hat{y}_i\)</span>, as follows:</p>
 <div class="math notranslate nohighlight">
 \[
 \hat{y}_i = \sum_j \beta_j x_{ij}
 \]</div>
-<p>The <span class="math notranslate nohighlight">\(d\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\beta = (\beta_1, \ldots, \beta_d)\)</span> contains the coefficients for each feature: linear regression involves figuring out what these are. We can write this in vector notation using the vectors <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(x_i\)</span>:</p>
+<p>The <span class="math notranslate nohighlight">\(d\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\beta = (\beta_1, \ldots, \beta_d)\)</span> contains the <strong>coefficients</strong> for each predictor: linear regression involves figuring out what these are. We can write this in vector notation using the vectors <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(x_i\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 \hat{y}_i = \beta^T x_i = x_i^T \beta
@@ -447,6 +472,25 @@ X = \begin{pmatrix}
 \[
 \hat{y} = X\beta
 \]</div>
+<p>We can interpret each coefficient <span class="math notranslate nohighlight">\(\beta_j\)</span> in the context of the model as follows: “if <span class="math notranslate nohighlight">\(x_j\)</span> increases by <span class="math notranslate nohighlight">\(t\)</span>, then the model predicts that <span class="math notranslate nohighlight">\(y\)</span> should increase by about <span class="math notranslate nohighlight">\(\beta_j \times t\)</span>.”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">&#39;rEUf3bW32jM&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/rEUf3bW32jM"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
 </section>
 <section id="likelihoods-and-loss-functions">
 <h2>Likelihoods and loss functions<a class="headerlink" href="#likelihoods-and-loss-functions" title="Permalink to this heading">#</a></h2>
@@ -457,7 +501,7 @@ X = \begin{pmatrix}
 </ol>
 <section id="loss-functions">
 <h3>Loss functions<a class="headerlink" href="#loss-functions" title="Permalink to this heading">#</a></h3>
-<p>Recall that in linear regression, we try to find the value of <span class="math notranslate nohighlight">\(y\)</span> that minimizes the mean squared error (MSE). We can write the RMSE as follows:</p>
+<p>Recall that in ordinary least-squares linear regression, we try to find the value of <span class="math notranslate nohighlight">\(y\)</span> that minimizes the mean squared error (MSE). We can write the MSE as follows:</p>
 <div class="math notranslate nohighlight">
 \[
 \text{MSE} = \frac{1}{n}\sum_i (y_i - \beta^T x_i)^2
@@ -476,6 +520,7 @@ X = \begin{pmatrix}
 </section>
 <section id="likelihood-and-noise">
 <h3>Likelihood and noise<a class="headerlink" href="#likelihood-and-noise" title="Permalink to this heading">#</a></h3>
+<p><em>We’ll build heavily off the formulation in this section, so make sure you understand what’s going on here well!</em></p>
 <p>We can also describe the errors in our model:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -484,13 +529,18 @@ y_i = \beta^T x_i + \epsilon_i,
 <p>where <span class="math notranslate nohighlight">\(\epsilon_i \sim N(0, \sigma^2)\)</span> is a random variable that represents the noise, or error, in the observed value. We can vectorize this noise, too: we’ll write <span class="math notranslate nohighlight">\(\epsilon = (\epsilon_1, \ldots, \epsilon_n)\)</span> so that the vector <span class="math notranslate nohighlight">\(\epsilon\)</span> has a multivariate normal distribution <span class="math notranslate nohighlight">\(\epsilon \sim N(0, \sigma^2 I_n)\)</span>. We can then write:</p>
 <div class="math notranslate nohighlight">
 \[
+:label: additive-noise
 y = X\beta + \epsilon,
 \]</div>
 <p>or equivalently, using properties of the normal distribution,</p>
 <div class="math notranslate nohighlight">
 \[
+:label: centered-noise
 y | \beta \sim N(X\beta, \sigma^2 I_n).
 \]</div>
+<p>We can interpret this equation as telling us that the <strong>average prediction</strong> is <span class="math notranslate nohighlight">\(X\beta\)</span>. This equation is a likelihood model: it tells us the likelihood of data <span class="math notranslate nohighlight">\(y\)</span> given the parameter(s) <span class="math notranslate nohighlight">\(\beta\)</span>. Note that we are treating <span class="math notranslate nohighlight">\(X\)</span> as fixed and known, so there’s no probability model associated with it. We’ll generally focus on this version, rather than the previous one</p>
+<p>Let’s think about the implicit assumptions we’re making by choosing a normal likelihood. Recall that under a normal distribution, we’re very unlikely to see values more than 3<span class="math notranslate nohighlight">\(\sigma\)</span> away from the mean. That means that we’re implicitly assuming that the vast majority of <span class="math notranslate nohighlight">\(y\)</span>-values we see will be within 3<span class="math notranslate nohighlight">\(\sigma\)</span> of the average prediction prediction <span class="math notranslate nohighlight">\(X\beta\)</span>. This helps explain why linear regression is sensitive to outliers: the likelihood of a point very far away from the average prediction is very small, but the likelihood of several points all somewhat far away is much higher.</p>
+<p>This model is often referred to as <strong>ordinary least squares, or OLS</strong>.</p>
 <p>Under this model, one reasonable way to estimate <span class="math notranslate nohighlight">\(\beta\)</span> is to choose the value that maximizes the likelihood. When choosing a value of <span class="math notranslate nohighlight">\(\beta\)</span> to maximize the likelihood, we note that we don’t actually care about the normalizing constant in the normal distribution. So, we can write:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -500,7 +550,7 @@ y | \beta \sim N(X\beta, \sigma^2 I_n).
     &amp;= \text{argmax}_\beta \exp\left\{-\frac{1}{2\sigma^2}\|y - X\beta\|_2^2\right\}
 \end{align}
 \end{split}\]</div>
-<p>Maximizing a quantity inside an exponential is hard. So, we’ll take advantage of the fact that the <span class="math notranslate nohighlight">\(\log\)</span> function is monotonically increasing. Furthermore, we’ll make this a minimization rather than a maximization. In general, for any well-behaved function <span class="math notranslate nohighlight">\(f\)</span>:</p>
+<p>Just as we did in our earlier foray into maximum likelihood estimation, we’ll take advantage of the fact that the <span class="math notranslate nohighlight">\(\log\)</span> function is monotonically increasing, and optimize the log-likelihood. Furthermore, we’ll make this a minimization rather than a maximization. In general, for any well-behaved function <span class="math notranslate nohighlight">\(f\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
@@ -521,6 +571,10 @@ y | \beta \sim N(X\beta, \sigma^2 I_n).
 \end{split}\]</div>
 <p>So, we’ve found that maximizing the Gaussian likelihood of the data is exactly equivalent to minimizing the squared loss. This is true in general for regression problems: we can arrive at the same answer by either choosing a loss function and minimizing it, or choosing a corresponding likelihood and maximizing it.</p>
 </section>
+<section id="uncertainty-in-regression-predictions">
+<h3>Uncertainty in Regression Predictions<a class="headerlink" href="#uncertainty-in-regression-predictions" title="Permalink to this heading">#</a></h3>
+<p>It’s important to remember that when making a prediction for a new data point, there are multiple sources of uncertainty. Recall that our model states that <span class="math notranslate nohighlight">\(\hat{y} = X\hat{\beta} + \epsilon\)</span>. When making a prediction, we have some uncertainty the first term <span class="math notranslate nohighlight">\(X\hat{\beta}\)</span>, because the coefficients we estimate depend on the random data. We also have additional uncertainty from the second term, depending on how much variability the model estimates in the data around the average predictions.</p>
+</section>
 </section>
 <section id="logistic-regression">
 <h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h2>
@@ -535,15 +589,99 @@ y | \beta \sim N(X\beta, \sigma^2 I_n).
 \hat{\beta} = \text{argmin}_\beta \sum_i -\left[ y_i \ln(\hat{y}_i) + (1-y_i) \ln(1-\hat{y}_i) \right]
 \]</div>
 <p>You’ll show on the discussion worksheet that if we assume the likelihood model for <span class="math notranslate nohighlight">\(y\)</span> is Bernoulli with parameter <span class="math notranslate nohighlight">\(\sigma(\beta^T x_i)\)</span>, then maximizing the likelihood is equivalent to minimizing the binary cross-entropy loss.</p>
-<p>For a deeper refresher on logistic regression, see <a class="reference external" href="https://www.textbook.ds100.org/ch/23/classification_intro.html">Chapter 23 of the Data 100 textbook</a>. Note that our notation is slightly different:</p>
+<p><em>For a deeper refresher on logistic regression, see <a class="reference external" href="https://www.textbook.ds100.org/ch/23/classification_intro.html">Chapter 23 of the Data 100 textbook</a>. Note that our notation is slightly different:</em></p>
 <ul class="simple">
 <li><p>We’re using <span class="math notranslate nohighlight">\(\beta\)</span> instead of <span class="math notranslate nohighlight">\(\theta\)</span> for the coefficients</p></li>
 <li><p>We’re using <span class="math notranslate nohighlight">\(\hat{y}\)</span> for the predictions instead of <span class="math notranslate nohighlight">\(f_{\hat{\theta}}\)</span>.</p></li>
 </ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/-xHu9FfVKqg"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
 </section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<p><em>Coming soon</em></p>
+<section id="fitting-models-with-scikit-learn">
+<h2>Fitting models with <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code><a class="headerlink" href="#fitting-models-with-scikit-learn" title="Permalink to this heading">#</a></h2>
+<p>You may recall that the easiest way to fit a linear model is to use the <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> model from <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. We can then inspect the coefficients and intercept using the <code class="docutils literal notranslate"><span class="pre">coef_</span></code> and <code class="docutils literal notranslate"><span class="pre">intercept_</span></code> attributes respectively, and make predictions on new data points using the <code class="docutils literal notranslate"><span class="pre">predict()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.0638684061258262, array([ 0.15201513, -0.62278861]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this chapter, we’ll use two new packages for regression in frequentist and Bayesian paradigms. The first will be <a class="reference external" href="https://www.statsmodels.org/stable/index.html">statsmodels</a>, which fits linear models using a frequentist approach, and <a class="reference external" href="https://bambinos.github.io/bambi/">Bambi</a>, which uses <code class="docutils literal notranslate"><span class="pre">PyMC</span></code> for approximate inference in Bayesian linear models.</p>
+</section>
+<section id="known-unknown-random-and-fixed">
+<h2>Known, unknown, random, and fixed<a class="headerlink" href="#known-unknown-random-and-fixed" title="Permalink to this heading">#</a></h2>
+<p>In regression modeling, we typically use a probability model for the observed target values <span class="math notranslate nohighlight">\(y\)</span>, but we tend to assume that the predictors <span class="math notranslate nohighlight">\(X\)</span> are <strong>fixed and known</strong>. To summarize:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Known or unknown?</p></th>
+<th class="head"><p>Fixed or random? (Bayesian)</p></th>
+<th class="head"><p>Fixed or random? (frequentist)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x\)</span></p></td>
+<td><p>Predictors</p></td>
+<td><p>Known</p></td>
+<td><p>Fixed, known</p></td>
+<td><p>Fixed, known</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(y\)</span></p></td>
+<td><p>Target values</p></td>
+<td><p>Known for training set, unknown for test set</p></td>
+<td><p>Random</p></td>
+<td><p>Random</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\beta\)</span></p></td>
+<td><p>Coefficients</p></td>
+<td><p>Unknown</p></td>
+<td><p>Random</p></td>
+<td><p>Fixed</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 
@@ -577,6 +715,24 @@ y | \beta \sim N(X\beta, \sigma^2 I_n).
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="01_prediction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Prediction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_glms.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Generalized Linear Models</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -597,10 +753,12 @@ y | \beta \sim N(X\beta, \sigma^2 I_n).
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihoods-and-loss-functions">Likelihoods and loss functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-functions">Loss functions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihood-and-noise">Likelihood and noise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-in-regression-predictions">Uncertainty in Regression Predictions</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-models-with-scikit-learn">Fitting models with <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#known-unknown-random-and-fixed">Known, unknown, random, and fixed</a></li>
 </ul>
   </nav></div>
 
