@@ -1,3 +1,3 @@
-# Generalized Linear Models
+# Prediction
 
-This chapter will cover generalized linear models.
+This chapter will cover prediction with generalized linear models and nonparametric models.
