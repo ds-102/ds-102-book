@@ -37,11 +37,17 @@ chapters:
       title: "Bayesian Inference and Sampling"
 - file: content/chapters/03/intro
   title: "Chapter 3: Prediction"
-  # sections:
-  #   - file: content/chapters/03/00_regression_review
-  #     title: "Multiple Linear Regression Review"
-  #   - file: content/chapters/03/01_glms
-  #     title: "Generalized Linear Models"
+  sections:
+    - file: content/chapters/03/01_prediction
+      title: "Prediction"
+    - file: content/chapters/03/02_regression_review
+      title: "Linear Regression Review"
+    - file: content/chapters/03/03_glms
+      title: "Generalized Linear Models"
+    - file: content/chapters/03/04_model_checking
+      title: "Model Checking"
+    - file: content/chapters/03/05_uncertainty_quantification
+      title: "Uncertainty Quantification"
 - file: content/chapters/04/intro
   title: "Chapter 4: Causal Inference"
   sections:
