@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Association, Correlation, and Causation &#8212; Data, Inference, and Decisions</title>
   
@@ -15,53 +14,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/04/01_association_correlation_causation';</script>
@@ -71,6 +69,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="prev" title="Chapter 4: Causal Inference" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -78,32 +77,16 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -111,7 +94,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -119,16 +101,25 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -143,6 +134,8 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../../intro.html">
   
@@ -154,7 +147,14 @@ const thebe_selector_output = ".output, .cell_output"
     <p class="title logo__title">Data, Inference, and Decisions</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -165,36 +165,37 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../01/01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/04_binary_classification.html">Binary Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/05_decision_theory.html">Decision Theory</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../02/01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02/02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02/03_graphical_models.html">Graphical Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02/04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
 </ul>
-</li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_quantifying_association.html">Quantifying Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_causality.html">Causality and Potential Outcomes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -203,14 +204,19 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -219,14 +225,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -349,27 +355,19 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -420,63 +418,63 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="association-correlation-and-causation">
-<h1>Association, Correlation, and Causation<a class="headerlink" href="#association-correlation-and-causation" title="Permalink to this heading">#</a></h1>
+<h1>Association, Correlation, and Causation<a class="headerlink" href="#association-correlation-and-causation" title="Link to this heading">#</a></h1>
 <p><img alt="" src="https://imgs.xkcd.com/comics/correlation.png" /></p>
 <p>“<em>Correlation does not necessarily imply causation</em>.” You’ve surely heard this statement many times by now. In this section, we’ll understand the relationship between association, correlation, and causation. We’ll look at a few different problems that arise when thinking about these concepts.</p>
 <p>We’ll start by looking at three mistakes that one can make when thinking about association, correlation, and causation. Then, we’ll review a few different ways of measuring association, which we’ll use in our later discussion of causality.</p>
 <section id="prediction-vs-causation">
-<h2>Prediction vs Causation<a class="headerlink" href="#prediction-vs-causation" title="Permalink to this heading">#</a></h2>
+<h2>Prediction vs Causation<a class="headerlink" href="#prediction-vs-causation" title="Link to this heading">#</a></h2>
 <p>In many applications, we may be interested in predicting a certain quantity from another quantity. We’ve already seen examples of this: GLMs help us predict one variable given many others. But it’s important to keep in mind the distinction between prediction and causation. Here’s an example that highlights the difference.</p>
 <p>Suppose we’re interested in using recorded audio data from a soccer match TV broadcast to predict how many people were applauding at any given time. Intuitively, this seems like a case where we can make a pretty good prediction: louder audio should be predictive of more people applauding. However, even though our prediction ability may be excellent, this does not imply a causal relationship at all: in fact, the data we observe (audio volume) is caused by the thing that we’re trying to predict (people applauding).</p>
 <p>In many cases, our goal may be predictive power, in which case the reverse causality here is fine. However, in cases where we’re trying to infer causality, high predictive power alone is not enough.</p>
 </section>
 <section id="mistaking-correlation-and-association-for-causation">
-<h2>Mistaking correlation (and association) for causation<a class="headerlink" href="#mistaking-correlation-and-association-for-causation" title="Permalink to this heading">#</a></h2>
+<h2>Mistaking correlation (and association) for causation<a class="headerlink" href="#mistaking-correlation-and-association-for-causation" title="Link to this heading">#</a></h2>
 <p>It’s often easier to fall for the trap of conflating association and causation than you might think. For example, consider the following story:</p>
 <blockquote>
 <div><p>A Martian arrives on Earth, and after a year of study announces the discovery of a correlation between using an umbrella and getting wet: people who use umbrellas have a higher probability of getting wet (even if it’s just their pants) than people who don’t use an umbrella. The Martian infers that using an umbrella causes people to get wet.</p>
 </div></blockquote>
 <p>The correlation that the Martian observes is real, but the real causal story is a little more complex than this: we use umbrellas when it rains, and we get wet when it rains. While it’s easy to point to this example and laugh at how silly the Martian is, the reality is that we hear (and make) inferences like this all the time.</p>
 <section id="confounding-variables">
-<h3>Confounding variables<a class="headerlink" href="#confounding-variables" title="Permalink to this heading">#</a></h3>
+<h3>Confounding variables<a class="headerlink" href="#confounding-variables" title="Link to this heading">#</a></h3>
 <p>A key problem that comes up when reasoning about causality is the existence of <strong>confounding</strong> variables.</p>
 <section id="sunburns-and-ice-cream-sales">
-<h4>Sunburns and ice cream sales<a class="headerlink" href="#sunburns-and-ice-cream-sales" title="Permalink to this heading">#</a></h4>
+<h4>Sunburns and ice cream sales<a class="headerlink" href="#sunburns-and-ice-cream-sales" title="Link to this heading">#</a></h4>
 <p>As an example, let’s suppose we collect daily data on sunburns and ice cream sales for an entire year. We find a strong positive association in the data: days with higher ice cream sales have much higher sunburn rates. Clearly, sunburn doesn’t cause increased ice cream sales, and increased ice cream sales don’t cause sunburns, either. This example fails to take into account the confounding effect of the weather: hot, sunny weather causes people to buy more ice cream, and also causes more sunburns. We can illustrate this using a directed graph, similar to the ones we used in Bayesian graphical models:</p>
 <p><img alt="" src="../../../_images/sunburn_icecream_.png" /></p>
 <p>Here, the edges indicate <em>causal</em> relationships (we’ll formalize this idea in the next section). For example, this graph claims that sun causes a change in sunburn rates. Like the example with the Martian, the existence of a confounding variable (sunny weather) is clear in this example.</p>
 </section>
 <section id="cameras-and-social-media-likes">
-<h4>Cameras and social media likes<a class="headerlink" href="#cameras-and-social-media-likes" title="Permalink to this heading">#</a></h4>
+<h4>Cameras and social media likes<a class="headerlink" href="#cameras-and-social-media-likes" title="Link to this heading">#</a></h4>
 <p>Let’s look at an example with a more complex relationship. Suppose we want to know whether using a high-end DSLR camera causes increased likes on Instagram posts. If we collect data and find a strong positive association between DSLR cost and number of likes, does this let us conclude a causal relationship? In this case, the answer is a more nebulous “maybe”. There are other confounding factors here: for example, high-profile, well-financed accounts that already have a lot of followers are more likely to use high-end cameras than amateur accounts. In this case, the causal graph might look more like this:</p>
 <p><img alt="" src="../../../_images/instagram_.png" /></p>
 <p>Without further information about the account’s size and budget, it’s hard to determine a causal relationship.</p>
 </section>
 </section>
 <section id="spurious-correlations">
-<h3>Spurious correlations<a class="headerlink" href="#spurious-correlations" title="Permalink to this heading">#</a></h3>
+<h3>Spurious correlations<a class="headerlink" href="#spurious-correlations" title="Link to this heading">#</a></h3>
 <p>Sometimes, regardless of whether or not we’re trying to draw conclusions about causality, the correlations we observe might be <em>spurious</em>: that is, they could occur just by chance, or by a series of confounds that may negate any conclusions we would want to draw. One example from <a class="reference external" href="https://www.tylervigen.com/spurious-correlations">Tyler Vigen’s Spurious Correlations website</a> is shown below:</p>
 <p><img alt="" src="../../../_images/mozzarella_civile_phd.png" /></p>
 <p>We can draw a directed graph for these two variables: in this case, there are no edges between them because there’s no causal relationship either way, and no confounding variable:</p>
 <p><img alt="" src="../../../_images/spurious.png" /></p>
 </section>
 <section id="the-marshmallow-experiment">
-<h3>The Marshmallow Experiment<a class="headerlink" href="#the-marshmallow-experiment" title="Permalink to this heading">#</a></h3>
+<h3>The Marshmallow Experiment<a class="headerlink" href="#the-marshmallow-experiment" title="Link to this heading">#</a></h3>
 <p>Another example is the famous so-called “<a class="reference external" href="https://en.wikipedia.org/wiki/Stanford_marshmallow_experiment">marshmallow study</a>”. In this study, researchers presented children with a choice: either they could have one marshmallow immediately, or, if they waited 15 minutes, they could have two marshmallows. They followed the students for 30 years, and found that students who waited for the extra payout achieved greater success in life (as measured by the researchers). Although the original researchers cautioned people to avoid direct causal interpretations, the most common and widespread interpretation was causal: that children’s ability to delay gratification (i.e., to wait 15 minutes for a double marshmallow payout) caused them to succeed throughout their lives. Schools implemented coaching programs to help students build self-control and resist the urge to eat the first marshmallow.</p>
 <p>However, followup studies have shown a much more <a class="reference external" href="https://anderson-review.ucla.edu/new-study-disavows-marshmallow-tests-predictive-powers/">complex and nuanced story</a>: while many follow-up studies have shown an association, the predictive effect of resisting a marshmallow seems to diminish or disappear when controlling for factors such as socioeconomic background or other measures of self-control. Many scientists have argued that rather than self-control, what the study really measures is middle-class or upper-class behavior: responding to environments without shortages.</p>
 <p>Stories like this one illustrate both the importance and the difficulty of determining causality from observational studies. If we could somehow determine that teaching small children self-control is guaranteed to have a large impact on their eventual life outcomes, then this seems like a worthwhile policy goal. This is even more true if the effect is true regardless of socioeconomic background. However, the numerous confounding variables and unclear direction of causality highlight the need for methods that can determine causality in such environments, outside of a randomized controlled trial.</p>
 </section>
 </section>
 <section id="simpson-s-paradox">
-<h2>Simpson’s Paradox<a class="headerlink" href="#simpson-s-paradox" title="Permalink to this heading">#</a></h2>
+<h2>Simpson’s Paradox<a class="headerlink" href="#simpson-s-paradox" title="Link to this heading">#</a></h2>
 <p>One counterintuitive problem that can come up with confounding variables is <strong>Simpson’s Paradox</strong>. Let’s start with a hypothetical example: suppose a group of restaurant critics spends two years sampling dishes from two popular restaurants, A and B. They rate every dish that they order with either a 👎 (didn’t like) or a 👍 (liked). They summarize the data in the following table:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">food</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;restaurants.csv&#39;</span><span class="p">)</span>
 <span class="n">food</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
@@ -486,6 +484,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2238/95172738.py:5: FutureWarning: The provided callable &lt;function sum at 0x7f4b48198180&gt; is currently using DataFrameGroupBy.sum. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;sum&quot; instead.
+  food.pivot_table(
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -540,6 +542,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2238/4218979607.py:1: FutureWarning: The provided callable &lt;function sum at 0x7f4b48198180&gt; is currently using DataFrameGroupBy.sum. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;sum&quot; instead.
+  food.pivot_table(
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -609,8 +615,8 @@ document.write(`
 <p>We can visualize the percentages in the bullet points above on a graph. Let the <span class="math notranslate nohighlight">\(x\)</span>-axis represent the percent of dishes ordered in 2020, during the pandemic: this is the confounding variable. Let the <span class="math notranslate nohighlight">\(y\)</span>-axis represent the percent of dishes liked (👍): this is our outcome. For the data broken down by year, these percentages are always 0 or 1, indicated by the four points (two blue circles and two orange squares):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s1">&#39;talk&#39;</span><span class="p">)</span>
@@ -628,7 +634,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/62713266212262e19478b2cdbe2d10956893f25c9dad01084389441bf119443b.png" src="../../../_images/62713266212262e19478b2cdbe2d10956893f25c9dad01084389441bf119443b.png" />
+<img alt="../../../_images/00f3566b15c39c66ce7e4935295f887983c362d81eea6be0e0b8d8277df1044a.png" src="../../../_images/00f3566b15c39c66ce7e4935295f887983c362d81eea6be0e0b8d8277df1044a.png" />
 </div>
 </div>
 <p>This plot shows that the critics prefer Restaurant A (blue line) over Restaurant B (orange line). But when we looked at the aggregate data in the first table above, we were comparing restaurant A’s dishes, which were mostly from 2020, to restaurant B’s dishes, which were mostly from 2019, shown with the large circle/square:</p>
@@ -652,7 +658,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/fa6ab26a8f18030c0c102fb64e91cf63ab5cf6ce60721055bf3b25cfb0d4e6a9.png" src="../../../_images/fa6ab26a8f18030c0c102fb64e91cf63ab5cf6ce60721055bf3b25cfb0d4e6a9.png" />
+<img alt="../../../_images/3c6deff4c60b171d93772bb845a62ad0332c9e25675065e8233ed86e597a619e.png" src="../../../_images/3c6deff4c60b171d93772bb845a62ad0332c9e25675065e8233ed86e597a619e.png" />
 </div>
 </div>
 <p>This plot is called a Baker-Kramer (or B-K) plot: it highlights that even though Restaurant A is better than Restaurant B, the confounding effect of the year makes Restaurant A look much worse.</p>
@@ -667,9 +673,9 @@ document.write(`
 <p>When looking at the data separated by year, we can see that they preferred restaurant A in both years. But, because of the two factors above, when aggregating the data, restaurant A looks worse. Here’s a visualization that represents this:</p>
 <p>Note that despite the name, this isn’t really a paradox: this happens entirely because of the confounding factor.</p>
 <section id="more-examples">
-<h3>More Examples<a class="headerlink" href="#more-examples" title="Permalink to this heading">#</a></h3>
+<h3>More Examples<a class="headerlink" href="#more-examples" title="Link to this heading">#</a></h3>
 <section id="berkson-s-paradox-and-colliders">
-<h4>Berkson’s Paradox and Colliders<a class="headerlink" href="#berkson-s-paradox-and-colliders" title="Permalink to this heading">#</a></h4>
+<h4>Berkson’s Paradox and Colliders<a class="headerlink" href="#berkson-s-paradox-and-colliders" title="Link to this heading">#</a></h4>
 <p>A baker decides to put out some of his best loaves of bread on display in the front window, to help attract customers. For every batch of bread he bakes, he rates the bread on flavor and appearance (from 1-10). There isn’t any correlation between flavor and appearance, so the scores look like this:</p>
 <p><img alt="" src="../../../_images/breadscores.png" /></p>
 <p>He then decides to add up the flavor and appearance scores: for any batch with a combined score greater than 10, he’ll display a loaf in the front window.</p>
@@ -681,15 +687,15 @@ document.write(`
 <p>Because the direction of causality is different, display isn’t a confounder here: we instead call it a <strong>collider</strong>.</p>
 </section>
 <section id="berkeley-graduate-admissions">
-<h4>Berkeley Graduate Admissions<a class="headerlink" href="#berkeley-graduate-admissions" title="Permalink to this heading">#</a></h4>
+<h4>Berkeley Graduate Admissions<a class="headerlink" href="#berkeley-graduate-admissions" title="Link to this heading">#</a></h4>
 <p>The <a class="reference external" href="https://mlstory.org/causal.html#the-limitations-of-observation">Patterns, Predictions, and Actions</a> book has an excellent discussion of this well-known case of Simpson’s Paradox.</p>
 </section>
 <section id="continuous-data">
-<h4>Continuous data<a class="headerlink" href="#continuous-data" title="Permalink to this heading">#</a></h4>
+<h4>Continuous data<a class="headerlink" href="#continuous-data" title="Link to this heading">#</a></h4>
 <p><em>Coming soon</em></p>
 </section>
 <section id="even-more-examples">
-<h4>Even more examples<a class="headerlink" href="#even-more-examples" title="Permalink to this heading">#</a></h4>
+<h4>Even more examples<a class="headerlink" href="#even-more-examples" title="Link to this heading">#</a></h4>
 <p>Simpson’s Paradox also shows up in sports (e.g., <a class="reference external" href="http://www.math.kent.edu/~darci/simpson/bballexamples.html">basketball</a> and <a class="reference external" href="https://metro.co.uk/2014/01/17/roger-federer-is-rubbish-at-tennis-because-he-tries-too-hard-4264338/">tennis</a>), <a class="reference external" href="https://aip.scitation.org/doi/10.1063/1.4977784">physics</a>, <a class="reference external" href="http://causality.cs.ucla.edu/blog/index.php/2020/07/06/race-covid-mortality-and-simpsons-paradox-by-dana-mackenzie/">COVID-19 mortality rates</a>, and much more.</p>
 </section>
 </section>
@@ -723,7 +729,7 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -751,7 +757,9 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -804,7 +812,7 @@ By Data 102 Staff
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -828,8 +836,8 @@ By Data 102 Staff
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

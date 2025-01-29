@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Parameter estimation and Bayesian Inference Fundamentals &#8212; Data, Inference, and Decisions</title>
   
@@ -15,53 +14,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/02/01_parameter_estimation';</script>
@@ -71,6 +69,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="prev" title="Chapter 2: Bayesian Inference" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -78,32 +77,16 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -111,7 +94,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -119,16 +101,25 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -143,6 +134,8 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../../intro.html">
   
@@ -154,7 +147,14 @@ const thebe_selector_output = ".output, .cell_output"
     <p class="title logo__title">Data, Inference, and Decisions</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -165,36 +165,37 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../01/01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/04_binary_classification.html">Binary Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/05_decision_theory.html">Decision Theory</a></li>
 </ul>
-</li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 2: Bayesian modeling</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 2: Bayesian modeling</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_graphical_models.html">Graphical Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/03_causality.html">Causality and Potential Outcomes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -203,14 +204,19 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -219,14 +225,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -349,27 +355,19 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -426,10 +424,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="parameter-estimation-and-bayesian-inference-fundamentals">
-<h1>Parameter estimation and Bayesian Inference Fundamentals<a class="headerlink" href="#parameter-estimation-and-bayesian-inference-fundamentals" title="Permalink to this heading">#</a></h1>
+<h1>Parameter estimation and Bayesian Inference Fundamentals<a class="headerlink" href="#parameter-estimation-and-bayesian-inference-fundamentals" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -437,13 +435,13 @@ document.write(`
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">YouTubeVideo</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
 </pre></div>
 </div>
 </div>
@@ -457,7 +455,7 @@ document.write(`
 </ul>
 <p>We’ll start with the first example.</p>
 <section id="intuition-and-computation">
-<h2>Intuition and computation<a class="headerlink" href="#intuition-and-computation" title="Permalink to this heading">#</a></h2>
+<h2>Intuition and computation<a class="headerlink" href="#intuition-and-computation" title="Link to this heading">#</a></h2>
 <p>Suppose you’re shopping for a new microwave. You find two choices, both of which cost about the same amount:</p>
 <ul class="simple">
 <li><p>Microwave A has three positive reviews and no negative reviews</p></li>
@@ -487,7 +485,7 @@ document.write(`
 </div>
 </section>
 <section id="frequentist-parameter-estimation-maximum-likelihood">
-<h2>Frequentist parameter estimation: maximum likelihood<a class="headerlink" href="#frequentist-parameter-estimation-maximum-likelihood" title="Permalink to this heading">#</a></h2>
+<h2>Frequentist parameter estimation: maximum likelihood<a class="headerlink" href="#frequentist-parameter-estimation-maximum-likelihood" title="Link to this heading">#</a></h2>
 <p>Before we can actually do any parameter estimation, we need to first specify the relevant probability distributions. Recall that in the frequentist setting, we’re assuming that the data (our binary reviews, <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>) are random, but that the parameter (the probability of generating a positive review <span class="math notranslate nohighlight">\(\theta\)</span>) is fixed and unknown.</p>
 <p>To set up a probability model in the frequentist setting, all we need is a <strong>likelihood</strong> <span class="math notranslate nohighlight">\(p(x_i|\theta)\)</span>. This tells us how likely a data point is, given a certain value of <span class="math notranslate nohighlight">\(\theta\)</span>. Since our data are binary and our parameter is a number between 0 and 1, a natural choice is a <strong>Bernoulli distribution</strong> (for more on Bernoulli distributions, see the <a class="reference external" href="http://prob140.org/textbook/content/Chapter_03/02_Distributions.html#named-distributions">Data 140 textbook</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Wikipedia</a>):</p>
 <div class="math notranslate nohighlight">
@@ -529,7 +527,7 @@ p(x_i|\theta) = \begin{cases}
 <li><p>We’ll confirm that step 3 gave us a maximum (rather than a minimum) by computing the second derivative and confirming that it’s negative, and checking the boundaries.</p></li>
 </ol>
 <section id="writing-the-likelihood">
-<h3>1. Writing the likelihood<a class="headerlink" href="#writing-the-likelihood" title="Permalink to this heading">#</a></h3>
+<h3>1. Writing the likelihood<a class="headerlink" href="#writing-the-likelihood" title="Link to this heading">#</a></h3>
 <p>Our likelihood for all the data points is:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -568,7 +566,7 @@ p(x_1, \ldots, x_n|\theta)
 \end{split}\]</div>
 </section>
 <section id="taking-the-log">
-<h3>2. Taking the log<a class="headerlink" href="#taking-the-log" title="Permalink to this heading">#</a></h3>
+<h3>2. Taking the log<a class="headerlink" href="#taking-the-log" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 \begin{align}
@@ -580,7 +578,7 @@ p(x_1, \ldots, x_n|\theta)
 \]</div>
 </section>
 <section id="maximizing">
-<h3>3. Maximizing<a class="headerlink" href="#maximizing" title="Permalink to this heading">#</a></h3>
+<h3>3. Maximizing<a class="headerlink" href="#maximizing" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
@@ -594,7 +592,7 @@ p(x_1, \ldots, x_n|\theta)
 <p>At this point, we can see why we chose to use the log likelihood: it was easier to differentiate the expression from step 2 than it would have been to differentiate the expression from step 1 (if you need to, convince yourself that this is true by computing the derivative).</p>
 </section>
 <section id="verifying-a-maximum">
-<h3>4. Verifying a maximum<a class="headerlink" href="#verifying-a-maximum" title="Permalink to this heading">#</a></h3>
+<h3>4. Verifying a maximum<a class="headerlink" href="#verifying-a-maximum" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
@@ -608,7 +606,7 @@ p(x_1, \ldots, x_n|\theta)
 <p>In many cases, it may also be necessary to check the boundary values, especially if the likelihood function is monotonically increasing or decreasing over the range of possible <span class="math notranslate nohighlight">\(\theta\)</span> values.</p>
 </section>
 <section id="applying-the-maximum-likelihood-estimate">
-<h3>Applying the maximum likelihood estimate<a class="headerlink" href="#applying-the-maximum-likelihood-estimate" title="Permalink to this heading">#</a></h3>
+<h3>Applying the maximum likelihood estimate<a class="headerlink" href="#applying-the-maximum-likelihood-estimate" title="Link to this heading">#</a></h3>
 <p>Let’s return to our example comparing microwaves A and B. If we apply maximum likelihood for each one, we get that <span class="math notranslate nohighlight">\(\hat{\theta}_{A, \text{MLE}} = 3/3 = 1\)</span> and <span class="math notranslate nohighlight">\(\hat{\theta}_{B,\text{MLE}} = 19/20 = 0.95\)</span>: in other words, MLE tells us that Microwave A is the better choice.</p>
 <p>In other words, the value of <span class="math notranslate nohighlight">\(\theta\)</span> that makes “3 positive reviews only” as likely as possible is <span class="math notranslate nohighlight">\(\theta=1\)</span>. Similarly, the value of <span class="math notranslate nohighlight">\(\theta\)</span> that makes “19 positive reviews and 1 negative review” as likely as possible is <span class="math notranslate nohighlight">\(\theta=0.95\)</span>.</p>
 <div class="cell tag_remove-input docutils container">
@@ -627,7 +625,7 @@ p(x_1, \ldots, x_n|\theta)
 </section>
 </section>
 <section id="a-different-way-bayesian-inference">
-<h2>A different way: Bayesian inference<a class="headerlink" href="#a-different-way-bayesian-inference" title="Permalink to this heading">#</a></h2>
+<h2>A different way: Bayesian inference<a class="headerlink" href="#a-different-way-bayesian-inference" title="Link to this heading">#</a></h2>
 <p>In the Bayesian setting, we’ll assume that the unknown parameter <span class="math notranslate nohighlight">\(\theta\)</span> is a random variable. Now, instead of looking for a single estimate, we’ll consider the probability distribution for <span class="math notranslate nohighlight">\(\theta\)</span> after observing the data <span class="math notranslate nohighlight">\(x\)</span>. This is the conditional distribution <span class="math notranslate nohighlight">\(p(\theta|x)\)</span>, which we call the <strong>posterior distribution</strong>. Throughout the rest of this chapter, we’ll learn how to compute and interpret this distribution. It represents our understanding of the randomness in <span class="math notranslate nohighlight">\(\theta\)</span> after seeing the data <span class="math notranslate nohighlight">\(x\)</span>. We’ll compute it using Bayes’ rule:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -667,7 +665,7 @@ p(\theta|x) &amp;\propto p(x|\theta)p(\theta)
         </div></div>
 </div>
 <section id="choosing-a-prior-beta-distributions">
-<h3>Choosing a prior: Beta distributions<a class="headerlink" href="#choosing-a-prior-beta-distributions" title="Permalink to this heading">#</a></h3>
+<h3>Choosing a prior: Beta distributions<a class="headerlink" href="#choosing-a-prior-beta-distributions" title="Link to this heading">#</a></h3>
 <p>Let’s return to our product review example. For our prior <span class="math notranslate nohighlight">\(p(\theta)\)</span>, which represents our belief about the unknown product quality <span class="math notranslate nohighlight">\(\theta\)</span> before seeing any data, we’ll choose the <a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">Beta distribution</a>. This isn’t the only distribution we can choose, but it happens to be a particularly convenient choice: we’ll see why later. The Beta distribution has two parameters, <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. It’s defined as:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -675,7 +673,7 @@ p(\theta) \propto \theta^{\alpha-1} (1-\theta)^{\beta-1}
 \]</div>
 <p>The normalization constant is quite complicated, but we don’t need to know what it is to use the Beta distribution. Since this is a well-studied distribution, we can find out any facts about it that we need just by looking them up. Try it yourself: without doing any computation, what is the expectation of a Beta-distributed random variable? What is the mode?</p>
 <section id="normalizing-the-beta-distribution-optional">
-<h4>Normalizing the Beta distribution (optional)<a class="headerlink" href="#normalizing-the-beta-distribution-optional" title="Permalink to this heading">#</a></h4>
+<h4>Normalizing the Beta distribution (optional)<a class="headerlink" href="#normalizing-the-beta-distribution-optional" title="Link to this heading">#</a></h4>
 <p>How would we go about computing the normalization constant for this distribution? We know that the formula above is missing a constant of proportionality, which we’ll call <span class="math notranslate nohighlight">\(Z\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -694,7 +692,7 @@ p(\theta) = \frac{1}{Z} \theta^{\alpha-1} (1-\theta)^{\beta-1}
 <p>Also note that <span class="math notranslate nohighlight">\(Z\)</span> does not depend on <span class="math notranslate nohighlight">\(\theta\)</span>, but it does depend on the parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 </section>
 <section id="intuition-for-the-beta-distribution">
-<h4>Intuition for the Beta distribution<a class="headerlink" href="#intuition-for-the-beta-distribution" title="Permalink to this heading">#</a></h4>
+<h4>Intuition for the Beta distribution<a class="headerlink" href="#intuition-for-the-beta-distribution" title="Link to this heading">#</a></h4>
 <p>Before we compute the posterior, let’s build some intuition for how the Beta distribution works. The <a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">Wikipedia page</a> has some helpful examples of what it looks like for different values of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. Let’s look at a few of those examples. Recall that we can use the distributions in <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> to compute and visualize probability density functions (PDFs):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -712,7 +710,7 @@ p(\theta) = \frac{1}{Z} \theta^{\alpha-1} (1-\theta)^{\beta-1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/f2b46a6cdfcc5522836210b4743618d5ef673d393142347fd320cfb721586df2.png" src="../../../_images/f2b46a6cdfcc5522836210b4743618d5ef673d393142347fd320cfb721586df2.png" />
+<img alt="../../../_images/4bc6fc6be1e389c9c4e682b10752e4f762dad380b4f134659b6bbf5c54f3c11e.png" src="../../../_images/4bc6fc6be1e389c9c4e682b10752e4f762dad380b4f134659b6bbf5c54f3c11e.png" />
 </div>
 </div>
 <p>We can see that different values of the parameters lead to different shapes for the Beta distribution. In particular, when <span class="math notranslate nohighlight">\(\alpha\)</span> is larger than <span class="math notranslate nohighlight">\(\beta\)</span>, we see that larger values of <span class="math notranslate nohighlight">\(\theta\)</span> are more likely, and vice versa. We can also see that Beta<span class="math notranslate nohighlight">\((1, 1)\)</span> is the same as the Uniform distribution over <span class="math notranslate nohighlight">\([0, 1]\)</span>. Try experimenting with different values: what changes as <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> get larger?</p>
@@ -731,7 +729,7 @@ p(\theta) = \frac{1}{Z} \theta^{\alpha-1} (1-\theta)^{\beta-1}
 </div>
 </section>
 <section id="computing-the-posterior">
-<h4>Computing the posterior<a class="headerlink" href="#computing-the-posterior" title="Permalink to this heading">#</a></h4>
+<h4>Computing the posterior<a class="headerlink" href="#computing-the-posterior" title="Link to this heading">#</a></h4>
 <p>Now that we’ve set up the prior, we can compute the posterior distribution:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -764,7 +762,7 @@ p(\theta|x)
 </div>
 </section>
 <section id="demo-prior-and-posterior-betas">
-<h4>Demo: prior and posterior Betas<a class="headerlink" href="#demo-prior-and-posterior-betas" title="Permalink to this heading">#</a></h4>
+<h4>Demo: prior and posterior Betas<a class="headerlink" href="#demo-prior-and-posterior-betas" title="Link to this heading">#</a></h4>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -774,7 +772,7 @@ p(\theta|x)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">FIGURE_SIZE</span> <span class="o">=</span> <span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
 <span class="c1">#def plot_beta_prior_and_posterior(r, s, m, y, show_map=False, show_lmse=False):</span>
-<span class="k">def</span> <span class="nf">plot_beta_prior_and_posterior</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">pos_obs</span><span class="p">,</span> <span class="n">neg_obs</span><span class="p">,</span> <span class="n">show_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_lmse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>   
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_beta_prior_and_posterior</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">pos_obs</span><span class="p">,</span> <span class="n">neg_obs</span><span class="p">,</span> <span class="n">show_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_lmse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>   
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
     <span class="n">prior</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
     
@@ -800,7 +798,7 @@ p(\theta|x)
                          <span class="n">posterior_label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Posterior: Beta(</span><span class="si">{</span><span class="n">alpha_new</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">beta_new</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span>
                          <span class="n">x_map</span><span class="o">=</span><span class="n">x_map</span><span class="p">,</span> <span class="n">x_lmse</span><span class="o">=</span><span class="n">x_lmse</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
     
-<span class="k">def</span> <span class="nf">plot_prior_posterior</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prior</span><span class="p">,</span> <span class="n">posterior</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> 
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_prior_posterior</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prior</span><span class="p">,</span> <span class="n">posterior</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> 
                          <span class="n">prior_label</span><span class="p">,</span> <span class="n">posterior_label</span><span class="p">,</span>
                          <span class="n">x_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_lmse</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     
@@ -842,7 +840,7 @@ p(\theta|x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/3094465dbdfc1537fc8e7cca64a370d7e3bc70bbc302f44a90ba84e592d877cc.png" src="../../../_images/3094465dbdfc1537fc8e7cca64a370d7e3bc70bbc302f44a90ba84e592d877cc.png" />
+<img alt="../../../_images/764bb478c33b740511c7a3c900be97aec8beea5b9ae49a0fe3c198844cd4a048.png" src="../../../_images/764bb478c33b740511c7a3c900be97aec8beea5b9ae49a0fe3c198844cd4a048.png" />
 </div>
 </div>
 <p>Looking at the orange density, it assigns higher probability to larger values of <span class="math notranslate nohighlight">\(\theta\)</span>. What if we use a different prior? We’ll try a Beta<span class="math notranslate nohighlight">\((1, 5)\)</span> prior, which represents the belief that before we observe any reviews, smaller values of <span class="math notranslate nohighlight">\(\theta\)</span> are more likely than larger ones (i.e., we are skeptical of product quality before we see any reviews).</p>
@@ -853,7 +851,7 @@ p(\theta|x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/98c576e29d44a3e03ae2c7007365e6382c86698d8c6b68cedea64763c1b98542.png" src="../../../_images/98c576e29d44a3e03ae2c7007365e6382c86698d8c6b68cedea64763c1b98542.png" />
+<img alt="../../../_images/5568458b33f13ce5e77b62c96dcf0bae340bcc8f2b126d14fdbe126192b52825.png" src="../../../_images/5568458b33f13ce5e77b62c96dcf0bae340bcc8f2b126d14fdbe126192b52825.png" />
 </div>
 </div>
 <p>Changing the prior distribution has dramatically changed the posterior distribution. What if we had used an even more “skeptical” prior?</p>
@@ -864,7 +862,7 @@ p(\theta|x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/f22f5474014a513105f3707600485cca9b87e80bdd98bba8dbc16330d3c70904.png" src="../../../_images/f22f5474014a513105f3707600485cca9b87e80bdd98bba8dbc16330d3c70904.png" />
+<img alt="../../../_images/492243a70fceb284bd370de60d42b474ebbdbf70533b8a2b46061998b1f4874f.png" src="../../../_images/492243a70fceb284bd370de60d42b474ebbdbf70533b8a2b46061998b1f4874f.png" />
 </div>
 </div>
 <p>We can see that for microwave A, our choice of prior has a significant effect on the posterior distribution. What about for microwave B?</p>
@@ -877,9 +875,9 @@ p(\theta|x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/d6ee29cb0def59322856dfa15e1a624197b58bfacb3a2735d4ab29a7f29ad189.png" src="../../../_images/d6ee29cb0def59322856dfa15e1a624197b58bfacb3a2735d4ab29a7f29ad189.png" />
-<img alt="../../../_images/d1c5613642bdf4829015e2da0cbdeb2471534ec0f9a4d3a7488934ab1821e5ca.png" src="../../../_images/d1c5613642bdf4829015e2da0cbdeb2471534ec0f9a4d3a7488934ab1821e5ca.png" />
-<img alt="../../../_images/3c8fa515adedb93deb4411f263b6ec03e7d813a4c62360690315f6178d6e879f.png" src="../../../_images/3c8fa515adedb93deb4411f263b6ec03e7d813a4c62360690315f6178d6e879f.png" />
+<img alt="../../../_images/f3a54c62d376d438a884ad847f41dcc3d8f89cc3871bc08a07217f192ea11dd9.png" src="../../../_images/f3a54c62d376d438a884ad847f41dcc3d8f89cc3871bc08a07217f192ea11dd9.png" />
+<img alt="../../../_images/2908869ac1d4b6667440cf46fd2d20f49e9c958215144187047aa666d25ac0a2.png" src="../../../_images/2908869ac1d4b6667440cf46fd2d20f49e9c958215144187047aa666d25ac0a2.png" />
+<img alt="../../../_images/8ba58538469963bc8f38d22b798e63df0133e355a87ed55547642361d02df777.png" src="../../../_images/8ba58538469963bc8f38d22b798e63df0133e355a87ed55547642361d02df777.png" />
 </div>
 </div>
 <p>Here, the prior still has an effect on the posterior distribution: the more “skeptical” the prior is, the more the posterior shifts to the left. But, the effect of the prior is much smaller than it was for Microwave A. This illustrates a general trend in Bayesian inference: <strong>with less data, the prior usually has a stronger effect on the posterior</strong>.</p>
@@ -898,7 +896,7 @@ p(\theta|x)
 </div>
 </section>
 <section id="point-estimates">
-<h4>Point estimates<a class="headerlink" href="#point-estimates" title="Permalink to this heading">#</a></h4>
+<h4>Point estimates<a class="headerlink" href="#point-estimates" title="Link to this heading">#</a></h4>
 <p>Once we have a posterior distribution, we will often want to answer the question: how do we use the distribution to get a single estimate for <span class="math notranslate nohighlight">\(\theta\)</span>? This single number is typically called a <strong>point estimate</strong>.</p>
 <p>We’ll start with two answers for question 1: the <strong>Maximum a Posteriori (MAP) estimate</strong> and the <strong>Minimum/Least Mean Squared Error (MMSE/LMSE) Estimate</strong>.</p>
 <p>The <strong>MAP estimate</strong> is the estimate that maximizes the posterior distribution. Remember that the posterior distribution represents our belief about the unknown parameter <span class="math notranslate nohighlight">\(\theta\)</span>. Intuitively, the MAP estimate is the <span class="math notranslate nohighlight">\(\theta\)</span> value that is most likely according to that belief. For a Beta<span class="math notranslate nohighlight">\((\alpha, \beta)\)</span> distribution, we can look up the maximum value (mode) of the distribution to find that it’s <span class="math notranslate nohighlight">\(\frac{\alpha-1}{\alpha+\beta-2}\)</span>.</p>
@@ -939,7 +937,7 @@ p(\theta|x)
 </div>
 </section>
 <section id="choosing-the-prior-parameters">
-<h4>Choosing the prior parameters<a class="headerlink" href="#choosing-the-prior-parameters" title="Permalink to this heading">#</a></h4>
+<h4>Choosing the prior parameters<a class="headerlink" href="#choosing-the-prior-parameters" title="Link to this heading">#</a></h4>
 <p>Returning to our microwave example, we can see that our choice of prior encodes our beliefs about products and reviews.</p>
 <p>For example, if we think that most products are good until proven otherwise by the review data, then we could choose a more “optimistic” prior, such as Beta<span class="math notranslate nohighlight">\((5, 1)\)</span>, which favors (assigns higher probability to)  larger values of <span class="math notranslate nohighlight">\(\theta\)</span>. In this case:</p>
 <ul class="simple">
@@ -957,7 +955,7 @@ So, under this prior, microwave B looks better.</p></li>
 </section>
 </section>
 <section id="another-attempt-a-non-conjugate-prior">
-<h3>Another attempt: a non-conjugate prior<a class="headerlink" href="#another-attempt-a-non-conjugate-prior" title="Permalink to this heading">#</a></h3>
+<h3>Another attempt: a non-conjugate prior<a class="headerlink" href="#another-attempt-a-non-conjugate-prior" title="Link to this heading">#</a></h3>
 <p>To see why the conjugate prior is so helpful, let’s see what would have happened if we chose a different prior.</p>
 <p>Suppose we instead choose the prior <span class="math notranslate nohighlight">\(p(\theta) = \frac{\pi}{2} \cos\left(\frac{\pi}{2} \theta\right), \, \theta \in [0, 1]\)</span>:</p>
 <div class="cell docutils container">
@@ -973,7 +971,7 @@ So, under this prior, microwave B looks better.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/aa95ee6c0297b1761edee88b669e17e26202d7a2fd486d3b92a8cb7853401151.png" src="../../../_images/aa95ee6c0297b1761edee88b669e17e26202d7a2fd486d3b92a8cb7853401151.png" />
+<img alt="../../../_images/568b177d8bed1c7ac151c43e736582fd0af734720debee7ffe7728b6c728095d.png" src="../../../_images/568b177d8bed1c7ac151c43e736582fd0af734720debee7ffe7728b6c728095d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -983,7 +981,11 @@ So, under this prior, microwave B looks better.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9999991742330661
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2019/2433367669.py:1: DeprecationWarning: `trapz` is deprecated. Use `trapezoid` instead, or one of the numerical integration functions in `scipy.integrate`.
+  np.trapz(np.pi/2 * np.cos(thetas * np.pi/2), thetas)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9999991742330661)
 </pre></div>
 </div>
 </div>
@@ -1002,14 +1004,14 @@ p(\theta|x)
 </section>
 </section>
 <section id="a-continuous-example-estimating-heights">
-<h2>A continuous example: estimating heights<a class="headerlink" href="#a-continuous-example-estimating-heights" title="Permalink to this heading">#</a></h2>
+<h2>A continuous example: estimating heights<a class="headerlink" href="#a-continuous-example-estimating-heights" title="Link to this heading">#</a></h2>
 <p>Suppose instead that now our parameter of interest <span class="math notranslate nohighlight">\(\theta\)</span> is the average height of a population, and our data <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> are heights of individuals in a sample. A Bernoulli distribution no longer makes sense for these continuous data. There are many options we could choose, but for simplicity we’ll use a normal distribution:</p>
 <div class="math notranslate nohighlight">
 \[
 x_i|\theta \sim \mathcal{N}(\theta, \sigma^2)
 \]</div>
 <section id="mle-for-the-gaussian-likelihood">
-<h3>MLE for the Gaussian likelihood<a class="headerlink" href="#mle-for-the-gaussian-likelihood" title="Permalink to this heading">#</a></h3>
+<h3>MLE for the Gaussian likelihood<a class="headerlink" href="#mle-for-the-gaussian-likelihood" title="Link to this heading">#</a></h3>
 <p>We can go through a similar process as before to find the MLE for the Gaussian likelihood. Because the normalizing constant <span class="math notranslate nohighlight">\(\frac{1}{\sigma\sqrt{2\pi}}\)</span> doesn’t depend on <span class="math notranslate nohighlight">\(\theta\)</span> (and our goal is to optimize for <span class="math notranslate nohighlight">\(\theta\)</span>, we’ll leave it out for now.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1037,7 +1039,7 @@ p(x_1, \ldots, x_n|\theta) &amp;= \left(\frac{1}{\sigma\sqrt{2\pi}}\right)^n \ex
 <p><strong>Exercise</strong>: Suppose instead of the population average, we had been interested in the population standard deviation. What is the MLE for the population standard deviation?</p>
 </section>
 <section id="bayesian-inference-for-heights">
-<h3>Bayesian inference for heights<a class="headerlink" href="#bayesian-inference-for-heights" title="Permalink to this heading">#</a></h3>
+<h3>Bayesian inference for heights<a class="headerlink" href="#bayesian-inference-for-heights" title="Link to this heading">#</a></h3>
 <p>Now suppose we instead take a Bayesian approach, and treat <span class="math notranslate nohighlight">\(\theta\)</span> as random. Just like before, we’re interested in the posterior distribution:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1080,7 +1082,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># You don&#39;t need to understand how this function is implemented.</span>
 
-<span class="k">def</span> <span class="nf">plot_gaussian_prior_and_posterior</span><span class="p">(</span><span class="n">μ_0</span><span class="p">,</span> <span class="n">σ_0</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">range_in_σs</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">show_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_lmse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_gaussian_prior_and_posterior</span><span class="p">(</span><span class="n">μ_0</span><span class="p">,</span> <span class="n">σ_0</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">range_in_σs</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">show_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_lmse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots prior and posterior Normaly distribution</span>
 <span class="sd">    </span>
@@ -1142,7 +1144,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/7cbb7319b1e42031a4d51978df02130967ddb32ec1207ec2f17d25327b9fc739.png" src="../../../_images/7cbb7319b1e42031a4d51978df02130967ddb32ec1207ec2f17d25327b9fc739.png" />
+<img alt="../../../_images/e2fdb954c47b3f898c87e58874a1010b55c462625ad420d9e0886a53d661e379.png" src="../../../_images/e2fdb954c47b3f898c87e58874a1010b55c462625ad420d9e0886a53d661e379.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1152,7 +1154,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/0062244492dcfda35dd60a2acc6994efdd7b478b5da355a16396ddf1d0c923bd.png" src="../../../_images/0062244492dcfda35dd60a2acc6994efdd7b478b5da355a16396ddf1d0c923bd.png" />
+<img alt="../../../_images/a1f5d5277fac355742ce160267e8f796963a867b092e58b5ad1f3b9c2dcac21d.png" src="../../../_images/a1f5d5277fac355742ce160267e8f796963a867b092e58b5ad1f3b9c2dcac21d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1162,7 +1164,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/fa824eeb84a635dc3c7549689bc22edef69f926b71400166570832ce50ab4d30.png" src="../../../_images/fa824eeb84a635dc3c7549689bc22edef69f926b71400166570832ce50ab4d30.png" />
+<img alt="../../../_images/a8ea91c20363d48255b7a7989d8e96cba8786c34b7c53d09c2e5d5de7e3adc92.png" src="../../../_images/a8ea91c20363d48255b7a7989d8e96cba8786c34b7c53d09c2e5d5de7e3adc92.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1172,7 +1174,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/4b27c7a89315741432c5e53753e882a58d95b141f3b6a50b7957c6c6d82e771b.png" src="../../../_images/4b27c7a89315741432c5e53753e882a58d95b141f3b6a50b7957c6c6d82e771b.png" />
+<img alt="../../../_images/ddabb415a2771febba9386153667c8d2a8ebfc3ff161f96ae9b4122ddd68ffb7.png" src="../../../_images/ddabb415a2771febba9386153667c8d2a8ebfc3ff161f96ae9b4122ddd68ffb7.png" />
 </div>
 </div>
 <p>Just as before, we can observe that the prior has a stronger effect when we have less data. We can also see that the posterior distribution becomes narrower as the amount of data increases. This is another general fact: <strong>the more data we observe, the narrower our posterior distribution becomes.</strong></p>
@@ -1207,7 +1209,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -1235,7 +1237,9 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1294,7 +1298,7 @@ By Data 102 Staff
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1318,8 +1322,8 @@ By Data 102 Staff
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

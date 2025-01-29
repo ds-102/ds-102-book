@@ -1,0 +1,1691 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Causal Inference in Observational Studies: Unconfoundedness &#8212; Data, Inference, and Decisions</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/04/05_observational_studies_unconfoundedness';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="Causal Inference in Randomized Experiments" href="04_randomized_experiments.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Data, Inference, and Decisions</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data, Inference, and Decisions
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/04_binary_classification.html">Binary Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/05_decision_theory.html">Decision Theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02/01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/03_graphical_models.html">Graphical Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_association_correlation_causation.html">Understanding Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_causality.html">Causality and Potential Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Causality in Observational Studies: Unconfoundedness</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/04/05_observational_studies_unconfoundedness.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/chapters/04/05_observational_studies_unconfoundedness.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Causal Inference in Observational Studies: Unconfoundedness</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-s-hard">Why it’s hard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-variables-and-the-superpopulation-model">Confounding variables and the superpopulation model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-average-treatment-effect-and-unconfoundedness">Conditional average treatment effect and unconfoundedness</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-cate-to-ate">From CATE to ATE</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outcome-regression">Outcome Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-propensity-weighting">Inverse propensity weighting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reweighting">Reweighting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-propensity-score-weighting-ipw">Inverse Propensity Score Weighting (IPW)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-propensity-scores-using-logistic-regression">Computing propensity scores using logistic regression</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="causal-inference-in-observational-studies-unconfoundedness">
+<h1>Causal Inference in Observational Studies: Unconfoundedness<a class="headerlink" href="#causal-inference-in-observational-studies-unconfoundedness" title="Link to this heading">#</a></h1>
+<p>So far, we’ve looked at ways of measuring association in any dataset. We’ve also looked at how we can draw conclusions about causality in randomized controlled trials. But in many cases, randomized controlled trials are not viable. Some reasons for that might be:</p>
+<ul class="simple">
+<li><p><strong>Ethical considerations</strong>: suppose we believe that a certain treatment might harm people. In order to test this belief in a randomized controlled trial, we would have to subject people to a treatment that we believe would harm them, which is profoundly unethical. In such cases, we need alternative ways of drawing causal conclusions: we have an obligation as data scientists and researchers to avoid making <a class="reference external" href="https://en.wikipedia.org/wiki/Unethical_human_experimentation_in_the_United_States">the mistakes of the past</a>.</p></li>
+<li><p><strong>Cost</strong>: Randomized controlled trials can be expensive to run: we must find randomly chosen individuals that are representative the population; apply a treatment to half of them; and measure the outcomes, potentially over a long range of time. In some cases, this may be infeasible.</p></li>
+<li><p><strong>Sample size</strong>: due to cost considerations, randomized controlled trials may not have enough subjects to draw strong statistical conclusions.</p></li>
+</ul>
+<p>There is a wealth of data available on observational studies. In this section, we’ll look at ways we can use this data to draw causal conclusions. As we saw when looking at association, the most common problem when trying to draw conclusions about causality is the presence of confounding variables. We’ll focus our attention on methods that try to account for these confounding variables.</p>
+<section id="why-it-s-hard">
+<h2>Why it’s hard<a class="headerlink" href="#why-it-s-hard" title="Link to this heading">#</a></h2>
+<p>When dealing with data from observational studies, we can’t just take the simple difference in means anymore. To see why not, let’s return to our restaurants example. We’ll do the same computations we did before, but this time from the potential outcomes perspective.</p>
+<p>Consider the science table version of the data (where we’ve converted 👍 to 1 and 👎 to 0, so that averages correspond to percentages liked):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">food</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;restaurants_counterfactuals.csv&#39;</span><span class="p">)</span>
+<span class="n">food</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dish rating for A</th>
+      <th>Dish rating for B</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>2020</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>2019</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>2020</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>2020</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>2020</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values indicate missing counterfactual outcomes that we don’t get to observe: for example, dish 0 was ordered from Restaurant A, so we don’t know what rating the critics would have given a dish from Restaurant B on that day.</p>
+<p>Displaying the data this way requires us to think about it slightly differently, and highlights the implications of the potential outcomes framework! In particular:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Z_i\)</span> corresponds to whether the critic ordered dish <span class="math notranslate nohighlight">\(i\)</span> from restaurant A or B.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_i(B)\)</span> and <span class="math notranslate nohighlight">\(Y_i(A)\)</span> represent what-ifs: <em>if</em> the critics had ordered dish <span class="math notranslate nohighlight">\(i\)</span> from a particular restaurant, would they have liked it?</p></li>
+<li><p>The year is our confounder (or “confounding variable”): we’ll use <span class="math notranslate nohighlight">\(X_i\)</span> to denote the year that dish <span class="math notranslate nohighlight">\(i\)</span> was ordered in.</p></li>
+</ul>
+<p>Our representation of the data this way makes it clear that we can’t compute the ATE:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_ATE</span> <span class="o">=</span> <span class="p">(</span><span class="n">food</span><span class="p">[</span><span class="s2">&quot;Dish rating for B&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">food</span><span class="p">[</span><span class="s2">&quot;Dish rating for A&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">food_ATE</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nan
+</pre></div>
+</div>
+</div>
+</div>
+<p>In trying to understand a causal relationship between choice of restaurant and liking the food, naively using the simple difference in observed means (SDO) can mislead us, as we already saw:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_sdo</span> <span class="o">=</span> <span class="n">food</span><span class="p">[</span><span class="s2">&quot;Dish rating for B&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">food</span><span class="p">[</span><span class="s2">&quot;Dish rating for A&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">food_sdo</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.20000000000000007)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="confounding-variables-and-the-superpopulation-model">
+<h2>Confounding variables and the superpopulation model<a class="headerlink" href="#confounding-variables-and-the-superpopulation-model" title="Link to this heading">#</a></h2>
+<p>In the case of a randomized controlled trial, we saw that we could use the difference in means estimator because of the independence between the treatment assignment <span class="math notranslate nohighlight">\(Z_i\)</span> and the potential outcomes <span class="math notranslate nohighlight">\(\big(Y_i(0), Y_i(1)\big)\)</span>. But, in the case of an observational study, this independence assumption no longer holds. We’ve seen a few examples of this in the last few sections, where confounding variables affect both the treatment and the outcome.</p>
+<p>In this section, we’ll focus on a few methods that answer the question: if we also observe the confounding variable, can we determine whether the treatment has an effect on the outcome?</p>
+<p>Our notation will be similar to what we’ve used before, and we’ll add a new variable <span class="math notranslate nohighlight">\(X_i\)</span> for each unit that represents the confounding information. We have tuples <span class="math notranslate nohighlight">\((Z_i, Y_i(0), Y_i(1), X_i)\)</span> for each unit that are i.i.d. (that is, the tuple for one unit is independent from the tuple for the next unit). This is called the <strong>superpopulation model</strong>.</p>
+</section>
+<section id="conditional-average-treatment-effect-and-unconfoundedness">
+<h2>Conditional average treatment effect and unconfoundedness<a class="headerlink" href="#conditional-average-treatment-effect-and-unconfoundedness" title="Link to this heading">#</a></h2>
+<p>We’ll define a new quantity called the <strong>conditional average treatment effect (CATE)</strong>. This is like the ATE we saw before, but conditioned on a particular value of <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{CATE} = \tau(x) = E[Y(1) - Y(0) | X = x]
+\]</div>
+<p>Introducing the conditioning alone doesn’t help us: if we were to expand this using the tower property to condition on <span class="math notranslate nohighlight">\(Z\)</span>, we’ll still have counterfactual terms. So why did we do it? It turns out that we only need to make one assumption for this to help us. This assumption is called <strong>unconfoundedness</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \big(Y(0), Y(1)\big) \perp \!\!\! \perp Z \mid X
+\]</div>
+<p>This is a statement of conditional independence. The potential outcomes <span class="math notranslate nohighlight">\(Y(0)\)</span> and <span class="math notranslate nohighlight">\(Y(1)\)</span> might not be independent of the treatment decision <span class="math notranslate nohighlight">\(Z\)</span>, but this assumption states that they are conditionally independent <em>if</em> we know the value of a confounding variable <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>In the restaurant example above, unconfoundedness would mean that within each year, the decision whether to order from A or B (treatment) is independent of the ratings that dishes from A and B would get (potential outcomes). It does <em>not</em> state that the restaurant is conditionally independent of the rating: this is a subtle but important distinction.</p>
+<p>If we assume unconfoundedness, then we can safely estimate the CATE using the difference in conditional means:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+    \tau(x) 
+        &amp;= E[Y(1) - Y(0) | X = x] &amp;\\
+        &amp;= E[Y(1) | X = x] - E[Y(0) | X = x] &amp; {\tiny\text{(linearity of (conditional) expectation)}}\\
+        &amp;= E[Y(1) | X = x, Z = 1] - E[Y(0) | X = x, Z = 0] &amp; {\tiny\text{(unconfoundedness)}}
+\end{align}
+\end{split}\]</div>
+<section id="from-cate-to-ate">
+<h3>From CATE to ATE<a class="headerlink" href="#from-cate-to-ate" title="Link to this heading">#</a></h3>
+<p>In most cases, what we’re really interested in is the ATE. How do we get from the CATE to the ATE? As we’ve done so many times before, we can use the law of iterated expectation (tower property):</p>
+<div class="math notranslate nohighlight">
+\[
+E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
+\]</div>
+<p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+    ATE 
+        &amp;= E[\tau(X)] \\
+        &amp;= \sum_x \tau(x) P(X=x)
+\end{align}
+\end{split}\]</div>
+<p>(where we would use an integral instead of a sum if <span class="math notranslate nohighlight">\(X\)</span> is continuous).</p>
+<p>What does this look like in practice? Let’s go back to the restaurant example. Instead of computing the difference in means for the entire dataset, we’ll do it separately, once for 2020 and once for 2019:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food_2020</span> <span class="o">=</span> <span class="n">food</span><span class="p">[</span><span class="n">food</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2020</span><span class="p">]</span>
+<span class="n">food_2019</span> <span class="o">=</span> <span class="n">food</span><span class="p">[</span><span class="n">food</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2019</span><span class="p">]</span>
+
+<span class="n">food_sdo_2020</span> <span class="o">=</span> <span class="n">food_2020</span><span class="p">[</span><span class="s2">&quot;Dish rating for B&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">food_2020</span><span class="p">[</span><span class="s2">&quot;Dish rating for A&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">food_sdo_2019</span> <span class="o">=</span> <span class="n">food_2019</span><span class="p">[</span><span class="s2">&quot;Dish rating for B&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">food_2019</span><span class="p">[</span><span class="s2">&quot;Dish rating for A&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">food_sdo_2020</span><span class="p">,</span> <span class="n">food_sdo_2019</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.05555555555555558 -0.125
+</pre></div>
+</div>
+</div>
+</div>
+<p>These correspond to the CATEs <span class="math notranslate nohighlight">\(\tau(2020)\)</span> and <span class="math notranslate nohighlight">\(\tau(2019)\)</span> respectively. Just like earlier, we see that these values have the opposite sign from the SDO computed on the entire data: Restaurant A was better-liked in 2020 and 2019. But, because the critics ordered from Restaurant A more in 2020 (which had lower ratings overall), Restaurant A looks worse in the aggregate data.</p>
+<p>How do we combine these to estimate the ATE? We need the marginal probabilities <span class="math notranslate nohighlight">\(P(2020)\)</span> and <span class="math notranslate nohighlight">\(P(2019)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_2020</span> <span class="o">=</span> <span class="p">(</span><span class="n">food</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2020</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">p_2019</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">p_2020</span>
+
+<span class="n">est_food_ATE</span> <span class="o">=</span> <span class="n">food_sdo_2020</span> <span class="o">*</span> <span class="n">p_2020</span> <span class="o">+</span> <span class="n">food_sdo_2019</span> <span class="o">*</span> <span class="n">p_2019</span>
+<span class="n">est_food_ATE</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-0.07870370370370372)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is our first causal inference from observational data! To state it formally:</p>
+<p><strong>If we assume that the year is the only confounder for the effect of restaurant choice on reviews, then choosing Restaurant A causes the critics to like dishes about 8% more</strong>.</p>
+<p>When we assume that the year is the only confounder, we’re assuming *<em>unconfoundedness</em>: that the pair of potential outcomes (i.e., the what-ifs for their reviews) are independent of which restaurant they actually chose, given the year.</p>
+<p>Note that we can’t just make a blanket statement about causality: this statement depends heavily on our use of the unconfoundedness assumption. This is true in general: in order to draw causal inferences outside of randomized controlled experiments, we need to make assumptions. When reporting your causal conclusions, it’s always important to communicate the assumptions you made!</p>
+</section>
+</section>
+<section id="outcome-regression">
+<h2>Outcome Regression<a class="headerlink" href="#outcome-regression" title="Link to this heading">#</a></h2>
+<p><em>Coming soon</em></p>
+</section>
+<section id="inverse-propensity-weighting">
+<h2>Inverse propensity weighting<a class="headerlink" href="#inverse-propensity-weighting" title="Link to this heading">#</a></h2>
+<p>In inverse propensity weighting, we’re intuitively trying to undo or compensate for the effect of the confounder by reweighting the outcome variables based on the treatment and confounders. To illustrate the effect, we’ll use a synthetic dataset from a treatment for high blood pressure for twenty people. The data contain three columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">treated</span></code>, which says whether or not each person received the treatment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_old</span></code>, whether the patient is older than 45 (1) or not (0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bp_change</span></code>, how much the person’s (systolic) blood pressure dropped (in mm Hg)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;bp_treatment.csv&#39;</span><span class="p">)</span>
+<span class="n">bp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>treated</th>
+      <th>is_old</th>
+      <th>bp_change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-3.4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-4.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-5.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-2.9</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-3.8</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-4.7</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0</td>
+      <td>1</td>
+      <td>-0.7</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0</td>
+      <td>1</td>
+      <td>-0.9</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-5.2</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-4.8</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-5.9</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-6.1</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.1</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.5</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-2.1</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-0.8</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.7</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-4.9</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-5.4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;is_old&#39;</span><span class="p">,</span> <span class="s1">&#39;treated&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>bp_change</th>
+    </tr>
+    <tr>
+      <th>is_old</th>
+      <th>treated</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">0</th>
+      <th>0</th>
+      <td>-3.514286</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-5.500000</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">1</th>
+      <th>0</th>
+      <td>-0.800000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-2.500000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>From a quick look at the data, we can see a few facts:</p>
+<ul class="simple">
+<li><p>Most of the people who received the treatment were older</p></li>
+<li><p>Almost all the younger peoples’ BP improved</p></li>
+<li><p>Most of the older peoples’ BP did not improve</p></li>
+<li><p>We have very few data points: only twenty people overall, and, e.g., only two older people who took the treatment.</p></li>
+</ul>
+<p>We’ll ignore the last point for now, for the sake of illustration. The first three points make it very clear that <em>age is a confounding variable</em> for the effect of the treatment. One way to quantify the degree of confounding is using the conditional probability of receving the treatment given the confounder: this is called the <strong>propensity score</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;is_old&#39;</span><span class="p">,</span> <span class="s1">&#39;treated&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>bp_change</th>
+    </tr>
+    <tr>
+      <th>is_old</th>
+      <th>treated</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">0</th>
+      <th>0</th>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">1</th>
+      <th>0</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>For the older group, the probability of receiving the treatment is <span class="math notranslate nohighlight">\(7/9 \approx 0.78\)</span>. For the younger group, the probability is <span class="math notranslate nohighlight">\(4/11 \approx 0.36\)</span>. We can add these into the table:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;propensity_score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bp</span><span class="p">[</span><span class="s1">&#39;is_old&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">7</span><span class="o">/</span><span class="mi">9</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;is_old&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="mi">4</span><span class="o">/</span><span class="mi">11</span>
+<span class="n">bp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>treated</th>
+      <th>is_old</th>
+      <th>bp_change</th>
+      <th>propensity_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.2</td>
+      <td>0.363636</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-3.4</td>
+      <td>0.363636</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-4.0</td>
+      <td>0.363636</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-5.6</td>
+      <td>0.363636</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-2.9</td>
+      <td>0.363636</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-3.8</td>
+      <td>0.363636</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-4.7</td>
+      <td>0.363636</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0</td>
+      <td>1</td>
+      <td>-0.7</td>
+      <td>0.777778</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0</td>
+      <td>1</td>
+      <td>-0.9</td>
+      <td>0.777778</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-5.2</td>
+      <td>0.363636</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-4.8</td>
+      <td>0.363636</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-5.9</td>
+      <td>0.363636</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-6.1</td>
+      <td>0.363636</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.1</td>
+      <td>0.777778</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.5</td>
+      <td>0.777778</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-2.1</td>
+      <td>0.777778</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-0.8</td>
+      <td>0.777778</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.7</td>
+      <td>0.777778</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-4.9</td>
+      <td>0.777778</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-5.4</td>
+      <td>0.777778</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This tells us that person 0 had a <span class="math notranslate nohighlight">\(0.36\)</span> probability of receiving the treatment, given that they were younger, and so on.</p>
+<section id="reweighting">
+<h3>Reweighting<a class="headerlink" href="#reweighting" title="Link to this heading">#</a></h3>
+<p>If we try to naively compute a causal effect using the data above, we’ll be led astray:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">treatment_mean_confounded</span> <span class="o">=</span> <span class="n">bp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;treated&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;bp_change&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">control_mean_confounded</span> <span class="o">=</span> <span class="n">bp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;treated&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;bp_change&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">treatment_mean_confounded</span> <span class="o">-</span> <span class="n">control_mean_confounded</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-0.6797979797979803)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The effect appears to be very small: only a drop of 0.68mm Hg. This is because of the confounding effect: younger people are overrepresented in the control group, and underrepresented in the treatment group (and vice versa for older people).</p>
+<p>What if we try to adjust for the overrepresentation/underrepresentation by re-weighting each data point? Let’s start by looking at the treatment group. For this group, we should <strong>increase</strong> the weight on the younger people (because there are too few of them). There are many ways we could do this: one is to divide by the propensity score. In particular, the approach we’re going to take will give us an <strong>unbiased estimate of the ATE</strong>, even in the presence of confounding!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;outcome_reweighted&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bp</span><span class="p">[</span><span class="s1">&#39;bp_change&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">bp</span><span class="p">[</span><span class="s1">&#39;propensity_score&#39;</span><span class="p">]</span>
+<span class="n">bp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;treated&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;outcome_reweighted&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span>  <span class="c1"># only look at treatment group for now</span>
+<span class="n">bp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>treated</th>
+      <th>is_old</th>
+      <th>bp_change</th>
+      <th>propensity_score</th>
+      <th>outcome_reweighted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.2</td>
+      <td>0.363636</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-3.4</td>
+      <td>0.363636</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-4.0</td>
+      <td>0.363636</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-5.6</td>
+      <td>0.363636</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-2.9</td>
+      <td>0.363636</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-3.8</td>
+      <td>0.363636</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-4.7</td>
+      <td>0.363636</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0</td>
+      <td>1</td>
+      <td>-0.7</td>
+      <td>0.777778</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0</td>
+      <td>1</td>
+      <td>-0.9</td>
+      <td>0.777778</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-5.2</td>
+      <td>0.363636</td>
+      <td>-14.300000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-4.8</td>
+      <td>0.363636</td>
+      <td>-13.200000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-5.9</td>
+      <td>0.363636</td>
+      <td>-16.225000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-6.1</td>
+      <td>0.363636</td>
+      <td>-16.775000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.1</td>
+      <td>0.777778</td>
+      <td>-1.414286</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.5</td>
+      <td>0.777778</td>
+      <td>-1.928571</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-2.1</td>
+      <td>0.777778</td>
+      <td>-2.700000</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-0.8</td>
+      <td>0.777778</td>
+      <td>-1.028571</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.7</td>
+      <td>0.777778</td>
+      <td>-2.185714</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-4.9</td>
+      <td>0.777778</td>
+      <td>-6.300000</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-5.4</td>
+      <td>0.777778</td>
+      <td>-6.942857</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This gives a significantly increased weight to the improvements from the younger group (and only a very slightly increased weight to the improvements from the older group).</p>
+<p>What about the control group? There, we want to increase the weight on the older people. Dividing by the propensity score would have the opposite effect from what we want: instead, we’ll divide by 1 minus the propensity score.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">control</span> <span class="o">=</span> <span class="n">bp</span><span class="p">[</span><span class="s1">&#39;treated&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="n">bp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">control</span><span class="p">,</span> <span class="s1">&#39;outcome_reweighted&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">bp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">control</span><span class="p">,</span> <span class="s1">&#39;bp_change&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">bp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">control</span><span class="p">,</span> <span class="s1">&#39;propensity_score&#39;</span><span class="p">])</span>
+<span class="p">)</span>
+<span class="n">bp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>treated</th>
+      <th>is_old</th>
+      <th>bp_change</th>
+      <th>propensity_score</th>
+      <th>outcome_reweighted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.2</td>
+      <td>0.363636</td>
+      <td>-0.314286</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-3.4</td>
+      <td>0.363636</td>
+      <td>-5.342857</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-4.0</td>
+      <td>0.363636</td>
+      <td>-6.285714</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-5.6</td>
+      <td>0.363636</td>
+      <td>-8.800000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-2.9</td>
+      <td>0.363636</td>
+      <td>-4.557143</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-3.8</td>
+      <td>0.363636</td>
+      <td>-5.971429</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0</td>
+      <td>0</td>
+      <td>-4.7</td>
+      <td>0.363636</td>
+      <td>-7.385714</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0</td>
+      <td>1</td>
+      <td>-0.7</td>
+      <td>0.777778</td>
+      <td>-3.150000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0</td>
+      <td>1</td>
+      <td>-0.9</td>
+      <td>0.777778</td>
+      <td>-4.050000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-5.2</td>
+      <td>0.363636</td>
+      <td>-14.300000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-4.8</td>
+      <td>0.363636</td>
+      <td>-13.200000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-5.9</td>
+      <td>0.363636</td>
+      <td>-16.225000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1</td>
+      <td>0</td>
+      <td>-6.1</td>
+      <td>0.363636</td>
+      <td>-16.775000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.1</td>
+      <td>0.777778</td>
+      <td>-1.414286</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.5</td>
+      <td>0.777778</td>
+      <td>-1.928571</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-2.1</td>
+      <td>0.777778</td>
+      <td>-2.700000</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-0.8</td>
+      <td>0.777778</td>
+      <td>-1.028571</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.7</td>
+      <td>0.777778</td>
+      <td>-2.185714</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-4.9</td>
+      <td>0.777778</td>
+      <td>-6.300000</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>1</td>
+      <td>1</td>
+      <td>-5.4</td>
+      <td>0.777778</td>
+      <td>-6.942857</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now, we can compare the difference in reweighted means:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">treatment_total</span> <span class="o">=</span> <span class="n">bp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;treated&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;outcome_reweighted&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">control_total</span> <span class="o">=</span> <span class="n">bp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;treated&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;outcome_reweighted&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="p">(</span><span class="n">treatment_total</span> <span class="o">-</span> <span class="n">control_total</span><span class="p">)</span><span class="o">/</span><span class="mi">20</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-1.857142857142857)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that this does a much better job of capturing the real effect!</p>
+</section>
+<section id="inverse-propensity-score-weighting-ipw">
+<h3>Inverse Propensity Score Weighting (IPW)<a class="headerlink" href="#inverse-propensity-score-weighting-ipw" title="Link to this heading">#</a></h3>
+<p>Using the logic above, and our ad hoc processing of the table, we’re now ready to define the IPW (inverse propensity weighted) estimator for the ATE:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\tau}_{IPW} =
+    \frac{1}{n}
+    \underbrace{%
+         \sum_{i: Z_i = 1} \frac{Y_i}{e(X_i)}
+    }_{\text{reweighted treated rows}}
+    -
+    \frac{1}{n}
+    \underbrace{%
+        \sum_{i: Z_i = 0} \frac{Y_i}{1-e(X_i)}
+    }_{\text{reweighted control rows}}
+\]</div>
+<p>This is a particularly useful estimator because <strong>if the unconfoundedness assumption</strong> (also known as the conditional independence assumption or CIA) <strong>is true, then this will be an unbiased estimate of the true ATE</strong>: <span class="math notranslate nohighlight">\(E[\hat{\tau}_{IPW}] = \tau\)</span>.</p>
+<p>Intuitively, why does it make sense to divide by the propensity score (for the treatment group) and one minus the propensity score (for the control group)? We’re trying to find units that were less likely to end up in the group that they did, and give those higher weight. Recall that the propensity score and its complement are conditional probabilities:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+e(x) &amp;= P(Z=1 | X=x) \\
+1 - e(x) &amp;= P(Z=0 | X=x)
+\end{align*}
+\end{split}\]</div>
+<p>For the treatment group, we want to find units that, because of confounding, were unlikely to end up in the treatment group (in the example above, this corresponds to finding younger people). Those units will have a very small propensity score, so we can divide by it to increase the weight on those points.</p>
+<p>For the control group, we want to find units that, because of confounding, were unlikely to end up in the control group (in the example above, this corresponds to finding older people). Those units will have a very <strong>large</strong> propensity score (close to 1), so we can divide by 1 minus the propensity score.</p>
+<p>The same process will give <strong>less</strong> weight to units that are overrepresented in their group.</p>
+<p>We can prove that the IPW estimator above gives an <strong>unbiased estimate</strong> of the true ATE.</p>
+<p><em>Proof coming soon: see <a class="reference external" href="https://mixtape.scunning.com/05-matching_and_subclassification#weighting-on-the-propensity-score">Causal Inference: The Mixtape</a> for a proof using slightly different notation</em></p>
+</section>
+<section id="computing-propensity-scores-using-logistic-regression">
+<h3>Computing propensity scores using logistic regression<a class="headerlink" href="#computing-propensity-scores-using-logistic-regression" title="Link to this heading">#</a></h3>
+<p>In this example, our confounder was binary, which made it very easy to compute the propensity scores using simple arithmetic. But in many applications, our confounders could be continuous, or we could have multiple confounders. In such cases, computing propensity scores is not as trivial.</p>
+<p>In these cases, we typically use logistic regression to predict them. Note that although this is the same logistic regression you’re familiar with, the purpose of using it is very different: here, we aren’t trying to make predictions, or achieve high prediction accuracy. We’re instead just using it to determine for each row, what is the probability (based on the confounders) of that row ending up in the treatment group?</p>
+<p>This means that we don’t have to worry about splitting our data into testing and training sets: instead, we fit the model on our entire dataset, and use the predicted probabilities as propensity scores.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/chapters/04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_randomized_experiments.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Causal Inference in Randomized Experiments</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-s-hard">Why it’s hard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-variables-and-the-superpopulation-model">Confounding variables and the superpopulation model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-average-treatment-effect-and-unconfoundedness">Conditional average treatment effect and unconfoundedness</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-cate-to-ate">From CATE to ATE</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outcome-regression">Outcome Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-propensity-weighting">Inverse propensity weighting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reweighting">Reweighting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-propensity-score-weighting-ipw">Inverse Propensity Score Weighting (IPW)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-propensity-scores-using-logistic-regression">Computing propensity scores using logistic regression</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Data 102 Staff
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

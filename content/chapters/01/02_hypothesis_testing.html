@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Hypothesis Testing &#8212; Data, Inference, and Decisions</title>
   
@@ -15,53 +14,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/01/02_hypothesis_testing';</script>
@@ -71,6 +69,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="prev" title="Binary Decision-Making and Error Rates" href="01_decisions_and_errors.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -78,32 +77,16 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -111,7 +94,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -119,16 +101,25 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -143,6 +134,8 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../../intro.html">
   
@@ -154,7 +147,14 @@ const thebe_selector_output = ".output, .cell_output"
     <p class="title logo__title">Data, Inference, and Decisions</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -165,36 +165,37 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 1: Binary Decision-Making</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 1: Binary Decision-Making</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Hypothesis Testing and p-Values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_binary_classification.html">Binary Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_decision_theory.html">Decision Theory</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../02/01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02/02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02/03_graphical_models.html">Graphical Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02/04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/03_causality.html">Causality and Potential Outcomes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -203,14 +204,19 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -219,14 +225,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -349,27 +355,19 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -415,10 +413,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing">
-<h1>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this heading">#</a></h1>
+<h1>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -426,11 +424,11 @@ document.write(`
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
 
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
@@ -473,7 +471,7 @@ document.write(`
         </div></div>
 </div>
 <section id="hypothesis-testing-and-binary-decision-making">
-<h2>Hypothesis testing and binary decision-making<a class="headerlink" href="#hypothesis-testing-and-binary-decision-making" title="Permalink to this heading">#</a></h2>
+<h2>Hypothesis testing and binary decision-making<a class="headerlink" href="#hypothesis-testing-and-binary-decision-making" title="Link to this heading">#</a></h2>
 <p>We’ll frame hypothesis testing as a binary decision-making problem, where we decide between the null and alternative hypotheses, and we assume that one of them is true (note that this framing is flawed; see below for more). In this case, <strong>reality</strong> corresponds to which hypothesis is actually true, and we make our <strong>decision</strong> based on the p-values.</p>
 <p>In order to translate the p-values into binary decisions, we’ll have to decide on some threshold(s) for doing so: we’ll spend the rest of this chapter analyzing different ways to pick this threshold (or thresholds), and what assumptions are encoded in each one.</p>
 <p>Here are some important notes about conventions and vocabulary:</p>
@@ -488,7 +486,7 @@ document.write(`
 </li>
 </ul>
 <section id="limitations-of-binary-outlook-on-hypothesis-testing">
-<h3>Limitations of binary outlook on hypothesis testing<a class="headerlink" href="#limitations-of-binary-outlook-on-hypothesis-testing" title="Permalink to this heading">#</a></h3>
+<h3>Limitations of binary outlook on hypothesis testing<a class="headerlink" href="#limitations-of-binary-outlook-on-hypothesis-testing" title="Link to this heading">#</a></h3>
 <p>In many cases, the null and alternative hypotheses are not necessarily mutually exclusive! When we make a discovery, or equivalently, reject the null hypothesis, this only means that <strong>the data we observed are unlikely if the null hypothesis is true</strong>. In many cases, this doesn’t necessarily mean that the alternative hypothesis is true! A rejection of the null hypothesis is often only one step toward showing an alternative hypothesis that we’re interested in.</p>
 <p>For example, consider a blood pressure drug trial, where researchers want to show that the drug lowers blood pressure. They conduct a randomized experiment to measure the drug’s effects. They precisely state their null hypothesis, that the drug has no effect on blood pressure, as “there is no difference in the distribution of blood pressure changes between the population of people who take the drug and the population of people who don’t”. Since they’re interested in showing a decrease (rather than just a change), they state their alternative hypothesis, that the drug lowers blood pressure, as “the distribution of blood pressure changes in people who take the drug  is lower than the distribution for people who don’t”.</p>
 <p>In general, in this situation, consider the following four statements:</p>
@@ -513,20 +511,20 @@ document.write(`
 <p>From these examples, we can see that conducting a hypothesis test is not a decisive statement: instead, it should be viewed as one step within a larger process.</p>
 </section>
 <section id="connecting-p-values-with-false-positive-rate">
-<h3>Connecting <span class="math notranslate nohighlight">\(p\)</span>-values with false positive rate<a class="headerlink" href="#connecting-p-values-with-false-positive-rate" title="Permalink to this heading">#</a></h3>
+<h3>Connecting <span class="math notranslate nohighlight">\(p\)</span>-values with false positive rate<a class="headerlink" href="#connecting-p-values-with-false-positive-rate" title="Link to this heading">#</a></h3>
 <p><em>You may find it helpful to review <a class="reference external" href="http://prob140.org/textbook/content/Chapter_15/01_Density_and_CDF.html">Chapter 15</a> of the Data 140 textbook, which covers continuous random variables.</em></p>
 <p>We’ll work through a few exercises to help us understand the connection between <span class="math notranslate nohighlight">\(p\)</span>-values and the error rates described in the previous section. In the process, we’ll get some practice reasoning about probabilities, and learn some important facts about the distribution of <span class="math notranslate nohighlight">\(p\)</span>-values under the null hypothesis.</p>
 <p><strong>Exercise 1</strong>: Suppose the null hypothesis is true. In this case, what is the probability of obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than 0.05?</p>
 <p><strong>Solution</strong>: In order to answer this question, we’ll look at the distribution of the test statistic under the null hypothesis, and use what we know about probabilities. If the null hypothesis is true, then the test statistic comes from some distribution that we can either simulate or analytically compute. We’ll represent it visually as follows. Note that everything we’re about to conclude is true even if the shape of the distribution is very different: we’re only making it to facilitate easy visualization.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/08757020e750079cc41bf3dc34243ea076851f6ba76c6c4f056892a00e1a7e47.png" src="../../../_images/08757020e750079cc41bf3dc34243ea076851f6ba76c6c4f056892a00e1a7e47.png" />
+<img alt="../../../_images/ff841eceb31c8ac055b1464fc420c4bc976b1e484b15a1ffbb026adc7c751dc9.png" src="../../../_images/ff841eceb31c8ac055b1464fc420c4bc976b1e484b15a1ffbb026adc7c751dc9.png" />
 </div>
 </div>
 <p>What does it mean to obtain a <span class="math notranslate nohighlight">\(p\)</span>-value less than 0.05? This happens when our test statistic is large enough that it’s unlikely according to the null distribution. Specifically, let’s choose a particular value of the test statistic <span class="math notranslate nohighlight">\(a\)</span>, chosen such that the area under the curve to the right of <span class="math notranslate nohighlight">\(a\)</span> is 0.05:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/eb9c5478042c861defcc6d5d1b3032f3bb20db594828339d5f814817a62df761.png" src="../../../_images/eb9c5478042c861defcc6d5d1b3032f3bb20db594828339d5f814817a62df761.png" />
+<img alt="../../../_images/6f98efaa2929b117d60a7b6b4d79b1cb142308197974cdc7531b563ef159a55d.png" src="../../../_images/6f98efaa2929b117d60a7b6b4d79b1cb142308197974cdc7531b563ef159a55d.png" />
 </div>
 </div>
 <p>If our test statistic is <span class="math notranslate nohighlight">\(a\)</span>, then the <span class="math notranslate nohighlight">\(p\)</span>-value is the probability of getting a value greater than or equal to <span class="math notranslate nohighlight">\(a\)</span>. That probability is the area under the curve to the right of <span class="math notranslate nohighlight">\(a\)</span>. By construction, that area is 0.05 (in other words, we set things up and chose <span class="math notranslate nohighlight">\(a\)</span> to have an area of 0.05).</p>
@@ -568,7 +566,7 @@ document.write(`
 </div>
 </section>
 <section id="proof-of-uniformity-of-p-values-under-the-null-distribution-optional">
-<h3>Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution (optional)<a class="headerlink" href="#proof-of-uniformity-of-p-values-under-the-null-distribution-optional" title="Permalink to this heading">#</a></h3>
+<h3>Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution (optional)<a class="headerlink" href="#proof-of-uniformity-of-p-values-under-the-null-distribution-optional" title="Link to this heading">#</a></h3>
 <p><em>For this subsection only, we’ll use more precise notation: random variables will be denoted with capital letters, values they can take on will be denoted with lowercase letters, and density functions and cumulative distribution functions will be subscripted with the corresponding random variables. For a refresher on this notation, see the Data 140 textbook.</em></p>
 <p><em>Additionally, note carefully the difference between the notation for random variable <span class="math notranslate nohighlight">\(P\)</span> and probability <span class="math notranslate nohighlight">\(\mathbb{P}\)</span>.</em></p>
 <p>Let <span class="math notranslate nohighlight">\(T\)</span> be a continuous random variable denoting our test statistic, and let <span class="math notranslate nohighlight">\(F_T\)</span> be the CDF of <span class="math notranslate nohighlight">\(T\)</span> under the null hypothesis: in other words, <span class="math notranslate nohighlight">\(F_T(t) = \mathbb{P}(T \leq t)\)</span>. Let <span class="math notranslate nohighlight">\(G_T\)</span> be the <em>tail CDF</em>: <span class="math notranslate nohighlight">\(G_T(t) = 1 - F_T(t) = \mathbb{P}(T \geq t)\)</span>. We’re being imprecise with our use of <span class="math notranslate nohighlight">\(\geq\)</span> rather than <span class="math notranslate nohighlight">\(&gt;\)</span> here, but the equality is still true since <span class="math notranslate nohighlight">\(T\)</span> is a continuous random variable and therefore <span class="math notranslate nohighlight">\(\mathbb{P}(T = t) = 0\)</span>.</p>
@@ -606,7 +604,7 @@ F_P(p)
 <p>We can then find the probability density function for random variable <span class="math notranslate nohighlight">\(P\)</span> by differentiating, which gives us that <span class="math notranslate nohighlight">\(f_P(p) = 1\)</span>, for <span class="math notranslate nohighlight">\(0 \leq p \leq 1\)</span>: in other words, under the null hypothesis, <span class="math notranslate nohighlight">\(P\)</span> is a uniform random variable.</p>
 <p>Note that we made no assumptions about the distribution of the test statistic: this is true regardless of which test statistic we choose.</p>
 <section id="short-version">
-<h4>Short version<a class="headerlink" href="#short-version" title="Permalink to this heading">#</a></h4>
+<h4>Short version<a class="headerlink" href="#short-version" title="Link to this heading">#</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
@@ -631,7 +629,7 @@ P
 </section>
 </section>
 <section id="example-p-value-thresholds-for-e-commerce-website-optimization">
-<h3>Example: p-value thresholds for e-commerce website optimization<a class="headerlink" href="#example-p-value-thresholds-for-e-commerce-website-optimization" title="Permalink to this heading">#</a></h3>
+<h3>Example: p-value thresholds for e-commerce website optimization<a class="headerlink" href="#example-p-value-thresholds-for-e-commerce-website-optimization" title="Link to this heading">#</a></h3>
 <p>This example will explore how our choice of <span class="math notranslate nohighlight">\(p\)</span>-value thresholds leads to tradeoffs between the different error rates we discussed in the previous section.</p>
 <p>Suppose we are exploring ways to make our e-commerce site more appealing to customers. We make 100 different changes to the website (different colors, fonts, page layouts, etc.), and for each one, we use an A/B test to see whether customers are more likely to make a purchase. We define the following null and alternative hypotheses:</p>
 <ul class="simple">
@@ -697,7 +695,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/222d4c19fbf3808853b1fd1657d214dd8a1788a4ff946d3cb1de070dc3862c5c.png" src="../../../_images/222d4c19fbf3808853b1fd1657d214dd8a1788a4ff946d3cb1de070dc3862c5c.png" />
+<img alt="../../../_images/5157425df66e689965ea6a1e7d11a365a997b186c3e59ebd87a06a8b2eab41b9.png" src="../../../_images/5157425df66e689965ea6a1e7d11a365a997b186c3e59ebd87a06a8b2eab41b9.png" />
 </div>
 </div>
 <p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
@@ -766,10 +764,10 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.049319194537530316, 1.035869189459966, 1.5, -0.5)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(-0.049319194537530316), np.float64(1.035869189459966), np.float64(1.5), np.float64(-0.5))
 </pre></div>
 </div>
-<img alt="../../../_images/f81ac45932ed36ae2bde181d063a00122e138e18c132bdad466ae1b8fd660444.png" src="../../../_images/f81ac45932ed36ae2bde181d063a00122e138e18c132bdad466ae1b8fd660444.png" />
+<img alt="../../../_images/bcd3a558f4d90df04dd64b34d369c6fb6ffa8e51af3626693f42069d69b5da24.png" src="../../../_images/bcd3a558f4d90df04dd64b34d369c6fb6ffa8e51af3626693f42069d69b5da24.png" />
 </div>
 </div>
 <p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
@@ -786,7 +784,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/08b88bd01f67937794b9d05fef380ac9362740d3fa30509d2969e704913c03b8.png" src="../../../_images/08b88bd01f67937794b9d05fef380ac9362740d3fa30509d2969e704913c03b8.png" />
+<img alt="../../../_images/7ffa53df20238a8256595169db8edeb144d190ecc1a914f6a5fd5ed6f0071df8.png" src="../../../_images/7ffa53df20238a8256595169db8edeb144d190ecc1a914f6a5fd5ed6f0071df8.png" />
 </div>
 </div>
 <p>For p-values smaller than our threshold (to the right of the line), our decision is 1. So:</p>
@@ -810,14 +808,14 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/b9250ece64f0213ecb61ca3ce24c16c7664954ce2bad92df1817b6a7ca3f4fe8.png" src="../../../_images/b9250ece64f0213ecb61ca3ce24c16c7664954ce2bad92df1817b6a7ca3f4fe8.png" />
+<img alt="../../../_images/1714a8e8557771a06967fe9a6626406b82beb85a824d1082afa8cd04f4408f19.png" src="../../../_images/1714a8e8557771a06967fe9a6626406b82beb85a824d1082afa8cd04f4408f19.png" />
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>
 </section>
 </section>
 <section id="simple-and-composite-hypotheses">
-<h2>Simple and Composite Hypotheses<a class="headerlink" href="#simple-and-composite-hypotheses" title="Permalink to this heading">#</a></h2>
+<h2>Simple and Composite Hypotheses<a class="headerlink" href="#simple-and-composite-hypotheses" title="Link to this heading">#</a></h2>
 <p>When conducting hypothesis testing, our null and alternative hypotheses fall into one of two categories:</p>
 <ul class="simple">
 <li><p>A <strong>simple</strong> hypothesis is precise, and states that the test statistic takes on a particular value. For example, hypotheses such as “there is no difference between the average values in the two groups (<span class="math notranslate nohighlight">\(\mu_1 - \mu_2 = 0\)</span>)” or “the true proportion is 0.5 (<span class="math notranslate nohighlight">\(q = 0.5\)</span>)” provide one single value for the test statistic.</p></li>
@@ -826,7 +824,7 @@ P
 <p>In most hypothesis tests you’ve seen so far, you’ve likely worked with a simple null hypothesis (i.e., one that’s specific that we can simulate or calculate under), and a composite alternative hypothesis. Later, we’ll explore what happens when we use a simple alternative hypothesis as well.</p>
 </section>
 <section id="from-p-values-to-decisions">
-<h2>From p-values to decisions<a class="headerlink" href="#from-p-values-to-decisions" title="Permalink to this heading">#</a></h2>
+<h2>From p-values to decisions<a class="headerlink" href="#from-p-values-to-decisions" title="Link to this heading">#</a></h2>
 <p>We’ve seen above that in order to make a binary decision from a single p-value, we must use some threshold. We’ll see several different ways to choose such a threshold:</p>
 <ul class="simple">
 <li><p>Classical null hypothesis significance testing (NHST): here, we choose a threshold based on our desired false positive rate. For example, the traditional (arbitrary) threshold of 0.05 corresponds to a 5% chance of making a false positive with each hypothesis test we conduct. In this setting, our null hypothesis will usually be a clearly specified simple hypothesis, but we usually use “vague” composite alternative hypotheses such as ‘there is no difference between the two groups’. This means that we can precisely analyze what happens when the null is true (<span class="math notranslate nohighlight">\(R=0\)</span>), and reason about the false positive rate and true negative rate. However, because our alternative hypothesis is composite, we can’t precisely define what happens in the alternative case, so we typically don’t reason about the true positive rate and false negative rate (i.e., the rates corresponding to <span class="math notranslate nohighlight">\(R=1\)</span>).</p></li>
@@ -848,7 +846,7 @@ P
 </div>
 </section>
 <section id="trading-off-between-different-row-wise-rates">
-<h2>Trading off between different row-wise rates<a class="headerlink" href="#trading-off-between-different-row-wise-rates" title="Permalink to this heading">#</a></h2>
+<h2>Trading off between different row-wise rates<a class="headerlink" href="#trading-off-between-different-row-wise-rates" title="Link to this heading">#</a></h2>
 <p>Analysis of <span class="math notranslate nohighlight">\(p\)</span>-values helps us understand what happens if the null is true: we saw earlier that the <span class="math notranslate nohighlight">\(p\)</span>-value threshold we choose is the false positive rate for the test. But what about if the alternative is true? For example, we may be interested in constructing a test where we want the false negative rate to be less than <span class="math notranslate nohighlight">\(0.1\)</span>, or we may want to numerically quantify how much the false negative rate would increase if we reduced our false positive rate by <span class="math notranslate nohighlight">\(0.01\)</span>.</p>
 <p>Composite alternative hypotheses don’t support the kind of analysis we did above: we can only reason about the alternative case if we choose a simple alternative hypothesis. So, for the remainder of this section, we’ll only consider the case where <strong>both the null and alternative hypotheses are simple</strong>.</p>
 <p>While there are different ways to analyze the tradeoff, we’ll focus on two.</p>
@@ -857,7 +855,7 @@ P
 <li><p>The second is: <strong>for a given false positive rate (i.e., significance threshold or <span class="math notranslate nohighlight">\(p\)</span>-value threshold), what test statistic should we choose to maximize the power, or true positive rate?</strong> In other words, if we fix a desired level of error for the case where <span class="math notranslate nohighlight">\(R=0\)</span>, how do we get the best possible performance when <span class="math notranslate nohighlight">\(R=1\)</span>? This is what we’ll turn our attention to now.</p></li>
 </ul>
 <section id="neyman-pearson">
-<h3>Neyman-Pearson<a class="headerlink" href="#neyman-pearson" title="Permalink to this heading">#</a></h3>
+<h3>Neyman-Pearson<a class="headerlink" href="#neyman-pearson" title="Link to this heading">#</a></h3>
 <p><em>Coming soon</em></p>
 </section>
 </section>
@@ -890,7 +888,7 @@ P
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -918,7 +916,9 @@ P
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -966,7 +966,7 @@ By Data 102 Staff
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -990,8 +990,8 @@ By Data 102 Staff
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Causal Inference in Randomized Experiments &#8212; Data, Inference, and Decisions</title>
   
@@ -15,61 +14,62 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/04/04_randomized_experiments';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Causal Inference in Observational Studies: Unconfoundedness" href="05_observational_studies_unconfoundedness.html" />
     <link rel="prev" title="Causality" href="03_causality.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -77,32 +77,16 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -110,7 +94,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -118,16 +101,25 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -142,6 +134,8 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../../intro.html">
   
@@ -153,7 +147,14 @@ const thebe_selector_output = ".output, .cell_output"
     <p class="title logo__title">Data, Inference, and Decisions</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -164,36 +165,37 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../01/01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/04_binary_classification.html">Binary Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../01/05_decision_theory.html">Decision Theory</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../02/01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02/02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02/03_graphical_models.html">Graphical Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02/04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
 </ul>
-</li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_quantifying_association.html">Quantifying Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_causality.html">Causality and Potential Outcomes</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Causality in Randomized Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -202,14 +204,19 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -218,14 +225,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -348,27 +355,19 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -414,12 +413,12 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="causal-inference-in-randomized-experiments">
-<h1>Causal Inference in Randomized Experiments<a class="headerlink" href="#causal-inference-in-randomized-experiments" title="Permalink to this heading">#</a></h1>
+<h1>Causal Inference in Randomized Experiments<a class="headerlink" href="#causal-inference-in-randomized-experiments" title="Link to this heading">#</a></h1>
 <p>In this section, we’ll build a deeper understanding of randomized experiments. Recall from the last section the table of potential outcomes:</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Unit</p></th>
 <th class="head"><p>Outcome if not treated</p></th>
@@ -455,8 +454,9 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <section id="randomized-experiments-and-potential-outcomes">
-<h2>Randomized experiments and potential outcomes<a class="headerlink" href="#randomized-experiments-and-potential-outcomes" title="Permalink to this heading">#</a></h2>
+<h2>Randomized experiments and potential outcomes<a class="headerlink" href="#randomized-experiments-and-potential-outcomes" title="Link to this heading">#</a></h2>
 <p>In a randomized experiment, we protect ourselves from dealing with confounding variables by randomizing units into treatment and control. In other words, we choose each <span class="math notranslate nohighlight">\(Z_i\)</span> randomly, and we choose it independent of whatever <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span> might be. Mathematically, we can write:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -467,7 +467,7 @@ document.write(`
 <p>Remember, this doesn’t mean that the treatment is independent from the observed outcome! It only means that the treatment is independent from the <em>pair</em> of potential outcomes. The observed outcome <span class="math notranslate nohighlight">\(Y_{i,obs} = Y_i(0)(1-Z_i) + Y_i(1) Z_i\)</span> always depends on the treatment decision. In other words, knowing the treatment decision <span class="math notranslate nohighlight">\(Z_i\)</span> always gives us information about <em>which</em> of the two potential outcomes (<span class="math notranslate nohighlight">\(Y_i(0)\)</span> or <span class="math notranslate nohighlight">\(Y_i(1)\)</span>) we observed (except in the uninteresting scenario where the treatment is completely unrelated to the outcome), but</p>
 <p>For example, consider a double-blind vaccine trial. We can consider the potential outcomes for a particular subject: they represent what happens to that subject if they get the vaccine (<span class="math notranslate nohighlight">\(Y_i(1)\)</span>) or if they don’t get the vaccine (<span class="math notranslate nohighlight">\(Y_i(0)\)</span>). This is the pair of potential outcomes, <span class="math notranslate nohighlight">\(\big(Y_i(0), Y_i(1)\big)\)</span>. Next, consider the treatment decision <span class="math notranslate nohighlight">\(Z_i\)</span>: this represents whether the subject got the vaccine (<span class="math notranslate nohighlight">\(Z_i = 1\)</span>) or a placebo (<span class="math notranslate nohighlight">\(Z_i = 0\)</span>). These are independent: knowing whether or not a subject got the vaccine/placebo gives us no information about the pair of potential outcomes: it only gives us information about which one of the two we observe in the real world.</p>
 <section id="computing-the-average-treatment-effect">
-<h3>Computing the average treatment effect<a class="headerlink" href="#computing-the-average-treatment-effect" title="Permalink to this heading">#</a></h3>
+<h3>Computing the average treatment effect<a class="headerlink" href="#computing-the-average-treatment-effect" title="Link to this heading">#</a></h3>
 <p>You may remember learning that in a randomized controlled trial, we can determine causality by using the difference in means between the treatment and control groups. Let’s now show mathematically that this is true. Recall from the previous section our definition of the ATE <span class="math notranslate nohighlight">\(\tau\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\tau = E[Y_i(1) - Y_i(0)] = E[Y_i(1)] - E[Y_i(0)]\]</div>
@@ -498,10 +498,10 @@ document.write(`
 </section>
 </section>
 <section id="optional-fixed-sample-assumption-fisher-and-neyman">
-<h2>(Optional) Fixed-sample assumption: Fisher and Neyman<a class="headerlink" href="#optional-fixed-sample-assumption-fisher-and-neyman" title="Permalink to this heading">#</a></h2>
+<h2>(Optional) Fixed-sample assumption: Fisher and Neyman<a class="headerlink" href="#optional-fixed-sample-assumption-fisher-and-neyman" title="Link to this heading">#</a></h2>
 <p>In this section, we’ll analyze randomized experiments and the Neyman estimator under the fixed-sample assumption. Recall that in this setting, we assume that <span class="math notranslate nohighlight">\(Z_i\)</span> (which we observe) is random, but that <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span> (which are unknown) are fixed. In this case, the statement of independence above doesn’t really make sense, since <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span> are not random. However, we can still compute the Neyman estimator. We’ll develop some properties of the estimator, then use those to construct a confidence interval for the estimated ATE. Finally, we’ll look at two different hypothesis tests used in randomized experiments.</p>
 <section id="properties-of-the-neyman-estimator">
-<h3>Properties of the Neyman estimator<a class="headerlink" href="#properties-of-the-neyman-estimator" title="Permalink to this heading">#</a></h3>
+<h3>Properties of the Neyman estimator<a class="headerlink" href="#properties-of-the-neyman-estimator" title="Link to this heading">#</a></h3>
 <p>The Neyman estimator has two useful properties: the first is that it’s unbiased, and the second is that its variance depends on the estimated variances within the two groups:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -536,7 +536,7 @@ E[\hat{\tau}] &amp;= \tau \\
 <p>It can be shown that under certain regularity conditions, as the number of samples grows larger, the distribution of the quantity <span class="math notranslate nohighlight">\(\frac{\hat{\tau} - \tau}{\sqrt{\hat{V}}}\)</span> converges to a normal distribution <span class="math notranslate nohighlight">\(N(0, \sigma^2)\)</span>, where <span class="math notranslate nohighlight">\(\sigma^2 &lt; 1\)</span>.</p>
 </section>
 <section id="confidence-intervals-for-the-ate">
-<h3>Confidence intervals for the ATE<a class="headerlink" href="#confidence-intervals-for-the-ate" title="Permalink to this heading">#</a></h3>
+<h3>Confidence intervals for the ATE<a class="headerlink" href="#confidence-intervals-for-the-ate" title="Link to this heading">#</a></h3>
 <p>Given the fact above, we can construct an asymptotically valid <span class="math notranslate nohighlight">\(95\%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\tau\)</span> as follows:
 $<span class="math notranslate nohighlight">\(
 \begin{align*}
@@ -545,7 +545,7 @@ $<span class="math notranslate nohighlight">\(
 \)</span>$</p>
 </section>
 <section id="hypothesis-testing-for-causal-effects">
-<h3>Hypothesis testing for causal effects<a class="headerlink" href="#hypothesis-testing-for-causal-effects" title="Permalink to this heading">#</a></h3>
+<h3>Hypothesis testing for causal effects<a class="headerlink" href="#hypothesis-testing-for-causal-effects" title="Link to this heading">#</a></h3>
 <p>In the classic null hypothesis significance testing framework, there are two different null hypotheses commonly used when measuring causal effects in randomized trials:</p>
 <ol class="arabic simple">
 <li><p><strong>Fisher’s strong null</strong> (also known as Fisher’s sharp null) states that for every unit, the treatment effect <span class="math notranslate nohighlight">\(Y_i(1) - Y_i(0) = 0\)</span>.</p></li>
@@ -557,10 +557,10 @@ $<span class="math notranslate nohighlight">\(
 </section>
 </section>
 <section id="optional-complications-with-randomized-experiments">
-<h2>(Optional) Complications with randomized experiments<a class="headerlink" href="#optional-complications-with-randomized-experiments" title="Permalink to this heading">#</a></h2>
+<h2>(Optional) Complications with randomized experiments<a class="headerlink" href="#optional-complications-with-randomized-experiments" title="Link to this heading">#</a></h2>
 <p>Randomized experiments present several challenges that make them infeasible in some circumstances. Here are some of the issues that come up with them. Note that this list is far from exhaustive!</p>
 <section id="compliance">
-<h3>Compliance<a class="headerlink" href="#compliance" title="Permalink to this heading">#</a></h3>
+<h3>Compliance<a class="headerlink" href="#compliance" title="Link to this heading">#</a></h3>
 <p>Carrying out a randomized experiment requires that the units follow their treatment/no-treatment assignment. This is easier to ensure in some experiments than others. Consider the following examples:</p>
 <ol class="arabic simple">
 <li><p>An experiment to determine whether a new fertilizer increases crop yield</p></li>
@@ -573,7 +573,7 @@ $<span class="math notranslate nohighlight">\(
 <p>In particular, in some randomized experiments, we can’t guarantee that units will be <strong>compliant</strong> with the treatment assignment. We can’t solve this by simply removing the units that were non-compliant, since this could introduce bias and/or confounding.</p>
 </section>
 <section id="external-validity">
-<h3>External validity<a class="headerlink" href="#external-validity" title="Permalink to this heading">#</a></h3>
+<h3>External validity<a class="headerlink" href="#external-validity" title="Link to this heading">#</a></h3>
 <p><strong>External validity</strong> refers to whether or not a finding from a randomized experiment will apply to a broader population of interest. This often arises due to sampling bias, contrived situations in an experiment that don’t reflect real-world conditions, or other similar effects.</p>
 <p>Consider the following example:</p>
 <blockquote>
@@ -582,7 +582,7 @@ $<span class="math notranslate nohighlight">\(
 <p>In this case, our randomized experiment shows no causal effect, but our sample is not representative of the population at large: we can expect that most Data 102 students, who are probability experts, already know the common pitfalls in the 15-minute video. Among a larger population, however, the same might not be true!</p>
 </section>
 <section id="ethical-considerations">
-<h3>Ethical considerations<a class="headerlink" href="#ethical-considerations" title="Permalink to this heading">#</a></h3>
+<h3>Ethical considerations<a class="headerlink" href="#ethical-considerations" title="Link to this heading">#</a></h3>
 <p>Randomized experiments might not always be ethical. Suppose we want to determine whether or not the death penalty acts as a deterrent: in other words, does instituting the death penalty cause a reduction in crime?</p>
 <p>Random assignment of the death penalty is profoundly unethical, and no randomized experiment can determine this.</p>
 </section>
@@ -616,7 +616,7 @@ $<span class="math notranslate nohighlight">\(
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -628,6 +628,15 @@ $<span class="math notranslate nohighlight">\(
         <p class="prev-next-title">Causality</p>
       </div>
     </a>
+    <a class="right-next"
+       href="05_observational_studies_unconfoundedness.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Causal Inference in Observational Studies: Unconfoundedness</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -635,7 +644,9 @@ $<span class="math notranslate nohighlight">\(
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -683,7 +694,7 @@ By Data 102 Staff
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -707,8 +718,8 @@ By Data 102 Staff
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
