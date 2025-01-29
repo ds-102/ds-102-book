@@ -59,3 +59,5 @@ chapters:
       title: "Causality and Potential Outcomes"
     - file: content/chapters/04/04_randomized_experiments
       title: "Causality in Randomized Experiments"
+    - file: content/chapters/04/05_observational_studies_unconfoundedness
+      title: "Causality in Observational Studies: Unconfoundedness"
