@@ -401,6 +401,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-and-composite-hypotheses">Simple and Composite Hypotheses</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-p-values-to-decisions">From p-values to decisions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trading-off-between-different-row-wise-rates">Trading off between different row-wise rates</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-power-significance-tradeoff-in-hypothesis-testing">Understanding the power-significance tradeoff in hypothesis testing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-pearson">Neyman-Pearson</a></li>
 </ul>
 </li>
@@ -695,7 +696,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/5157425df66e689965ea6a1e7d11a365a997b186c3e59ebd87a06a8b2eab41b9.png" src="../../../_images/5157425df66e689965ea6a1e7d11a365a997b186c3e59ebd87a06a8b2eab41b9.png" />
+<img alt="../../../_images/355d34877412f1838b16f606ffc41505f1adc0dfba5293731f1aadad36f52b87.png" src="../../../_images/355d34877412f1838b16f606ffc41505f1adc0dfba5293731f1aadad36f52b87.png" />
 </div>
 </div>
 <p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
@@ -767,7 +768,7 @@ P
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(-0.049319194537530316), np.float64(1.035869189459966), np.float64(1.5), np.float64(-0.5))
 </pre></div>
 </div>
-<img alt="../../../_images/bcd3a558f4d90df04dd64b34d369c6fb6ffa8e51af3626693f42069d69b5da24.png" src="../../../_images/bcd3a558f4d90df04dd64b34d369c6fb6ffa8e51af3626693f42069d69b5da24.png" />
+<img alt="../../../_images/275b587a30d58821100b8a3c7672bcce6184064be6c342a7096422f6754618c6.png" src="../../../_images/275b587a30d58821100b8a3c7672bcce6184064be6c342a7096422f6754618c6.png" />
 </div>
 </div>
 <p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
@@ -784,7 +785,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/7ffa53df20238a8256595169db8edeb144d190ecc1a914f6a5fd5ed6f0071df8.png" src="../../../_images/7ffa53df20238a8256595169db8edeb144d190ecc1a914f6a5fd5ed6f0071df8.png" />
+<img alt="../../../_images/335a0b9b7cb628f3dc0973e7c9025248b1db4cf05b5402afff67781513a7a3ac.png" src="../../../_images/335a0b9b7cb628f3dc0973e7c9025248b1db4cf05b5402afff67781513a7a3ac.png" />
 </div>
 </div>
 <p>For p-values smaller than our threshold (to the right of the line), our decision is 1. So:</p>
@@ -808,7 +809,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/1714a8e8557771a06967fe9a6626406b82beb85a824d1082afa8cd04f4408f19.png" src="../../../_images/1714a8e8557771a06967fe9a6626406b82beb85a824d1082afa8cd04f4408f19.png" />
+<img alt="../../../_images/77245aaea91b7e1536d79741030e705ff9e861379ea5d7109df6b7cd35880350.png" src="../../../_images/77245aaea91b7e1536d79741030e705ff9e861379ea5d7109df6b7cd35880350.png" />
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>
@@ -849,14 +850,71 @@ P
 <h2>Trading off between different row-wise rates<a class="headerlink" href="#trading-off-between-different-row-wise-rates" title="Link to this heading">#</a></h2>
 <p>Analysis of <span class="math notranslate nohighlight">\(p\)</span>-values helps us understand what happens if the null is true: we saw earlier that the <span class="math notranslate nohighlight">\(p\)</span>-value threshold we choose is the false positive rate for the test. But what about if the alternative is true? For example, we may be interested in constructing a test where we want the false negative rate to be less than <span class="math notranslate nohighlight">\(0.1\)</span>, or we may want to numerically quantify how much the false negative rate would increase if we reduced our false positive rate by <span class="math notranslate nohighlight">\(0.01\)</span>.</p>
 <p>Composite alternative hypotheses don’t support the kind of analysis we did above: we can only reason about the alternative case if we choose a simple alternative hypothesis. So, for the remainder of this section, we’ll only consider the case where <strong>both the null and alternative hypotheses are simple</strong>.</p>
-<p>While there are different ways to analyze the tradeoff, we’ll focus on two.</p>
-<ul class="simple">
-<li><p>The first is: <strong>how do we quantify the tradeoff between false positive rate and false negative rate?</strong> In other words, how do we measure the tradeoff between the row-wise rates for <span class="math notranslate nohighlight">\(R=0\)</span> and the row-wise rates for <span class="math notranslate nohighlight">\(R=1\)</span>? We’ll use a receiver operating characteristic curve, commonly known as an <strong>ROC curve</strong>, to answer this. For more, see the binary classification section.</p></li>
-<li><p>The second is: <strong>for a given false positive rate (i.e., significance threshold or <span class="math notranslate nohighlight">\(p\)</span>-value threshold), what test statistic should we choose to maximize the power, or true positive rate?</strong> In other words, if we fix a desired level of error for the case where <span class="math notranslate nohighlight">\(R=0\)</span>, how do we get the best possible performance when <span class="math notranslate nohighlight">\(R=1\)</span>? This is what we’ll turn our attention to now.</p></li>
-</ul>
+<p>There are many ways to analyze the tradeoff, so we’ll focus on two of them:</p>
+<ol class="arabic simple">
+<li><p><strong>How do we quantify the tradeoff between false positive rate and false negative rate?</strong> In other words, how do we measure the tradeoff between the row-wise rates for <span class="math notranslate nohighlight">\(R=0\)</span> and the row-wise rates for <span class="math notranslate nohighlight">\(R=1\)</span>? We’ll use a receiver operating characteristic curve, commonly known as an <strong>ROC curve</strong>, to answer this. For more, see the binary classification section.</p></li>
+<li><p><strong>For a given false positive rate (i.e., significance threshold or <span class="math notranslate nohighlight">\(p\)</span>-value threshold), what test statistic should we choose to maximize the power, or true positive rate?</strong> In other words, if we fix a desired level of error for the case where <span class="math notranslate nohighlight">\(R=0\)</span>, how do we get the best possible performance when <span class="math notranslate nohighlight">\(R=1\)</span>? This is what we’ll turn our attention to now.</p></li>
+</ol>
+<section id="understanding-the-power-significance-tradeoff-in-hypothesis-testing">
+<h3>Understanding the power-significance tradeoff in hypothesis testing<a class="headerlink" href="#understanding-the-power-significance-tradeoff-in-hypothesis-testing" title="Link to this heading">#</a></h3>
+<p>When using the Neyman-Pearson lemma, our goal will be to find the most powerful test for any given level of significance. In other words, for any desired FPR we specify (i.e., we want to control our error probability if the null is true), we want to find the test with the highest possible power (i.e., we want to maximize our success probability if the alternative is true).</p>
+<p>We’ll do so by choosing a test statistic (i.e., a function of our observed data) that maximizes the power. Instead of computing a <span class="math notranslate nohighlight">\(p\)</span>-value as before, we’ll make a decision by applying a threshold to our test statistic: if it’s above our threshold, then we’ll reject the null, and if it’s below our threshold, we’ll fail to reject the null.</p>
+<p>Before we see what this test statistic is, let’s look at a few diagrams that help illustrate the trade-off between power and significance. Suppose we observe a single normally distributed data point <span class="math notranslate nohighlight">\(x\)</span>, and our test statistic is <span class="math notranslate nohighlight">\(t=x\)</span>. We’ll assume that <span class="math notranslate nohighlight">\(t \sim \mathcal{N}(\mu, 1)\)</span>, for some mean <span class="math notranslate nohighlight">\(\mu\)</span>. If our null hypothesis states that <span class="math notranslate nohighlight">\(\mu = 0\)</span>, then we can write <span class="math notranslate nohighlight">\(t | H_0 \sim \mathcal{N}(0, 1)\)</span>. Therefore, our distribution for <span class="math notranslate nohighlight">\(t\)</span> under the null hypothesis is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">make_null_alternative_plots</span><span class="p">(</span><span class="n">show_null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_alternative</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/378109c863858032366de5365b1a84c5b525aa07f10a9971d463990705ca4bbe.png" src="../../../_images/378109c863858032366de5365b1a84c5b525aa07f10a9971d463990705ca4bbe.png" />
+</div>
+</div>
+<p>The black vertical line shows one arbitrarily chosen decision threshold: if we use this threshold, the shaded areas show the FPR (right, red) and TNR (left, yellow) of our test. We can see that if we were to raise the threshold, we’d obtain a lower false positive rate (red).</p>
+<p>But what about the power? If we want to follow a similar process to compute the power (or TPR) of the test, we must use a simple alternative hypothesis. A compound alternative such as <span class="math notranslate nohighlight">\(\mu &gt; 0\)</span> won’t give us enough information to compute the error rates under the alternative. So, we’ll choose a specific alternative hypothesis: <span class="math notranslate nohighlight">\(T | H_1 \sim \mathcal{N}(2.5, 1)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">make_null_alternative_plots</span><span class="p">(</span><span class="n">show_null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_alternative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/5a13072c565eb467a0013a28ca23998c4212ab29327c1d60cee013e64816d008.png" src="../../../_images/5a13072c565eb467a0013a28ca23998c4212ab29327c1d60cee013e64816d008.png" />
+</div>
+</div>
+<p>For this choice of the alternative hypothesis, we can now see the power (TPR) and FNR as the green (right) and purple (left) areas, respectively. If we were to raise the threshold, we’d obtain a lower power (green).</p>
+<p>Now, we’ll visualize both hypotheses on the same graph:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">make_null_alternative_plots</span><span class="p">(</span><span class="n">show_null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_alternative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/cd4d5b2e5d4ad34cdc7cda657ee1552c269e722976639319ea9525f10cb928e0.png" src="../../../_images/cd4d5b2e5d4ad34cdc7cda657ee1552c269e722976639319ea9525f10cb928e0.png" />
+</div>
+</div>
+<p>Now, we can see the impact of our threshold in both cases: if the null is true, our error probability is the area under the red curve to the <strong>right</strong> of the threshold (make sure you convince yourself why this is true). If the alternative is true, our error probability is the area under the blue curve to the <strong>left</strong> of the threshold. Ideally, we want both of these areas to be as small as possible, but in practice, we often must trade off one for the other.</p>
+<p>The Neyman-Pearson lemma helps us quantify this tradeoff by choosing a good test statistic. Recall our testing framework: we first specify the distribution of the data under the null and the alternative (e.g., above, we chose <span class="math notranslate nohighlight">\(X | H_0 \sim \mathcal{N}(0, 1)\)</span> and <span class="math notranslate nohighlight">\(X | H_1 \sim \mathcal{N}(2.5, 1)\)</span>). Then, we choose a test statistic that helps us distinguish between the null and the alternative. In the very simple example above, where we only observed one data point, we just chose our test statistic to be the data point we observed. But in general, when we observe many data points and have to choose between more complex hypotheses, there are many possible test statistics we could choose.</p>
+<p>Note that above, we defined a distribution for our data given each hypothesis: these are called <strong>likelihood functions</strong>. They specify the distribution for our observed data given a certain unknown state of the world. In the conventional hypothesis testing setup, we only need to define the likelihood under the null (or be able to simulate it). When we want to reason about power, we need to specify the likelihood under the alternative as well. This usually requires us to make a specific assumption about the size of the difference or effect that we are looking for: any calculation of power is based on this assumption.</p>
+</section>
 <section id="neyman-pearson">
 <h3>Neyman-Pearson<a class="headerlink" href="#neyman-pearson" title="Link to this heading">#</a></h3>
-<p><em>Coming soon</em></p>
+<p>The Neyman Pearson lemma states that for any desired level of significance (i.e., false positive rate) that we wish to achieve, we can achieve the highest possible power by computing the <strong>likelihood ratio</strong> as our test statistic, and then comparing it to a threshold that’s determined by our desired significance.</p>
+<p>Given observed data <span class="math notranslate nohighlight">\(x\)</span> (which can often represent multiple observations), and likelihood functions for the null and alternative, we compute the test statistic:</p>
+<div class="math notranslate nohighlight">
+\[
+LR = \frac{p(x|H_1)}{p(x|H_0)}
+\]</div>
+<p>and compare it to some threshold <span class="math notranslate nohighlight">\(\eta\)</span>. If the likelihood ratio is greater than the threshold, we reject the null, and if it’s below the threshold, we fail to reject. Intuitively, this test asks: “how many times more likely are the data under the alternative, compared to under the null?” Our threshold then determines how much more likely we require the data to be under the alternative before we decide to reject the null. For example, a threshold of 2 requires us to see data that are twice as likely under the alternative (relative to the null) before we decide to reject the null.</p>
+<p>Using the Neyman-Pearson lemma in practice typically involves the following sequence of steps:</p>
+<ol class="arabic simple">
+<li><p>Define the likelihood functions for the observed data according to the null and alternative hypothesis.</p></li>
+<li><p>Identify a desired level of significance (i.e., false positive rate that you are willing to tolerate).</p></li>
+<li><p>Use the significance level to compute a threshold by (a) expressing the false positive rate as a conditional probability based on the decision rule described above, (b) setting it equal to the desired significance level, and (c) solving for the threshold as a function of the significance level.</p></li>
+<li><p>Compute the power of the test by (a) expressing the power as a conditional probability based on the decision rule above and (b) plugging in the threshold computed in the previous step.</p></li>
+</ol>
+<p>By solving for the threshold in step (3) in terms of any desired significance level, we can use step (4) to explicitly relate the tradeoff between power and significance level.</p>
 </section>
 </section>
 </section>
@@ -939,6 +997,7 @@ P
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-and-composite-hypotheses">Simple and Composite Hypotheses</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-p-values-to-decisions">From p-values to decisions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trading-off-between-different-row-wise-rates">Trading off between different row-wise rates</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-power-significance-tradeoff-in-hypothesis-testing">Understanding the power-significance tradeoff in hypothesis testing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-pearson">Neyman-Pearson</a></li>
 </ul>
 </li>

@@ -547,7 +547,7 @@ P\left(\bigcup_{i=1}^m A_i\right) \leq \sum_{i=1}^m P(A_i).
 FWER 
     &amp;= P\left(\bigcup_{i=1}^m T_i\right) \\
     &amp;\leq \sum_{i=1}^m P\left(T_i\right) \\
-    &amp;= m\gamma
+    &amp;= m \gamma
 \end{align*}
 \end{split}\]</div>
 <p>If we choose our <span class="math notranslate nohighlight">\(p\)</span>-value threshold for each test <span class="math notranslate nohighlight">\(\gamma\)</span> to be equal to <span class="math notranslate nohighlight">\(\alpha/m\)</span> (recall that <span class="math notranslate nohighlight">\(\alpha\)</span> is our desired FWER), then the right-hand side becomes <span class="math notranslate nohighlight">\(\alpha\)</span>, and we guarantee that our FWER is less than or equal to <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
@@ -760,8 +760,8 @@ FWER
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">desired_fdr</span> <span class="o">=</span> <span class="mf">0.05</span>
 <span class="n">desired_fwer</span> <span class="o">=</span> <span class="mf">0.05</span>
 
-<span class="c1"># From visually inspecting the graph above, we saw that the 16th p-value was</span>
-<span class="c1"># the last one below the reference value (line)</span>
+<span class="c1"># From visually inspecting the graph above, we saw that the 16th</span>
+<span class="c1">#  p-value was the last one below the reference value (cyan line)</span>
 <span class="n">bh_threshold</span> <span class="o">=</span> <span class="n">p_sorted</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">p_sorted</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span>
