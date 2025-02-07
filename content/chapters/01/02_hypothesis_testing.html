@@ -177,7 +177,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../02/01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02/02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02/03_graphical_models.html">Graphical Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../02/04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/04_inference.html">Bayesian Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/05_inference_with_sampling.html">Bayesian Inference with Sampling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -696,7 +697,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/355d34877412f1838b16f606ffc41505f1adc0dfba5293731f1aadad36f52b87.png" src="../../../_images/355d34877412f1838b16f606ffc41505f1adc0dfba5293731f1aadad36f52b87.png" />
+<img alt="../../../_images/6b161a5a8904b7d497532631ef04f4430b29e47327f6cb8496f7635ed6afd620.png" src="../../../_images/6b161a5a8904b7d497532631ef04f4430b29e47327f6cb8496f7635ed6afd620.png" />
 </div>
 </div>
 <p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
@@ -768,7 +769,7 @@ P
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(-0.049319194537530316), np.float64(1.035869189459966), np.float64(1.5), np.float64(-0.5))
 </pre></div>
 </div>
-<img alt="../../../_images/275b587a30d58821100b8a3c7672bcce6184064be6c342a7096422f6754618c6.png" src="../../../_images/275b587a30d58821100b8a3c7672bcce6184064be6c342a7096422f6754618c6.png" />
+<img alt="../../../_images/bf351c92e97dd10fe4c20845f92e165f86725dca47d4aab2d0060150f9e67d87.png" src="../../../_images/bf351c92e97dd10fe4c20845f92e165f86725dca47d4aab2d0060150f9e67d87.png" />
 </div>
 </div>
 <p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
@@ -785,7 +786,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/335a0b9b7cb628f3dc0973e7c9025248b1db4cf05b5402afff67781513a7a3ac.png" src="../../../_images/335a0b9b7cb628f3dc0973e7c9025248b1db4cf05b5402afff67781513a7a3ac.png" />
+<img alt="../../../_images/00687854e421f7376d0322ba243818da45440d2e5f62656165c240a06029061b.png" src="../../../_images/00687854e421f7376d0322ba243818da45440d2e5f62656165c240a06029061b.png" />
 </div>
 </div>
 <p>For p-values smaller than our threshold (to the right of the line), our decision is 1. So:</p>
@@ -809,7 +810,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/77245aaea91b7e1536d79741030e705ff9e861379ea5d7109df6b7cd35880350.png" src="../../../_images/77245aaea91b7e1536d79741030e705ff9e861379ea5d7109df6b7cd35880350.png" />
+<img alt="../../../_images/bf7fb0b9b612a5d75b115786912b18dc467425b31bf43120274a3aeea2c513d3.png" src="../../../_images/bf7fb0b9b612a5d75b115786912b18dc467425b31bf43120274a3aeea2c513d3.png" />
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>

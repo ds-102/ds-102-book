@@ -177,7 +177,8 @@
 <li class="toctree-l2"><a class="reference internal" href="01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Hierarchical Bayesian Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_graphical_models.html">Graphical Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_inference.html">Bayesian Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_inference_with_sampling.html">Bayesian Inference with Sampling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -594,7 +595,7 @@
 y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots, C\}
 \end{align*}
 \end{split}\]</div>
-<p>We saw in the last section that if the likelihood for a sequence of random variables <span class="math notranslate nohighlight">\(x_i\)</span> is Bernoulli<span class="math notranslate nohighlight">\((\theta)\)</span> and the prior for <span class="math notranslate nohighlight">\(\theta\)</span> is Beta<span class="math notranslate nohighlight">\((a, b)\)</span>, then the posterior for <span class="math notranslate nohighlight">\(\theta\)</span> is Beta<span class="math notranslate nohighlight">\(\left(a + \sum x_i, b + n - \sum x_i\right)\)</span>. We can also show that <strong>if the likelihood a random variable <span class="math notranslate nohighlight">\(y\)</span> is Binomial<span class="math notranslate nohighlight">\((n, \theta)\)</span> and the prior for <span class="math notranslate nohighlight">\(\theta\)</span> is Beta<span class="math notranslate nohighlight">\((a, b)\)</span>, then the posterior for <span class="math notranslate nohighlight">\(\theta\)</span> is Beta<span class="math notranslate nohighlight">\((a + y, b + n - y)\)</span>.</strong> In other words, just as the Beta distribution is the conjugate prior for the Bernoulli likelihood, it is also the conjugate prior for the binomial likelihood. (It also happens to be the conjugate prior for the geometric likelihood as well!)</p>
+<p>We saw in the last section that if the likelihood for a sequence of random variables <span class="math notranslate nohighlight">\(x_i\)</span> is Bernoulli<span class="math notranslate nohighlight">\((\theta)\)</span> and the prior for <span class="math notranslate nohighlight">\(\theta\)</span> is Beta<span class="math notranslate nohighlight">\((a, b)\)</span>, then the posterior for <span class="math notranslate nohighlight">\(\theta\)</span> is Beta<span class="math notranslate nohighlight">\(\left(a + \sum x_i, b + n - \sum x_i\right)\)</span>. We can also show that <strong>if the likelihood a random variable <span class="math notranslate nohighlight">\(y\)</span> is Binomial<span class="math notranslate nohighlight">\((n, \theta)\)</span> and the prior for <span class="math notranslate nohighlight">\(\theta\)</span> is Beta<span class="math notranslate nohighlight">\((a, b)\)</span>, then the posterior for <span class="math notranslate nohighlight">\(\theta\)</span> is Beta<span class="math notranslate nohighlight">\((a + y, b + n - y)\)</span>.</strong> In other words, just as the beta distribution is the conjugate prior for the Bernoulli likelihood, it is also the conjugate prior for the binomial likelihood. (It also happens to be the conjugate prior for the geometric likelihood as well!)</p>
 <p>Putting all this together, we can now compute the posterior distribution. Instead of a single parameter <span class="math notranslate nohighlight">\(\theta\)</span>, we now have <span class="math notranslate nohighlight">\(C\)</span> parameters, <span class="math notranslate nohighlight">\(\theta_1, \ldots, \theta_C\)</span>. The posterior distribution is the joint distribution of all of these random variables, conditioned on all of the observed data:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -658,12 +659,12 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 <img alt="../../../_images/d0744f3282fcb56e82e72c95d7c4deb31ce7e36ac4a512817591890f5580e1d8.png" src="../../../_images/d0744f3282fcb56e82e72c95d7c4deb31ce7e36ac4a512817591890f5580e1d8.png" />
 </div>
 </div>
-<p>We’ll use this empirical distribution (or rather, a close approximation of it) as our prior: this is where the “empirical” in empirical Bayes comes from. Since we want to use a Beta prior, we need to fit a Beta distribution to this data. In other words, we need to find parameters <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> that are a good fit for this sequence of observations (in the histogram above).</p>
-<p>This is exactly the problem we solved in the last section using maximum likelihood! We’ll use maximum likelihood to fit a Beta distribution to these data. This time, instead of deriving the MLEs for the Beta distribution, we’ll use scipy to do it for us:</p>
+<p>We’ll use this empirical distribution (or rather, a slightly modified version of it) as our prior: this is where the “empirical” in empirical Bayes comes from. Since we want to use a beta prior, we need to fit a beta distribution to this data. In other words, we need to find parameters <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> that are a good fit for this sequence of observations (in the histogram above).</p>
+<p>This is exactly the problem we solved in the last section using maximum likelihood! We’ll use maximum likelihood to fit a beta distribution to these data. This time, instead of deriving the MLEs for the Beta distribution, we’ll use scipy to do it for us:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
-<span class="c1"># The last two arguments tell scipy that it shouldn&#39;t try to shift or scale our Beta distribution</span>
+<span class="c1"># The last two arguments tell scipy that it shouldn&#39;t try to shift or scale our beta distribution</span>
 <span class="n">a_hat</span><span class="p">,</span> <span class="n">b_hat</span><span class="p">,</span> <span class="n">loc_</span><span class="p">,</span> <span class="n">scale_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">kc_large_counties</span><span class="p">[</span><span class="s1">&#39;rate_nopool&#39;</span><span class="p">],</span> <span class="n">floc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fscale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">a_hat</span><span class="p">,</span> <span class="n">b_hat</span><span class="p">)</span>
 </pre></div>
@@ -679,7 +680,7 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 <ul class="simple">
 <li><p>We want to find the parameters <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> of the prior, using our data to help us since we don’t have any domain knowledge</p></li>
 <li><p>We determined that we trust the data from the large counties, but not the smaller counties (because they are too variable). Note that this is an implicit <strong>assumption</strong> which could lead us astray: for example, if larger counties are biased toward lower or higher rates, then using them to estimate parameters of the prior is a bad idea.</p></li>
-<li><p>We looked at the naively estimated rates for the large counties only, and fit a Beta distribution to those, and then used that Beta distribution as our prior.</p></li>
+<li><p>We looked at the naively estimated rates for the large counties only, and fit a beta distribution to those, and then used that beta distribution as our prior.</p></li>
 </ul>
 <p>Let’s compare the results for these two approaches. For ease of visualization, we’ll look at a histogram of each county’s LMSE estimate:</p>
 <div class="cell docutils container">
@@ -712,7 +713,7 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f8daf02ee40&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f87dd16e360&gt;
 </pre></div>
 </div>
 <img alt="../../../_images/a70a8dc089eb4655b0b4da3b356f1afbc690a02bed1868f132dcb3d0a38208b5.png" src="../../../_images/a70a8dc089eb4655b0b4da3b356f1afbc690a02bed1868f132dcb3d0a38208b5.png" />
@@ -724,7 +725,7 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 <h3>Full Hierarchical Model<a class="headerlink" href="#full-hierarchical-model" title="Link to this heading">#</a></h3>
 <p>Philosophically, taking a Bayesian approach means that we’re deciding to treat unknown quantities as random variables, rather than fixed parameters. From what we’ve seen so far, in this model, <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are important unknown quantities that have a fairly significant effect on the outcome of our inference. So, we’ll now try treating them as random variables. Note that we now have two levels of unknown random variables: <span class="math notranslate nohighlight">\(\theta_i\)</span>, which we’ve already established, are the county-level risk probabilities. <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are now US-level average parameters that reflect the risk across all counties. This is a common feature of hierarchical models: one set of variables is closely linked to the data for each group (in this case, county), and one set of variables represents more global information (in this case, the entire US).</p>
 <p>But this leads to yet another modeling question: <strong>what prior distribution do we choose for <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span></strong>?</p>
-<p>Unfortunately, there is no convenient distribution that is a conjugate prior for the parameters of the Beta distribution. We’ll use a uniform distribution, but we’re still left with the question of how to choose the parameters of that uniform distribution. Since we know that <span class="math notranslate nohighlight">\(b &gt;&gt; a\)</span>, we’ll make the somewhat arbitrary choice of saying <span class="math notranslate nohighlight">\(a \sim \mathrm{Uniform}(0, 50)\)</span> and <span class="math notranslate nohighlight">\(b \sim \mathrm{Uniform}(0, 200000)\)</span>. We can then write out the full model:</p>
+<p>Unfortunately, there is no convenient distribution that is a conjugate prior for the parameters of the beta distribution. We’ll use a uniform distribution, but we’re still left with the question of how to choose the parameters of that uniform distribution. Since we know that <span class="math notranslate nohighlight">\(b &gt;&gt; a\)</span>, we’ll make the somewhat arbitrary choice of saying <span class="math notranslate nohighlight">\(a \sim \mathrm{Uniform}(0, 50)\)</span> and <span class="math notranslate nohighlight">\(b \sim \mathrm{Uniform}(0, 200000)\)</span>. We can then write out the full model:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
@@ -873,7 +874,7 @@ y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots\}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f8dab78c080&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f87dd040860&gt;]
 </pre></div>
 </div>
 <img alt="../../../_images/9edaf18f406637da791b52e3bf48cc4d9655b4e60f2e286cca1bef355f523c41.png" src="../../../_images/9edaf18f406637da791b52e3bf48cc4d9655b4e60f2e286cca1bef355f523c41.png" />

@@ -65,7 +65,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/02/03_graphical_models';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Bayesian Inference and Sampling" href="04_inference_sampling.html" />
+    <link rel="next" title="Bayesian Inference" href="04_inference.html" />
     <link rel="prev" title="Bayesian Hierarchical Models" href="02_hierarchical_models.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -177,7 +177,8 @@
 <li class="toctree-l2"><a class="reference internal" href="01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Graphical Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_inference.html">Bayesian Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_inference_with_sampling.html">Bayesian Inference with Sampling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -528,7 +529,9 @@ p(a, b, \theta_1, \ldots, \theta_C, y_1, \ldots, y_C) = p(a)p(b) \prod_{i=1}^C p
 </ul>
 <p><em><strong>Exercise</strong>: using the definition of conditional distributions, show that the two conditions above are mathematically equivalent.</em></p>
 <p>We say that two random variables <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(v\)</span> are <strong>conditionally independent</strong> given a third random variable <span class="math notranslate nohighlight">\(u\)</span> if, when we condition on <span class="math notranslate nohighlight">\(u\)</span>, knowing the value of one of <span class="math notranslate nohighlight">\(v\)</span> or <span class="math notranslate nohighlight">\(w\)</span> tells us nothing about the distribution of the other. Notationally, we write <span class="math notranslate nohighlight">\(w \perp\!\!\!\perp v \mid u\)</span>, and mathematically this means that <span class="math notranslate nohighlight">\(p(w, v \mid u) = p(w\mid u) p(v \mid u)\)</span>.</p>
-<p>For example, suppose <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are the heights of two people randomly sampled from a very specific population with some average height <span class="math notranslate nohighlight">\(\mu\)</span>. If we know the value of <span class="math notranslate nohighlight">\(\mu\)</span>, then <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are conditionally independent, because they’re random samples. Suppose instead that we don’t know the value of <span class="math notranslate nohighlight">\(\mu\)</span>, but we find out that <span class="math notranslate nohighlight">\(x_1 = 7' 1''\)</span>. In this case, we might guess that the ‘specific population’ is likely a very tall group, such as NBA players. This will affect our belief about the distribution of <span class="math notranslate nohighlight">\(x_2\)</span> (i.e., we should expect the second person to be tall too). So, in this case:</p>
+<p>For example, suppose <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are the heights of two people randomly sampled from a very specific population with some average height <span class="math notranslate nohighlight">\(\mu\)</span>: this population could be college students, or second-graders, or Olympic swimmers, or some other group entirely.</p>
+<p>If we know the value of <span class="math notranslate nohighlight">\(\mu\)</span>, then <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are conditionally independent, because they’re random samples from the same distribution with known mean <span class="math notranslate nohighlight">\(\mu\)</span>. For example, if we are given that <span class="math notranslate nohighlight">\(\mu = 4'1''\)</span>, then knowing <span class="math notranslate nohighlight">\(x_1\)</span> does not tell us anything about <span class="math notranslate nohighlight">\(x_2\)</span>.</p>
+<p>Suppose instead that we don’t know the value of <span class="math notranslate nohighlight">\(\mu\)</span>. Then, we find out that <span class="math notranslate nohighlight">\(x_1 = 7' 1''\)</span>. In this case, we might guess that the ‘specific population’ is likely a very tall group, such as NBA players. This will affect our belief about the distribution of <span class="math notranslate nohighlight">\(x_2\)</span> (i.e., we should expect the second person to be tall too). So, in this case:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are conditionally independent given <span class="math notranslate nohighlight">\(\mu\)</span>: <span class="math notranslate nohighlight">\(x_1 \perp\!\!\!\perp x_2 \mid \mu\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are not unconditionally independent: it is not true that <span class="math notranslate nohighlight">\(x_1 \perp\!\!\!\perp x_2\)</span>.</p></li>
@@ -587,8 +590,9 @@ p(x_1, x_2 \mid \mu)
 <li><p><span class="math notranslate nohighlight">\(x\)</span> is whether or not I am sick (with a cold, flu, COVID, etc.)</p></li>
 <li><p><span class="math notranslate nohighlight">\(z\)</span> is whether or not I have seasonal allergies.</p></li>
 </ul>
-<p>First, we can see that the description matches the graphical model: whether or not I have a stuffy nose depends on whether or not I’m sick, and whether or not I have allergies. But, they don’t affect each other. In other words, if I don’t know anything about whether I have a stuffy nose, then my sickness and allergies are independent of each other.</p>
-<p>Now, suppose I wake up one morning with a stuffy nose (i.e., <span class="math notranslate nohighlight">\(y=1\)</span>), and I’m trying to determine whether I’m sick or have allergies. I call my friend who usually has allergies around the same time of the year as me, and my friend tells me that they are having severe allergies right now. As soon as I hear this information, I’m a lot more certain that <span class="math notranslate nohighlight">\(z=1\)</span>. But, even though my friend didn’t tell me anything about whether or not I’m sick, my belief that I’m sick drops significantly: my symptoms have been <strong>explained away</strong> by the explanation that I probably have allergies. In other words, conditioned on a value of <span class="math notranslate nohighlight">\(y\)</span>, knowing something about <span class="math notranslate nohighlight">\(z\)</span> gives me information about the distribution of <span class="math notranslate nohighlight">\(x\)</span>. This is precisely the definition of conditional dependence.</p>
+<p>First, we can see that the description matches the graphical model: whether or not I have a stuffy nose depends on whether or not I’m sick, and whether or not I have allergies. But, sickness and allergies don’t affect each other. In other words, if I don’t know anything about whether I have a stuffy nose, then my sickness and allergies are independent of each other.</p>
+<p>Now, suppose I wake up one morning with a stuffy nose (i.e., <span class="math notranslate nohighlight">\(y=1\)</span>), and I’m trying to determine whether I’m sick or have allergies. I look at the weather forecast, and see that the pollen counts are very high. As soon as I hear this information, I’m a lot more certain that <span class="math notranslate nohighlight">\(z=1\)</span>. But, even though the weather forecast didn’t directly tell me anything about whether or not I’m sick, my belief that I’m sick drops significantly: my symptoms have been <strong>explained away</strong> by the explanation that I probably have allergies.</p>
+<p>In other words, conditioned on a value of <span class="math notranslate nohighlight">\(y\)</span> (stuffy nose), knowing something about <span class="math notranslate nohighlight">\(z\)</span> (allergies) gives me information about the distribution of <span class="math notranslate nohighlight">\(x\)</span> (sickness). This is precisely the definition of conditional dependence.</p>
 <p><em><strong>Exercise</strong>: mathematically prove the results above.</em></p>
 <p>These results can be formalized and generalized in the <strong>d-separation</strong> or <strong>Bayes’ ball</strong> algorithm. While this algorithm is beyond the scope of this textbook, we’ll look at a variant of it in a few chapters when we talk about causality.</p>
 <div class="cell tag_remove-input docutils container">
@@ -648,11 +652,11 @@ p(x_1, x_2 \mid \mu)
       </div>
     </a>
     <a class="right-next"
-       href="04_inference_sampling.html"
+       href="04_inference.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bayesian Inference and Sampling</p>
+        <p class="prev-next-title">Bayesian Inference</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -177,7 +177,8 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_graphical_models.html">Graphical Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_inference_sampling.html">Bayesian Inference and Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_inference.html">Bayesian Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_inference_with_sampling.html">Bayesian Inference with Sampling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -666,12 +667,12 @@ p(\theta|x) &amp;\propto p(x|\theta)p(\theta)
 </div>
 <section id="choosing-a-prior-beta-distributions">
 <h3>Choosing a prior: Beta distributions<a class="headerlink" href="#choosing-a-prior-beta-distributions" title="Link to this heading">#</a></h3>
-<p>Let’s return to our product review example. For our prior <span class="math notranslate nohighlight">\(p(\theta)\)</span>, which represents our belief about the unknown product quality <span class="math notranslate nohighlight">\(\theta\)</span> before seeing any data, we’ll choose the <a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">Beta distribution</a>. This isn’t the only distribution we can choose, but it happens to be a particularly convenient choice: we’ll see why later. The Beta distribution has two parameters, <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. It’s defined as:</p>
+<p>Let’s return to our product review example. For our prior <span class="math notranslate nohighlight">\(p(\theta)\)</span>, which represents our belief about the unknown product quality <span class="math notranslate nohighlight">\(\theta\)</span> before seeing any data, we’ll choose the <a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">beta distribution</a>. This isn’t the only distribution we can choose, but it happens to be a particularly convenient choice: we’ll see why later. The beta distribution has two parameters, <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. It’s defined as:</p>
 <div class="math notranslate nohighlight">
 \[
 p(\theta) \propto \theta^{\alpha-1} (1-\theta)^{\beta-1}
 \]</div>
-<p>The normalization constant is quite complicated, but we don’t need to know what it is to use the Beta distribution. Since this is a well-studied distribution, we can find out any facts about it that we need just by looking them up. Try it yourself: without doing any computation, what is the expectation of a Beta-distributed random variable? What is the mode?</p>
+<p>The normalization constant is quite complicated, but we don’t need to know what it is to use the beta distribution. Since this is a well-studied distribution, we can find out any facts about it that we need just by looking them up. Try it yourself: without doing any computation, what is the expectation of a beta-distributed random variable? What is the mode?</p>
 <section id="normalizing-the-beta-distribution-optional">
 <h4>Normalizing the Beta distribution (optional)<a class="headerlink" href="#normalizing-the-beta-distribution-optional" title="Link to this heading">#</a></h4>
 <p>How would we go about computing the normalization constant for this distribution? We know that the formula above is missing a constant of proportionality, which we’ll call <span class="math notranslate nohighlight">\(Z\)</span>:</p>
@@ -693,7 +694,7 @@ p(\theta) = \frac{1}{Z} \theta^{\alpha-1} (1-\theta)^{\beta-1}
 </section>
 <section id="intuition-for-the-beta-distribution">
 <h4>Intuition for the Beta distribution<a class="headerlink" href="#intuition-for-the-beta-distribution" title="Link to this heading">#</a></h4>
-<p>Before we compute the posterior, let’s build some intuition for how the Beta distribution works. The <a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">Wikipedia page</a> has some helpful examples of what it looks like for different values of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. Let’s look at a few of those examples. Recall that we can use the distributions in <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> to compute and visualize probability density functions (PDFs):</p>
+<p>Before we compute the posterior, let’s build some intuition for how the beta distribution works. The <a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">Wikipedia page</a> has some helpful examples of what it looks like for different values of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. Let’s look at a few of those examples. Recall that we can use the distributions in <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> to compute and visualize probability density functions (PDFs):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">thetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
@@ -713,7 +714,7 @@ p(\theta) = \frac{1}{Z} \theta^{\alpha-1} (1-\theta)^{\beta-1}
 <img alt="../../../_images/4bc6fc6be1e389c9c4e682b10752e4f762dad380b4f134659b6bbf5c54f3c11e.png" src="../../../_images/4bc6fc6be1e389c9c4e682b10752e4f762dad380b4f134659b6bbf5c54f3c11e.png" />
 </div>
 </div>
-<p>We can see that different values of the parameters lead to different shapes for the Beta distribution. In particular, when <span class="math notranslate nohighlight">\(\alpha\)</span> is larger than <span class="math notranslate nohighlight">\(\beta\)</span>, we see that larger values of <span class="math notranslate nohighlight">\(\theta\)</span> are more likely, and vice versa. We can also see that Beta<span class="math notranslate nohighlight">\((1, 1)\)</span> is the same as the Uniform distribution over <span class="math notranslate nohighlight">\([0, 1]\)</span>. Try experimenting with different values: what changes as <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> get larger?</p>
+<p>We can see that different values of the parameters lead to different shapes for the beta distribution. In particular, when <span class="math notranslate nohighlight">\(\alpha\)</span> is larger than <span class="math notranslate nohighlight">\(\beta\)</span>, we see that larger values of <span class="math notranslate nohighlight">\(\theta\)</span> are more likely, and vice versa. We can also see that Beta<span class="math notranslate nohighlight">\((1, 1)\)</span> is the same as the uniform distribution over <span class="math notranslate nohighlight">\([0, 1]\)</span>. Try experimenting with different values: what changes as <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> get larger?</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
@@ -740,13 +741,13 @@ p(\theta|x)
     &amp;\propto \theta^{\alpha + \left[\sum_i x_i\right] - 1}(1-\theta)^{\beta + \left[\sum_i (1-x_i)\right] - 1}
 \end{align}
 \end{split}\]</div>
-<p>We can see that this is also a Beta distribution, because it looks like <span class="math notranslate nohighlight">\(\theta^{\text{stuff}}(1-\theta)^{\text{other stuff}}\)</span>. It has parameters <span class="math notranslate nohighlight">\(\alpha + \sum_i x_i\)</span> and <span class="math notranslate nohighlight">\(\beta + \sum_i (1-x_i)\)</span>, so we can write the posterior as</p>
+<p>We can see that this is also a beta distribution, because it looks like <span class="math notranslate nohighlight">\(\theta^{\text{stuff}-1}(1-\theta)^{\text{other stuff}-1}\)</span>. It has parameters <span class="math notranslate nohighlight">\(\alpha + \sum_i x_i\)</span> and <span class="math notranslate nohighlight">\(\beta + \sum_i (1-x_i)\)</span>, so we can write the posterior as</p>
 <div class="math notranslate nohighlight">
 \[
 \theta|x \sim \mathrm{Beta}\Bigg(\alpha + \sum_i x_i\,,\,\, \beta + \sum_i (1-x_i)\Bigg)
 \]</div>
 <p>By making this observation, we avoided having to compute the denominator <span class="math notranslate nohighlight">\(p(x)\)</span>!</p>
-<p>This is because the Beta distribution is the <strong>conjugate prior</strong> for the Bernoulli distribution. This means that whenever we have a Bernoulli likelihood, if we choose a prior from the Beta family, then the posterior distribution will also be in the Beta family.</p>
+<p>This is because the beta distribution is the <strong>conjugate prior</strong> for the Bernoulli distribution. This means that whenever we have a Bernoulli likelihood, if we choose a prior from the beta family, then the posterior distribution will also be in the beta family.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
@@ -828,12 +829,12 @@ p(\theta|x)
 </div>
 </details>
 </div>
-<p>Let’s visualize some examples of prior and posterior Beta distributions. We’ll use the <code class="docutils literal notranslate"><span class="pre">plot_beta_prior_and_posterior</span></code> function, which takes in the parameters of the prior (<span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>) as well as the number of positive and negative observations (<span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(n-k\)</span>), and shows the prior and posterior distributions for <span class="math notranslate nohighlight">\(\theta\)</span> on the same graph.</p>
+<p>Let’s visualize some examples of prior and posterior beta distributions. We’ll use the <code class="docutils literal notranslate"><span class="pre">plot_beta_prior_and_posterior</span></code> function, which takes in the parameters of the prior (<span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>) as well as the number of positive and negative observations (<span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(n-k\)</span>), and shows the prior and posterior distributions for <span class="math notranslate nohighlight">\(\theta\)</span> on the same graph.</p>
 <p>We’ll start with Microwave A, which had 3 positive reviews and 0 negative reviews. For now, we’ll just explore a few different choices and look at the outcomes. Later, we’ll discuss which choice of prior could be a better fit for this particular problem.</p>
 <p>First, what happens if we use a <span class="math notranslate nohighlight">\(\mathrm{Beta}(1, 1)\)</span> prior? We saw earlier that this is the same as a uniform prior. Intuitively, this prior represents the belief that before observing any reviews, all values of <span class="math notranslate nohighlight">\(\theta\)</span> (between 0 and 1) should be equally likely.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots a Beta distribution with a Beta(1, 1) prior (the first two arguments) </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots a beta posterior resulting from a Beta(1, 1) prior (the first two arguments) </span>
 <span class="c1"># and 3 positive observations and 0 negative observations (the second two arguments)</span>
 <span class="n">plot_beta_prior_and_posterior</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
@@ -900,7 +901,7 @@ p(\theta|x)
 <p>Once we have a posterior distribution, we will often want to answer the question: how do we use the distribution to get a single estimate for <span class="math notranslate nohighlight">\(\theta\)</span>? This single number is typically called a <strong>point estimate</strong>.</p>
 <p>We’ll start with two answers for question 1: the <strong>Maximum a Posteriori (MAP) estimate</strong> and the <strong>Minimum/Least Mean Squared Error (MMSE/LMSE) Estimate</strong>.</p>
 <p>The <strong>MAP estimate</strong> is the estimate that maximizes the posterior distribution. Remember that the posterior distribution represents our belief about the unknown parameter <span class="math notranslate nohighlight">\(\theta\)</span>. Intuitively, the MAP estimate is the <span class="math notranslate nohighlight">\(\theta\)</span> value that is most likely according to that belief. For a Beta<span class="math notranslate nohighlight">\((\alpha, \beta)\)</span> distribution, we can look up the maximum value (mode) of the distribution to find that it’s <span class="math notranslate nohighlight">\(\frac{\alpha-1}{\alpha+\beta-2}\)</span>.</p>
-<p><strong>Optional exercise</strong>: derive the mode of the Beta distribution. <em>Hint: instead of maximizing the Beta density with respect to <span class="math notranslate nohighlight">\(\theta\)</span>, try taking the log first, just like we did before.</em></p>
+<p><strong>Optional exercise</strong>: derive the mode of the beta distribution. <em>Hint: instead of maximizing the Beta density with respect to <span class="math notranslate nohighlight">\(\theta\)</span>, try taking the log first, just like we did before.</em></p>
 <p>The <strong>LMSE estimate</strong> is simply the mean of the posterior distribution. It has this name because we can show that the mean of the posterior distribution minimizes the mean squared error:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -981,7 +982,7 @@ So, under this prior, microwave B looks better.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2069/2433367669.py:1: DeprecationWarning: `trapz` is deprecated. Use `trapezoid` instead, or one of the numerical integration functions in `scipy.integrate`.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2005/2433367669.py:1: DeprecationWarning: `trapz` is deprecated. Use `trapezoid` instead, or one of the numerical integration functions in `scipy.integrate`.
   np.trapz(np.pi/2 * np.cos(thetas * np.pi/2), thetas)
 </pre></div>
 </div>
@@ -1005,7 +1006,7 @@ p(\theta|x)
 </section>
 <section id="a-continuous-example-estimating-heights">
 <h2>A continuous example: estimating heights<a class="headerlink" href="#a-continuous-example-estimating-heights" title="Link to this heading">#</a></h2>
-<p>Suppose instead that now our parameter of interest <span class="math notranslate nohighlight">\(\theta\)</span> is the average height of a population, and our data <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> are heights of individuals in a sample. A Bernoulli distribution no longer makes sense for these continuous data. There are many options we could choose, but for simplicity we’ll use a normal distribution:</p>
+<p>Suppose instead that now our parameter of interest <span class="math notranslate nohighlight">\(\theta\)</span> is the average height of a population, and our data <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> are heights of individuals in a sample. A Bernoulli distribution no longer makes sense for these continuous data. There are many options we could choose, but for simplicity we’ll use a normal distribution (also known as the Gaussian distribution):</p>
 <div class="math notranslate nohighlight">
 \[
 x_i|\theta \sim \mathcal{N}(\theta, \sigma^2)
@@ -1050,7 +1051,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 \[
 \theta \sim \mathcal{N}(\mu_0, \sigma_0^2)
 \]</div>
-<p>Note that the parameters of this distribution, <span class="math notranslate nohighlight">\(\mu_0\)</span> and <span class="math notranslate nohighlight">\(\sigma_0^2\)</span>, are different from the parameters in the likelihood! This says that our parameter <span class="math notranslate nohighlight">\(\theta\)</span>, the mean of the population, follows a normal distribution with some mean <span class="math notranslate nohighlight">\(\mu_0\)</span> and some variance <span class="math notranslate nohighlight">\(\sigma_0^2\)</span>.</p>
+<p>Note that the parameters of this prior distribution, <span class="math notranslate nohighlight">\(\mu_0\)</span> and <span class="math notranslate nohighlight">\(\sigma_0^2\)</span>, are different from the parameters in the likelihood! This says that our parameter <span class="math notranslate nohighlight">\(\theta\)</span>, the mean of the population, follows a normal distribution with some mean <span class="math notranslate nohighlight">\(\mu_0\)</span> and some variance <span class="math notranslate nohighlight">\(\sigma_0^2\)</span>.</p>
 <p>Although the algebra is a bit more involved, we can show that the normal distribution is the conjugate prior for the mean of a normal distribution. In other words, the posterior distribution for <span class="math notranslate nohighlight">\(\theta\)</span> is also normal.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1084,7 +1085,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_gaussian_prior_and_posterior</span><span class="p">(</span><span class="n">μ_0</span><span class="p">,</span> <span class="n">σ_0</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">range_in_σs</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">show_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_lmse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plots prior and posterior Normaly distribution</span>
+<span class="sd">    Plots prior and posterior Normal distribution</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
 <span class="sd">        μ_0, σ_0: parameters (mean, SD) of the prior distribution</span>
@@ -1178,6 +1179,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 </div>
 </div>
 <p>Just as before, we can observe that the prior has a stronger effect when we have less data. We can also see that the posterior distribution becomes narrower as the amount of data increases. This is another general fact: <strong>the more data we observe, the narrower our posterior distribution becomes.</strong></p>
+<p><strong>Optional Exercise</strong>: now that you’ve seen the effect of the prior parameters in a normal prior + normal likelihood model, give an intuitive explanation of how the parameters interact in the posterior distribution above for <span class="math notranslate nohighlight">\(p(\theta | x_1, \ldots x_n)\)</span>.</p>
 </section>
 </section>
 </section>
