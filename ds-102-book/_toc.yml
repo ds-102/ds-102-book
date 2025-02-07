@@ -33,8 +33,10 @@ chapters:
       title: "Hierarchical Bayesian Models"
     - file: content/chapters/02/03_graphical_models
       title: "Graphical Models"
-    - file: content/chapters/02/04_inference_sampling
-      title: "Bayesian Inference and Sampling"
+    - file: content/chapters/02/04_inference
+      title: "Bayesian Inference"
+    - file: content/chapters/02/05_inference_with_sampling
+      title: "Bayesian Inference with Sampling"
 - file: content/chapters/03/intro
   title: "Chapter 3: Prediction"
   sections:
