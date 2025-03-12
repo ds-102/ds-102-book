@@ -622,18 +622,6 @@ L(a, b, c) = (a + 3b)c^2
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Torch tensors are like numpy arrays</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">2.</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>We then define tensors for q and r. Note that each one contains both the value computed as well as the necessary operation to compute the gradient in the backward pass:</p>
 <div class="cell docutils container">
@@ -680,13 +668,24 @@ L(a, b, c) = (a + 3b)c^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor(16.)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor(16.) tensor(48.) tensor(88.)
 </pre></div>
 </div>
 </div>
 </div>
 <p>We can see that the results match up precisely with what we computed above manually!</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/GBwLIjFF3Rg"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 </section>
 </section>

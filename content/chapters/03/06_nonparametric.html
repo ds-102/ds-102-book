@@ -593,18 +593,10 @@ p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">fit_and_predict_and_draw_results</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">LogisticRegression</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">),</span> <span class="s1">&#39;logistic regression&#39;</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="p">);</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.626
 </pre></div>
 </div>
+<img alt="../../../_images/655d4f23403a89cad9a9308b8e1f732a08a58c35378d629f0a7a60f28344bad4.png" src="../../../_images/655d4f23403a89cad9a9308b8e1f732a08a58c35378d629f0a7a60f28344bad4.png" />
 </div>
 </div>
 <p>As expected, the overall accuracy is close to <span class="math notranslate nohighlight">\(0.5\)</span> (which is what we’d get if we predicted completely at random). Logistic regression (without any feature engineering) is a poor choice for this data.</p>
@@ -626,7 +618,7 @@ p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.952
 </pre></div>
 </div>
-<img alt="../../../_images/80302630d19ee06bfbda92acacf3a10dbf8273fcfbeb82e55ad725ec11812648.png" src="../../../_images/80302630d19ee06bfbda92acacf3a10dbf8273fcfbeb82e55ad725ec11812648.png" />
+<img alt="../../../_images/6ebe9130a537ff54269ac4fcdcd24f3e9ad8a905dd85b82fd0729b25e76a9d7a.png" src="../../../_images/6ebe9130a537ff54269ac4fcdcd24f3e9ad8a905dd85b82fd0729b25e76a9d7a.png" />
 </div>
 </div>
 <p>The kNN model does much better on this dataset. Best of all, we didn’t have to do any feature engineering or parameter tuning: it just worked out of the box.</p>
@@ -636,7 +628,7 @@ p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
         <iframe
             width="400"
             height="300"
-            src="https://www.youtube.com/embed/DcjHq-5jpko"
+            src="https://www.youtube.com/embed/YCfdENsb_YI"
             frameborder="0"
             allowfullscreen
             
@@ -649,7 +641,7 @@ p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
         <iframe
             width="400"
             height="300"
-            src="https://www.youtube.com/embed/DcjHq-5jpko"
+            src="https://www.youtube.com/embed/AfBgttM7wFc"
             frameborder="0"
             allowfullscreen
             
@@ -695,7 +687,7 @@ p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
         <iframe
             width="400"
             height="300"
-            src="https://www.youtube.com/embed/DcjHq-5jpko"
+            src="https://www.youtube.com/embed/SoDiaODgEDQ"
             frameborder="0"
             allowfullscreen
             
@@ -724,7 +716,7 @@ p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
         <iframe
             width="400"
             height="300"
-            src="https://www.youtube.com/embed/DcjHq-5jpko"
+            src="https://www.youtube.com/embed/sjfqHalgC9E"
             frameborder="0"
             allowfullscreen
             
@@ -746,7 +738,7 @@ p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.99
 </pre></div>
 </div>
-<img alt="../../../_images/bf313f6f66e0569b3a6aea3644380d75451aef29919a126442be2ff11a2afd39.png" src="../../../_images/bf313f6f66e0569b3a6aea3644380d75451aef29919a126442be2ff11a2afd39.png" />
+<img alt="../../../_images/04432585082d7478d77ec22cd5fe7b8f86de5d92d825fcc03f12992ef6beae05.png" src="../../../_images/04432585082d7478d77ec22cd5fe7b8f86de5d92d825fcc03f12992ef6beae05.png" />
 </div>
 </div>
 <p>The decision tree is almost perfect.</p>
@@ -766,7 +758,7 @@ p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/73abc59712d59be20178cf2db892cd124f57156692a7871c21adeadbe47554ab.png" src="../../../_images/73abc59712d59be20178cf2db892cd124f57156692a7871c21adeadbe47554ab.png" />
+<img alt="../../../_images/f416fb38345b7d67b4106b23a1d0b88abd1fb2194a7fb79b55349096cf9e5dc0.png" src="../../../_images/f416fb38345b7d67b4106b23a1d0b88abd1fb2194a7fb79b55349096cf9e5dc0.png" />
 </div>
 </div>
 <p>Now there are a small handful of points where the training label is wrong. Let’s try fitting a decision tree again: we’ll train on the noisy data, but we’ll test on the good data, so that we can evaluate whether the model learns the true pattern despite the noise.</p>
@@ -784,7 +776,7 @@ p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.746
 </pre></div>
 </div>
-<img alt="../../../_images/da4ac7d7054b01b1d3dba491148a6a6d081b790177c28cb0b6a43399a536d48f.png" src="../../../_images/da4ac7d7054b01b1d3dba491148a6a6d081b790177c28cb0b6a43399a536d48f.png" />
+<img alt="../../../_images/e5c18037693eb1e20f967f4801e5db0257f905fbe8f1314c0b1ff4053ec5a731.png" src="../../../_images/e5c18037693eb1e20f967f4801e5db0257f905fbe8f1314c0b1ff4053ec5a731.png" />
 </div>
 </div>
 <p>Changing just <span class="math notranslate nohighlight">\(10\%\)</span> of the points completely wrecked the tree! Our accuracy dropped to around <span class="math notranslate nohighlight">\(75\%\)</span>. While this is a toy dataset, it’s not uncommon in real-world datasets to see <span class="math notranslate nohighlight">\(10\%\)</span> of the data be corrupted by noise.</p>
@@ -829,7 +821,7 @@ p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.958
 </pre></div>
 </div>
-<img alt="../../../_images/142788edb9cd2d7d38994310b409d62b43a6cf77e06ff09b2c4186a18a57796f.png" src="../../../_images/142788edb9cd2d7d38994310b409d62b43a6cf77e06ff09b2c4186a18a57796f.png" />
+<img alt="../../../_images/f4f15130d5ff4b1e6125b697ad9ae00d9795e192368ef1c8cdd234ff6a4335d1.png" src="../../../_images/f4f15130d5ff4b1e6125b697ad9ae00d9795e192368ef1c8cdd234ff6a4335d1.png" />
 </div>
 </div>
 <p>The random forest achieves <span class="math notranslate nohighlight">\(95\%\)</span> training accuracy. Remember that the labels in our training data was only <span class="math notranslate nohighlight">\(90\%\)</span> accurate, so <span class="math notranslate nohighlight">\(95\%\)</span> here is very impressive!</p>
@@ -840,7 +832,7 @@ p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
         <iframe
             width="400"
             height="300"
-            src="https://www.youtube.com/embed/DcjHq-5jpko"
+            src="https://www.youtube.com/embed/CZObqvT_gWU"
             frameborder="0"
             allowfullscreen
             
@@ -867,10 +859,10 @@ p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.626
-Coefficients: [[-0.03490349  0.05527346]]
+Coefficients: [[-0.03462649  0.05539163]]
 </pre></div>
 </div>
-<img alt="../../../_images/68c6c11bd7a357a50f85baa035f4edcfc7aacbbf9ac4c32f4e5ec2ff3dbc95be.png" src="../../../_images/68c6c11bd7a357a50f85baa035f4edcfc7aacbbf9ac4c32f4e5ec2ff3dbc95be.png" />
+<img alt="../../../_images/655d4f23403a89cad9a9308b8e1f732a08a58c35378d629f0a7a60f28344bad4.png" src="../../../_images/655d4f23403a89cad9a9308b8e1f732a08a58c35378d629f0a7a60f28344bad4.png" />
 </div>
 </div>
 <p>This tells us that for an increase of 1 in <span class="math notranslate nohighlight">\(x_1\)</span>, the log-odds decreases by <span class="math notranslate nohighlight">\(0.03\)</span>. Unfortunately, this interpretion is meaningless, because the model does not accurately reflect the patterns in the data! This is an important lesson: the interpretation of a model is, at best, only as good as the model itself.</p>
@@ -880,7 +872,7 @@ Coefficients: [[-0.03490349  0.05527346]]
         <iframe
             width="400"
             height="300"
-            src="https://www.youtube.com/embed/DcjHq-5jpko"
+            src="https://www.youtube.com/embed/sjfqHalgC9E"
             frameborder="0"
             allowfullscreen
             
@@ -917,7 +909,7 @@ Coefficients: [[-0.03490349  0.05527346]]
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.996
 </pre></div>
 </div>
-<img alt="../../../_images/8c23fee193a2a77bc8e295a584586e56ff7038c74db6153dd16dd7d5d703a641.png" src="../../../_images/8c23fee193a2a77bc8e295a584586e56ff7038c74db6153dd16dd7d5d703a641.png" />
+<img alt="../../../_images/b8d14449a825e849960b614ebadb9e2cdd1f550206a607b7adfe0a24c9c64991.png" src="../../../_images/b8d14449a825e849960b614ebadb9e2cdd1f550206a607b7adfe0a24c9c64991.png" />
 </div>
 </div>
 <p>Unsurprisingly, this model does <em>much</em> better! Now that we’ve resolved our issues with the model’s accuracy, let’s see if we can interpret the coefficients:</p>
@@ -928,7 +920,7 @@ Coefficients: [[-0.03490349  0.05527346]]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  277.36746859,   -56.97829336, 19397.32580951]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 139.23624127,  -30.04770306, 9686.74207127]])
 </pre></div>
 </div>
 </div>
@@ -953,7 +945,7 @@ Coefficients: [[-0.03490349  0.05527346]]
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.952
 </pre></div>
 </div>
-<img alt="../../../_images/80302630d19ee06bfbda92acacf3a10dbf8273fcfbeb82e55ad725ec11812648.png" src="../../../_images/80302630d19ee06bfbda92acacf3a10dbf8273fcfbeb82e55ad725ec11812648.png" />
+<img alt="../../../_images/6ebe9130a537ff54269ac4fcdcd24f3e9ad8a905dd85b82fd0729b25e76a9d7a.png" src="../../../_images/6ebe9130a537ff54269ac4fcdcd24f3e9ad8a905dd85b82fd0729b25e76a9d7a.png" />
 </div>
 </div>
 <p>Consider the misclassified point around <span class="math notranslate nohighlight">\((0.2, -2.9)\)</span>. If we ask why this point has been misclassified, the answer is in the training set.</p>
@@ -964,7 +956,7 @@ Coefficients: [[-0.03490349  0.05527346]]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/774f1caccbe05a90def7b8b1f7abf4b46ac0412b1e5c2f81b45c9d712d8b3ee0.png" src="../../../_images/774f1caccbe05a90def7b8b1f7abf4b46ac0412b1e5c2f81b45c9d712d8b3ee0.png" />
+<img alt="../../../_images/f83694e6f49037dfa43b91871d729c8ff8fe32077127a52b1debe6baea19c690.png" src="../../../_images/f83694e6f49037dfa43b91871d729c8ff8fe32077127a52b1debe6baea19c690.png" />
 </div>
 </div>
 <p>We can see that the bottom-left portion of quadrant IV is rather sparse in our training datsaset. If we consider the point at <span class="math notranslate nohighlight">\((0.2, -2.9)\)</span>, we can see that it’s likely to be equidistant to the “1” (yellow) points toward the bottom of quadrant III! This is the cause of the misclassification.</p>
@@ -984,10 +976,10 @@ Coefficients: [[-0.03490349  0.05527346]]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.762
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.99
 </pre></div>
 </div>
-<img alt="../../../_images/fde4d04d39ba8faaaa2d562a2cc104ee131643519d9faf314663bb49c3c7ddca.png" src="../../../_images/fde4d04d39ba8faaaa2d562a2cc104ee131643519d9faf314663bb49c3c7ddca.png" />
+<img alt="../../../_images/04432585082d7478d77ec22cd5fe7b8f86de5d92d825fcc03f12992ef6beae05.png" src="../../../_images/04432585082d7478d77ec22cd5fe7b8f86de5d92d825fcc03f12992ef6beae05.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1000,7 +992,7 @@ Coefficients: [[-0.03490349  0.05527346]]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/83d3257dc2728f7d2501f5261f99bbc3061d442345fefc51f89a23126c3ca2ef.png" src="../../../_images/83d3257dc2728f7d2501f5261f99bbc3061d442345fefc51f89a23126c3ca2ef.png" />
+<img alt="../../../_images/6c281b2a525170dbb8c1bfdc5762512517f612ace7a754d88368910ce7cde8ae.png" src="../../../_images/6c281b2a525170dbb8c1bfdc5762512517f612ace7a754d88368910ce7cde8ae.png" />
 </div>
 </div>
 <p>While the top of the tree is somewhat counterintuitive due to the arbitrary nature of the initial split, we can see that the lower layers are easy to interpret: we split at <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> values close to 0.</p>
@@ -1019,7 +1011,7 @@ Coefficients: [[-0.03490349  0.05527346]]
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.746
 </pre></div>
 </div>
-<img alt="../../../_images/4909a5213367910052e6b436b44508b0a8c4459fc1702d4a269bf35b9171c8f0.png" src="../../../_images/4909a5213367910052e6b436b44508b0a8c4459fc1702d4a269bf35b9171c8f0.png" />
+<img alt="../../../_images/b1e61ae76ef08018bd167c87ed86b338119d0aaeed264175b06a69eeffda13d5.png" src="../../../_images/b1e61ae76ef08018bd167c87ed86b338119d0aaeed264175b06a69eeffda13d5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1035,7 +1027,7 @@ Coefficients: [[-0.03490349  0.05527346]]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/c774cfd56f1d819e67fc99e4c53ccd5b64f51b3c7f32fb92d90ae3db35aa5c53.png" src="../../../_images/c774cfd56f1d819e67fc99e4c53ccd5b64f51b3c7f32fb92d90ae3db35aa5c53.png" />
+<img alt="../../../_images/dd667c0fbfd49d3739ec13987b12490ab33d1650fa6f1e69b3275293c006968e.png" src="../../../_images/dd667c0fbfd49d3739ec13987b12490ab33d1650fa6f1e69b3275293c006968e.png" />
 </div>
 </div>
 <p>This tree is <strong>much</strong> more difficult to interpret! Tracing any individual prediction may require us to go down up to 15 levels deep: and, this is just for a simple two-dimensional toy dataset! In real-world datasets in higher dimensions, trees can be even deeper.</p>
@@ -1049,7 +1041,7 @@ Coefficients: [[-0.03490349  0.05527346]]
         <iframe
             width="400"
             height="300"
-            src="https://www.youtube.com/embed/DcjHq-5jpko"
+            src="https://www.youtube.com/embed/5vrzxIyGU4w"
             frameborder="0"
             allowfullscreen
             
@@ -1066,7 +1058,7 @@ Coefficients: [[-0.03490349  0.05527346]]
         <iframe
             width="400"
             height="300"
-            src="https://www.youtube.com/embed/DcjHq-5jpko"
+            src="https://www.youtube.com/embed/1odBKmKSPG0"
             frameborder="0"
             allowfullscreen
             
