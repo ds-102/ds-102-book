@@ -5,3 +5,6 @@ seaborn
 pandas
 ghp-import
 scipy
+scikit-learn
+torch
+pymc
