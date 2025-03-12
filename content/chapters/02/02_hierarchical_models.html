@@ -196,8 +196,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">[WIP] Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">[WIP] Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/06_nonparametric.html">Nonparametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/07_neural_networks.html">Neural Networks</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -556,7 +558,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;rate_nopool&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/dd43d88ed6d248c3634c2e0be45bc092e772fd8730ca1e8ca2030f9466b57053.png" src="../../../_images/dd43d88ed6d248c3634c2e0be45bc092e772fd8730ca1e8ca2030f9466b57053.png" />
+<img alt="../../../_images/76e34933eddb0edefbe5c3b2c12dd9d32cbc9b117fbb04aaad9235bcd669ff3f.png" src="../../../_images/76e34933eddb0edefbe5c3b2c12dd9d32cbc9b117fbb04aaad9235bcd669ff3f.png" />
 </div>
 </div>
 <p>From this, it appears that most counties have a rate between 1 in 100,000 (<span class="math notranslate nohighlight">\(0.00001\)</span>) and 1 in 10,000 (<span class="math notranslate nohighlight">\(0.0001\)</span>), but a sizeable number have a rate of 0.</p>
@@ -569,7 +571,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/d214bd601db6dc15bf63c6b70167e41a33466efdc3b40cd26cfa4e351215e9cd.png" src="../../../_images/d214bd601db6dc15bf63c6b70167e41a33466efdc3b40cd26cfa4e351215e9cd.png" />
+<img alt="../../../_images/59f00c5d28f699bcc47311e0415c5ee36598948993f28bff0cab0259639f4c8e.png" src="../../../_images/59f00c5d28f699bcc47311e0415c5ee36598948993f28bff0cab0259639f4c8e.png" />
 </div>
 </div>
 <p>For larger counties, our estimates are consistently between <span class="math notranslate nohighlight">\(0.00002\)</span> and <span class="math notranslate nohighlight">\(0.00008\)</span>, but for the small counties, the estimates have much higher variability.</p>
@@ -655,7 +657,7 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/f3c21a8a534e99a5ce29f745bdc66aad6f18876acaf0a3c127f463d1a4d8a543.png" src="../../../_images/f3c21a8a534e99a5ce29f745bdc66aad6f18876acaf0a3c127f463d1a4d8a543.png" />
+<img alt="../../../_images/76993bea187526c74040beb6f41f4d8d37cd9ae22d62f8bb434af5a92c615b96.png" src="../../../_images/76993bea187526c74040beb6f41f4d8d37cd9ae22d62f8bb434af5a92c615b96.png" />
 </div>
 </div>
 <p>Based on this, we’ll use 300,000 as a cutoff (the dotted line), and ignore counties smaller than this when estimating the parameters of the prior:</p>
@@ -670,7 +672,7 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;rate_nopool&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/d0744f3282fcb56e82e72c95d7c4deb31ce7e36ac4a512817591890f5580e1d8.png" src="../../../_images/d0744f3282fcb56e82e72c95d7c4deb31ce7e36ac4a512817591890f5580e1d8.png" />
+<img alt="../../../_images/75347a58a0f36eab883225c67cc0c1c1e786527330215000aac6fe62d20c9e52.png" src="../../../_images/75347a58a0f36eab883225c67cc0c1c1e786527330215000aac6fe62d20c9e52.png" />
 </div>
 </div>
 <p>We’ll use this empirical distribution (or rather, a slightly modified version of it) as our prior: this is where the “empirical” in empirical Bayes comes from. Since we want to use a beta prior, we need to fit a beta distribution to this data. In other words, we need to find parameters <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> that are a good fit for this sequence of observations (in the histogram above).</p>
@@ -727,10 +729,10 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f299330f680&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa5d3ea9100&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/a70a8dc089eb4655b0b4da3b356f1afbc690a02bed1868f132dcb3d0a38208b5.png" src="../../../_images/a70a8dc089eb4655b0b4da3b356f1afbc690a02bed1868f132dcb3d0a38208b5.png" />
+<img alt="../../../_images/0e40efb3bb5d2312be9312784fd01bf4e4ef0f63aa8a3d1d7284fabe6149977e.png" src="../../../_images/0e40efb3bb5d2312be9312784fd01bf4e4ef0f63aa8a3d1d7284fabe6149977e.png" />
 </div>
 </div>
 <p>In both cases, we no longer see estimates of 0. Note that because the empirical Bayes prior was stronger (i.e., less variable due to larger values of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>), the posterior estimates fall in a narrower range.</p>
@@ -871,7 +873,7 @@ y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots\}
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;radius&#39;, ylabel=&#39;Density&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/22b615cd26bdce2c152b23e8eb02beef9a2a3919bfdc329e9473c3c0e06eeda8.png" src="../../../_images/22b615cd26bdce2c152b23e8eb02beef9a2a3919bfdc329e9473c3c0e06eeda8.png" />
+<img alt="../../../_images/b9e11daf2879ced400e13ec3bc7466c320d2e2930ca29acbd00604020285a706.png" src="../../../_images/b9e11daf2879ced400e13ec3bc7466c320d2e2930ca29acbd00604020285a706.png" />
 </div>
 </div>
 <p>We can see that there are two groups of planets: those with relatively small radii (closer to Earth-sized), and those with larger radii (closer to Jupiter-sized). We can see that if we try to fit a single Gaussian distribution to this data, the resulting fit is rather poor:</p>
@@ -888,10 +890,10 @@ y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots\}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f2995748ce0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa5d0758200&gt;]
 </pre></div>
 </div>
-<img alt="../../../_images/9edaf18f406637da791b52e3bf48cc4d9655b4e60f2e286cca1bef355f523c41.png" src="../../../_images/9edaf18f406637da791b52e3bf48cc4d9655b4e60f2e286cca1bef355f523c41.png" />
+<img alt="../../../_images/e91160c1ead1e28e8bc3ab5317a3c40e035295731b81f4314d07196438fbc321.png" src="../../../_images/e91160c1ead1e28e8bc3ab5317a3c40e035295731b81f4314d07196438fbc321.png" />
 </div>
 </div>
 <p>Visually, the result is somewhat obvious: the data fall into two distinct groups, so trying to impose one Gaussian distribution produces a poor fit. Instead, what we want is a more sophisticated model that can directly model these two groups, and help us infer properties of each group separately.</p>

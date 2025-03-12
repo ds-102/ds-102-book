@@ -196,8 +196,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">[WIP] Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">[WIP] Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/06_nonparametric.html">Nonparametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/07_neural_networks.html">Neural Networks</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -459,13 +461,13 @@ document.write(`
 <section id="sunburns-and-ice-cream-sales">
 <h4>Sunburns and ice cream sales<a class="headerlink" href="#sunburns-and-ice-cream-sales" title="Link to this heading">#</a></h4>
 <p>As an example, let’s suppose we collect daily data on sunburns and ice cream sales for an entire year. We find a strong positive association in the data: days with higher ice cream sales have much higher sunburn rates. Clearly, sunburn doesn’t cause increased ice cream sales, and increased ice cream sales don’t cause sunburns, either. This example fails to take into account the confounding effect of the weather: hot, sunny weather causes people to buy more ice cream, and also causes more sunburns. We can illustrate this using a directed graph, similar to the ones we used in Bayesian graphical models:</p>
-<p><img alt="" src="../../../_images/sunburn_icecream_.png" /></p>
+<p><img alt="" src="content/chapters/04/sunburn_icecream_.png" /></p>
 <p>Here, the edges indicate <em>causal</em> relationships (we’ll formalize this idea in the next section). For example, this graph claims that sun causes a change in sunburn rates. Like the example with the Martian, the existence of a confounding variable (sunny weather) is clear in this example.</p>
 </section>
 <section id="cameras-and-social-media-likes">
 <h4>Cameras and social media likes<a class="headerlink" href="#cameras-and-social-media-likes" title="Link to this heading">#</a></h4>
 <p>Let’s look at an example with a more complex relationship. Suppose we want to know whether using a high-end DSLR camera causes increased likes on Instagram posts. If we collect data and find a strong positive association between DSLR cost and number of likes, does this let us conclude a causal relationship? In this case, the answer is a more nebulous “maybe”. There are other confounding factors here: for example, high-profile, well-financed accounts that already have a lot of followers are more likely to use high-end cameras than amateur accounts. In this case, the causal graph might look more like this:</p>
-<p><img alt="" src="../../../_images/instagram_.png" /></p>
+<p><img alt="" src="content/chapters/04/instagram_.png" /></p>
 <p>Without further information about the account’s size and budget, it’s hard to determine a causal relationship.</p>
 </section>
 </section>
@@ -474,7 +476,7 @@ document.write(`
 <p>Sometimes, regardless of whether or not we’re trying to draw conclusions about causality, the correlations we observe might be <em>spurious</em>: that is, they could occur just by chance, or by a series of confounds that may negate any conclusions we would want to draw. One example from <a class="reference external" href="https://www.tylervigen.com/spurious-correlations">Tyler Vigen’s Spurious Correlations website</a> is shown below:</p>
 <p><img alt="" src="../../../_images/mozzarella_civile_phd.png" /></p>
 <p>We can draw a directed graph for these two variables: in this case, there are no edges between them because there’s no causal relationship either way, and no confounding variable:</p>
-<p><img alt="" src="../../../_images/spurious.png" /></p>
+<p><img alt="" src="content/chapters/04/spurious.png" /></p>
 </section>
 <section id="the-marshmallow-experiment">
 <h3>The Marshmallow Experiment<a class="headerlink" href="#the-marshmallow-experiment" title="Link to this heading">#</a></h3>
@@ -499,7 +501,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2221/95172738.py:5: FutureWarning: The provided callable &lt;function sum at 0x7f32e8794040&gt; is currently using DataFrameGroupBy.sum. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;sum&quot; instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2355/95172738.py:5: FutureWarning: The provided callable &lt;function sum at 0x7fbf9ca7c220&gt; is currently using DataFrameGroupBy.sum. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;sum&quot; instead.
   food.pivot_table(
 </pre></div>
 </div>
@@ -557,7 +559,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2221/4218979607.py:1: FutureWarning: The provided callable &lt;function sum at 0x7f32e8794040&gt; is currently using DataFrameGroupBy.sum. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;sum&quot; instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2355/4218979607.py:1: FutureWarning: The provided callable &lt;function sum at 0x7fbf9ca7c220&gt; is currently using DataFrameGroupBy.sum. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;sum&quot; instead.
   food.pivot_table(
 </pre></div>
 </div>
@@ -649,7 +651,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/00f3566b15c39c66ce7e4935295f887983c362d81eea6be0e0b8d8277df1044a.png" src="../../../_images/00f3566b15c39c66ce7e4935295f887983c362d81eea6be0e0b8d8277df1044a.png" />
+<img alt="../../../_images/f3f47479caade1c8ec3809b956887c3b91d17407281f992a07ed656eac83f1e9.png" src="../../../_images/f3f47479caade1c8ec3809b956887c3b91d17407281f992a07ed656eac83f1e9.png" />
 </div>
 </div>
 <p>This plot shows that the critics prefer Restaurant A (blue line) over Restaurant B (orange line). But when we looked at the aggregate data in the first table above, we were comparing restaurant A’s dishes, which were mostly from 2020, to restaurant B’s dishes, which were mostly from 2019, shown with the large circle/square:</p>
@@ -673,12 +675,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/3c6deff4c60b171d93772bb845a62ad0332c9e25675065e8233ed86e597a619e.png" src="../../../_images/3c6deff4c60b171d93772bb845a62ad0332c9e25675065e8233ed86e597a619e.png" />
+<img alt="../../../_images/de8b2132a01fae4e38bcbc827134a114f03f2162409851cd187107ecc1e81196.png" src="../../../_images/de8b2132a01fae4e38bcbc827134a114f03f2162409851cd187107ecc1e81196.png" />
 </div>
 </div>
 <p>This plot is called a Baker-Kramer (or B-K) plot: it highlights that even though Restaurant A is better than Restaurant B, the confounding effect of the year makes Restaurant A look much worse.</p>
 <p>We can also represent this information in a directed graph, as we did earlier:</p>
-<p><img alt="" src="../../../_images/restaurant.png" /></p>
+<p><img alt="" src="content/chapters/04/restaurant.png" /></p>
 <p>Note that this graph is a little imprecise: it isn’t really the year that causes the change in the other two variables, but rather the pandemic.</p>
 <p>The pandemic (as measured in this case by the year) affected the data in two ways:</p>
 <ol class="arabic simple">

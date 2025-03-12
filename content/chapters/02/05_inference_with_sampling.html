@@ -196,8 +196,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">[WIP] Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">[WIP] Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/06_nonparametric.html">Nonparametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/07_neural_networks.html">Neural Networks</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -473,10 +475,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f95861a3200&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f432cf1a360&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/a03e1c793b87e57fe40ac538e6cd88810890247ef28553e4ad5046e0eada990f.png" src="../../../_images/a03e1c793b87e57fe40ac538e6cd88810890247ef28553e4ad5046e0eada990f.png" />
+<img alt="../../../_images/5c0fac822b6252a3e95a684d7e77e16107d90349162a5b9f710f63c76cbf7c73.png" src="../../../_images/5c0fac822b6252a3e95a684d7e77e16107d90349162a5b9f710f63c76cbf7c73.png" />
 </div>
 </div>
 <p>We can see that the samples are a good representation for the distribution, as long as we have enough. We can use the mean of the samples to approximate the mean of the distribution:</p>
@@ -491,7 +493,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42857142857142855 0.42338218027554125
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42857142857142855 0.4230178980567683
 </pre></div>
 </div>
 </div>
@@ -515,7 +517,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/045c8d3752db77cde55f3e74cc5121331fb6dade070df682d090aafc5a0e4e19.png" src="../../../_images/045c8d3752db77cde55f3e74cc5121331fb6dade070df682d090aafc5a0e4e19.png" />
+<img alt="../../../_images/b2c043b1ca53927a5368d6c6481f5fb2b6b82ac830e5efb3a088f573132f447c.png" src="../../../_images/b2c043b1ca53927a5368d6c6481f5fb2b6b82ac830e5efb3a088f573132f447c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -541,10 +543,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of x1 (estimated from samples): 0.215
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of x1 (estimated from samples): 0.228
 </pre></div>
 </div>
-<img alt="../../../_images/2b82f7b01abce7541fee68b121f26aafd3b5ee5d3369f1496101bf6fc1e4ca16.png" src="../../../_images/2b82f7b01abce7541fee68b121f26aafd3b5ee5d3369f1496101bf6fc1e4ca16.png" />
+<img alt="../../../_images/5f02fb80b7f8b51e75b87de21b9fa07af0f8d7cd16adb2d405fe4bdb68259fbe.png" src="../../../_images/5f02fb80b7f8b51e75b87de21b9fa07af0f8d7cd16adb2d405fe4bdb68259fbe.png" />
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
@@ -576,7 +578,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2796304da8487d14504deb107b76521b03413f5547d101e77946a46ac4b3586d.png" src="../../../_images/2796304da8487d14504deb107b76521b03413f5547d101e77946a46ac4b3586d.png" />
+<img alt="../../../_images/4f6aa434c274c849eb437451ba33b7c73ec4923eef71d804426bb1e385005407.png" src="../../../_images/4f6aa434c274c849eb437451ba33b7c73ec4923eef71d804426bb1e385005407.png" />
 </div>
 </div>
 <p>How can we make this look like the geometry-based example from before? The solution is an algorithm called <strong>rejection sampling</strong>. There are two ways of understanding how it works:</p>
@@ -600,7 +602,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/db60e1fac99336bcc3d20f0e61c0960718b72840148c0fda639795ece7878dc0.png" src="../../../_images/db60e1fac99336bcc3d20f0e61c0960718b72840148c0fda639795ece7878dc0.png" />
+<img alt="../../../_images/9aea2eecc19950d15debfa37fee2ed6e266da43f481f7d9aedc70a8c6573b371.png" src="../../../_images/9aea2eecc19950d15debfa37fee2ed6e266da43f481f7d9aedc70a8c6573b371.png" />
 </div>
 </div>
 <p>To be more precise, rejection sampling works as follows: given an unnormalized target distribution and proposal distribution, we generate samples from the normalized version of the target distribution by:</p>
@@ -662,15 +664,15 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Max accept prob: 0.638
-Accepted 190 out of 500 proposals
+Accepted 179 out of 500 proposals
 Max accept prob: 0.638
-Accepted 3650 out of 10000 proposals
+Accepted 3656 out of 10000 proposals
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(-0.25), np.float64(1.75), np.float64(0.0), np.float64(1.8))
 </pre></div>
 </div>
-<img alt="../../../_images/ff412183b751e306657fbef54d9fa8040e638fbc1ce56a132e580c1989252233.png" src="../../../_images/ff412183b751e306657fbef54d9fa8040e638fbc1ce56a132e580c1989252233.png" />
+<img alt="../../../_images/7d5d3a90adf01bf2c36886a30064dc78ea7e35c71449189f0e876eeff28f326c.png" src="../../../_images/7d5d3a90adf01bf2c36886a30064dc78ea7e35c71449189f0e876eeff28f326c.png" />
 </div>
 </div>
 <p>From the results, we can see that rejection sampling, when run with enough proposals, correctly and accurately gives us samples from the target distribution. But, it can be <strong>inefficient</strong>: we accepted less than half of the samples each time! Indeed, even with 10,000 proposals (right), the samples don’t perfectly represent the target distribution.</p>
@@ -725,10 +727,10 @@ Accepted 3650 out of 10000 proposals
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accepted 591 out of 1000 proposals
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accepted 584 out of 1000 proposals
 </pre></div>
 </div>
-<img alt="../../../_images/721c2d157e732d306cd4154518dd115e89d9f627473143fdf2b9c335bcaf424f.png" src="../../../_images/721c2d157e732d306cd4154518dd115e89d9f627473143fdf2b9c335bcaf424f.png" />
+<img alt="../../../_images/1441409bea912b3960ed3e7cc1dc9edfe0aec6b3957383e1c4d4567d84575b70.png" src="../../../_images/1441409bea912b3960ed3e7cc1dc9edfe0aec6b3957383e1c4d4567d84575b70.png" />
 </div>
 </div>
 <p>To summarize, we saw that rejection sampling can be used to draw samples given only an unnormalized target distribution. Even though it can be used to draw samples from any unnormalized target, we most often will use it (and other sampling methods) with the  unnormalized target distribution being the numerator of a posterior distribution <span class="math notranslate nohighlight">\(p(\theta|x)p(\theta)\)</span>.</p>

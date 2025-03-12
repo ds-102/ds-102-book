@@ -196,8 +196,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">[WIP] Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">[WIP] Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/06_nonparametric.html">Nonparametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/07_neural_networks.html">Neural Networks</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -730,7 +732,7 @@ FWER
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/719075e79602c9013d8b764ae27d55ce52e9e28647172ba1b529a7acca81d256.png" src="../../../_images/719075e79602c9013d8b764ae27d55ce52e9e28647172ba1b529a7acca81d256.png" />
+<img alt="../../../_images/30967bb39fb3ca26949dfbb2458932b513e3f18ddd57294937fcf495e5f9a60c.png" src="../../../_images/30967bb39fb3ca26949dfbb2458932b513e3f18ddd57294937fcf495e5f9a60c.png" />
 </div>
 </div>
 <p>Here, the <span class="math notranslate nohighlight">\(x\)</span>-axis is <span class="math notranslate nohighlight">\(k\)</span>, the index, and the <span class="math notranslate nohighlight">\(y\)</span>-axis represents the <span class="math notranslate nohighlight">\(p\)</span>-value. We can visualize the results of two techniques:</p>
@@ -751,7 +753,7 @@ FWER
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/a35b869d118dad5caa607cb452aa1514afa6c3c9d8fa611155d468732f59c7d8.png" src="../../../_images/a35b869d118dad5caa607cb452aa1514afa6c3c9d8fa611155d468732f59c7d8.png" />
+<img alt="../../../_images/fd432d8bd34c64249f79b33f754f3ed4281fe6dd8adddef1262d4600fcb0a3a0.png" src="../../../_images/fd432d8bd34c64249f79b33f754f3ed4281fe6dd8adddef1262d4600fcb0a3a0.png" />
 </div>
 </div>
 <p>In this visualization, how does the Benjamini-Hochberg procedure work? We compare each <span class="math notranslate nohighlight">\(p\)</span>-value to the comparison value <span class="math notranslate nohighlight">\(\frac{k\alpha}{m}\)</span>, which in this visualization is a diagonal line. In order to better see what’s going on, we’ll also zoom in on a narrower range of <span class="math notranslate nohighlight">\(p\)</span>-values:</p>
@@ -766,7 +768,7 @@ FWER
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/9258a9a028f65a323475903d3f0b542caa58014dd90b875eb8096405c54002f2.png" src="../../../_images/9258a9a028f65a323475903d3f0b542caa58014dd90b875eb8096405c54002f2.png" />
+<img alt="../../../_images/1452922a6744de2821bd712579d80d7d9d7a065586edc7c9a8c6d3fec75f43bd.png" src="../../../_images/1452922a6744de2821bd712579d80d7d9d7a065586edc7c9a8c6d3fec75f43bd.png" />
 </div>
 </div>
 <p>The Benjamini-Hochberg procedure says to take the largest <span class="math notranslate nohighlight">\(p\)</span>-value that’s below the comparison value <span class="math notranslate nohighlight">\(\frac{k\alpha}{m}\)</span>: in this case, that’s the point at index 16. This becomes our <span class="math notranslate nohighlight">\(p\)</span>-value threshold, so we choose to reject the null hypothesis for the first 16 <span class="math notranslate nohighlight">\(p\)</span>-values (after being sorted). The graph below shows all three thresholds:</p>
@@ -797,7 +799,7 @@ FWER
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/175e02003843566b9fdf09de0885455b330ea2ca8e5eecbe71be526fcf4d0921.png" src="../../../_images/175e02003843566b9fdf09de0885455b330ea2ca8e5eecbe71be526fcf4d0921.png" />
+<img alt="../../../_images/42af2413b76da603ff29d12b2c09598963e8638fcf978a138e6d03e43897b38f.png" src="../../../_images/42af2413b76da603ff29d12b2c09598963e8638fcf978a138e6d03e43897b38f.png" />
 </div>
 </div>
 <section id="why-does-benjamini-hochberg-control-fdr">
