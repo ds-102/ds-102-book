@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Causal Inference in Observational Studies: Unconfoundedness" href="05_observational_studies_unconfoundedness.html" />
-    <link rel="prev" title="Causality" href="03_causality.html" />
+    <link rel="prev" title="Quantifying Association" href="02_quantifying_association.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -205,7 +205,6 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_quantifying_association.html">Quantifying Association</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_causality.html">Causality and Potential Outcomes</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Causality in Randomized Experiments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
 </ul>
@@ -512,6 +511,38 @@ document.write(`
 <li><p>The <strong>Neyman estimator</strong></p></li>
 <li><p>The <strong><em>prima facie</em> causal effect</strong>, <span class="math notranslate nohighlight">\(\tau_{PF}\)</span> (<em>prima facie</em> is latin for “at first sight”).</p></li>
 </ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/dmrMZ5vERx4"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">YouTubeVideo</span>
+<span class="n">YouTubeVideo</span><span class="p">(</span><span class="s2">&quot;0o_m_GIfe6I&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/0o_m_GIfe6I"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
 </section>
 </section>
 <section id="optional-fixed-sample-assumption-fisher-and-neyman">
@@ -519,7 +550,7 @@ document.write(`
 <p>In this section, we’ll analyze randomized experiments and the Neyman estimator under the fixed-sample assumption. Recall that in this setting, we assume that <span class="math notranslate nohighlight">\(Z_i\)</span> (which we observe) is random, but that <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span> (which are unknown) are fixed. In this case, the statement of independence above doesn’t really make sense, since <span class="math notranslate nohighlight">\(Y_i(0)\)</span> and <span class="math notranslate nohighlight">\(Y_i(1)\)</span> are not random. However, we can still compute the Neyman estimator. We’ll develop some properties of the estimator, then use those to construct a confidence interval for the estimated ATE. Finally, we’ll look at two different hypothesis tests used in randomized experiments.</p>
 <section id="properties-of-the-neyman-estimator">
 <h3>Properties of the Neyman estimator<a class="headerlink" href="#properties-of-the-neyman-estimator" title="Link to this heading">#</a></h3>
-<p>The Neyman estimator has two useful properties: the first is that it’s unbiased, and the second is that its variance depends on the estimated variances within the two groups:</p>
+<p>The Neyman estimator has two useful properties: the first is that it’s unbiased, and the second is that its variance can be bounded by the estimated variances within the two groups:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
@@ -582,7 +613,7 @@ $<span class="math notranslate nohighlight">\(
 <ol class="arabic simple">
 <li><p>An experiment to determine whether a new fertilizer increases crop yield</p></li>
 <li><p>A double-blind vaccine trial</p></li>
-<li><p>An experiment on whether using a new app for at least 20 minutes a day causes better sleep</p></li>
+<li><p>An experiment on whether using a mindfulness app for at least 20 minutes a day causes better sleep</p></li>
 <li><p>An experiment on whether eating a certain amount of chocolate causes improved heart function</p></li>
 </ol>
 <p>For the first two, we can guarantee that the treatment will be properly followed. As experimenters, we know that if a certain unit (plant, person, etc.) is assigned to the treatment group, that they will receive the treatment.</p>
@@ -594,7 +625,7 @@ $<span class="math notranslate nohighlight">\(
 <p><strong>External validity</strong> refers to whether or not a finding from a randomized experiment will apply to a broader population of interest. This often arises due to sampling bias, contrived situations in an experiment that don’t reflect real-world conditions, or other similar effects.</p>
 <p>Consider the following example:</p>
 <blockquote>
-<div><p>Suppose we want to determine whether watching a 15-minute video about common pitfalls and misunderstandings of probability helps people make better decisions about whether news stories they read are valid. We recruit a sample of Data 102 students, randomly assign half to watch the video, and assign the other half not to watch the video. We then evaluate how well they can critically evaluate several news stories. We find that the videos have no effect: everyone in our sample does an excellent job of evaluation, regardless of whether or not they watched the video.</p>
+<div><p>Suppose we want to determine whether watching a 15-minute video about common pitfalls and misunderstandings of probability helps people make better decisions about whether news stories they read are valid. We recruit a random sample of Data 102 students, randomly assign half to watch the video, and assign the other half not to watch the video. We then evaluate how well the students can critically evaluate several news stories. We find that the videos have no effect: everyone in our sample does an excellent job of evaluation, regardless of whether or not they watched the video.</p>
 </div></blockquote>
 <p>In this case, our randomized experiment shows no causal effect, but our sample is not representative of the population at large: we can expect that most Data 102 students, who are probability experts, already know the common pitfalls in the 15-minute video. Among a larger population, however, the same might not be true!</p>
 </section>
@@ -637,12 +668,12 @@ $<span class="math notranslate nohighlight">\(
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="03_causality.html"
+       href="02_quantifying_association.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Causality</p>
+        <p class="prev-next-title">Quantifying Association</p>
       </div>
     </a>
     <a class="right-next"

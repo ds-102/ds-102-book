@@ -205,7 +205,6 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_quantifying_association.html">Quantifying Association</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_causality.html">Causality and Potential Outcomes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
 </ul>
@@ -434,64 +433,54 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="instrumental-variables">
 <h1>Instrumental variables<a class="headerlink" href="#instrumental-variables" title="Link to this heading">#</a></h1>
+<p><em>This section is a work in progress and is subject to change. Special thanks to <a class="reference internal" href="#"><span class="xref myst">Yan Shuo Tan</span></a>, who wrote most of this section’s content.</em></p>
 <section id="review-and-introduction">
 <h2>Review and introduction<a class="headerlink" href="#review-and-introduction" title="Link to this heading">#</a></h2>
 <p>To briefly recap what we have learnt so far:</p>
 <ol class="arabic simple">
-<li><p>We defined a <em>non-parametric</em> superpopulation model, i.e. a distribution for <span class="math notranslate nohighlight">\((X,Z,Y(0),Y(1))\)</span>:</p>
+<li><p>We defined a superpopulation model, i.e. a distribution for <span class="math notranslate nohighlight">\((X_i,Z_i,Y_i(0),Y_i(1))\)</span>:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(Z\)</span> is the (binary) treatment decision,</p></li>
 <li><p><span class="math notranslate nohighlight">\(Y(0)\)</span> and <span class="math notranslate nohighlight">\(Y(1)\)</span> are the potential outcomes in the universes where the unit wasn’t/was treated,</p></li>
-<li><p><span class="math notranslate nohighlight">\(X\)</span> is a confounding variable (in other words, it has a causal effect on <span class="math notranslate nohighlight">\(Z\)</span> and on <span class="math notranslate nohighlight">\(Y\)</span>)</p></li>
-<li><p>So far, we haven’t needed to make any assumptions about the distribution in general (only that it exists)</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> is a confounding variable (in other words, it has a causal effect on <span class="math notranslate nohighlight">\(Z\)</span> and on <span class="math notranslate nohighlight">\(Y\)</span>)
+So far, we haven’t needed to make any assumptions about the distribution of these variables in general (only that it exists).</p></li>
 </ul>
 </li>
-<li><p>We defined a quantity of interest, the average treatment effect (ATE): <span class="math notranslate nohighlight">\(\tau = \mathbb{E}[Y(1) - Y(0)]\)</span>, which is impossible to estimate unless we make further assumptions</p></li>
+<li><p>We defined our quantity of interest, the average treatment effect (ATE): <span class="math notranslate nohighlight">\(\tau = E[Y(1) - Y(0)]\)</span>, which tells us the average effect of the treatment. We saw that this is impossible to estimate unless we make further assumptions.</p></li>
 <li><p>We saw that in a randomized experiment, we have the following:</p>
 <ul class="simple">
-<li><p>The treatment decisions are random, and independent of the potential outcomes</p></li>
-<li><p>In other words, <span class="math notranslate nohighlight">\(\big(Y(0),Y(1)\big)\perp\!\!\perp Z\)</span></p></li>
+<li><p>The treatment decisions are random, and therefore are <strong>independent of the potential outcomes</strong>.</p></li>
+<li><p>In other words, <span class="math notranslate nohighlight">\(\big(Y(0),Y(1)\big)\perp\!\!\perp Z\)</span>.</p></li>
 </ul>
 </li>
 </ol>
-<p>In this section, we’ll investigate how we can estimate the ATE in situations where we have unknown confounding variables. We’ll rely on <strong>natural experiments</strong> to help us. Note that you’ve probably seen <a class="reference external" href="https://inferentialthinking.com/chapters/02/2/snow-s-grand-experiment.html">natural experiments before in Data 8 when learning about John Snow’s study of cholera</a>.</p>
+<p>In this section, we’ll investigate how we can estimate the ATE in situations where we have unknown confounding variables. We’ll rely on <strong>natural experiments</strong> to help us. Note that you’ve probably seen <a class="reference external" href="https://inferentialthinking.com/chapters/02/2/snow-s-grand-experiment.html">natural experiments before in Data 8, when learning about John Snow’s study of cholera</a>.</p>
 </section>
 <section id="linear-structural-model-lsm">
 <h2>Linear structural model (LSM)<a class="headerlink" href="#linear-structural-model-lsm" title="Link to this heading">#</a></h2>
-<p>In some fields (such as economics), it is typical to work with <em>structural models</em>, which place some restrictions on the joint distribution of all the variables, but also make it easier to estimate the parameters of the model.</p>
-<p><strong>Definition</strong>: We will work with the <em>linear structural model</em>
+<p>In some fields (such as economics), it is typical to work with <em>structural models</em>, which place some restrictions on the joint distribution of all the variables, and in doing so, make it easier to estimate the parameters of the model.</p>
+<p>We will work with the <strong>linear structural model</strong> relating our outcome <span class="math notranslate nohighlight">\(Y\)</span> to our treatment <span class="math notranslate nohighlight">\(Z\)</span> and confounding variable(s) <span class="math notranslate nohighlight">\(X\)</span>:
 $<span class="math notranslate nohighlight">\(
 Y = \alpha + \tau Z + \beta^TX + \epsilon,
 \)</span>$</p>
-<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> has mean zero, and is independent of <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(X\)</span> (in economics, we say that <span class="math notranslate nohighlight">\(\epsilon\)</span> is <em>exogenous</em>). We sometimes further assume that <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal{N}(0,\sigma^2)\)</span>, but this is not necessary for any of the analysis we’re going to do. <span class="math notranslate nohighlight">\(Y\)</span> is still our outcome variable, <span class="math notranslate nohighlight">\(Z\)</span> is our treatment variable of interest (typically binary), and <span class="math notranslate nohighlight">\(X\)</span> is a confounding variable (or variables).</p>
-<p><em>Note: We usually add the further structural equation <span class="math notranslate nohighlight">\(Z = f(X, \delta)\)</span> where <span class="math notranslate nohighlight">\(\delta\)</span> is an exogenous noise variable, and <span class="math notranslate nohighlight">\(f\)</span> encodes the structural relationship between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Z\)</span>, but all you need to know for now is that we allow for <span class="math notranslate nohighlight">\(\textrm{Cov}(Z,X) \neq 0\)</span>.</em></p>
-<p>This is not the same as the <em>linear model</em> that we have seen when we learned about GLMs, and that you’ve seen in previous classes. In those settings, we were assuming a model about the joint distribution of the variables, which is a statement about associations and predictions.</p>
-<p>On the other hand, a linear structural model encodes an assumption about <em>intervention</em>. It assumes that if for unit <span class="math notranslate nohighlight">\(i\)</span>, if we could set <span class="math notranslate nohighlight">\(Z_i = 1\)</span>, we will observe <span class="math notranslate nohighlight">\(Y_i(1) = \tau + \beta^TX_i + \epsilon_i\)</span>, and if we could set <span class="math notranslate nohighlight">\(Z_i = 0\)</span>, we will observe <span class="math notranslate nohighlight">\(Y_i(0) = \beta^TX_i + \epsilon_i\)</span>. If <span class="math notranslate nohighlight">\(Z\)</span> is not binary, then there will be a potential outcome for each possible value of <span class="math notranslate nohighlight">\(Z\)</span>. This is a subtle but important point, that also situates the linear structural model as a special case of the potential outcomes framework.</p>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> has mean zero, and is independent of <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(X\)</span> (in economics, we say that <span class="math notranslate nohighlight">\(\epsilon\)</span> is <em>exogenous</em>). We sometimes further assume that <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal{N}(0,\sigma^2)\)</span>, but this is not necessary for any of the analysis we’re going to do.</p>
+<p><em>Note: in general, we often add the further structural equation <span class="math notranslate nohighlight">\(Z = f(X, \delta)\)</span> where <span class="math notranslate nohighlight">\(\delta\)</span> is an exogenous noise variable, and <span class="math notranslate nohighlight">\(f\)</span> encodes the structural relationship between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Z\)</span>. We won’t go into this level of detail, but when reading this equation, you should assume that <span class="math notranslate nohighlight">\(\textrm{Cov}(Z,X)\)</span> is not necessarily 0.</em></p>
+<p>This is not quite the same as the <em>linear model</em> that we have seen when we learned about GLMs, and that you’ve seen in previous classes! While it looks very similar, the linear model we worked with before is a statement about associations and predictions, while this linear structural model is a statement about intervention and action.</p>
+<p>Specifically, this model assumes that if for unit <span class="math notranslate nohighlight">\(i\)</span>, if we could set <span class="math notranslate nohighlight">\(Z_i = 1\)</span>, we will observe <span class="math notranslate nohighlight">\(Y_i(1) = \tau + \beta^TX_i + \epsilon_i\)</span>, and if we could set <span class="math notranslate nohighlight">\(Z_i = 0\)</span>, we will observe <span class="math notranslate nohighlight">\(Y_i(0) = \beta^TX_i + \epsilon_i\)</span>. (If <span class="math notranslate nohighlight">\(Z\)</span> is not binary, then there will be a potential outcome for each possible value of <span class="math notranslate nohighlight">\(Z\)</span>.) This is a subtle but important point, that also situates the linear structural model as a special case of the potential outcomes framework!</p>
 <p>From this, we see that the average treatment effect in this model is <span class="math notranslate nohighlight">\(\tau\)</span> (can you show this is true?), and furthermore, that the individual treatment effect for every unit is</p>
 <div class="math notranslate nohighlight">
 \[Y_i(1) - Y_i(0) = \tau.\]</div>
-<p>In other words, the linear structural model is making an implicit assumption that the treatment effect is constant.</p>
+<p>In other words, the linear structural model is making an implicit assumption that the treatment effect is constant across all units.</p>
 <section id="causal-graphs-and-lsms">
 <h3>Causal graphs and LSMs<a class="headerlink" href="#causal-graphs-and-lsms" title="Link to this heading">#</a></h3>
 <p>Apart from the causal effect of <span class="math notranslate nohighlight">\(Z\)</span> on <span class="math notranslate nohighlight">\(Y\)</span>, the linear structural model also does something new from before. It asserts the causal relationships between the other variables, i.e. it tells us how <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> change if we manipulate <span class="math notranslate nohighlight">\(X\)</span>. The above linear structural model can be represented graphically as follows:</p>
 <img src="causal_graph1.png" align="center"/>
-<p>As a reminder, the arrows from <span class="math notranslate nohighlight">\(X\)</span> into <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> assert that <span class="math notranslate nohighlight">\(X\)</span> causes both <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> (i.e. intervening on <span class="math notranslate nohighlight">\(Z\)</span> changes the values of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>), and the arrow from <span class="math notranslate nohighlight">\(Z\)</span> into <span class="math notranslate nohighlight">\(Y\)</span> asserts that <span class="math notranslate nohighlight">\(Z\)</span> causes <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>As a reminder, the arrows from <span class="math notranslate nohighlight">\(X\)</span> into <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> assert that <span class="math notranslate nohighlight">\(X\)</span> causes both <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> (i.e. intervening on <span class="math notranslate nohighlight">\(X\)</span> changes the values of <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>), and the arrow from <span class="math notranslate nohighlight">\(Z\)</span> into <span class="math notranslate nohighlight">\(Y\)</span> asserts that <span class="math notranslate nohighlight">\(Z\)</span> causes <span class="math notranslate nohighlight">\(Y\)</span>.</p>
 </section>
 </section>
 <section id="confounding-and-omitted-variable-bias">
 <h2>Confounding and omitted variable bias<a class="headerlink" href="#confounding-and-omitted-variable-bias" title="Link to this heading">#</a></h2>
-<p>In many scenarios, confounding is complicated and involves many different variables, and it may be impossible to describe all of them. In that case (i.e., if we don’t observe <span class="math notranslate nohighlight">\(X\)</span>), then we are in trouble because of <em>confounding</em>. Since we’re assuming a linear model, let’s see what happens when we try to fit a linear regression to <span class="math notranslate nohighlight">\(Y\)</span> using <span class="math notranslate nohighlight">\(Z\)</span>. We <span class="math notranslate nohighlight">\(\tau_{OLS}\)</span> be the solution of the least squares problem <span class="math notranslate nohighlight">\(\min_{\tau,\alpha} \mathbb{E}[(\alpha + \tau Z - Y)^2]\)</span>. We then get
-$<span class="math notranslate nohighlight">\(
-\begin{align}
-    \tau_{OLS} &amp; = \frac{\text{Cov}(Y,Z)}{\text{Var}(Z)} \\
-    &amp; = \frac{\text{Cov}(\alpha + \tau Z + \beta^TX + \epsilon,Z)}{\text{Var}(Z)} \\
-    &amp; = \frac{\text{Cov}(\tau Z,Z)}{\text{Var}(Z)} + \frac{\text{Cov}(\beta^TX,Z)}{\text{Var}(Z)} \\
-    &amp; = \tau + \beta^T\frac{\text{Cov}(X,Z)}{\text{Var}(Z)}.
-\end{align}
-\)</span>$</p>
-<p>The first term is the true ATE. The second term is a bias in the <span class="math notranslate nohighlight">\(\tau_{OLS}\)</span> estimator, There is hence the bias term <span class="math notranslate nohighlight">\(\beta^T\frac{\text{Cov}(X,Z)}{\text{Var}(Z)}\)</span>, which we call the <em>omitted variable bias</em>.</p>
-<p><em>Remark: <span class="math notranslate nohighlight">\(\frac{\text{Cov}(Y,Z)}{\text{Var}(Z)}\)</span> is the infinite population version of the typical formula <span class="math notranslate nohighlight">\(\hat{\tau}_{OLS} = (Z^TZ)^{-1}Z^TY\)</span>, where we now use <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> to denote matrices/vectors.</em></p>
-<p>Here are some examples:</p>
+<p>In many scenarios, confounding is complicated and involves many different variables, and it may be impossible to collect, observe, or describe all of them. In that case we must assume that <span class="math notranslate nohighlight">\(X\)</span> is unobserved. If this happens, then just as before, we’re in trouble because of <em>confounding</em>. Here are some examples. In each one, we’ve only listed one possible confounder <span class="math notranslate nohighlight">\(X\)</span>, but there are likely many more: can you think of at least one for each example?</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Treatment <span class="math notranslate nohighlight">\(Z\)</span></p></th>
@@ -524,6 +513,19 @@ $<span class="math notranslate nohighlight">\(
 </table>
 </div>
 <p>Note that in most of these examples, socioeconomic background is a confounder. This is particularly common in economics and econometrics, where most of the methods in this section originated.</p>
+<p>Let’s be a bit more precise about quantifying the effect of confounding. Specifically, we’ll assume the linear structural model above, and then see what happens when we naively try to fit a linear regression to <span class="math notranslate nohighlight">\(Y\)</span> using <span class="math notranslate nohighlight">\(Z\)</span>, without accounting for <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\hat{\tau}_{OLS}\)</span> be the solution of the least squares problem <span class="math notranslate nohighlight">\(\min_{\tau,\alpha} \mathbb{E}[(\alpha + \tau Z - Y)^2]\)</span>. We then get
+$<span class="math notranslate nohighlight">\(
+\begin{align}
+    \hat{\tau}_{OLS} 
+    &amp; = \frac{\text{Cov}(Y,Z)}{\text{Var}(Z)} \\
+    &amp; = \frac{\text{Cov}(\alpha + \tau Z + \beta^TX + \epsilon,Z)}{\text{Var}(Z)} \\
+    &amp; = \frac{\text{Cov}(\tau Z,Z)}{\text{Var}(Z)} + \frac{\text{Cov}(\beta^TX,Z)}{\text{Var}(Z)} \\
+    &amp; = \underbrace{\tau}_\text{true ATE} + \underbrace{\beta^T\frac{\text{Cov}(X,Z)}{\text{Var}(Z)}}_{\text{bias involving }X}.
+\end{align}
+\)</span>$</p>
+<p>The second term is a bias in the <span class="math notranslate nohighlight">\(\tau_{OLS}\)</span> estimator: in other words, it’s the difference between the true value and the estimator, and it depends on the omitted (i.e., unobserved) variable <span class="math notranslate nohighlight">\(X\)</span>. So, we’ll call this term <span class="math notranslate nohighlight">\(\beta^T\frac{\text{Cov}(X,Z)}{\text{Var}(Z)}\)</span> the <strong>omitted variable bias</strong>.</p>
+<p><em>Remark: <span class="math notranslate nohighlight">\(\frac{\text{Cov}(Y,Z)}{\text{Var}(Z)}\)</span> is the infinite population version of the typical formula <span class="math notranslate nohighlight">\(\hat{\tau}_{OLS} = (Z^TZ)^{-1}Z^TY\)</span>, where we now use <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> to denote matrices/vectors.</em></p>
 <p><strong>Why can’t we just adjust for confounding?</strong> Having such confounders is problematic because in order to avoid omitted variable bias, we need to have observed them, and added them to our regression (collection of such data may not always be feasible for a number of reasons.) Furthermore, there could always be <em>other</em> confounders that we are unaware of, which leaves our causal conclusions under an inescapable cloud of doubt.</p>
 </section>
 <section id="id1">
@@ -583,7 +585,7 @@ Hence, we can think of IV as measuring the ratio of the prima facie treatment ef
 <p><strong>Example 2:</strong> <span class="math notranslate nohighlight">\(Z\)</span> is military service, <span class="math notranslate nohighlight">\(Y\)</span> is salary, <span class="math notranslate nohighlight">\(X\)</span> is socioeconomic background. Angrist (1990) used the Vietnam era draft lottery as the instrument <span class="math notranslate nohighlight">\(W\)</span>, and found that among white veterans, there was a 15% drop in earnings compared to non-veterans.</p>
 <p><strong>Example 3:</strong> <span class="math notranslate nohighlight">\(Z\)</span> is family size, <span class="math notranslate nohighlight">\(Y\)</span> is mother’s employment, <span class="math notranslate nohighlight">\(X\)</span> is socioeconomic background. Angrist and Evans (1998) used sibling sex decomposition (in other words, the assigned sexes at birth of a sibling) as the IV. This is plausible because of the pseudo randomization of the sibling sex composition. This is based on the fact that parents in the US with two children of the same sex are more likely to have a third child than those parents with two children of different sex.</p>
 <p><strong>Example 4:</strong> <span class="math notranslate nohighlight">\(Z\)</span> is years of schooling, <span class="math notranslate nohighlight">\(Y\)</span> is salary, <span class="math notranslate nohighlight">\(X\)</span> is socioeconomic background. Card (1993) used geographical variation in college proximity as the instrumental variable.</p>
-<p><strong>Example 5:</strong> <span class="math notranslate nohighlight">\(Z\)</span> is smoking, <span class="math notranslate nohighlight">\(Y\)</span> is lung cancer, <span class="math notranslate nohighlight">\(X\)</span> is socioeconomic background. Unfortunately, this example does not lend itself well to an instrumental variable: despite decades of searching, nobody has yet found one that is convincing.</p>
+<p><strong>Example 5:</strong> <span class="math notranslate nohighlight">\(Z\)</span> is smoking, <span class="math notranslate nohighlight">\(Y\)</span> is lung cancer, <span class="math notranslate nohighlight">\(X\)</span> is socioeconomic background. Unfortunately, this example does not lend itself well to an instrumental variable: despite decades of searching, nobody has yet found one that is convincing. This leads to an important lesson: <strong>not every problem is amenable to the use of instrumental variables, or even natural experiments!</strong></p>
 <p>As we see in these examples, sometimes you need to be quite ingenious to come up with an appropriate instrumental variable. Joshua Angrist, David Card, and Guido Imbens, who is named in several of these examples, are phenomenally good at this: in fact, they won the Nobel Prize in economics for their collected body of work!</p>
 </section>
 <section id="extensions">

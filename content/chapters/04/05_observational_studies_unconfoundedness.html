@@ -204,7 +204,6 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_quantifying_association.html">Quantifying Association</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_causality.html">Causality and Potential Outcomes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Causality in Observational Studies: Unconfoundedness</a></li>
 </ul>
@@ -445,76 +444,84 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="n">food</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;restaurants_counterfactuals.csv&#39;</span><span class="p">)</span>
+<span class="n">food</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/restaurants_counterfactuals.csv&#39;</span><span class="p">)</span>
 <span class="n">food</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">food</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/restaurants_counterfactuals.csv&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">food</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Dish rating for A</th>
-      <th>Dish rating for B</th>
-      <th>Year</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>2020</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>NaN</td>
-      <td>1.0</td>
-      <td>2019</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>2020</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1.0</td>
-      <td>NaN</td>
-      <td>2020</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1.0</td>
-      <td>NaN</td>
-      <td>2020</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1887</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1888</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/pandas/io/common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">876</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">877</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;data/restaurants_counterfactuals.csv&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values indicate missing counterfactual outcomes that we don’t get to observe: for example, dish 0 was ordered from Restaurant A, so we don’t know what rating the critics would have given a dish from Restaurant B on that day.</p>
 <p>Displaying the data this way requires us to think about it slightly differently, and highlights the implications of the potential outcomes framework! In particular:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(Z_i\)</span> corresponds to whether the critic ordered dish <span class="math notranslate nohighlight">\(i\)</span> from restaurant A or B.</p></li>
-<li><p><span class="math notranslate nohighlight">\(Y_i(B)\)</span> and <span class="math notranslate nohighlight">\(Y_i(A)\)</span> represent what-ifs: <em>if</em> the critics had ordered dish <span class="math notranslate nohighlight">\(i\)</span> from a particular restaurant, would they have liked it?</p></li>
-<li><p>The year is our confounder (or “confounding variable”): we’ll use <span class="math notranslate nohighlight">\(X_i\)</span> to denote the year that dish <span class="math notranslate nohighlight">\(i\)</span> was ordered in.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_i(A)\)</span> and <span class="math notranslate nohighlight">\(Y_i(B)\)</span> represent what-ifs: <em>if</em> the critics had ordered dish <span class="math notranslate nohighlight">\(i\)</span> from a particular restaurant, would they have liked it?</p></li>
+<li><p>The year is our confounder (or confounding variable): we’ll use <span class="math notranslate nohighlight">\(X_i\)</span> to denote the year that dish <span class="math notranslate nohighlight">\(i\)</span> was ordered in.</p></li>
 </ul>
 <p>Our representation of the data this way makes it clear that we can’t compute the ATE:</p>
 <div class="cell docutils container">
@@ -539,7 +546,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.20000000000000007)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.20000000000000007
 </pre></div>
 </div>
 </div>
@@ -577,7 +584,7 @@ document.write(`
 \end{split}\]</div>
 <section id="from-cate-to-ate">
 <h3>From CATE to ATE<a class="headerlink" href="#from-cate-to-ate" title="Link to this heading">#</a></h3>
-<p>In most cases, what we’re really interested in is the ATE. How do we get from the CATE to the ATE? As we’ve done so many times before, we can use the law of iterated expectation (tower property):</p>
+<p>In most cases, what we’re really interested in is the ATE. How do we get from the CATE to the ATE? We can use the law of iterated expectation (tower property):</p>
 <div class="math notranslate nohighlight">
 \[
 E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
@@ -600,30 +607,22 @@ E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
 
 <span class="n">food_sdo_2020</span> <span class="o">=</span> <span class="n">food_2020</span><span class="p">[</span><span class="s2">&quot;Dish rating for B&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">food_2020</span><span class="p">[</span><span class="s2">&quot;Dish rating for A&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">food_sdo_2019</span> <span class="o">=</span> <span class="n">food_2019</span><span class="p">[</span><span class="s2">&quot;Dish rating for B&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">food_2019</span><span class="p">[</span><span class="s2">&quot;Dish rating for A&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">food_sdo_2020</span><span class="p">,</span> <span class="n">food_sdo_2019</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.05555555555555558 -0.125
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">food_sdo_2020</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">food_sdo_2019</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>These correspond to the CATEs <span class="math notranslate nohighlight">\(\tau(2020)\)</span> and <span class="math notranslate nohighlight">\(\tau(2019)\)</span> respectively. Just like earlier, we see that these values have the opposite sign from the SDO computed on the entire data: Restaurant A was better-liked in 2020 and 2019. But, because the critics ordered from Restaurant A more in 2020 (which had lower ratings overall), Restaurant A looks worse in the aggregate data.</p>
+<p>These correspond to the CATEs <span class="math notranslate nohighlight">\(\tau(2020)\)</span> and <span class="math notranslate nohighlight">\(\tau(2019)\)</span> respectively. We can interpret <span class="math notranslate nohighlight">\(\tau(2019)\)</span> in English as: “given that a dish was ordered in 2019, what is the causal effect of choosing restaurant B (rather than A) on the probability of the critics liking their food?”, and similarly for <span class="math notranslate nohighlight">\(\tau(2020)\)</span>.</p>
+<p>Just like earlier, we see that these values have the opposite sign from the SDO computed on the entire data: Restaurant A was better-liked in 2020 and 2019. But, because the critics ordered from Restaurant A more in 2020 (which had lower ratings overall), Restaurant A looks worse in the aggregate data.</p>
 <p>How do we combine these to estimate the ATE? We need the marginal probabilities <span class="math notranslate nohighlight">\(P(2020)\)</span> and <span class="math notranslate nohighlight">\(P(2019)\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_2020</span> <span class="o">=</span> <span class="p">(</span><span class="n">food</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2020</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">p_2019</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">p_2020</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p_2019</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">p_2020</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">est_food_ATE</span> <span class="o">=</span> <span class="n">food_sdo_2020</span> <span class="o">*</span> <span class="n">p_2020</span> <span class="o">+</span> <span class="n">food_sdo_2019</span> <span class="o">*</span> <span class="n">p_2019</span>
-<span class="n">est_food_ATE</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-0.07870370370370372)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimated ATE:&quot;</span><span class="p">,</span> <span class="n">est_food_ATE</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -653,154 +652,6 @@ E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>treated</th>
-      <th>is_old</th>
-      <th>bp_change</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-0.2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-3.4</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-4.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-5.6</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-2.9</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-3.8</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-4.7</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>0</td>
-      <td>1</td>
-      <td>-0.7</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>0</td>
-      <td>1</td>
-      <td>-0.9</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-5.2</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-4.8</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-5.9</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-6.1</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-1.1</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-1.5</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-2.1</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-0.8</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-1.7</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-4.9</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-5.4</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -808,63 +659,13 @@ E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>bp_change</th>
-    </tr>
-    <tr>
-      <th>is_old</th>
-      <th>treated</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">0</th>
-      <th>0</th>
-      <td>-3.514286</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-5.500000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">1</th>
-      <th>0</th>
-      <td>-0.800000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-2.500000</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>From a quick look at the data, we can see a few facts:</p>
 <ul class="simple">
 <li><p>Most of the people who received the treatment were older</p></li>
-<li><p>Almost all the younger peoples’ BP improved</p></li>
+<li><p>Almost all the younger peoples’ BP improved (i.e., went down)</p></li>
 <li><p>Most of the older peoples’ BP did not improve</p></li>
-<li><p>We have very few data points: only twenty people overall, and, e.g., only two older people who took the treatment.</p></li>
+<li><p>We have very few data points. There are only twenty people overall, and even fewer once we slice the data up. For example, there are only two older people who took the treatment.</p></li>
 </ul>
 <p>We’ll ignore the last point for now, for the sake of illustration. The first three points make it very clear that <em>age is a confounding variable</em> for the effect of the treatment. One way to quantify the degree of confounding is using the conditional probability of receving the treatment given the confounder: this is called the <strong>propensity score</strong>.</p>
 <div class="cell docutils container">
@@ -873,56 +674,6 @@ E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>bp_change</th>
-    </tr>
-    <tr>
-      <th>is_old</th>
-      <th>treated</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">0</th>
-      <th>0</th>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">1</th>
-      <th>0</th>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>7</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>For the older group, the probability of receiving the treatment is <span class="math notranslate nohighlight">\(7/9 \approx 0.78\)</span>. For the younger group, the probability is <span class="math notranslate nohighlight">\(4/11 \approx 0.36\)</span>. We can add these into the table:</p>
 <div class="cell docutils container">
@@ -932,175 +683,6 @@ E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>treated</th>
-      <th>is_old</th>
-      <th>bp_change</th>
-      <th>propensity_score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-0.2</td>
-      <td>0.363636</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-3.4</td>
-      <td>0.363636</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-4.0</td>
-      <td>0.363636</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-5.6</td>
-      <td>0.363636</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-2.9</td>
-      <td>0.363636</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-3.8</td>
-      <td>0.363636</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-4.7</td>
-      <td>0.363636</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>0</td>
-      <td>1</td>
-      <td>-0.7</td>
-      <td>0.777778</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>0</td>
-      <td>1</td>
-      <td>-0.9</td>
-      <td>0.777778</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-5.2</td>
-      <td>0.363636</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-4.8</td>
-      <td>0.363636</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-5.9</td>
-      <td>0.363636</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-6.1</td>
-      <td>0.363636</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-1.1</td>
-      <td>0.777778</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-1.5</td>
-      <td>0.777778</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-2.1</td>
-      <td>0.777778</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-0.8</td>
-      <td>0.777778</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-1.7</td>
-      <td>0.777778</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-4.9</td>
-      <td>0.777778</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-5.4</td>
-      <td>0.777778</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>This tells us that person 0 had a <span class="math notranslate nohighlight">\(0.36\)</span> probability of receiving the treatment, given that they were younger, and so on.</p>
 <section id="reweighting">
@@ -1111,11 +693,6 @@ E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">treatment_mean_confounded</span> <span class="o">=</span> <span class="n">bp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;treated&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;bp_change&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">control_mean_confounded</span> <span class="o">=</span> <span class="n">bp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;treated&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;bp_change&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">treatment_mean_confounded</span> <span class="o">-</span> <span class="n">control_mean_confounded</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-0.6797979797979803)
 </pre></div>
 </div>
 </div>
@@ -1130,196 +707,6 @@ E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>treated</th>
-      <th>is_old</th>
-      <th>bp_change</th>
-      <th>propensity_score</th>
-      <th>outcome_reweighted</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-0.2</td>
-      <td>0.363636</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-3.4</td>
-      <td>0.363636</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-4.0</td>
-      <td>0.363636</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-5.6</td>
-      <td>0.363636</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-2.9</td>
-      <td>0.363636</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-3.8</td>
-      <td>0.363636</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-4.7</td>
-      <td>0.363636</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>0</td>
-      <td>1</td>
-      <td>-0.7</td>
-      <td>0.777778</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>0</td>
-      <td>1</td>
-      <td>-0.9</td>
-      <td>0.777778</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-5.2</td>
-      <td>0.363636</td>
-      <td>-14.300000</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-4.8</td>
-      <td>0.363636</td>
-      <td>-13.200000</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-5.9</td>
-      <td>0.363636</td>
-      <td>-16.225000</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-6.1</td>
-      <td>0.363636</td>
-      <td>-16.775000</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-1.1</td>
-      <td>0.777778</td>
-      <td>-1.414286</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-1.5</td>
-      <td>0.777778</td>
-      <td>-1.928571</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-2.1</td>
-      <td>0.777778</td>
-      <td>-2.700000</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-0.8</td>
-      <td>0.777778</td>
-      <td>-1.028571</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-1.7</td>
-      <td>0.777778</td>
-      <td>-2.185714</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-4.9</td>
-      <td>0.777778</td>
-      <td>-6.300000</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-5.4</td>
-      <td>0.777778</td>
-      <td>-6.942857</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>This gives a significantly increased weight to the improvements from the younger group (and only a very slightly increased weight to the improvements from the older group).</p>
 <p>What about the control group? There, we want to increase the weight on the older people. Dividing by the propensity score would have the opposite effect from what we want: instead, we’ll divide by 1 minus the propensity score.</p>
@@ -1333,196 +720,6 @@ E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>treated</th>
-      <th>is_old</th>
-      <th>bp_change</th>
-      <th>propensity_score</th>
-      <th>outcome_reweighted</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-0.2</td>
-      <td>0.363636</td>
-      <td>-0.314286</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-3.4</td>
-      <td>0.363636</td>
-      <td>-5.342857</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-4.0</td>
-      <td>0.363636</td>
-      <td>-6.285714</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-5.6</td>
-      <td>0.363636</td>
-      <td>-8.800000</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-2.9</td>
-      <td>0.363636</td>
-      <td>-4.557143</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-3.8</td>
-      <td>0.363636</td>
-      <td>-5.971429</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>0</td>
-      <td>0</td>
-      <td>-4.7</td>
-      <td>0.363636</td>
-      <td>-7.385714</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>0</td>
-      <td>1</td>
-      <td>-0.7</td>
-      <td>0.777778</td>
-      <td>-3.150000</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>0</td>
-      <td>1</td>
-      <td>-0.9</td>
-      <td>0.777778</td>
-      <td>-4.050000</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-5.2</td>
-      <td>0.363636</td>
-      <td>-14.300000</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-4.8</td>
-      <td>0.363636</td>
-      <td>-13.200000</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-5.9</td>
-      <td>0.363636</td>
-      <td>-16.225000</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>1</td>
-      <td>0</td>
-      <td>-6.1</td>
-      <td>0.363636</td>
-      <td>-16.775000</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-1.1</td>
-      <td>0.777778</td>
-      <td>-1.414286</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-1.5</td>
-      <td>0.777778</td>
-      <td>-1.928571</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-2.1</td>
-      <td>0.777778</td>
-      <td>-2.700000</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-0.8</td>
-      <td>0.777778</td>
-      <td>-1.028571</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-1.7</td>
-      <td>0.777778</td>
-      <td>-2.185714</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-4.9</td>
-      <td>0.777778</td>
-      <td>-6.300000</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>1</td>
-      <td>1</td>
-      <td>-5.4</td>
-      <td>0.777778</td>
-      <td>-6.942857</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Now, we can compare the difference in reweighted means:</p>
 <div class="cell docutils container">
@@ -1531,11 +728,6 @@ E[Y(1) - Y(0)] = E_X[E_Y[Y(1)-Y(0) | X]]
 <span class="n">control_total</span> <span class="o">=</span> <span class="n">bp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bp</span><span class="p">[</span><span class="s1">&#39;treated&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;outcome_reweighted&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
 <span class="p">(</span><span class="n">treatment_total</span> <span class="o">-</span> <span class="n">control_total</span><span class="p">)</span><span class="o">/</span><span class="mi">20</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-1.857142857142857)
 </pre></div>
 </div>
 </div>
@@ -1570,8 +762,11 @@ e(x) &amp;= P(Z=1 | X=x) \\
 <p>For the treatment group, we want to find units that, because of confounding, were unlikely to end up in the treatment group (in the example above, this corresponds to finding younger people). Those units will have a very small propensity score, so we can divide by it to increase the weight on those points.</p>
 <p>For the control group, we want to find units that, because of confounding, were unlikely to end up in the control group (in the example above, this corresponds to finding older people). Those units will have a very <strong>large</strong> propensity score (close to 1), so we can divide by 1 minus the propensity score.</p>
 <p>The same process will give <strong>less</strong> weight to units that are overrepresented in their group.</p>
-<p>We can prove that the IPW estimator above gives an <strong>unbiased estimate</strong> of the true ATE.</p>
-<p><em>Proof coming soon: see <a class="reference external" href="https://mixtape.scunning.com/05-matching_and_subclassification#weighting-on-the-propensity-score">Causal Inference: The Mixtape</a> for a proof using slightly different notation</em></p>
+<p>For a proof that the IPW estimator above gives an <strong>unbiased estimate</strong> of the true ATE, see one of these sources. Try the proof yourself as an exercise before looking at the answer!</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2305.18793">A First Course in Causal Inference</a> by Peng Ding (Section 11.2.1, pg. 159) has a proof that uses the same notation as this book.</p></li>
+<li><p><a class="reference external" href="https://mixtape.scunning.com/05-matching_and_subclassification#weighting-on-the-propensity-score">Causal Inference: The Mixtape</a> by Scott Cunningham has a proof that uses slightly different notation.</p></li>
+</ul>
 </section>
 <section id="computing-propensity-scores-using-logistic-regression">
 <h3>Computing propensity scores using logistic regression<a class="headerlink" href="#computing-propensity-scores-using-logistic-regression" title="Link to this heading">#</a></h3>
