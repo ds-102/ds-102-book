@@ -61,7 +61,7 @@ chapters:
       title: "Understanding Association"
     - file: content/chapters/04/02_quantifying_association
       title: "Quantifying Association"
-    - file: content/chapters/04/03_causality
+    - file: content/chapters/04/03_causality_potential_outcomes
       title: "Causality and Potential Outcomes"
     - file: content/chapters/04/04_randomized_experiments
       title: "Causality in Randomized Experiments"
