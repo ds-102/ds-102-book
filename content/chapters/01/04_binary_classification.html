@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -57,6 +57,8 @@
     <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/01/04_binary_classification';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -379,7 +381,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -395,6 +399,17 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-curves-trading-off-row-wise-rates">ROC Curves: Trading off Row-Wise Rates</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-recall-curves-and-column-wise-rates">Precision-Recall Curves and Column-Wise Rates</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -404,9 +419,287 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="binary-classification">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">precision_recall_curve</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="binary-classification">
 <h1>Binary Classification<a class="headerlink" href="#binary-classification" title="Link to this heading">#</a></h1>
-<p><em>Coming soon</em></p>
+<p>In binary classification, just as in the previous section, we’re also trying to make a binary decision. A key difference is that instead of using the language of hypothesis testing, we use the language of machine learning and classification: we have data points that we’re trying to classify as belonging to one of two groups, which (without loss of generality) we’ll call class 0 and class 1.</p>
+<p>In hypothesis testing, we made our decision using <span class="math notranslate nohighlight">\(p\)</span>-values, which captured the probability (for each test), given the data, that our data were observed under some null hypothesis. In binary classification, we’re interested in the probability, given the data, that our data were observed under class 0 or under class 1. Most classification algorithms will give us some arbitrary number. These numbers are often, but not always, between 0 and 1, in which case we can interpret them as the probability of belonging to class 1. We typically apply a threshold to that number to obtain a binary decision.</p>
+<p>For example, logistic regression produces probabilities: for a particular datum, a logistic regression classifier might predict that it has a 0.7 probability of belonging to class 1. We apply some threshold (often, but not always 0.5): if our value is above the threshold (as in this case), we make a decision of 1; otherwise, we make a decision of 0.</p>
+<p>While the mechanics of obtaining a decision are different for binary classification, the big ideas we’ve learned in the last few section remain just as relevant: in particular, we can think about the tradeoffs involved by understanding the row-wise and columnn-wise error rates. In binary classification, we visualize and analyze these error rates primarily through two visualizations: a receiver operating characteristic (ROC) curve, and a precision-recall curve.</p>
+<section id="roc-curves-trading-off-row-wise-rates">
+<h2>ROC Curves: Trading off Row-Wise Rates<a class="headerlink" href="#roc-curves-trading-off-row-wise-rates" title="Link to this heading">#</a></h2>
+<p>ROC curves help us visualize the tradeoff between different <strong>row-wise rates</strong>. Let’s make things concrete with an example. Suppose a manufacturing company trains a classifier that uses computer vision (e.g., a vision transformer) to predict whether each product coming off its assembly line is defective (1) or not (0). They obtain the following results on a held-out test set:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">defects</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;manufacturing.csv&#39;</span><span class="p">)</span>
+<span class="n">defects</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>is_defective</th>
+      <th>predicted_prob</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>0.284021</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>False</td>
+      <td>0.277903</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>True</td>
+      <td>0.653581</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>False</td>
+      <td>0.090320</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>False</td>
+      <td>0.173007</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">formatted_confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;R=0&#39;</span><span class="p">,</span> <span class="s1">&#39;R=1&#39;</span><span class="p">],</span>
+        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;D=0&#39;</span><span class="p">,</span> <span class="s1">&#39;D=1&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formatted_confusion_matrix</span><span class="p">(</span><span class="n">defects</span><span class="p">[</span><span class="s1">&#39;is_defective&#39;</span><span class="p">],</span> <span class="n">defects</span><span class="p">[</span><span class="s1">&#39;predicted_prob&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>D=0</th>
+      <th>D=1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>R=0</th>
+      <td>641</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>R=1</th>
+      <td>36</td>
+      <td>156</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formatted_confusion_matrix</span><span class="p">(</span><span class="n">defects</span><span class="p">[</span><span class="s1">&#39;is_defective&#39;</span><span class="p">],</span> <span class="n">defects</span><span class="p">[</span><span class="s1">&#39;predicted_prob&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>D=0</th>
+      <th>D=1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>R=0</th>
+      <td>364</td>
+      <td>444</td>
+    </tr>
+    <tr>
+      <th>R=1</th>
+      <td>2</td>
+      <td>190</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Just as before, we can see the same tradeoff between the row-wise rates: as our TPR increases (i.e., we are better at catching defective products), our FPR also increases (i.e., we get worse with non-defective products). The examples above show two points on that tradeoff, but there exists one such point for each different possible threshold value. Instead of computing and manually reviewing the confusion matrix for each threshold, we can instead visualize the TPR and FPR associated with each possible one by using the <code class="docutils literal notranslate"><span class="pre">roc_curve</span></code> function in <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fprs</span><span class="p">,</span> <span class="n">tprs</span><span class="p">,</span> <span class="n">thresholds_roc</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">defects</span><span class="p">[</span><span class="s1">&#39;is_defective&#39;</span><span class="p">],</span> <span class="n">defects</span><span class="p">[</span><span class="s1">&#39;predicted_prob&#39;</span><span class="p">])</span>
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fprs</span><span class="p">,</span> <span class="n">tprs</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;FPR&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;TPR&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Receiver operating characteristic (ROC) curve&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/eb911e6938e1905acbf55e014567cb8d6be6f86e2ac270784e2f09deba6bf93b.png" src="../../../_images/eb911e6938e1905acbf55e014567cb8d6be6f86e2ac270784e2f09deba6bf93b.png" />
+</div>
+</div>
+<p>Each point on this graph represents one threshold. For example, the point at around (0.2, 0.8) tells us that if we choose that particular threshold value, we’ll achieve a false positive rate of 0.2 and a true positive rate of 0.8.</p>
+<p>What if that FPR was unacceptably high? We could instead choose a threshold corresponding to the point at around (0.1, 0.4). This tells us that if we want a smaller FPR of 0.1, we have to accept a much lower TPR of 0.1.</p>
+<p>This provides us a way of clearly visualizing the tradeoffs involved, at least as far as the row-wise rates are concerned.</p>
+<p><strong>Exercise</strong>: write code to find the threshold value that gives us an FPR as close as possible to 0.2. <em>Hint: use the <code class="docutils literal notranslate"><span class="pre">thresholds_roc</span></code> array.</em></p>
+<section id="precision-recall-curves-and-column-wise-rates">
+<h3>Precision-Recall Curves and Column-Wise Rates<a class="headerlink" href="#precision-recall-curves-and-column-wise-rates" title="Link to this heading">#</a></h3>
+<p>We saw in previous sections that the row-wise rates alone can’t tell us the whole story! We saw that in cases where the prevalence is low, even if we have relatively high row-wise rates, our column-wise rates can be quite low. In this example, a threshold of 0.5 leads to a TPR and TNR close to 0.8 (i.e., our algorithm is about <span class="math notranslate nohighlight">\(80\%\)</span> accurate for defective products and about <span class="math notranslate nohighlight">\(80\%\)</span> accurate for non-defective products), but a prediction of “defective” will be wrong more than half the time!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">formatted_confusion_matrix</span><span class="p">(</span><span class="n">defects</span><span class="p">[</span><span class="s1">&#39;is_defective&#39;</span><span class="p">],</span> <span class="n">defects</span><span class="p">[</span><span class="s1">&#39;predicted_prob&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">156</span><span class="o">/</span><span class="p">(</span><span class="mi">36</span><span class="o">+</span><span class="mi">156</span><span class="p">),</span> <span class="mi">641</span><span class="o">/</span><span class="p">(</span><span class="mi">167</span><span class="o">+</span><span class="mi">641</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>D=0</th>
+      <th>D=1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>R=0</th>
+      <td>641</td>
+      <td>167</td>
+    </tr>
+    <tr>
+      <th>R=1</th>
+      <td>36</td>
+      <td>156</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8125 0.7933168316831684
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just as the ROC curve plots the true positive rate against the false positive rate, a precision-recall curve plots the precision against the recall.</p>
+<p>Remember from before that the <strong>precision</strong> is the complement of the FDP: in other words, it describes how well we do when we make a decision of <span class="math notranslate nohighlight">\(D=1\)</span>, or in this case, when the classifier flags a product as defective. The <strong>recall</strong> is just another term for the true positive rate (which we’ve also referred to as the power and sensitivity). Plotting these two helps us understand the tradeoffs between row-wise and column-wise rates. Let’s see what it looks like for the example above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">precisions</span><span class="p">,</span> <span class="n">recalls</span><span class="p">,</span> <span class="n">thresholds_pr</span> <span class="o">=</span> <span class="n">precision_recall_curve</span><span class="p">(</span><span class="n">defects</span><span class="p">[</span><span class="s1">&#39;is_defective&#39;</span><span class="p">],</span> <span class="n">defects</span><span class="p">[</span><span class="s1">&#39;predicted_prob&#39;</span><span class="p">])</span>
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">recalls</span><span class="p">,</span> <span class="n">precisions</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Recall (TPR)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Precision&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Precision-recall curve&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/65791dacac497aa01678e684b269ae46271248b3125a46c3522690def5c3e44a.png" src="../../../_images/65791dacac497aa01678e684b269ae46271248b3125a46c3522690def5c3e44a.png" />
+</div>
+</div>
+<p>We can see that this tells us a complementary story. We can see that the left part of the curve is very noisy, and in the center, as recall improves, precision improves up to about 0.55 until it starts dropping off quickly for much higher values of the recall. What does this mean?</p>
+<p><strong>Exercise</strong>: explain why the left part of the curve looks so noisy. <em>Hint: consider what kind of threshold will lead to very low recall, and then explain how that kind of threshold affects the denominator in our precision calculation.</em></p>
+<p><strong>Exercise</strong>: explain why the precision increases with recall for a while before decreasing for recall values higher than about 0.6.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -463,6 +756,24 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-curves-trading-off-row-wise-rates">ROC Curves: Trading off Row-Wise Rates</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-recall-curves-and-column-wise-rates">Precision-Recall Curves and Column-Wise Rates</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

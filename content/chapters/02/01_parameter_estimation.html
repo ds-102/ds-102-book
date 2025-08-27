@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -445,10 +445,10 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="parameter-estimation-and-bayesian-inference-fundamentals">
 <h1>Parameter estimation and Bayesian Inference Fundamentals<a class="headerlink" href="#parameter-estimation-and-bayesian-inference-fundamentals" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -726,7 +726,7 @@ p(\theta) = \frac{1}{Z} \theta^{\alpha-1} (1-\theta)^{\beta-1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/67bd5333c632da3714b14e2e5fa5297914a482cf629a929292c0018fb8e40ab6.png" src="../../../_images/67bd5333c632da3714b14e2e5fa5297914a482cf629a929292c0018fb8e40ab6.png" />
+<img alt="../../../_images/06fe96be4abc8f192ce9316fa26880dc345a6d1d163a42df7a89e3d6f9ae0ef2.png" src="../../../_images/06fe96be4abc8f192ce9316fa26880dc345a6d1d163a42df7a89e3d6f9ae0ef2.png" />
 </div>
 </div>
 <p>We can see that different values of the parameters lead to different shapes for the beta distribution. In particular, when <span class="math notranslate nohighlight">\(\alpha\)</span> is larger than <span class="math notranslate nohighlight">\(\beta\)</span>, we see that larger values of <span class="math notranslate nohighlight">\(\theta\)</span> are more likely, and vice versa. We can also see that Beta<span class="math notranslate nohighlight">\((1, 1)\)</span> is the same as the uniform distribution over <span class="math notranslate nohighlight">\([0, 1]\)</span>. Try experimenting with different values: what changes as <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> get larger?</p>
@@ -780,10 +780,10 @@ p(\theta|x)
 <section id="demo-prior-and-posterior-betas">
 <h4>Demo: prior and posterior Betas<a class="headerlink" href="#demo-prior-and-posterior-betas" title="Link to this heading">#</a></h4>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">FIGURE_SIZE</span> <span class="o">=</span> <span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
@@ -856,7 +856,7 @@ p(\theta|x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/78734ca2ba1d7b0c8cdd283ee499a243d6447ade470ff3d06b01338f30deb2a0.png" src="../../../_images/78734ca2ba1d7b0c8cdd283ee499a243d6447ade470ff3d06b01338f30deb2a0.png" />
+<img alt="../../../_images/effabd936fd92b27caeea453ae6604e3dcc05dc140d8f16543f24fe9b32cb8c8.png" src="../../../_images/effabd936fd92b27caeea453ae6604e3dcc05dc140d8f16543f24fe9b32cb8c8.png" />
 </div>
 </div>
 <p>Looking at the orange density, it assigns higher probability to larger values of <span class="math notranslate nohighlight">\(\theta\)</span>. What if we use a different prior? We’ll try a Beta<span class="math notranslate nohighlight">\((1, 5)\)</span> prior, which represents the belief that before we observe any reviews, smaller values of <span class="math notranslate nohighlight">\(\theta\)</span> are more likely than larger ones (i.e., we are skeptical of product quality before we see any reviews).</p>
@@ -867,7 +867,7 @@ p(\theta|x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/1a4d3b8e9420df828699e716ca91da257e4b9a55af3e0f04d3e0676eaea3a68a.png" src="../../../_images/1a4d3b8e9420df828699e716ca91da257e4b9a55af3e0f04d3e0676eaea3a68a.png" />
+<img alt="../../../_images/530f18d24c716f7ea6cb8a2af886e389401f1b8806c12fde27b9cc36d3c97f15.png" src="../../../_images/530f18d24c716f7ea6cb8a2af886e389401f1b8806c12fde27b9cc36d3c97f15.png" />
 </div>
 </div>
 <p>Changing the prior distribution has dramatically changed the posterior distribution. What if we had used an even more “skeptical” prior?</p>
@@ -878,7 +878,7 @@ p(\theta|x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/b26835c405c2ceed979979d156543a6fed3707cab6e4bdadef889be3121fd92f.png" src="../../../_images/b26835c405c2ceed979979d156543a6fed3707cab6e4bdadef889be3121fd92f.png" />
+<img alt="../../../_images/59a09b1294d48ca22aaa1aed594e8c5340f030e270974f92cfc7b02a5ca49c9e.png" src="../../../_images/59a09b1294d48ca22aaa1aed594e8c5340f030e270974f92cfc7b02a5ca49c9e.png" />
 </div>
 </div>
 <p>We can see that for microwave A, our choice of prior has a significant effect on the posterior distribution. What about for microwave B?</p>
@@ -891,9 +891,9 @@ p(\theta|x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/bacd2c9addd1da6a85b6287e99929adb1de879f56262f98e902c35e381a281d8.png" src="../../../_images/bacd2c9addd1da6a85b6287e99929adb1de879f56262f98e902c35e381a281d8.png" />
-<img alt="../../../_images/62ab074462107fce5b7e59c34a7e599ffd05bf0120265973b917d3ec2ace0d5a.png" src="../../../_images/62ab074462107fce5b7e59c34a7e599ffd05bf0120265973b917d3ec2ace0d5a.png" />
-<img alt="../../../_images/8f2ff5f52a82373cb726ffbb6d632cb05893486b6d896c3e6fd8768e95687a32.png" src="../../../_images/8f2ff5f52a82373cb726ffbb6d632cb05893486b6d896c3e6fd8768e95687a32.png" />
+<img alt="../../../_images/0297631d80f36f7733d655095d29bb09c7a936dc7f1507d0fb6bc76ba82259c5.png" src="../../../_images/0297631d80f36f7733d655095d29bb09c7a936dc7f1507d0fb6bc76ba82259c5.png" />
+<img alt="../../../_images/1ae2688b550010a17ad6989ab78dc018dc6a0723fe5184bbc5a82a85d6c3efe4.png" src="../../../_images/1ae2688b550010a17ad6989ab78dc018dc6a0723fe5184bbc5a82a85d6c3efe4.png" />
+<img alt="../../../_images/cdd557048100e88bf086c4a4ee56f8fd2e34f5685e25bbdea39ad6104c66db00.png" src="../../../_images/cdd557048100e88bf086c4a4ee56f8fd2e34f5685e25bbdea39ad6104c66db00.png" />
 </div>
 </div>
 <p>Here, the prior still has an effect on the posterior distribution: the more “skeptical” the prior is, the more the posterior shifts to the left. But, the effect of the prior is much smaller than it was for Microwave A. This illustrates a general trend in Bayesian inference: <strong>with less data, the prior usually has a stronger effect on the posterior</strong>.</p>
@@ -987,7 +987,7 @@ So, under this prior, microwave B looks better.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/5dbc6a0bd05e54f7bb98b49a116657bd81f65735a32e13f766425f8bd6bdd073.png" src="../../../_images/5dbc6a0bd05e54f7bb98b49a116657bd81f65735a32e13f766425f8bd6bdd073.png" />
+<img alt="../../../_images/f783ef4831b1a7887cf2ade1b13a33a4ecbdb9f3dbddbafcd648f82b627cfc61.png" src="../../../_images/f783ef4831b1a7887cf2ade1b13a33a4ecbdb9f3dbddbafcd648f82b627cfc61.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -997,7 +997,7 @@ So, under this prior, microwave B looks better.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2176/2433367669.py:1: DeprecationWarning: `trapz` is deprecated. Use `trapezoid` instead, or one of the numerical integration functions in `scipy.integrate`.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2350/2433367669.py:1: DeprecationWarning: `trapz` is deprecated. Use `trapezoid` instead, or one of the numerical integration functions in `scipy.integrate`.
   np.trapz(np.pi/2 * np.cos(thetas * np.pi/2), thetas)
 </pre></div>
 </div>
@@ -1090,10 +1090,10 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
         </div></div>
 </div>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># You don&#39;t need to understand how this function is implemented.</span>
@@ -1160,7 +1160,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/3c0a0bd7f39b90df84a019f31ceddf881d40e29307eda9a7a7a56d7f17ba0b5c.png" src="../../../_images/3c0a0bd7f39b90df84a019f31ceddf881d40e29307eda9a7a7a56d7f17ba0b5c.png" />
+<img alt="../../../_images/7aa76b580dfa71259346c34c992b02bd2f4a76fdee369b70de6e6ae5253af548.png" src="../../../_images/7aa76b580dfa71259346c34c992b02bd2f4a76fdee369b70de6e6ae5253af548.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1170,7 +1170,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/bc61f5ce693002d6eb962b604593d7ad333e2d5327d66a8857dbb6dcd5a5dc5c.png" src="../../../_images/bc61f5ce693002d6eb962b604593d7ad333e2d5327d66a8857dbb6dcd5a5dc5c.png" />
+<img alt="../../../_images/e5b113ddce4b556ba9f3f3e61beaa21bd3124bb778ecc932d20a8f2d3dca91a3.png" src="../../../_images/e5b113ddce4b556ba9f3f3e61beaa21bd3124bb778ecc932d20a8f2d3dca91a3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1180,7 +1180,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/46766d158cf1f19d577a1d51d4c911298fc22352fdb73a7d6a540bd52f684814.png" src="../../../_images/46766d158cf1f19d577a1d51d4c911298fc22352fdb73a7d6a540bd52f684814.png" />
+<img alt="../../../_images/dabd45896f2c0a4a6afd47b21eee83450e75549142668b24d964946fd83225e4.png" src="../../../_images/dabd45896f2c0a4a6afd47b21eee83450e75549142668b24d964946fd83225e4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1190,7 +1190,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/94160ca24e9d707dcd12fc224b84d9f13449a6a6f78ecda9a17ccc35306d37a3.png" src="../../../_images/94160ca24e9d707dcd12fc224b84d9f13449a6a6f78ecda9a17ccc35306d37a3.png" />
+<img alt="../../../_images/0975a9260f284de1d5294c0e8d41b1b92ef08143482aca2b4cc8432f937584c1.png" src="../../../_images/0975a9260f284de1d5294c0e8d41b1b92ef08143482aca2b4cc8432f937584c1.png" />
 </div>
 </div>
 <p>Just as before, we can observe that the prior has a stronger effect when we have less data. We can also see that the posterior distribution becomes narrower as the amount of data increases. This is another general fact: <strong>the more data we observe, the narrower our posterior distribution becomes.</strong></p>

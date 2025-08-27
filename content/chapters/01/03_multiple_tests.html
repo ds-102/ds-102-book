@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -419,7 +419,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-visual-comparison-of-naive-thresholding-bonferroni-and-benjamini-hochberg">A Visual Comparison of Naive thresholding, Bonferroni, and Benjamini-Hochberg</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-benjamini-hochberg-control-fdr">Why does Benjamini-Hochberg Control FDR?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-why-does-benjamini-hochberg-control-fdr">(Optional) Why does Benjamini-Hochberg Control FDR?</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-and-contrasting-fwer-and-fdr">Comparing and Contrasting FWER and FDR</a></li>
@@ -437,10 +437,10 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="multiple-hypothesis-testing">
 <h1>Multiple Hypothesis Testing<a class="headerlink" href="#multiple-hypothesis-testing" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -731,7 +731,7 @@ FWER
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/30967bb39fb3ca26949dfbb2458932b513e3f18ddd57294937fcf495e5f9a60c.png" src="../../../_images/30967bb39fb3ca26949dfbb2458932b513e3f18ddd57294937fcf495e5f9a60c.png" />
+<img alt="../../../_images/66a2a9ed73b336e3102686683c9646e21050351f84002ed9b494759e91371b67.png" src="../../../_images/66a2a9ed73b336e3102686683c9646e21050351f84002ed9b494759e91371b67.png" />
 </div>
 </div>
 <p>Here, the <span class="math notranslate nohighlight">\(x\)</span>-axis is <span class="math notranslate nohighlight">\(k\)</span>, the index, and the <span class="math notranslate nohighlight">\(y\)</span>-axis represents the <span class="math notranslate nohighlight">\(p\)</span>-value. We can visualize the results of two techniques:</p>
@@ -752,7 +752,7 @@ FWER
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/fd432d8bd34c64249f79b33f754f3ed4281fe6dd8adddef1262d4600fcb0a3a0.png" src="../../../_images/fd432d8bd34c64249f79b33f754f3ed4281fe6dd8adddef1262d4600fcb0a3a0.png" />
+<img alt="../../../_images/b01af17fb23880d5d2380fccc63f570955aa50bea10c3d6b3fc9bafeb9249efc.png" src="../../../_images/b01af17fb23880d5d2380fccc63f570955aa50bea10c3d6b3fc9bafeb9249efc.png" />
 </div>
 </div>
 <p>In this visualization, how does the Benjamini-Hochberg procedure work? We compare each <span class="math notranslate nohighlight">\(p\)</span>-value to the comparison value <span class="math notranslate nohighlight">\(\frac{k\alpha}{m}\)</span>, which in this visualization is a diagonal line. In order to better see what’s going on, we’ll also zoom in on a narrower range of <span class="math notranslate nohighlight">\(p\)</span>-values:</p>
@@ -767,7 +767,7 @@ FWER
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/1452922a6744de2821bd712579d80d7d9d7a065586edc7c9a8c6d3fec75f43bd.png" src="../../../_images/1452922a6744de2821bd712579d80d7d9d7a065586edc7c9a8c6d3fec75f43bd.png" />
+<img alt="../../../_images/057f55f7bcb0ec537872fbba545fe0beed3c6e3afe7c79118fc8c21209294be4.png" src="../../../_images/057f55f7bcb0ec537872fbba545fe0beed3c6e3afe7c79118fc8c21209294be4.png" />
 </div>
 </div>
 <p>The Benjamini-Hochberg procedure says to take the largest <span class="math notranslate nohighlight">\(p\)</span>-value that’s below the comparison value <span class="math notranslate nohighlight">\(\frac{k\alpha}{m}\)</span>: in this case, that’s the point at index 16. This becomes our <span class="math notranslate nohighlight">\(p\)</span>-value threshold, so we choose to reject the null hypothesis for the first 16 <span class="math notranslate nohighlight">\(p\)</span>-values (after being sorted). The graph below shows all three thresholds:</p>
@@ -798,11 +798,11 @@ FWER
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/42af2413b76da603ff29d12b2c09598963e8638fcf978a138e6d03e43897b38f.png" src="../../../_images/42af2413b76da603ff29d12b2c09598963e8638fcf978a138e6d03e43897b38f.png" />
+<img alt="../../../_images/ea38d2fc51a14c52548b63ffaf3a293099557f89d9938199b93bcbeb6461b67c.png" src="../../../_images/ea38d2fc51a14c52548b63ffaf3a293099557f89d9938199b93bcbeb6461b67c.png" />
 </div>
 </div>
-<section id="why-does-benjamini-hochberg-control-fdr">
-<h3>Why does Benjamini-Hochberg Control FDR?<a class="headerlink" href="#why-does-benjamini-hochberg-control-fdr" title="Link to this heading">#</a></h3>
+<section id="optional-why-does-benjamini-hochberg-control-fdr">
+<h3>(Optional) Why does Benjamini-Hochberg Control FDR?<a class="headerlink" href="#optional-why-does-benjamini-hochberg-control-fdr" title="Link to this heading">#</a></h3>
 <p><em>Text coming soon: see video</em></p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -930,7 +930,7 @@ FWER
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-visual-comparison-of-naive-thresholding-bonferroni-and-benjamini-hochberg">A Visual Comparison of Naive thresholding, Bonferroni, and Benjamini-Hochberg</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-benjamini-hochberg-control-fdr">Why does Benjamini-Hochberg Control FDR?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-why-does-benjamini-hochberg-control-fdr">(Optional) Why does Benjamini-Hochberg Control FDR?</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-and-contrasting-fwer-and-fdr">Comparing and Contrasting FWER and FDR</a></li>
