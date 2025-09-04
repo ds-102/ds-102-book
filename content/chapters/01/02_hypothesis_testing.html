@@ -535,13 +535,13 @@ document.write(`
 <p><strong>Solution</strong>: In order to answer this question, we’ll look at the distribution of the test statistic under the null hypothesis, and use what we know about probabilities. If the null hypothesis is true, then the test statistic comes from some distribution that we can either simulate or analytically compute. We’ll represent it visually as follows. Note that everything we’re about to conclude is true even if the shape of the distribution is very different: we’re only making it to facilitate easy visualization.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/9b275383d421bf4512526f2101ce86be49e85fec1a3ac2f79b0088350a3019bc.png" src="../../../_images/9b275383d421bf4512526f2101ce86be49e85fec1a3ac2f79b0088350a3019bc.png" />
+<img alt="../../../_images/23cd1aa7166de12029486647e54ea81681de814e3e77dc579567071d2142a265.png" src="../../../_images/23cd1aa7166de12029486647e54ea81681de814e3e77dc579567071d2142a265.png" />
 </div>
 </div>
 <p>What does it mean to obtain a <span class="math notranslate nohighlight">\(p\)</span>-value less than 0.05? This happens when our test statistic is large enough that it’s unlikely according to the null distribution. Specifically, let’s choose a particular value of the test statistic <span class="math notranslate nohighlight">\(a\)</span>, chosen such that the area under the curve to the right of <span class="math notranslate nohighlight">\(a\)</span> is 0.05:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../../_images/d8af680ab5c0017160b6cd5751e0fb008a21f4ad69dfed350b38b47afe3c3cde.png" src="../../../_images/d8af680ab5c0017160b6cd5751e0fb008a21f4ad69dfed350b38b47afe3c3cde.png" />
+<img alt="../../../_images/0954d029b0b4576486db80b3a0d72e8447050692b73a6d8afc571bc5665bba59.png" src="../../../_images/0954d029b0b4576486db80b3a0d72e8447050692b73a6d8afc571bc5665bba59.png" />
 </div>
 </div>
 <p>If our test statistic is <span class="math notranslate nohighlight">\(a\)</span>, then the <span class="math notranslate nohighlight">\(p\)</span>-value is the probability of getting a value greater than or equal to <span class="math notranslate nohighlight">\(a\)</span>. That probability is the area under the curve to the right of <span class="math notranslate nohighlight">\(a\)</span>. By construction, that area is 0.05 (in other words, we set things up and chose <span class="math notranslate nohighlight">\(a\)</span> to have an area of 0.05).</p>
@@ -712,7 +712,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/846666bc0326d256f7131061a36eaac7e0e9c192d9bc5e2db764ece32ffd3779.png" src="../../../_images/846666bc0326d256f7131061a36eaac7e0e9c192d9bc5e2db764ece32ffd3779.png" />
+<img alt="../../../_images/d64dfc06e222ceeed2fc54e5aa664a3c619de349b67fbefc023a7a2da903389e.png" src="../../../_images/d64dfc06e222ceeed2fc54e5aa664a3c619de349b67fbefc023a7a2da903389e.png" />
 </div>
 </div>
 <p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
@@ -784,7 +784,7 @@ P
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(-0.049319194537530316), np.float64(1.035869189459966), np.float64(1.5), np.float64(-0.5))
 </pre></div>
 </div>
-<img alt="../../../_images/8eb5c35e37536efbcab840b595b351a943899bfa6ae08100dcbd7d03018cdd2e.png" src="../../../_images/8eb5c35e37536efbcab840b595b351a943899bfa6ae08100dcbd7d03018cdd2e.png" />
+<img alt="../../../_images/6a65dd94c48fadfc42e18eef3155a91663cff18a8d593f6d7f9057431f5636de.png" src="../../../_images/6a65dd94c48fadfc42e18eef3155a91663cff18a8d593f6d7f9057431f5636de.png" />
 </div>
 </div>
 <p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
@@ -801,10 +801,10 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/a01f9cb063daaf5bb35ee871fa7e49a832c6ec497affaab29f57b6f1dc5718f7.png" src="../../../_images/a01f9cb063daaf5bb35ee871fa7e49a832c6ec497affaab29f57b6f1dc5718f7.png" />
+<img alt="../../../_images/7142596b4d96be531775e6386366433ab4fad3a9593c7b6be2edfb52e8e00fd2.png" src="../../../_images/7142596b4d96be531775e6386366433ab4fad3a9593c7b6be2edfb52e8e00fd2.png" />
 </div>
 </div>
-<p>For p-values smaller than our threshold (to the right of the line), our decision is 1. So:</p>
+<p>For p-values smaller than our threshold (to the left of the line), our decision is 1. So:</p>
 <ul class="simple">
 <li><p>For all the orange (bottom) points to the left of the line, we make a correct decision: in this case, reality and our decision are both 1 (alternative), so these are <em>true positives</em>.</p></li>
 <li><p>For all the orange (bottom) points to the right of the line, we make an incorrect decision: in this case, reality is 1 (alternative), but our decision is 0 (null). So, these are <em>false negatives</em>.</p></li>
@@ -825,7 +825,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/789a359f81714747bd3dfe6c8a6e534ad3ab4ce40e3071aa893472427d693644.png" src="../../../_images/789a359f81714747bd3dfe6c8a6e534ad3ab4ce40e3071aa893472427d693644.png" />
+<img alt="../../../_images/1280db5c5d6a1fadbb7aacc2fc899224dc1aed018fa6c11b88240768ba979385.png" src="../../../_images/1280db5c5d6a1fadbb7aacc2fc899224dc1aed018fa6c11b88240768ba979385.png" />
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>
@@ -883,7 +883,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/89d052e7ff2cac1bafb8ea1c0ba263e961505475f59aa3169027c6bcb22e6af7.png" src="../../../_images/89d052e7ff2cac1bafb8ea1c0ba263e961505475f59aa3169027c6bcb22e6af7.png" />
+<img alt="../../../_images/2b2573e1138f9a78665e9273e2d0889ac009f1be432d0b85122318908f3401e0.png" src="../../../_images/2b2573e1138f9a78665e9273e2d0889ac009f1be432d0b85122318908f3401e0.png" />
 </div>
 </div>
 <p>The black vertical line shows one arbitrarily chosen decision threshold: if we use this threshold, the shaded areas show the FPR (right, red) and TNR (left, yellow) of our test. We can see that if we were to raise the threshold, we’d obtain a lower false positive rate (red).</p>
@@ -895,7 +895,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/19102587f2f2f49e115de5104fc75d1ffbe144c63efa5ac26d85ac0d0d9755b7.png" src="../../../_images/19102587f2f2f49e115de5104fc75d1ffbe144c63efa5ac26d85ac0d0d9755b7.png" />
+<img alt="../../../_images/40a8ce9ad24c748deccc92594cf92f678a49013f3ae8b2c6e54b602198473ed6.png" src="../../../_images/40a8ce9ad24c748deccc92594cf92f678a49013f3ae8b2c6e54b602198473ed6.png" />
 </div>
 </div>
 <p>For this choice of the alternative hypothesis, we can now see the power (TPR) and FNR as the green (right) and purple (left) areas, respectively. If we were to raise the threshold, we’d obtain a lower power (green).</p>
@@ -907,7 +907,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/b52c160ce76af27696f0fbba2317987770a2667c55f1c6b2b533d6fdf2a53113.png" src="../../../_images/b52c160ce76af27696f0fbba2317987770a2667c55f1c6b2b533d6fdf2a53113.png" />
+<img alt="../../../_images/d04635fe929a478fc8e946911db4ef506d88b81115a90f502dda70b74edb1d9c.png" src="../../../_images/d04635fe929a478fc8e946911db4ef506d88b81115a90f502dda70b74edb1d9c.png" />
 </div>
 </div>
 <p>Now, we can see the impact of our threshold in both cases: if the null is true, our error probability is the area under the red curve to the <strong>right</strong> of the threshold (make sure you convince yourself why this is true). If the alternative is true, our error probability is the area under the blue curve to the <strong>left</strong> of the threshold. Ideally, we want both of these areas to be as small as possible, but in practice, we often must trade off one for the other.</p>
