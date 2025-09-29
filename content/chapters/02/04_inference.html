@@ -455,22 +455,28 @@ document.write(`
 <li><p>This made it easy to determine things like the MAP estimate or LMSE estimate, simply by using known properties of the Beta distribution.</p></li>
 </ul>
 <p>But what if our posterior distribution didn’t have such a convenient form? In that case, we would have to compute the posterior (and any estimates from it) ourselves:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
 p(\theta|x)
-&amp;= \frac{p(x|\theta)p(\theta)}{p(x)} \
-&amp;= \frac{p(x|\theta)p(\theta)}{\int p(x|\theta)p(\theta),d\theta} \
-\end{align}</p>
+&amp;= \frac{p(x|\theta)p(\theta)}{p(x)} \\
+&amp;= \frac{p(x|\theta)p(\theta)}{\int p(x|\theta)p(\theta)\,d\theta} \\
+\end{align}
+\end{split}\]</div>
 <p>In general, the integral in the denominator could be impossible to compute. We call the denominator the <strong>normalizing constant</strong>: it’s a constant because it doesn’t depend on <span class="math notranslate nohighlight">\(\theta\)</span>, and it’s normalizing because we need it for the distribution or density to sum or integrate to 1.</p>
 <p>In the next section, we’ll see a few examples that illustrate why computing the normalizing constant is hard, but first, let’s look at three examples of why we might need to know it in the first place.</p>
 <section id="computing-probabilities">
 <h3>Computing probabilities<a class="headerlink" href="#computing-probabilities" title="Link to this heading">#</a></h3>
 <p>Suppose we want to know the probability that <span class="math notranslate nohighlight">\(\theta\)</span> is greater than 0.7, given the observed data. In this case, we can set up an integral to compute this:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
 P(\theta &gt; 0.7 | x)
-&amp;= \int_{0.7}^1 p(\theta|x) , dx \
-&amp;= \int_{0.7}^1 \frac{p(x|\theta)p(\theta)}{p(x)} , dx \
-&amp;= \frac{1}{p(x)} \int_{0.7}^1 p(x|\theta)p(\theta) , dx
-\end{align}</p>
+&amp;= \int_{0.7}^1 p(\theta|x) \, dx \\
+&amp;= \int_{0.7}^1 \frac{p(x|\theta)p(\theta)}{p(x)} \, dx \\
+&amp;= \frac{1}{p(x)} \int_{0.7}^1 p(x|\theta)p(\theta) \, dx
+\end{align}
+\end{split}\]</div>
 <p>In the last step, we used the fact that p(x) doesn’t depend on <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 <p>If we don’t know <span class="math notranslate nohighlight">\(p(x)\)</span>, then our probability will be off by an unknown factor. For example, suppose the true probability is 0.9, the integral is 0.0009, and the normally-unknown denominator <span class="math notranslate nohighlight">\(p(x)\)</span> is <span class="math notranslate nohighlight">\(0.001\)</span>. In this case, if we don’t know the normalizing constant, there’s no way we can determine the probability: we’ll always be wrong by an unknown factor, which means that our answer is useless.</p>
 <div class="cell tag_remove-input docutils container">
