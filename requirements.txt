@@ -6,5 +6,8 @@ pandas
 ghp-import
 scipy
 scikit-learn
+statsmodels
+arviz
+bambi
 torch
 pymc
