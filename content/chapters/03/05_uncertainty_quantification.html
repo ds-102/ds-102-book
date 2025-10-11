@@ -57,6 +57,8 @@
     <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/03/05_uncertainty_quantification';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -379,7 +381,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -395,6 +399,25 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-uncertainty-quantification">Frequentist Uncertainty Quantification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uq-with-the-central-limit-theorem">UQ with the Central Limit Theorem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uq-with-the-bootstrap">UQ with the Bootstrap</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-limitations">Bootstrap limitations</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence intervals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-in-glms-comparing-coefficient-and-prediction-intervals">Uncertainty in GLMs: comparing coefficient and prediction intervals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-bootstrap-to-quantify-uncertainty-in-glms">Using Bootstrap to Quantify Uncertainty in GLMs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-uncertainty-quantification">Bayesian Uncertainty Quantification</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -406,7 +429,177 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="uncertainty-quantification">
 <h1>Uncertainty Quantification<a class="headerlink" href="#uncertainty-quantification" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">YouTubeVideo</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pymc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">arviz</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">az</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bambi</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bmb</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># Turn off logging (console output) for PyMC</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;pymc&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>(Almost) every dataset we work with has some amount of uncertainty in it. Everything from the randomness in a sample, measurement error, differences between the data and the underlying truth they represent, and much more can lead to uncertainty.</p>
+<p>Therefore, anything we <strong>compute</strong> using the data also inherits some uncertainty. So, it’s important to always report that uncertainty:</p>
+<ul class="simple">
+<li><p>If we infer a parameter or trend, we should report our uncertainty in the inference.</p></li>
+<li><p>If we make a prediction, we should report our uncertainty in the prediction.</p></li>
+<li><p>If we draw a conclusion, we should report our uncertainty in the conclusion.</p></li>
+</ul>
+<p>While uncertainty quantification looks slightly different from frequentist and Bayesian perspectives, the core ideas above remain true regardless.</p>
+<section id="frequentist-uncertainty-quantification">
+<h2>Frequentist Uncertainty Quantification<a class="headerlink" href="#frequentist-uncertainty-quantification" title="Link to this heading">#</a></h2>
+<p>In the frequentist setting, we treat our data as random, but our unknowns as fixed. So, any uncertainty we quantify is only over the data! Statements like the ones below are never valid in frequentist settings:</p>
+<ul class="simple">
+<li><p>~The unknown is probably within…~</p></li>
+<li><p>~The probability of the parameter being…~</p></li>
+</ul>
+<p>While these statements can be more intuitive and might align with what we want to say when quantifying uncertainty, they only make sense in the context of a probability model for the unknown: we’ll have to take a Bayesian approach in order to say anything of this sort.</p>
+<p>The main way we’ll quantify uncertainty in the frequentist setting is by using the distribution of our estimators. Specifically, whenever we estimate some parameter <span class="math notranslate nohighlight">\(\theta\)</span> with an estimator <span class="math notranslate nohighlight">\(\hat{\theta} = f(x_1, \ldots, x_n)\)</span>, the estimator is random, because it depends on the random data (even if <span class="math notranslate nohighlight">\(\theta\)</span> is fixed). So, we can use the distribution of <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> to quantify uncertainty.</p>
+<p>We already know that if we have the distribution of <span class="math notranslate nohighlight">\(\hat{\theta}\)</span>, we can construct a <strong>confidence interval</strong>, which gives us an idea of how much our estimator could vary if we had observed different datasets. But before we can construct one, we need to determine the distribution for <span class="math notranslate nohighlight">\(\hat{\theta}\)</span>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/ZDqSXtm0vBM"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<section id="uq-with-the-central-limit-theorem">
+<h3>UQ with the Central Limit Theorem<a class="headerlink" href="#uq-with-the-central-limit-theorem" title="Link to this heading">#</a></h3>
+<p><em>For more on the Central Limit Theorem, see <a class="reference external" href="https://data140.org/textbook/content/Chapter_14/00_The_Central_Limit_Theorem.html">Chapter 14 of the Data 140 textbook</a>.</em></p>
+<p>If we want to use the distribution of <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> to quantify our uncertainty, then we have to start by answering: “what is the distribution of <span class="math notranslate nohighlight">\(\hat{\theta}\)</span>?</p>
+<p>In the case where <span class="math notranslate nohighlight">\(\theta\)</span> is the sample mean, we can answer this with one of the most beautiful results in statistics: the <strong>Central Limit Theorem</strong>. Briefly, this states that if <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> is the sample mean of data points <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>, where each <span class="math notranslate nohighlight">\(x_i\)</span> has mean <span class="math notranslate nohighlight">\(\mu\)</span> and (finite) variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>, then the distribution of <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> converges to a normal distribution with mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2/n\)</span>.</p>
+<p>Note that a similar result holds for any maximum likelihood estimate! While the details are beyond the scope of this class, one can show that if <span class="math notranslate nohighlight">\(\hat{\theta}_{MLE}\)</span> is the maximum likelihood estimate for some parameter <span class="math notranslate nohighlight">\(\theta\)</span> based on data points <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>, then the distribution for <span class="math notranslate nohighlight">\(\hat{\theta}_{MLE}\)</span> <strong>also</strong> converges to a normal distribution, with mean <span class="math notranslate nohighlight">\(\theta\)</span> and variance <span class="math notranslate nohighlight">\(1/(nI(\theta))\)</span>. Here, <span class="math notranslate nohighlight">\(I(\theta)\)</span> is the <a class="reference external" href="https://en.wikipedia.org/wiki/Fisher_information">Fisher informatoin</a> of the likelihood, which quantifies how much information each <span class="math notranslate nohighlight">\(x_i\)</span> gives us about <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>While the details (e.g., Fisher information) are beyond the scope of this class, the takeaway is important:</p>
+<p>Asymptotically (i.e., as the number of observations gets very large), <strong>the distribution of a maximum likelihood estimator, like that of a sample mean, converges to a normal distribution</strong>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/TiqwK0YYrNo"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="uq-with-the-bootstrap">
+<h3>UQ with the Bootstrap<a class="headerlink" href="#uq-with-the-bootstrap" title="Link to this heading">#</a></h3>
+<p><em>You may find it helpful to review <a class="reference external" href="https://inferentialthinking.com/chapters/13/2/Bootstrap.html">Chapter 13.2 of the Data 8 textbook</a>, which covers the bootstrap.</em></p>
+<p>In many cases, we might not be able to compute the distribution of <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> analytically. In some of these cases, we can use the <strong>bootstrap</strong> to quantify uncertainty.</p>
+<section id="bootstrap-limitations">
+<h4>Bootstrap limitations<a class="headerlink" href="#bootstrap-limitations" title="Link to this heading">#</a></h4>
 <p><em>Coming soon</em></p>
+<p>The bootstrap works well in most, but not all situations. Here are some guidelines for when to (and when not to) use it:</p>
+<ul class="simple">
+<li><p>The bootstrap is a <strong>good</strong> choice when the presence or absence of a single sample won’t change the estimate dramatically (e.g., this is not true for the min or max)</p></li>
+<li><p>The bootstrap is a <strong>good</strong> choice when the number of data points is very small</p></li>
+<li><p>The bootstrap is a <strong>good</strong> choice when the number of parameters <span class="math notranslate nohighlight">\(d\)</span> being estimated is much smaller than the number of data points <span class="math notranslate nohighlight">\(n\)</span> (e.g., this is not true for neural networks, where we are estimating a very large number of parameters)</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/hmQAc5VMBDY"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/ZQfrPKruYLg"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+</section>
+<section id="confidence-intervals">
+<h3>Confidence intervals<a class="headerlink" href="#confidence-intervals" title="Link to this heading">#</a></h3>
+<p><em>You may find it helpful to review <a class="reference external" href="https://inferentialthinking.com/chapters/13/3/Confidence_Intervals.html">Section 13.3 of the Data 8 textbook</a>, which covers confidence intervals.</em></p>
+<p>A confidence interval provides a measure of uncertainty about our estimator, based on its distribution. Recall that confidence intervals provide a guarantee about the process, not about the location of the (fixed) unknown parameter. Specifically, thinking about a 95% confidence interval, we know that 95% of datasets will produce an interval that contains the true parameter. We don’t know whether our interval happens to be one of the lucky 95%, or one of the unlucky 5%.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/Zn9NqVID-qg"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="uncertainty-in-glms-comparing-coefficient-and-prediction-intervals">
+<h3>Uncertainty in GLMs: comparing coefficient and prediction intervals<a class="headerlink" href="#uncertainty-in-glms-comparing-coefficient-and-prediction-intervals" title="Link to this heading">#</a></h3>
+<p>When quantifying uncertainty in GLMs, it’s important to keep in mind that there are multiple sources of uncertainty. For example, consider our estimate of the coefficients, <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>, computed from data <span class="math notranslate nohighlight">\((x_1, y_1), \ldots, (x_n, y_n)\)</span>. These are computed as the maximum likelihood estimates given the observed data, and so have inherent uncertainty in them. In other words, if we had observed a different dataset, we might have gotten a different set of estimated coefficients <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>.</p>
+<p>Now, consider our estimated prediction for a new data point, <span class="math notranslate nohighlight">\(\hat{y}_{n+1}\)</span>. To simplify, we’ll focus on linear regression with a scalar <span class="math notranslate nohighlight">\(x\)</span>. In this case, we can write the distribution for the new value <span class="math notranslate nohighlight">\(y_{n+1}\)</span> as:
+$<span class="math notranslate nohighlight">\(
+\begin{align}
+\hat{y}_{n+1} \sim \mathcal{N}\left(\hat{\beta}_0 + \hat{\beta}_1 x_{n+1}\,,\, \sigma^2\right)
+\end{align}
+\)</span><span class="math notranslate nohighlight">\(
+Here, there are two sources of uncertainty: (1) the uncertainty in our estimator for the coefficients, \)</span>\hat{\beta}<span class="math notranslate nohighlight">\(; and (2) the uncertainty in the observed value and how far away it'll be from the average prediction (i.e., prediction line), as quantified by \)</span>\sigma$.</p>
+<p>So, if we want to construct a confidence interval for <span class="math notranslate nohighlight">\(\hat{\beta}_0\)</span>, we need only consider the first source of uncertainty. But, if we want to construct a confidence interval for <span class="math notranslate nohighlight">\(\hat{y}_{n+1}\)</span>, we need to consider <strong>both</strong> sources of uncertainty! This second type of interval is often called a <strong>prediction interval</strong>.</p>
+</section>
+<section id="using-bootstrap-to-quantify-uncertainty-in-glms">
+<h3>Using Bootstrap to Quantify Uncertainty in GLMs<a class="headerlink" href="#using-bootstrap-to-quantify-uncertainty-in-glms" title="Link to this heading">#</a></h3>
+<p><em>Text coming soon: see video</em></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/73I1wfQfmf4"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+</section>
+<section id="bayesian-uncertainty-quantification">
+<h2>Bayesian Uncertainty Quantification<a class="headerlink" href="#bayesian-uncertainty-quantification" title="Link to this heading">#</a></h2>
+<p><em>Coming soon</em></p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -463,6 +656,32 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-uncertainty-quantification">Frequentist Uncertainty Quantification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uq-with-the-central-limit-theorem">UQ with the Central Limit Theorem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uq-with-the-bootstrap">UQ with the Bootstrap</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-limitations">Bootstrap limitations</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals">Confidence intervals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-in-glms-comparing-coefficient-and-prediction-intervals">Uncertainty in GLMs: comparing coefficient and prediction intervals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-bootstrap-to-quantify-uncertainty-in-glms">Using Bootstrap to Quantify Uncertainty in GLMs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-uncertainty-quantification">Bayesian Uncertainty Quantification</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

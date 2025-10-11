@@ -25,36 +25,40 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import pandas as pd
-from IPython.display import YouTubeVideo
+# First, we need to set up and draw posterior samples for each model
+extra_kwargs = dict(progressbar=False, nuts={'verbose': -1})
+gaussian_trace = gaussian_model.fit(random_seed=0, progressbar=False)
 
-import statsmodels.api as sm
-import pymc as pm
-import arviz as az
-import bambi as bmb
+poisson_model = bmb.Model(formula='totals ~ year', data=ok_turbines, family='poisson')
+poisson_trace = poisson_model.fit(random_seed=0, progressbar=False)
 
-%matplotlib inline
+negbin_model = bmb.Model(formula='totals ~ year', data=ok_turbines, family='negativebinomial')
+negbin_trace = negbin_model.fit(random_seed=0, progressbar=False)
 
-import matplotlib.pyplot as plt
-import seaborn as sns
+# Now, visualize the PPC using the function we just defined
+f, axes = plt.subplots(1, 3, figsize=(10, 5))
+show_posterior_predictive(gaussian_model, gaussian_trace, ok_turbines, is_log_y=True, ax=axes[0])
+axes[0].set_title('Linear regression (log-xfm y)')
 
-# Turn off logging (console output) for PyMC
-import logging
-logging.getLogger("pymc").setLevel(logging.ERROR)
+show_posterior_predictive(poisson_model, poisson_trace, ok_turbines, is_log_y=False, ax=axes[1])
+axes[1].set_title('Poisson regression')
 
-sns.set()
+show_posterior_predictive(negbin_model, negbin_trace, ok_turbines, is_log_y=False, ax=axes[2])
+axes[2].set_title('Negative binomial regression')
+
+f.suptitle('Posterior predictive check: three methods for turbine prediction')
+plt.tight_layout()
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
-[31mModuleNotFoundError[39m                       Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 5[39m
-[32m      2[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpd[39;00m
-[32m      3[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mIPython[39;00m[34;01m.[39;00m[34;01mdisplay[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m YouTubeVideo
-[32m----> [39m[32m5[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mstatsmodels[39;00m[34;01m.[39;00m[34;01mapi[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01msm[39;00m
-[32m      6[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpymc[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpm[39;00m
-[32m      7[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01marviz[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01maz[39;00m
+[31mNameError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[9][39m[32m, line 3[39m
+[32m      1[39m [38;5;66;03m# First, we need to set up and draw posterior samples for each model[39;00m
+[32m      2[39m extra_kwargs = [38;5;28mdict[39m(progressbar=[38;5;28;01mFalse[39;00m, nuts={[33m'[39m[33mverbose[39m[33m'[39m: -[32m1[39m})
+[32m----> [39m[32m3[39m gaussian_trace = [43mgaussian_model[49m.fit(random_seed=[32m0[39m, progressbar=[38;5;28;01mFalse[39;00m)
+[32m      5[39m poisson_model = bmb.Model(formula=[33m'[39m[33mtotals ~ year[39m[33m'[39m, data=ok_turbines, family=[33m'[39m[33mpoisson[39m[33m'[39m)
+[32m      6[39m poisson_trace = poisson_model.fit(random_seed=[32m0[39m, progressbar=[38;5;28;01mFalse[39;00m)
 
-[31mModuleNotFoundError[39m: No module named 'statsmodels'
+[31mNameError[39m: name 'gaussian_model' is not defined
 
