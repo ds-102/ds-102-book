@@ -196,8 +196,8 @@
 <li class="toctree-l2"><a class="reference internal" href="01_prediction.html">Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_regression_review.html">Linear Regression Review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_glms.html">Generalized Linear Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_model_checking.html">[WIP] Model Checking</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">[WIP] Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_model_checking.html">Model Checking</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Uncertainty Quantification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06_nonparametric.html">Nonparametric Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="07_neural_networks.html">Neural Networks</a></li>
 </ul>
@@ -415,7 +415,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-bootstrap-to-quantify-uncertainty-in-glms">Using Bootstrap to Quantify Uncertainty in GLMs</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-uncertainty-quantification">Bayesian Uncertainty Quantification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-uncertainty-quantification">Bayesian Uncertainty Quantification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-hdis-from-samples">Constructing HDIs from samples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-uq-for-predictions">Bayesian UQ for Predictions</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -434,6 +438,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">YouTubeVideo</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pymc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pm</span>
@@ -598,7 +603,122 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 </section>
 <section id="bayesian-uncertainty-quantification">
 <h2>Bayesian Uncertainty Quantification<a class="headerlink" href="#bayesian-uncertainty-quantification" title="Link to this heading">#</a></h2>
-<p><em>Coming soon</em></p>
+<p>In the Bayesian setting, we treat our unknown parameters as random. This means that we can make statements like “The unknown is probably between A and B”, which we couldn’t in the frequentist setting.</p>
+<p>This motivates the definition of a <strong>credible interval</strong>. A <span class="math notranslate nohighlight">\(p\%\)</span> credible interval for a parameter <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\((a, b)\)</span>, says that there is a <span class="math notranslate nohighlight">\(p\%\)</span> chance that, given the observed data, the parameter <span class="math notranslate nohighlight">\(\theta\)</span> falls between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. For example, suppose we produce <span class="math notranslate nohighlight">\(90\%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span> of <span class="math notranslate nohighlight">\((0.3, 1.7)\)</span>. This tells us that given our observed data, the probability of <span class="math notranslate nohighlight">\(\theta\)</span> being between 0.3 and 1.7 is <span class="math notranslate nohighlight">\(0.9\)</span>, or equivalently <span class="math notranslate nohighlight">\(\int_{0.3}^{1.7} p(\theta|x_1, \ldots, x_n) d\theta = 0.9\)</span> (assuming <span class="math notranslate nohighlight">\(\theta\)</span> is continuous).</p>
+<p>Notice how much simpler this definition is than the confidence interval! This is one of the advantages of taking a Bayesian approach: treating our unknown as random lets us make intuitive statements about the probability that it takes on certain values.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/nGeZ7G34jPI"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<p>However, one problem with this definition is that it is <strong>not unique</strong>! Indeed, there are many possible credible intervals for a given level of confidence/credibility. Consider the following distribution, and the three possible <span class="math notranslate nohighlight">\(80\%\)</span> credible intervals. For all three, the total shaded blue area is <span class="math notranslate nohighlight">\(80\%\)</span>, so all three are valid <span class="math notranslate nohighlight">\(80\%\)</span> credible intervals. Which one would you prefer?</p>
+<p><img alt="" src="../../../_images/credible_interval_comparison.png" /></p>
+<p>The one in the center seems the most appealing: it covers an area of highest density, and is also the narrowest. This motivates the definition of a <strong>highest density interval (HDI)</strong>, sometimes also called a highest posterior density (HPD) interval. The HDI is the narrowest interval for a given level of credibility/confidence.</p>
+<p><em>Exercise: is the HDI always unique? If not, then what constraints could we place on the posterior to ensure it’s unique?</em></p>
+<p>We can see that the intervals we saw in Section 3.3 were HDIs that PyMC automatically constructed for us.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/8ozFH1ZN7Qw"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<section id="constructing-hdis-from-samples">
+<h3>Constructing HDIs from samples<a class="headerlink" href="#constructing-hdis-from-samples" title="Link to this heading">#</a></h3>
+<p>Given a posterior in closed form, we could analytically find <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> to minimize the width of the interval. But in practice, we rarely obtain posterior distributions in closed form: we usually end up approximating them with samples. So, how might we find an HDI with samples?</p>
+<p>Let’s do a simple example with some samples from a Beta distribution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_samples</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span>
+<span class="n">samples</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.47947298, 0.44521239, 0.15300271, 0.73135028, 0.34112694])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Call the samples <span class="math notranslate nohighlight">\(\theta_1, \ldots, \theta_{100}\)</span>. We can construct a <span class="math notranslate nohighlight">\(90\%\)</span> credible interval by sorting the samples, choosing any <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> so that <span class="math notranslate nohighlight">\((j-i)/200 = 0.9\)</span>, and reporting <span class="math notranslate nohighlight">\([\theta_i, \theta_j]\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">j1</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">190</span><span class="p">)</span>
+<span class="p">(</span><span class="n">i2</span><span class="p">,</span> <span class="n">j2</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">195</span><span class="p">)</span>
+<span class="n">credible_interval_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">sorted_samples</span><span class="p">[</span><span class="n">i1</span><span class="p">],</span> <span class="n">sorted_samples</span><span class="p">[</span><span class="n">j1</span><span class="p">])</span>
+<span class="n">credible_interval_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">sorted_samples</span><span class="p">[</span><span class="n">i2</span><span class="p">],</span> <span class="n">sorted_samples</span><span class="p">[</span><span class="n">j2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">credible_interval_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">credible_interval_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.15043361314216666), np.float64(0.7313502840944285))
+(np.float64(0.18167458346334558), np.float64(0.7803141208293186))
+</pre></div>
+</div>
+</div>
+</div>
+<p>How can we find the HDI? We can simply search over all intervals of width <span class="math notranslate nohighlight">\(200 \times 0.9 = 180\)</span>, and find the narrowest one.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">credibility</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">narrowest_start_so_far</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">narrowest_width_so_far</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+<span class="n">interval_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_samples</span> <span class="o">*</span> <span class="n">credibility</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span> <span class="c1"># Make sure you understand why we can stop at 20!</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">interval_samples</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">sorted_samples</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">-</span> <span class="n">sorted_samples</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">width</span> <span class="o">&lt;</span> <span class="n">narrowest_width_so_far</span><span class="p">:</span>
+        <span class="n">narrowest_start_so_far</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="n">narrowest_width_so_far</span> <span class="o">=</span> <span class="n">width</span>
+<span class="nb">print</span><span class="p">((</span>
+    <span class="n">sorted_samples</span><span class="p">[</span><span class="n">narrowest_start_so_far</span><span class="p">],</span>  
+    <span class="n">sorted_samples</span><span class="p">[</span><span class="n">narrowest_start_so_far</span> <span class="o">+</span> <span class="n">interval_samples</span><span class="p">]</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.14863588914338108), np.float64(0.7159361219364617))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/9wtfEgpIn8k"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="bayesian-uq-for-predictions">
+<h3>Bayesian UQ for Predictions<a class="headerlink" href="#bayesian-uq-for-predictions" title="Link to this heading">#</a></h3>
+<p>Just as in the frequentist world, in Bayesian GLMs, we can also construct credible intervals for our predictions! These will be constructed using the posterior predictive density, and inherit the uncertainty in the inference for the unknown coefficients as well as the uncertainty in the inference for parameters like <span class="math notranslate nohighlight">\(\sigma\)</span> in linear regres</p>
+</section>
 </section>
 </section>
 
@@ -677,7 +797,11 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-bootstrap-to-quantify-uncertainty-in-glms">Using Bootstrap to Quantify Uncertainty in GLMs</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-uncertainty-quantification">Bayesian Uncertainty Quantification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-uncertainty-quantification">Bayesian Uncertainty Quantification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-hdis-from-samples">Constructing HDIs from samples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-uq-for-predictions">Bayesian UQ for Predictions</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

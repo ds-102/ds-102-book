@@ -196,8 +196,8 @@
 <li class="toctree-l2"><a class="reference internal" href="01_prediction.html">Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_regression_review.html">Linear Regression Review</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Generalized Linear Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_model_checking.html">[WIP] Model Checking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_uncertainty_quantification.html">[WIP] Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_model_checking.html">Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06_nonparametric.html">Nonparametric Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="07_neural_networks.html">Neural Networks</a></li>
 </ul>
@@ -624,7 +624,7 @@ Model Family:                Gaussian   Df Model:                            1
 Link Function:               Identity   Scale:                          1.1810
 Method:                          IRLS   Log-Likelihood:                -24.472
 Date:                Sat, 11 Oct 2025   Deviance:                       17.716
-Time:                        19:46:36   Pearson chi2:                     17.7
+Time:                        21:00:20   Pearson chi2:                     17.7
 No. Iterations:                     3   Pseudo R-squ. (CS):             0.9131
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -977,7 +977,7 @@ For more options and details see https://pytensor.readthedocs.io/en/latest/troub
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/3e8128234acd2a68274e8675e616b8227db393fa9bde7b4ecf083d5b26f44b12.png" src="../../../_images/3e8128234acd2a68274e8675e616b8227db393fa9bde7b4ecf083d5b26f44b12.png" />
+<img alt="../../../_images/22dcabcafe7fa4063d29c99bb5fde3cd6df0d18f13be1b104f47ff7528afdbd9.png" src="../../../_images/22dcabcafe7fa4063d29c99bb5fde3cd6df0d18f13be1b104f47ff7528afdbd9.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -994,7 +994,7 @@ For more options and details see https://pytensor.readthedocs.io/en/latest/troub
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/1bae03d62945680ef66599d7c9cc3c3660965248522489624fe177b0f1237a87.png" src="../../../_images/1bae03d62945680ef66599d7c9cc3c3660965248522489624fe177b0f1237a87.png" />
+<img alt="../../../_images/c6f4eef918cd8cad6cfb76fcdd79b055e5718dfe13837cb81e032a80c24229fd.png" src="../../../_images/c6f4eef918cd8cad6cfb76fcdd79b055e5718dfe13837cb81e032a80c24229fd.png" />
 </div>
 </div>
 <p>These plots help us see that many of the lines have too high of a slope in the log-scale, likely due to the outlier at <span class="math notranslate nohighlight">\(t=0\)</span>. This corresponds to a too-fast exponential rise after 2016 when looking at the counts.</p>
@@ -1091,7 +1091,7 @@ y_i | \beta \sim \text{Poisson}(\exp(x_i^T \beta))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/c963fd0a1e968bd0f10f24600c7d7eda74fade673992a1d483e170754a552cde.png" src="../../../_images/c963fd0a1e968bd0f10f24600c7d7eda74fade673992a1d483e170754a552cde.png" />
+<img alt="../../../_images/c4941d49642ba2f9f6b9798ffe2414327e02aaf8d9fea4e61849a069c87cff05.png" src="../../../_images/c4941d49642ba2f9f6b9798ffe2414327e02aaf8d9fea4e61849a069c87cff05.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1101,7 +1101,7 @@ y_i | \beta \sim \text{Poisson}(\exp(x_i^T \beta))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/8887beed7c250fba857fc146f5558aefe6bfa8dbfb90ede2173459f4378314c3.png" src="../../../_images/8887beed7c250fba857fc146f5558aefe6bfa8dbfb90ede2173459f4378314c3.png" />
+<img alt="../../../_images/e56548282bc9d7a76b4fd1815ee22ae86411492ec136c9f24277827993ce77b0.png" src="../../../_images/e56548282bc9d7a76b4fd1815ee22ae86411492ec136c9f24277827993ce77b0.png" />
 </div>
 </div>
 <p>Just as before, it’s important to remember that these lines only show us the estimated uncertainty in the average prediction <span class="math notranslate nohighlight">\(X\beta\)</span>: we aren’t visualizing any of the uncertainty shown by the Poisson model itself.</p>
@@ -1407,7 +1407,7 @@ y_i | \beta \sim \text{Poisson}(\exp(x_i^T \beta))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/c5bd1928d8f7240c921d8ca974aa3a31b35df80dabc5b0460cfaee8f456b3bf2.png" src="../../../_images/c5bd1928d8f7240c921d8ca974aa3a31b35df80dabc5b0460cfaee8f456b3bf2.png" />
+<img alt="../../../_images/097b649964acec166fd8ae471362fe9e760261e7b3429efe88bf1445875371ff.png" src="../../../_images/097b649964acec166fd8ae471362fe9e760261e7b3429efe88bf1445875371ff.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1417,7 +1417,7 @@ y_i | \beta \sim \text{Poisson}(\exp(x_i^T \beta))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/98c116579f20f24a90813797e10d5685b7bf5d90ed295b21eb62213d96e2446f.png" src="../../../_images/98c116579f20f24a90813797e10d5685b7bf5d90ed295b21eb62213d96e2446f.png" />
+<img alt="../../../_images/5e8a0e8845c12f247efa296a7d1b2e52db5814daecd8f023cdde3ebc8e3c9b77.png" src="../../../_images/5e8a0e8845c12f247efa296a7d1b2e52db5814daecd8f023cdde3ebc8e3c9b77.png" />
 </div>
 </div>
 <p>This seems to be a much better overall fit: the uncertainty in the various lines/curves matches up with the observed data, indicating that most of the prediction lines are somewhat reasonable given the observed data. It’s important once again to remember that the uncertainty visualized here is only in the average prediction, and that we aren’t visualizing the uncertainty in the estimated variance from the negative binomial model.</p>
