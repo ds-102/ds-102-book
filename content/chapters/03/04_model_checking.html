@@ -463,7 +463,12 @@ document.write(`
 <li><p>Will our models (particularly prediction models) generalize well to new, previously unseen data?</p></li>
 </ol>
 <p>When formulating and fitting a model, it’s important to answer both of these questions. In practice, it’s often easier to answer (and debug/iterate) the first question before moving on to the second.</p>
-<div class="cell tag_remove-input docutils container">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">&#39;RlQNAjvm55A&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
@@ -703,7 +708,7 @@ Model Family:                Gaussian   Df Model:                            1
 Link Function:               Identity   Scale:                          1.1810
 Method:                          IRLS   Log-Likelihood:                -24.472
 Date:                Sun, 12 Oct 2025   Deviance:                       17.716
-Time:                        18:36:51   Pearson chi2:                     17.7
+Time:                        20:27:49   Pearson chi2:                     17.7
 No. Iterations:                     3   Pseudo R-squ. (CS):             0.9131
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -736,7 +741,7 @@ Model Family:                 Poisson   Df Model:                            1
 Link Function:                    Log   Scale:                          1.0000
 Method:                          IRLS   Log-Likelihood:                -755.42
 Date:                Sun, 12 Oct 2025   Deviance:                       1366.3
-Time:                        18:36:51   Pearson chi2:                 1.20e+03
+Time:                        20:27:49   Pearson chi2:                 1.20e+03
 No. Iterations:                     5   Pseudo R-squ. (CS):              1.000
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -769,7 +774,7 @@ Model Family:        NegativeBinomial   Df Model:                            1
 Link Function:                    Log   Scale:                          1.0000
 Method:                          IRLS   Log-Likelihood:                -134.14
 Date:                Sun, 12 Oct 2025   Deviance:                       7.1483
-Time:                        18:36:51   Pearson chi2:                     1.90
+Time:                        20:27:49   Pearson chi2:                     1.90
 No. Iterations:                    11   Pseudo R-squ. (CS):             0.6999
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -808,7 +813,12 @@ year           0.2389      0.043      5.514      0.000       0.154       0.324
 <section id="intuition-behind-the-chi-squared-statistic">
 <h4>Intuition behind the chi-squared statistic<a class="headerlink" href="#intuition-behind-the-chi-squared-statistic" title="Link to this heading">#</a></h4>
 <p><em>Coming soon: see video</em></p>
-<div class="cell tag_remove-input docutils container">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">&#39;wTNETHYrUl8&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
@@ -829,31 +839,32 @@ year           0.2389      0.043      5.514      0.000       0.154       0.324
 <section id="posterior-predictive-distributions">
 <h3>Posterior Predictive Distributions<a class="headerlink" href="#posterior-predictive-distributions" title="Link to this heading">#</a></h3>
 <p>Consider a model with observed data points <span class="math notranslate nohighlight">\(x_{1:n} = x_1, \ldots, x_n\)</span> and an unknown parameter, with a likelihood <span class="math notranslate nohighlight">\(p(x_{1:n}|\theta)\)</span> and a prior <span class="math notranslate nohighlight">\(p(\theta)\)</span>. As usual, we’ll assume that the data points are conditionally i.i.d. given <span class="math notranslate nohighlight">\(\theta\)</span>. So far, we’ve focused on obtaining the posterior distribution <span class="math notranslate nohighlight">\(p(\theta|x_{1:n})\)</span>.</p>
-<p>We can also consider the distribution for a new data point, given all the previous data points (after marginalizing out the unknown parameter <span class="math notranslate nohighlight">\(\theta\)</span>). This is called the <strong>posterior predictive distribution (PPD)</strong>, and will be our primary tool for model checking:
-$<span class="math notranslate nohighlight">\(
+<p>We can also consider the distribution for a new data point, given all the previous data points (after marginalizing out the unknown parameter <span class="math notranslate nohighlight">\(\theta\)</span>). This is called the <strong>posterior predictive distribution (PPD)</strong>, and will be our primary tool for model checking:</p>
+<div class="math notranslate nohighlight">
+\[
 p(x_{n+1} | x_1, \ldots, x_n)
-\)</span><span class="math notranslate nohighlight">\(
-How do we go about computing the PPD? Looking at the previous paragraph, we know more about the distribution of \)</span>x_{n+1}<span class="math notranslate nohighlight">\( given \)</span>\theta<span class="math notranslate nohighlight">\(, so we can use total probability:
-\)</span><span class="math notranslate nohighlight">\(
-\begin{align*}
-p(x_{n+1}|x_{1:n}) 
-    &amp;= \int p(x_{n+1}|x_{1:n}, \theta)p(\theta|x_{1:n})\, d\theta
-\end{align*}
-\)</span><span class="math notranslate nohighlight">\(
-We can simplify the first conditional distribution because \)</span>x_{n+1}<span class="math notranslate nohighlight">\( and \)</span>x_{1:n}<span class="math notranslate nohighlight">\( are conditionally independent given \)</span>\theta<span class="math notranslate nohighlight">\(: in other words, \)</span>p(x_{n+1}|x_{1:n}, \theta) = p(x_{n+1}|\theta)<span class="math notranslate nohighlight">\(. The second conditional distribution is the posterior distribution for \)</span>\theta<span class="math notranslate nohighlight">\(. So:
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>How do we go about computing the PPD? Looking at the previous paragraph, we know more about the distribution of <span class="math notranslate nohighlight">\(x_{n+1}\)</span> given <span class="math notranslate nohighlight">\(\theta\)</span>, so we can use total probability:</p>
+<div class="math notranslate nohighlight">
+\[
+p(x_{n+1}|x_{1:n}) = \int p(x_{n+1}|x_{1:n}, \theta)p(\theta|x_{1:n})\, d\theta
+\]</div>
+<p>We can simplify the first conditional distribution because <span class="math notranslate nohighlight">\(x_{n+1}\)</span> and <span class="math notranslate nohighlight">\(x_{1:n}\)</span> are conditionally independent given <span class="math notranslate nohighlight">\(\theta\)</span>: in other words, <span class="math notranslate nohighlight">\(p(x_{n+1}|x_{1:n}, \theta) = p(x_{n+1}|\theta)\)</span>. The second conditional distribution is the posterior distribution for <span class="math notranslate nohighlight">\(\theta\)</span>. So:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{align*}
 p(x_{n+1}|x_{1:n}) 
     &amp;= \int p(x_{n+1}|x_{1:n}, \theta)p(\theta|x_{1:n})\, d\theta \\
     &amp;= \int p(x_{n+1}|\theta)p(\theta|x_{1:n})\, d\theta \\
     &amp;= \mathbb{E}_{\theta|x_{1:n}}\left[p(x_{n+1}|\theta)\right]
 \end{align*}
-\)</span><span class="math notranslate nohighlight">\(
-In practice, computing this integral exactly is just as hard as computing the denominator in Bayes' rule, because we have to integrate out over all possible \)</span>\theta<span class="math notranslate nohighlight">\(. In the case of high-dimensional \)</span>\theta$, as before, the integral can be impossible! In practice, we usually approximate the posterior with samples, and then use that to approximate the PPD.</p>
-<p>Specifically, to compute the PPD for a new data point, we compute the expectation above using the empirical distribution for <span class="math notranslate nohighlight">\(\theta|x_{1:n}\)</span> as defined by the samples. In other words, given samples <span class="math notranslate nohighlight">\(\theta^{(1)}, \ldots, \theta^{(t)}\)</span> that approximate <span class="math notranslate nohighlight">\(p(\theta|x_{1:n})\)</span>, we can:</p>
+\end{split}\]</div>
+<p>In practice, computing this integral exactly is just as hard as computing the denominator in Bayes’ rule, because we have to integrate out over all possible <span class="math notranslate nohighlight">\(\theta\)</span>. In the case of high-dimensional <span class="math notranslate nohighlight">\(\theta\)</span>, as before, the integral can be impossible! In practice, we usually approximate the posterior with samples, and then use that to approximate the PPD.</p>
+<p>Specifically, to compute the PPD for a new data point, we compute the expectation above using the empirical distribution for <span class="math notranslate nohighlight">\(\theta|x_{1:n}\)</span> as defined by the samples.</p>
+<p>In other words, given samples <span class="math notranslate nohighlight">\(\theta^{(1)}, \ldots, \theta^{(t)}\)</span> that approximate <span class="math notranslate nohighlight">\(p(\theta|x_{1:n})\)</span>, we can:</p>
 <ul class="simple">
 <li><p><strong>compute the PPD for a specific value</strong> <span class="math notranslate nohighlight">\(x_{n+1}\)</span> by averaging <span class="math notranslate nohighlight">\((1/t)\sum_{i=1}^t p(x_{n+1}|\theta^{(t)})\)</span></p></li>
-<li><p><strong>draw a sample from the PPD</strong> by :</p>
+<li><p><strong>draw a sample from the PPD</strong> by:</p>
 <ul>
 <li><p>first, drawing a sample uniformly at random from <span class="math notranslate nohighlight">\(\theta^{(1)}, \ldots, \theta^{(t)}\)</span>, calling it <span class="math notranslate nohighlight">\(\theta^*\)</span>;</p></li>
 <li><p>and then drawing from the likelihood conditioned on that sample, <span class="math notranslate nohighlight">\(p(x_{n+1}|\theta^*)\)</span></p></li>

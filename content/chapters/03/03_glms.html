@@ -624,7 +624,7 @@ Model Family:                Gaussian   Df Model:                            1
 Link Function:               Identity   Scale:                          1.1810
 Method:                          IRLS   Log-Likelihood:                -24.472
 Date:                Sun, 12 Oct 2025   Deviance:                       17.716
-Time:                        18:36:02   Pearson chi2:                     17.7
+Time:                        20:27:02   Pearson chi2:                     17.7
 No. Iterations:                     3   Pseudo R-squ. (CS):             0.9131
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -918,7 +918,7 @@ For more options and details see https://pytensor.readthedocs.io/en/latest/troub
   warnings.warn('install "ipywidgets" for Jupyter support')
 </pre>
 </div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 2 chains for 1_000 tune and 1_000 draw iterations (2_000 + 2_000 draws total) took 1 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 2 chains for 1_000 tune and 1_000 draw iterations (2_000 + 2_000 draws total) took 2 seconds.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>We recommend running at least 4 chains for robust computation of convergence diagnostics
@@ -926,16 +926,16 @@ For more options and details see https://pytensor.readthedocs.io/en/latest/troub
 </div>
 </div>
 </div>
-<p>We can see the results using the <code class="docutils literal notranslate"><span class="pre">arviz</span></code> function <code class="docutils literal notranslate"><span class="pre">plot_trace</span></code>:</p>
+<p>We can see the results using the <code class="docutils literal notranslate"><span class="pre">arviz</span></code> function <code class="docutils literal notranslate"><span class="pre">plot_posterior</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">gaussian_trace</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">gaussian_trace</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/7e094e41a794634fd4a8f799741efbc70738f107b5aa07b3b3e72d70fe87c64c.png" src="../../../_images/7e094e41a794634fd4a8f799741efbc70738f107b5aa07b3b3e72d70fe87c64c.png" />
+<img alt="../../../_images/dd2bd94da428757c46a06e36c455ea94805f2d7d7b9fc624d7fb9f8f6eacd759.png" src="../../../_images/dd2bd94da428757c46a06e36c455ea94805f2d7d7b9fc624d7fb9f8f6eacd759.png" />
 </div>
 </div>
 <p>The first two rows each represent one coefficient. The third row, <code class="docutils literal notranslate"><span class="pre">log_totals_sigma</span></code>, is the estimated standard deviation of the data points around the average prediction. The left column shows the posterior distribution for that coefficient (by using <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">KDE</a> on the histogram of samples), and the right shows the trajectory of samples obtained during HMC.</p>
@@ -977,7 +977,7 @@ For more options and details see https://pytensor.readthedocs.io/en/latest/troub
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/5f7187dd5a5275509d694c1767fc20f0c47b141d54d8951b7c975fdd848d5463.png" src="../../../_images/5f7187dd5a5275509d694c1767fc20f0c47b141d54d8951b7c975fdd848d5463.png" />
+<img alt="../../../_images/2da74183c0bf9f5599de1d4993f0b4580e39a06478d8b50ce4956ae91dc69e7e.png" src="../../../_images/2da74183c0bf9f5599de1d4993f0b4580e39a06478d8b50ce4956ae91dc69e7e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -994,7 +994,7 @@ For more options and details see https://pytensor.readthedocs.io/en/latest/troub
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/6154e7c4d1b45c2f5b04700d78c6115c7e758001d0d00ba261ab2d0248edcb72.png" src="../../../_images/6154e7c4d1b45c2f5b04700d78c6115c7e758001d0d00ba261ab2d0248edcb72.png" />
+<img alt="../../../_images/f00298e312366e5683bd1d309c86f2cf668040f0507063b2c521715c151bf609.png" src="../../../_images/f00298e312366e5683bd1d309c86f2cf668040f0507063b2c521715c151bf609.png" />
 </div>
 </div>
 <p>These plots help us see that many of the lines have too high of a slope in the log-scale, likely due to the outlier at <span class="math notranslate nohighlight">\(t=0\)</span>. This corresponds to a too-fast exponential rise after 2016 when looking at the counts.</p>
@@ -1061,13 +1061,13 @@ y_i | \beta \sim \text{Poisson}(\exp(x_i^T \beta))
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">poisson_trace</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">poisson_trace</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/de399280af55f3e8b928352c9a82b558bfece572559d95d66d41f1049c2621b5.png" src="../../../_images/de399280af55f3e8b928352c9a82b558bfece572559d95d66d41f1049c2621b5.png" />
+<img alt="../../../_images/bfd6da9b7dbf91098c0328dc1122c0c71f89ca1594a279c6b6e3489832421617.png" src="../../../_images/bfd6da9b7dbf91098c0328dc1122c0c71f89ca1594a279c6b6e3489832421617.png" />
 </div>
 </div>
 <p>Comparing this to the results from the Gaussian model, we can see that the posterior distributions for the two coefficients are <strong>much</strong> narrower. On top of that, the values of the coefficient for <code class="docutils literal notranslate"><span class="pre">year</span></code> seem much smaller: whereas before the posterior was centered around <span class="math notranslate nohighlight">\(0.3\)</span>, now it looks like the entire distribution is narrowly distributed around 0.183.</p>
@@ -1091,7 +1091,7 @@ y_i | \beta \sim \text{Poisson}(\exp(x_i^T \beta))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/09347aa5d401b7008614d03e4eab7cfefa5508fb84216f052c99202dbf61d562.png" src="../../../_images/09347aa5d401b7008614d03e4eab7cfefa5508fb84216f052c99202dbf61d562.png" />
+<img alt="../../../_images/9d4ed7ce7e145b3613535e0c06b11438cb18ab249f33291f6f79896461737719.png" src="../../../_images/9d4ed7ce7e145b3613535e0c06b11438cb18ab249f33291f6f79896461737719.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1101,7 +1101,7 @@ y_i | \beta \sim \text{Poisson}(\exp(x_i^T \beta))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/970a27bd3db4c5de6ba75fc022872da3b0064956e5fdaaa2a1764404c19ee6bf.png" src="../../../_images/970a27bd3db4c5de6ba75fc022872da3b0064956e5fdaaa2a1764404c19ee6bf.png" />
+<img alt="../../../_images/44c67975c2e0f2cff65c8c0e7fb4b0012e0db635d6bbe1a9c3d1fb2d0089f5e6.png" src="../../../_images/44c67975c2e0f2cff65c8c0e7fb4b0012e0db635d6bbe1a9c3d1fb2d0089f5e6.png" />
 </div>
 </div>
 <p>Just as before, it’s important to remember that these lines only show us the estimated uncertainty in the average prediction <span class="math notranslate nohighlight">\(X\beta\)</span>: we aren’t visualizing any of the uncertainty shown by the Poisson model itself.</p>
@@ -1377,13 +1377,13 @@ y_i | \beta \sim \text{Poisson}(\exp(x_i^T \beta))
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">negbin_trace</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">negbin_trace</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/4351cdb0291aeea4104ab7780579eb075beab7e612a7289ff9ff266546b71510.png" src="../../../_images/4351cdb0291aeea4104ab7780579eb075beab7e612a7289ff9ff266546b71510.png" />
+<img alt="../../../_images/6e2ff87765628ca448e92b233661f697a3baf222209c4477ea0e12ff4ffe346b.png" src="../../../_images/6e2ff87765628ca448e92b233661f697a3baf222209c4477ea0e12ff4ffe346b.png" />
 </div>
 </div>
 <p>Here, the posterior distribution for the <code class="docutils literal notranslate"><span class="pre">year</span></code> coefficient has a wider spread, and the mean is around <span class="math notranslate nohighlight">\(0.24\)</span>:</p>
@@ -1407,7 +1407,7 @@ y_i | \beta \sim \text{Poisson}(\exp(x_i^T \beta))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/4033afb9e6fe0904840ca8ebd8816a075711b939593d0bf6a712f4007d078030.png" src="../../../_images/4033afb9e6fe0904840ca8ebd8816a075711b939593d0bf6a712f4007d078030.png" />
+<img alt="../../../_images/142658fe8c760fe88f9f22572d31a78933535eb439ec7b4fe16f1ff16a3a9b13.png" src="../../../_images/142658fe8c760fe88f9f22572d31a78933535eb439ec7b4fe16f1ff16a3a9b13.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1417,7 +1417,7 @@ y_i | \beta \sim \text{Poisson}(\exp(x_i^T \beta))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/7317c61658c3dc9118f8eb50c43e7250f84c0cae00443fbe2779a539c0d1e4ac.png" src="../../../_images/7317c61658c3dc9118f8eb50c43e7250f84c0cae00443fbe2779a539c0d1e4ac.png" />
+<img alt="../../../_images/a10f9b5642f47ee6ed40f628b0132089fbbef849d3062d62ef01350ee6fb02f7.png" src="../../../_images/a10f9b5642f47ee6ed40f628b0132089fbbef849d3062d62ef01350ee6fb02f7.png" />
 </div>
 </div>
 <p>This seems to be a much better overall fit: the uncertainty in the various lines/curves matches up with the observed data, indicating that most of the prediction lines are somewhat reasonable given the observed data. It’s important once again to remember that the uncertainty visualized here is only in the average prediction, and that we aren’t visualizing the uncertainty in the estimated variance from the negative binomial model.</p>
