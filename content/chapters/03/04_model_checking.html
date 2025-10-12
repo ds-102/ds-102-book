@@ -708,7 +708,7 @@ Model Family:                Gaussian   Df Model:                            1
 Link Function:               Identity   Scale:                          1.1810
 Method:                          IRLS   Log-Likelihood:                -24.472
 Date:                Sun, 12 Oct 2025   Deviance:                       17.716
-Time:                        20:27:49   Pearson chi2:                     17.7
+Time:                        21:39:47   Pearson chi2:                     17.7
 No. Iterations:                     3   Pseudo R-squ. (CS):             0.9131
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -741,7 +741,7 @@ Model Family:                 Poisson   Df Model:                            1
 Link Function:                    Log   Scale:                          1.0000
 Method:                          IRLS   Log-Likelihood:                -755.42
 Date:                Sun, 12 Oct 2025   Deviance:                       1366.3
-Time:                        20:27:49   Pearson chi2:                 1.20e+03
+Time:                        21:39:47   Pearson chi2:                 1.20e+03
 No. Iterations:                     5   Pseudo R-squ. (CS):              1.000
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -774,7 +774,7 @@ Model Family:        NegativeBinomial   Df Model:                            1
 Link Function:                    Log   Scale:                          1.0000
 Method:                          IRLS   Log-Likelihood:                -134.14
 Date:                Sun, 12 Oct 2025   Deviance:                       7.1483
-Time:                        20:27:49   Pearson chi2:                     1.90
+Time:                        21:39:47   Pearson chi2:                     1.90
 No. Iterations:                    11   Pseudo R-squ. (CS):             0.6999
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -913,7 +913,7 @@ p(x_{n+1}|x_{1:n})
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, we need to set up and draw posterior samples for each model</span>
-<span class="n">extra_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">progressbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nuts</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">})</span>
+<span class="n">gaussian_model</span> <span class="o">=</span> <span class="n">bmb</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;log_totals ~ year&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">ok_turbines</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">)</span>
 <span class="n">gaussian_trace</span> <span class="o">=</span> <span class="n">gaussian_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">progressbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">poisson_model</span> <span class="o">=</span> <span class="n">bmb</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;totals ~ year&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">ok_turbines</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;poisson&#39;</span><span class="p">)</span>
@@ -939,18 +939,14 @@ p(x_{n+1}|x_{1:n})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># First, we need to set up and draw posterior samples for each model</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">extra_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">progressbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nuts</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">})</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">gaussian_trace</span> <span class="o">=</span> <span class="n">gaussian_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">progressbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">poisson_model</span> <span class="o">=</span> <span class="n">bmb</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;totals ~ year&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">ok_turbines</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;poisson&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">poisson_trace</span> <span class="o">=</span> <span class="n">poisson_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">random_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">progressbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;gaussian_model&#39; is not defined
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/pytensor/link/c/cmodule.py:2968: UserWarning: PyTensor could not link to a BLAS installation. Operations that might benefit from BLAS will be severely degraded.
+This usually happens when PyTensor is installed via pip. We recommend it be installed via conda/mamba/pixi instead.
+Alternatively, you can use an experimental backend such as Numba or JAX that perform their own BLAS optimizations, by setting `pytensor.config.mode == &#39;NUMBA&#39;` or passing `mode=&#39;NUMBA&#39;` when compiling a PyTensor function.
+For more options and details see https://pytensor.readthedocs.io/en/latest/troubleshooting.html#how-do-i-configure-test-my-blas-library
+  warnings.warn(
 </pre></div>
 </div>
+<img alt="../../../_images/953874728380d7ae32d41320b4b884396b06d9cf50222072873ed25b37baa4cd.png" src="../../../_images/953874728380d7ae32d41320b4b884396b06d9cf50222072873ed25b37baa4cd.png" />
 </div>
 </div>
 <p>Each green line represents one sample from the PPD. We can think of these as possible sequences of data that are dreamt up by the models, based on their representation.</p>

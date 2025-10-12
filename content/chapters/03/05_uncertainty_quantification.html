@@ -634,19 +634,24 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 <section id="constructing-hdis-from-samples">
 <h3>Constructing HDIs from samples<a class="headerlink" href="#constructing-hdis-from-samples" title="Link to this heading">#</a></h3>
 <p>Given a posterior in closed form, we could analytically find <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> to minimize the width of the interval. But in practice, we rarely obtain posterior distributions in closed form: we usually end up approximating them with samples. So, how might we find an HDI with samples?</p>
-<p>Let’s do a simple example with some samples from a Beta distribution:</p>
+<p>Let’s do a simple example with some samples from a Beta-distributed random variable <span class="math notranslate nohighlight">\(t\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_samples</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="n">samples</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span>
-<span class="n">samples</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">distribution</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">))</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Samples&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">distribution</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True PDF&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;p(t)&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.49565369, 0.26679279, 0.4928239 , 0.2980645 , 0.62312103])
-</pre></div>
-</div>
+<img alt="../../../_images/36447fe1e23f951b9079d8e6eb7d04155824706e535dee2aa3ebf05666448bca.png" src="../../../_images/36447fe1e23f951b9079d8e6eb7d04155824706e535dee2aa3ebf05666448bca.png" />
 </div>
 </div>
 <p>Call the samples <span class="math notranslate nohighlight">\(\theta_1, \ldots, \theta_{100}\)</span>. We can construct a <span class="math notranslate nohighlight">\(90\%\)</span> credible interval by sorting the samples, choosing any <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> so that <span class="math notranslate nohighlight">\((j-i)/200 = 0.9\)</span>, and reporting <span class="math notranslate nohighlight">\([\theta_i, \theta_j]\)</span>:</p>
@@ -663,8 +668,8 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.1516055096772851), np.float64(0.6927257387131563))
-(np.float64(0.1728710190093274), np.float64(0.7226160733557986))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.1609676465806642), np.float64(0.7003572665114103))
+(np.float64(0.18977871841600422), np.float64(0.7240428753170578))
 </pre></div>
 </div>
 </div>
@@ -690,7 +695,7 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.1121549853596977), np.float64(0.6463199200430682))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.18165468141666066), np.float64(0.7038640773796415))
 </pre></div>
 </div>
 </div>
