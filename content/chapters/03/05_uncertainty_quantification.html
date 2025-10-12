@@ -469,11 +469,7 @@ document.write(`
 <p>While uncertainty quantification looks slightly different from frequentist and Bayesian perspectives, the core ideas above remain true regardless.</p>
 <section id="frequentist-uncertainty-quantification">
 <h2>Frequentist Uncertainty Quantification<a class="headerlink" href="#frequentist-uncertainty-quantification" title="Link to this heading">#</a></h2>
-<p>In the frequentist setting, we treat our data as random, but our unknowns as fixed. So, any uncertainty we quantify is only over the data! Statements like the ones below are never valid in frequentist settings:</p>
-<ul class="simple">
-<li><p>~The unknown is probably within…~</p></li>
-<li><p>~The probability of the parameter being…~</p></li>
-</ul>
+<p>In the frequentist setting, we treat our data as random, but our unknowns as fixed. So, any uncertainty we quantify is only over the data! We <strong>cannot</strong> make statements like “<em>The unknown is probably within</em>” or “<em>The probability of the parameter being..</em>”.</p>
 <p>While these statements can be more intuitive and might align with what we want to say when quantifying uncertainty, they only make sense in the context of a probability model for the unknown: we’ll have to take a Bayesian approach in order to say anything of this sort.</p>
 <p>The main way we’ll quantify uncertainty in the frequentist setting is by using the distribution of our estimators. Specifically, whenever we estimate some parameter <span class="math notranslate nohighlight">\(\theta\)</span> with an estimator <span class="math notranslate nohighlight">\(\hat{\theta} = f(x_1, \ldots, x_n)\)</span>, the estimator is random, because it depends on the random data (even if <span class="math notranslate nohighlight">\(\theta\)</span> is fixed). So, we can use the distribution of <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> to quantify uncertainty.</p>
 <p>We already know that if we have the distribution of <span class="math notranslate nohighlight">\(\hat{\theta}\)</span>, we can construct a <strong>confidence interval</strong>, which gives us an idea of how much our estimator could vary if we had observed different datasets. But before we can construct one, we need to determine the distribution for <span class="math notranslate nohighlight">\(\hat{\theta}\)</span>.</p>
@@ -576,9 +572,7 @@ document.write(`
 <p>When quantifying uncertainty in GLMs, it’s important to keep in mind that there are multiple sources of uncertainty. For example, consider our estimate of the coefficients, <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>, computed from data <span class="math notranslate nohighlight">\((x_1, y_1), \ldots, (x_n, y_n)\)</span>. These are computed as the maximum likelihood estimates given the observed data, and so have inherent uncertainty in them. In other words, if we had observed a different dataset, we might have gotten a different set of estimated coefficients <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>.</p>
 <p>Now, consider our estimated prediction for a new data point, <span class="math notranslate nohighlight">\(\hat{y}_{n+1}\)</span>. To simplify, we’ll focus on linear regression with a scalar <span class="math notranslate nohighlight">\(x\)</span>. In this case, we can write the distribution for the new value <span class="math notranslate nohighlight">\(y_{n+1}\)</span> as:
 $<span class="math notranslate nohighlight">\(
-\begin{align}
 \hat{y}_{n+1} \sim \mathcal{N}\left(\hat{\beta}_0 + \hat{\beta}_1 x_{n+1}\,,\, \sigma^2\right)
-\end{align}
 \)</span><span class="math notranslate nohighlight">\(
 Here, there are two sources of uncertainty: (1) the uncertainty in our estimator for the coefficients, \)</span>\hat{\beta}<span class="math notranslate nohighlight">\(; and (2) the uncertainty in the observed value and how far away it'll be from the average prediction (i.e., prediction line), as quantified by \)</span>\sigma$.</p>
 <p>So, if we want to construct a confidence interval for <span class="math notranslate nohighlight">\(\hat{\beta}_0\)</span>, we need only consider the first source of uncertainty. But, if we want to construct a confidence interval for <span class="math notranslate nohighlight">\(\hat{y}_{n+1}\)</span>, we need to consider <strong>both</strong> sources of uncertainty! This second type of interval is often called a <strong>prediction interval</strong>.</p>
@@ -650,7 +644,7 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.47947298, 0.44521239, 0.15300271, 0.73135028, 0.34112694])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.470522  , 0.50628849, 0.3367441 , 0.37909697, 0.53623203])
 </pre></div>
 </div>
 </div>
@@ -669,8 +663,8 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.15043361314216666), np.float64(0.7313502840944285))
-(np.float64(0.18167458346334558), np.float64(0.7803141208293186))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.1828806297301582), np.float64(0.7422028200638082))
+(np.float64(0.2083612365122432), np.float64(0.7760024025046005))
 </pre></div>
 </div>
 </div>
@@ -696,11 +690,15 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.14863588914338108), np.float64(0.7159361219364617))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.18934718943047885), np.float64(0.7431031798580767))
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="bayesian-uq-for-predictions">
+<h3>Bayesian UQ for Predictions<a class="headerlink" href="#bayesian-uq-for-predictions" title="Link to this heading">#</a></h3>
+<p>Just as in the frequentist world, in Bayesian GLMs, we can also construct credible intervals for our predictions! These will be constructed using the posterior predictive density, and inherit the uncertainty in the inference for the unknown coefficients as well as the uncertainty in the inference for parameters like <span class="math notranslate nohighlight">\(\sigma\)</span> in linear regression.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
@@ -714,10 +712,6 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
         ></iframe>
         </div></div>
 </div>
-</section>
-<section id="bayesian-uq-for-predictions">
-<h3>Bayesian UQ for Predictions<a class="headerlink" href="#bayesian-uq-for-predictions" title="Link to this heading">#</a></h3>
-<p>Just as in the frequentist world, in Bayesian GLMs, we can also construct credible intervals for our predictions! These will be constructed using the posterior predictive density, and inherit the uncertainty in the inference for the unknown coefficients as well as the uncertainty in the inference for parameters like <span class="math notranslate nohighlight">\(\sigma\)</span> in linear regres</p>
 </section>
 </section>
 </section>
