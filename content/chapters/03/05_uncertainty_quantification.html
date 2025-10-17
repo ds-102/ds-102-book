@@ -205,8 +205,10 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/03_causality_potential_outcomes.html">Causality and Potential Outcomes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/06_instrumental_variables.html">Causality in Observational Studies: Natural Experiments</a></li>
 </ul>
 </details></li>
 </ul>
@@ -416,6 +418,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-uncertainty-quantification">Bayesian Uncertainty Quantification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#credible-intervals">Credible Intervals</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-hdis-from-samples">Constructing HDIs from samples</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-uq-for-predictions">Bayesian UQ for Predictions</a></li>
 </ul>
@@ -514,7 +517,6 @@ document.write(`
 <p>In many cases, we might not be able to compute the distribution of <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> analytically. In some of these cases, we can use the <strong>bootstrap</strong> to quantify uncertainty.</p>
 <section id="bootstrap-limitations">
 <h4>Bootstrap limitations<a class="headerlink" href="#bootstrap-limitations" title="Link to this heading">#</a></h4>
-<p><em>Coming soon</em></p>
 <p>The bootstrap works well in most, but not all situations. Here are some guidelines for when to (and when not to) use it:</p>
 <ul class="simple">
 <li><p>The bootstrap is a <strong>good</strong> choice when the presence or absence of a single sample won’t change the estimate dramatically (e.g., this is not true for the min or max)</p></li>
@@ -598,6 +600,8 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 <section id="bayesian-uncertainty-quantification">
 <h2>Bayesian Uncertainty Quantification<a class="headerlink" href="#bayesian-uncertainty-quantification" title="Link to this heading">#</a></h2>
 <p>In the Bayesian setting, we treat our unknown parameters as random. This means that we can make statements like “The unknown is probably between A and B”, which we couldn’t in the frequentist setting.</p>
+<section id="credible-intervals">
+<h3>Credible Intervals<a class="headerlink" href="#credible-intervals" title="Link to this heading">#</a></h3>
 <p>This motivates the definition of a <strong>credible interval</strong>. A <span class="math notranslate nohighlight">\(p\%\)</span> credible interval for a parameter <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\((a, b)\)</span>, says that there is a <span class="math notranslate nohighlight">\(p\%\)</span> chance that, given the observed data, the parameter <span class="math notranslate nohighlight">\(\theta\)</span> falls between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. For example, suppose we produce <span class="math notranslate nohighlight">\(90\%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span> of <span class="math notranslate nohighlight">\((0.3, 1.7)\)</span>. This tells us that given our observed data, the probability of <span class="math notranslate nohighlight">\(\theta\)</span> being between 0.3 and 1.7 is <span class="math notranslate nohighlight">\(0.9\)</span>, or equivalently <span class="math notranslate nohighlight">\(\int_{0.3}^{1.7} p(\theta|x_1, \ldots, x_n) d\theta = 0.9\)</span> (assuming <span class="math notranslate nohighlight">\(\theta\)</span> is continuous).</p>
 <p>Notice how much simpler this definition is than the confidence interval! This is one of the advantages of taking a Bayesian approach: treating our unknown as random lets us make intuitive statements about the probability that it takes on certain values.</p>
 <div class="cell tag_remove-input docutils container">
@@ -614,7 +618,7 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
         </div></div>
 </div>
 <p>However, one problem with this definition is that it is <strong>not unique</strong>! Indeed, there are many possible credible intervals for a given level of confidence/credibility. Consider the following distribution, and the three possible <span class="math notranslate nohighlight">\(80\%\)</span> credible intervals. For all three, the total shaded blue area is <span class="math notranslate nohighlight">\(80\%\)</span>, so all three are valid <span class="math notranslate nohighlight">\(80\%\)</span> credible intervals. Which one would you prefer?</p>
-<p><img alt="" src="../../../_images/credible_interval_comparison.png" /></p>
+<p><img alt="" src="content/chapters/03/credible_interval_comparison.png" /></p>
 <p>The one in the center seems the most appealing: it covers an area of highest density, and is also the narrowest. This motivates the definition of a <strong>highest density interval (HDI)</strong>, sometimes also called a highest posterior density (HPD) interval. The HDI is the narrowest interval for a given level of credibility/confidence.</p>
 <p><em>Exercise: is the HDI always unique? If not, then what constraints could we place on the posterior to ensure it’s unique?</em></p>
 <p>We can see that the intervals we saw in Section 3.3 were HDIs that PyMC automatically constructed for us.</p>
@@ -631,27 +635,24 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
         ></iframe>
         </div></div>
 </div>
+</section>
 <section id="constructing-hdis-from-samples">
 <h3>Constructing HDIs from samples<a class="headerlink" href="#constructing-hdis-from-samples" title="Link to this heading">#</a></h3>
 <p>Given a posterior in closed form, we could analytically find <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> to minimize the width of the interval. But in practice, we rarely obtain posterior distributions in closed form: we usually end up approximating them with samples. So, how might we find an HDI with samples?</p>
-<p>Let’s do a simple example with some samples from a Beta-distributed random variable <span class="math notranslate nohighlight">\(t\)</span>:</p>
+<p>Let’s do a simple example with some samples from a Beta-distributed random variable:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_samples</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">distribution</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="n">samples</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span>
-<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">))</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Samples&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">distribution</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True PDF&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;p(t)&#39;</span><span class="p">);</span>
+<span class="n">samples</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/f5ed102dd423b94820044ee12dca711ee2cb6c1043750f88ec76d9b087138396.png" src="../../../_images/f5ed102dd423b94820044ee12dca711ee2cb6c1043750f88ec76d9b087138396.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.56868138, 0.55390305, 0.74493889, 0.26084253, 0.48120402])
+</pre></div>
+</div>
 </div>
 </div>
 <p>Call the samples <span class="math notranslate nohighlight">\(\theta_1, \ldots, \theta_{100}\)</span>. We can construct a <span class="math notranslate nohighlight">\(90\%\)</span> credible interval by sorting the samples, choosing any <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> so that <span class="math notranslate nohighlight">\((j-i)/200 = 0.9\)</span>, and reporting <span class="math notranslate nohighlight">\([\theta_i, \theta_j]\)</span>:</p>
@@ -668,8 +669,8 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.16743974982850357), np.float64(0.744388898344158))
-(np.float64(0.17873649148297072), np.float64(0.820773932493678))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.15209068170529796), np.float64(0.7583166741542496))
+(np.float64(0.19003580382812932), np.float64(0.8036768614966232))
 </pre></div>
 </div>
 </div>
@@ -695,7 +696,7 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.1549405685174489), np.float64(0.6994915166283343))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.12064179911017876), np.float64(0.7120389297753104))
 </pre></div>
 </div>
 </div>
@@ -797,6 +798,7 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-uncertainty-quantification">Bayesian Uncertainty Quantification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#credible-intervals">Credible Intervals</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-hdis-from-samples">Constructing HDIs from samples</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-uq-for-predictions">Bayesian UQ for Predictions</a></li>
 </ul>

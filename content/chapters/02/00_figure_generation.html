@@ -203,8 +203,10 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/03_causality_potential_outcomes.html">Causality and Potential Outcomes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/06_instrumental_variables.html">Causality in Observational Studies: Natural Experiments</a></li>
 </ul>
 </details></li>
 </ul>
@@ -426,23 +428,6 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">b</span>
-
-<span class="ne">NameError</span>: name &#39;b&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">PGM</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">spacing</span> <span class="o">=</span> <span class="mf">1.7</span>
 <span class="n">offset</span> <span class="o">=</span> <span class="mf">0.8</span>
@@ -468,7 +453,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/9780fd61983f933037c01673b9bbc488c97f07a361e5675775609d5a44317aa4.png" src="../../../_images/9780fd61983f933037c01673b9bbc488c97f07a361e5675775609d5a44317aa4.png" />
+<img alt="../../../_images/659fddd5a392618eb576449876f4e5d76551e7a538d7bc77536b38a69c2992da.png" src="../../../_images/659fddd5a392618eb576449876f4e5d76551e7a538d7bc77536b38a69c2992da.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -496,11 +481,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/xb/x1ncwczj3ld6c06v8p22z_7m0000gn/T/ipykernel_39447/3200144636.py:18: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
-  plt.tight_layout()
-</pre></div>
-</div>
-<img alt="../../../_images/63cc31cbb3f0ef5aa6f2423e2dfb2bcd32c4f749780a3a3f0d8618f41f5bd412.png" src="../../../_images/63cc31cbb3f0ef5aa6f2423e2dfb2bcd32c4f749780a3a3f0d8618f41f5bd412.png" />
+<img alt="../../../_images/7f0ecd641dbcdc88bee3cf52e156c7614345b2a5a7327625bd4b5833c458a13d.png" src="../../../_images/7f0ecd641dbcdc88bee3cf52e156c7614345b2a5a7327625bd4b5833c458a13d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -522,7 +503,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/d478b47d84c882dcb722353f4ebbb681c0826efdce7cebbb7b289f932dc87771.png" src="../../../_images/d478b47d84c882dcb722353f4ebbb681c0826efdce7cebbb7b289f932dc87771.png" />
+<img alt="../../../_images/e9af15c88694124cc63b88d24dfbf5600034712020dc5a548c98ae6093722b09.png" src="../../../_images/e9af15c88694124cc63b88d24dfbf5600034712020dc5a548c98ae6093722b09.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -544,7 +525,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/ed49decc0528f2d19380320048a155f9df57fc1dc740c924f0840a875c2e69b4.png" src="../../../_images/ed49decc0528f2d19380320048a155f9df57fc1dc740c924f0840a875c2e69b4.png" />
+<img alt="../../../_images/d58e7f59e2bbf064aeb581e03bab79fd0030ffa31480cbe18eb04a051fd3565d.png" src="../../../_images/d58e7f59e2bbf064aeb581e03bab79fd0030ffa31480cbe18eb04a051fd3565d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -566,7 +547,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/973f702cef74ceafe10ca9f4603b67ea348b2cfb81a1cc9e796aa57a4dce5820.png" src="../../../_images/973f702cef74ceafe10ca9f4603b67ea348b2cfb81a1cc9e796aa57a4dce5820.png" />
+<img alt="../../../_images/37a196c382a4a19326dfd995b9cb3de32be8e08bbf2ffd57191e0a3bd8e48bcf.png" src="../../../_images/37a196c382a4a19326dfd995b9cb3de32be8e08bbf2ffd57191e0a3bd8e48bcf.png" />
 </div>
 </div>
 

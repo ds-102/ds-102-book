@@ -205,8 +205,10 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/03_causality_potential_outcomes.html">Causality and Potential Outcomes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/06_instrumental_variables.html">Causality in Observational Studies: Natural Experiments</a></li>
 </ul>
 </details></li>
 </ul>
@@ -573,8 +575,7 @@ L(a, b, c) = (a + 3b)c^2
 </section>
 <section id="backpropagation-an-example">
 <h3>Backpropagation: an example<a class="headerlink" href="#backpropagation-an-example" title="Link to this heading">#</a></h3>
-<p>Instead of representing the computation as an algebraic expression, let’s express it as a computation graph. This is a visual representation of the mathematical expression:</p>
-<p><img alt="" src="content/chapters/03/computation_graph.png" /></p>
+<p>Instead of representing the computation as an algebraic expression, let’s express it as a computation graph. This is a visual representation of the mathematical expression.</p>
 <p>Given specific numerical values for <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(c\)</span>, backpropagation is an efficient way to compute the loss and the gradient (i.e., all the partial derivatives), with no redundant computation.</p>
 <p>We start by computing the loss itself. This involves just doing the computations specified by the graph, denoted by the blue numbers above the arrows:</p>
 <p><img alt="" src="../../../_images/backprop_forward.jpg" /></p>

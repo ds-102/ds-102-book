@@ -205,8 +205,10 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/03_causality_potential_outcomes.html">Causality and Potential Outcomes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/06_instrumental_variables.html">Causality in Observational Studies: Natural Experiments</a></li>
 </ul>
 </details></li>
 </ul>
@@ -708,7 +710,7 @@ Model Family:                Gaussian   Df Model:                            1
 Link Function:               Identity   Scale:                          1.1810
 Method:                          IRLS   Log-Likelihood:                -24.472
 Date:                Fri, 17 Oct 2025   Deviance:                       17.716
-Time:                        21:12:41   Pearson chi2:                     17.7
+Time:                        22:06:51   Pearson chi2:                     17.7
 No. Iterations:                     3   Pseudo R-squ. (CS):             0.9131
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -741,7 +743,7 @@ Model Family:                 Poisson   Df Model:                            1
 Link Function:                    Log   Scale:                          1.0000
 Method:                          IRLS   Log-Likelihood:                -755.42
 Date:                Fri, 17 Oct 2025   Deviance:                       1366.3
-Time:                        21:12:41   Pearson chi2:                 1.20e+03
+Time:                        22:06:51   Pearson chi2:                 1.20e+03
 No. Iterations:                     5   Pseudo R-squ. (CS):              1.000
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -774,7 +776,7 @@ Model Family:        NegativeBinomial   Df Model:                            1
 Link Function:                    Log   Scale:                          1.0000
 Method:                          IRLS   Log-Likelihood:                -134.14
 Date:                Fri, 17 Oct 2025   Deviance:                       7.1483
-Time:                        21:12:41   Pearson chi2:                     1.90
+Time:                        22:06:51   Pearson chi2:                     1.90
 No. Iterations:                    11   Pseudo R-squ. (CS):             0.6999
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -946,7 +948,7 @@ For more options and details see https://pytensor.readthedocs.io/en/latest/troub
   warnings.warn(
 </pre></div>
 </div>
-<img alt="../../../_images/5b4263e1a066900d3a9d3911dd5f92f81163d9cfde94e92fbb492ed54af4e050.png" src="../../../_images/5b4263e1a066900d3a9d3911dd5f92f81163d9cfde94e92fbb492ed54af4e050.png" />
+<img alt="../../../_images/90e0a0eec8054c021108b916fbb9ff0ed47b02d6d9c099ee31ac8ec0fa2bf3b6.png" src="../../../_images/90e0a0eec8054c021108b916fbb9ff0ed47b02d6d9c099ee31ac8ec0fa2bf3b6.png" />
 </div>
 </div>
 <p>Each green line represents one sample from the PPD. We can think of these as possible sequences of data that are dreamt up by the models, based on their representation.</p>

@@ -205,8 +205,10 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/03_causality_potential_outcomes.html">Causality and Potential Outcomes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../04/05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/06_instrumental_variables.html">Causality in Observational Studies: Natural Experiments</a></li>
 </ul>
 </details></li>
 </ul>
@@ -406,10 +408,13 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-understanding-kidney-cancer-death-risk">Example: Understanding Kidney Cancer Death Risk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-hierarchical-modeling-as-a-middle-ground">Bayesian Hierarchical Modeling as a Middle Ground</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uninformative-prior">Uninformative Prior</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#educated-guess">Educated Guess</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-bayes">Empirical Bayes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#full-hierarchical-model">Full Hierarchical Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-prior">Choosing the Prior</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#uninformative-prior">Uninformative Prior</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#educated-guess">Educated Guess</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-bayes">Empirical Bayes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#full-hierarchical-model">Full Hierarchical Model</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-in-the-kidney-cancer-dataset">Bias in the Kidney Cancer Dataset</a></li>
 </ul>
 </li>
@@ -627,6 +632,8 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 \theta_i | y_i \sim \mathrm{Beta}(a + y_i, b + n_i - y_i)
 \]</div>
 <p>Note that according to the posterior distribution <span class="math notranslate nohighlight">\(p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)\)</span>, the distribution for each county’s parameter is independent of all other counties, because the joint distribution can be written as a product of the marginal distributions. But, they all share the parameters <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> in common.</p>
+<section id="choosing-the-prior">
+<h3>Choosing the Prior<a class="headerlink" href="#choosing-the-prior" title="Link to this heading">#</a></h3>
 <p>Just as in the earlier example, we’re now left with a critically important question: <strong>how do we choose <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span></strong>? We’ll examine four approaches, in increasing order of complexity and sophistication:</p>
 <ol class="arabic simple">
 <li><p>Uninformative prior</p></li>
@@ -635,16 +642,16 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 <li><p>Hierarchical model</p></li>
 </ol>
 <section id="uninformative-prior">
-<h3>Uninformative Prior<a class="headerlink" href="#uninformative-prior" title="Link to this heading">#</a></h3>
+<h4>Uninformative Prior<a class="headerlink" href="#uninformative-prior" title="Link to this heading">#</a></h4>
 <p>If we don’t know anything about the data, we can choose an <strong>uninformative prior</strong>: in other words, one that provides as little information as possible. In this example, we might choose a uniform distribution over <span class="math notranslate nohighlight">\([0, 1]\)</span> (i.e., <span class="math notranslate nohighlight">\(a = b = 1\)</span>). While this avoids the problem of specifying a prior, it also isn’t particularly useful. If we use such a weak prior, we’re saying that risk values closer to <span class="math notranslate nohighlight">\(0.8\)</span> are just as likely as values closer to <span class="math notranslate nohighlight">\(0.0001\)</span>: this clearly does not align with what we already know about the problem. If we take this approach and then compute the posterior distributions, we would see results similar to the no-pooling estimates earlier.</p>
 </section>
 <section id="educated-guess">
-<h3>Educated Guess<a class="headerlink" href="#educated-guess" title="Link to this heading">#</a></h3>
+<h4>Educated Guess<a class="headerlink" href="#educated-guess" title="Link to this heading">#</a></h4>
 <p>A good prior distribution should encode our knowledge about the quantity of interest. In this case, everything we know comes from what we’ve done here: above, we estimated an overall rate of about 4.9 in 10,000. If we choose <span class="math notranslate nohighlight">\(a = 5\)</span> and <span class="math notranslate nohighlight">\(b = 9995\)</span>, then the mean of the prior is <span class="math notranslate nohighlight">\(5 \times 10^{-5}\)</span>. So, one possible option is Beta<span class="math notranslate nohighlight">\((5, 9995)\)</span>.</p>
 <p>Note that this is somewhat arbitrary: we could have just as easily chosen <span class="math notranslate nohighlight">\(a = 10\)</span> and <span class="math notranslate nohighlight">\(b = 19990\)</span>, or <span class="math notranslate nohighlight">\(a = 50\)</span> and <span class="math notranslate nohighlight">\(b = 99950\)</span>, and obtained the same mean.</p>
 </section>
 <section id="empirical-bayes">
-<h3>Empirical Bayes<a class="headerlink" href="#empirical-bayes" title="Link to this heading">#</a></h3>
+<h4>Empirical Bayes<a class="headerlink" href="#empirical-bayes" title="Link to this heading">#</a></h4>
 <p>Empirical Bayes is a hybrid Bayesian-frequentist approach that uses frequentist methods to find guesses or prior distributions for quantities of interest. In this case, we’ll use a frequentist approach to make a better guess for <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>.</p>
 <p>In particular, we saw earlier that the smaller counties produced naive estimates that varied too much. What if we just looked at the larger counties? We’ll start by deciding on a (somewhat arbitrary) threshold of big versus small counties. From the scatterplot above, we can see that after a certain size, the non-pooled estimates seem to be much less variable. We can zoom in to decide on a threshold:</p>
 <div class="cell docutils container">
@@ -728,7 +735,7 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7e771ff230&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f686d797b60&gt;
 </pre></div>
 </div>
 <img alt="../../../_images/81346b3d1e5ece2b7a4bfdb4152c971271438046f40a6b4d2fc7e3d14ede1e5e.png" src="../../../_images/81346b3d1e5ece2b7a4bfdb4152c971271438046f40a6b4d2fc7e3d14ede1e5e.png" />
@@ -737,10 +744,10 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 <p>In both cases, we no longer see estimates of 0. Note that because the empirical Bayes prior was stronger (i.e., less variable due to larger values of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>), the posterior estimates fall in a narrower range.</p>
 </section>
 <section id="full-hierarchical-model">
-<h3>Full Hierarchical Model<a class="headerlink" href="#full-hierarchical-model" title="Link to this heading">#</a></h3>
+<h4>Full Hierarchical Model<a class="headerlink" href="#full-hierarchical-model" title="Link to this heading">#</a></h4>
 <p>Philosophically, taking a Bayesian approach means that we’re deciding to treat unknown quantities as random variables, rather than fixed parameters. From what we’ve seen so far, in this model, <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are important unknown quantities that have a fairly significant effect on the outcome of our inference. So, we’ll now try treating them as random variables. Note that we now have two levels of unknown random variables: <span class="math notranslate nohighlight">\(\theta_i\)</span>, which we’ve already established, are the county-level risk probabilities. <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are now US-level average parameters that reflect the risk across all counties. This is a common feature of hierarchical models: one set of variables is closely linked to the data for each group (in this case, county), and one set of variables represents more global information (in this case, the entire US).</p>
 <p>But this leads to yet another modeling question: <strong>what prior distribution do we choose for <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span></strong>?</p>
-<p>Unfortunately, there is no convenient distribution that is a conjugate prior for the parameters of the beta distribution. We’ll use a uniform distribution, but we’re still left with the question of how to choose the parameters of that uniform distribution. Since we know that <span class="math notranslate nohighlight">\(b &gt;&gt; a\)</span>, we’ll make the somewhat arbitrary choice of saying <span class="math notranslate nohighlight">\(a \sim \mathrm{Uniform}(0, 50)\)</span> and <span class="math notranslate nohighlight">\(b \sim \mathrm{Uniform}(0, 200000)\)</span>. We can then write out the full model:</p>
+<p>Unfortunately, there is no convenient distribution that is a conjugate prior for the parameters of the beta distribution. While there are many possible distributions we could use, we’ll use a uniform distribution out of simplicity and convenience. But, we’re still left with the question of how to choose the parameters of that uniform distribution! Since we know that <span class="math notranslate nohighlight">\(b &gt;&gt; a\)</span>, we’ll make the somewhat arbitrary choice of saying <span class="math notranslate nohighlight">\(a \sim \mathrm{Uniform}(0, 50)\)</span> and <span class="math notranslate nohighlight">\(b \sim \mathrm{Uniform}(0, 300000)\)</span>. We can then write out the full model:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
@@ -750,7 +757,8 @@ b &amp;\sim \mathrm{Uniform}(0, 300000) \\
 y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots\}
 \end{align*}
 \end{split}\]</div>
-<p>Unfortunately, there is no convenient way to compute the posterior distribution here: we must resort to approximate techniques. We’ll return to this model in the next section, after we develop tools for approximate inference. In the remainder of this section, we’ll explore different hierarchical models as well as a unifying framework for them known as graphical models.</p>
+<p>Unfortunately, there is no convenient way to compute the posterior distribution here: we must resort to approximate techniques. We’ll return to this model in the next section, after we develop tools for approximate inference.</p>
+</section>
 </section>
 <section id="bias-in-the-kidney-cancer-dataset">
 <h3>Bias in the Kidney Cancer Dataset<a class="headerlink" href="#bias-in-the-kidney-cancer-dataset" title="Link to this heading">#</a></h3>
@@ -889,7 +897,7 @@ y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots\}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f7eac5eabd0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f68a84db410&gt;]
 </pre></div>
 </div>
 <img alt="../../../_images/ca690f940d308c62b7b3f43b6d8ad692bdaa7179b919ab76b86cbc0207862dba.png" src="../../../_images/ca690f940d308c62b7b3f43b6d8ad692bdaa7179b919ab76b86cbc0207862dba.png" />
@@ -1000,10 +1008,13 @@ y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots\}
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-understanding-kidney-cancer-death-risk">Example: Understanding Kidney Cancer Death Risk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-hierarchical-modeling-as-a-middle-ground">Bayesian Hierarchical Modeling as a Middle Ground</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uninformative-prior">Uninformative Prior</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#educated-guess">Educated Guess</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-bayes">Empirical Bayes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#full-hierarchical-model">Full Hierarchical Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-prior">Choosing the Prior</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#uninformative-prior">Uninformative Prior</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#educated-guess">Educated Guess</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-bayes">Empirical Bayes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#full-hierarchical-model">Full Hierarchical Model</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-in-the-kidney-cancer-dataset">Bias in the Kidney Cancer Dataset</a></li>
 </ul>
 </li>
