@@ -67,3 +67,5 @@ chapters:
       title: "Causality in Randomized Experiments"
     - file: content/chapters/04/05_observational_studies_unconfoundedness
       title: "Causality in Observational Studies: Unconfoundedness"
+    - file: content/chapters/04/06_instrumental_variables
+      title: "Causality in Observational Studies: Natural Experiments"
