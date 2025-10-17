@@ -11,3 +11,4 @@ arviz
 bambi
 torch
 pymc
+daft-pgm
