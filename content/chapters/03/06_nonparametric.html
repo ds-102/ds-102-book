@@ -865,23 +865,9 @@ Coefficients: [[-0.03462649  0.05539163]]
 </div>
 </div>
 <p>This tells us that for an increase of 1 in <span class="math notranslate nohighlight">\(x_1\)</span>, the log-odds decreases by <span class="math notranslate nohighlight">\(0.03\)</span>. Unfortunately, this interpretion is meaningless, because the model does not accurately reflect the patterns in the data! This is an important lesson: the interpretation of a model is, at best, only as good as the model itself.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output text_html">
-        <iframe
-            width="400"
-            height="300"
-            src="https://www.youtube.com/embed/sjfqHalgC9E"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
-</div>
 </section>
 <section id="interpreting-logistic-regression-with-feature-engineering">
 <h3>Interpreting logistic regression with feature engineering<a class="headerlink" href="#interpreting-logistic-regression-with-feature-engineering" title="Link to this heading">#</a></h3>
-<p><em>You may find it helpful to review Chapter _ of the Data 100 textbook, which discusses feature engineering.</em></p>
 <p>Up until now, we’ve painted logistic regression as being a poor choice for this problem. But in reality, linear models are more than capable of making predictions when there are nonlinear patterns: we just need to use <strong>feature engineering</strong> to define good features.</p>
 <p>For this particular problem, the feature <span class="math notranslate nohighlight">\(x_1 \times x_2\)</span> would be particularly useful, since it captures the nonlinear interaction that’s most important to the problem. We’ll add this as a third column in our matrix of predictors, and then try logistic regression:</p>
 <div class="cell docutils container">

@@ -543,13 +543,11 @@ y_i = \beta^T x_i + \epsilon_i,
 <p>where <span class="math notranslate nohighlight">\(\epsilon_i \sim N(0, \sigma^2)\)</span> is a random variable that represents the noise, or error, in the observed value. We can vectorize this noise, too: we’ll write <span class="math notranslate nohighlight">\(\epsilon = (\epsilon_1, \ldots, \epsilon_n)\)</span> so that the vector <span class="math notranslate nohighlight">\(\epsilon\)</span> has a multivariate normal distribution <span class="math notranslate nohighlight">\(\epsilon \sim N(0, \sigma^2 I_n)\)</span>. We can then write:</p>
 <div class="math notranslate nohighlight">
 \[
-:label: additive-noise
 y = X\beta + \epsilon,
 \]</div>
 <p>or equivalently, using properties of the normal distribution,</p>
 <div class="math notranslate nohighlight">
 \[
-:label: centered-noise
 y | \beta \sim N(X\beta, \sigma^2 I_n).
 \]</div>
 <p>We can interpret this equation as telling us that the <strong>average prediction</strong> is <span class="math notranslate nohighlight">\(X\beta\)</span>. This equation is a likelihood model: it tells us the likelihood of data <span class="math notranslate nohighlight">\(y\)</span> given the parameter(s) <span class="math notranslate nohighlight">\(\beta\)</span>. Note that we are treating <span class="math notranslate nohighlight">\(X\)</span> as fixed and known, so there’s no probability model associated with it. We’ll generally focus on this version, rather than the previous one</p>
@@ -645,7 +643,7 @@ y | \beta \sim N(X\beta, \sigma^2 I_n).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.3425387194766112), array([-0.50993917,  0.55281326]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.21098292135810023), array([-0.4926703 , -0.10775301]))
 </pre></div>
 </div>
 </div>
