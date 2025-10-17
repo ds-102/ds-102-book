@@ -618,7 +618,7 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
         </div></div>
 </div>
 <p>However, one problem with this definition is that it is <strong>not unique</strong>! Indeed, there are many possible credible intervals for a given level of confidence/credibility. Consider the following distribution, and the three possible <span class="math notranslate nohighlight">\(80\%\)</span> credible intervals. For all three, the total shaded blue area is <span class="math notranslate nohighlight">\(80\%\)</span>, so all three are valid <span class="math notranslate nohighlight">\(80\%\)</span> credible intervals. Which one would you prefer?</p>
-<p><img alt="" src="content/chapters/03/credible_interval_comparison.png" /></p>
+<p><img alt="" src="../../../_images/credible_interval_comparison.png" /></p>
 <p>The one in the center seems the most appealing: it covers an area of highest density, and is also the narrowest. This motivates the definition of a <strong>highest density interval (HDI)</strong>, sometimes also called a highest posterior density (HPD) interval. The HDI is the narrowest interval for a given level of credibility/confidence.</p>
 <p><em>Exercise: is the HDI always unique? If not, then what constraints could we place on the posterior to ensure it’s unique?</em></p>
 <p>We can see that the intervals we saw in Section 3.3 were HDIs that PyMC automatically constructed for us.</p>
@@ -650,7 +650,7 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.56868138, 0.55390305, 0.74493889, 0.26084253, 0.48120402])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.38210197, 0.80401855, 0.40002045, 0.53932934, 0.5861046 ])
 </pre></div>
 </div>
 </div>
@@ -669,8 +669,8 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.15209068170529796), np.float64(0.7583166741542496))
-(np.float64(0.19003580382812932), np.float64(0.8036768614966232))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.15333018166217993), np.float64(0.7523258844091404))
+(np.float64(0.1704470636483196), np.float64(0.7925316880638207))
 </pre></div>
 </div>
 </div>
@@ -696,7 +696,7 @@ Here, there are two sources of uncertainty: (1) the uncertainty in our estimator
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.12064179911017876), np.float64(0.7120389297753104))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.15333018166217993), np.float64(0.7523258844091404))
 </pre></div>
 </div>
 </div>
