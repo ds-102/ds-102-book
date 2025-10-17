@@ -1,3 +1,2 @@
-*
-!.gitignore
-!bp_treatment.csv
+restaurants.csv
+restaurants_counterfactuals.csv
