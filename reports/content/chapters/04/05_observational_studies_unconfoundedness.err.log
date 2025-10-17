@@ -18,19 +18,16 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import pandas as pd
-
-food = pd.read_csv('data/restaurants_counterfactuals.csv')
-food.head()
+bp = pd.read_csv('bp_treatment.csv')
+bp
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
 [31mFileNotFoundError[39m                         Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 3[39m
-[32m      1[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpd[39;00m
-[32m----> [39m[32m3[39m food = [43mpd[49m[43m.[49m[43mread_csv[49m[43m([49m[33;43m'[39;49m[33;43mdata/restaurants_counterfactuals.csv[39;49m[33;43m'[39;49m[43m)[49m
-[32m      4[39m food.head()
+[36mCell[39m[36m [39m[32mIn[6][39m[32m, line 1[39m
+[32m----> [39m[32m1[39m bp = [43mpd[49m[43m.[49m[43mread_csv[49m[43m([49m[33;43m'[39;49m[33;43mbp_treatment.csv[39;49m[33;43m'[39;49m[43m)[49m
+[32m      2[39m bp
 
 [36mFile [39m[32m/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1026[39m, in [36mread_csv[39m[34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)[39m
 [32m   1013[39m kwds_defaults = _refine_defaults_read(
@@ -86,5 +83,5 @@ food.head()
 [32m    881[39m         [38;5;66;03m# Binary mode[39;00m
 [32m    882[39m         handle = [38;5;28mopen[39m(handle, ioargs.mode)
 
-[31mFileNotFoundError[39m: [Errno 2] No such file or directory: 'data/restaurants_counterfactuals.csv'
+[31mFileNotFoundError[39m: [Errno 2] No such file or directory: 'bp_treatment.csv'
 
