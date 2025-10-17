@@ -415,7 +415,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-marshmallow-experiment">The Marshmallow Experiment</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpson-s-paradox">Simpson’s Paradox</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpson-s-paradox">Simpson’s Paradox</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-visualizing-simpson-s-paradox-with-baker-kramer-plots">(Optional) Visualizing Simpson’s Paradox with Baker-Kramer Plots</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#berkson-s-paradox-and-colliders">Berkson’s Paradox and Colliders</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples">More Examples</a></li>
 </ul>
@@ -486,7 +489,7 @@ document.write(`
 <section id="the-marshmallow-experiment">
 <h3>The Marshmallow Experiment<a class="headerlink" href="#the-marshmallow-experiment" title="Link to this heading">#</a></h3>
 <p>Another example is the famous so-called “<a class="reference external" href="https://en.wikipedia.org/wiki/Stanford_marshmallow_experiment">marshmallow study</a>”. In this study, researchers presented children with a choice: either they could have one marshmallow immediately, or, if they waited 15 minutes, they could have two marshmallows. They followed the students for 30 years, and found that students who waited for the extra payout achieved greater success in life (as measured by the researchers). Although the original researchers cautioned people to avoid direct causal interpretations, the most common and widespread interpretation was causal: that children’s ability to delay gratification (i.e., to wait 15 minutes for a double marshmallow payout) caused them to succeed throughout their lives. Schools implemented coaching programs to help students build self-control and resist the urge to eat the first marshmallow.</p>
-<p>However, followup studies have shown a much more <a class="reference external" href="https://anderson-review.ucla.edu/new-study-disavows-marshmallow-tests-predictive-powers/">complex and nuanced story</a>: while many follow-up studies have shown an association, the predictive effect of resisting a marshmallow seems to diminish or disappear when controlling for factors such as socioeconomic background or other measures of self-control. Many scientists have argued that rather than self-control, what the study really measures is middle-class or upper-class behavior: responding to environments without shortages.</p>
+<p>However, followup studies have shown a much more <a class="reference external" href="https://anderson-review.ucla.edu/new-study-disavows-marshmallow-tests-predictive-powers/">complex and nuanced story</a>: while many follow-up studies have shown an association, the predictive effect of resisting a marshmallow seems to diminish or disappear when controlling for factors such as socioeconomic background or other measures of self-control. Many scientists have argued that <strong>rather than self-control, what the study really measures is behavior in response to middle-class or upper-class upbringings</strong>: in other words, responding to environments without shortages.</p>
 <p>Stories like this one illustrate both the importance and the difficulty of determining causality from observational studies. If we could somehow determine that teaching small children self-control is guaranteed to have a large impact on their eventual life outcomes, then this seems like a worthwhile policy goal. This is even more true if the effect is true regardless of socioeconomic background. However, the numerous confounding variables and unclear direction of causality highlight the need for methods that can determine causality in such environments, outside of a randomized controlled trial.</p>
 </section>
 </section>
@@ -497,7 +500,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/restaurants.csv&#39;</span><span class="p">)</span>
 <span class="n">food</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
-    <span class="n">values</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;Restaurant&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Dish rating&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span>
+    <span class="n">values</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;Restaurant&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Dish rating&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -508,10 +511,10 @@ document.write(`
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">food</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/restaurants.csv&#39;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">food</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">values</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;Restaurant&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Dish rating&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">values</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;Restaurant&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Dish rating&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="p">)</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
 <span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
 <span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
@@ -520,19 +523,19 @@ document.write(`
 <span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
 <span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
 <span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
 <span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
 <span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
 <span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
 <span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
 <span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
@@ -548,7 +551,7 @@ document.write(`
 <span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 <span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/pandas/io/common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/io/common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
 <span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
 <span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
 <span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
@@ -656,6 +659,18 @@ document.write(`
 <p>Before continuing, let’s frame this question in the language of causal inference, so that we can use the intuition we’ve built up around confounding variables. Our question can be slightly rewritten as: does the critics’ choice of restaurant (A vs B) affect whether they like the food (and therefore give it a 👍 rating)? In this setting, our treatment is the choice of restaurant: A or B. Our outcome is whether or not they liked a dish (i.e., whether they gave it a 👍 rating). The confounder is when they ordered the dish. Why is this a confounder? Because it has a causal effect on both treatment and outcome. Ordering dishes in 2020 caused the critics to choose a takeout-friendly option more often (B). Ordering dishes in 2020 also caused the critics to give positive reviews (👍) less often.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
+<p>We can also represent this information in a directed graph, as we did earlier:</p>
+<p><img alt="" src="content/chapters/04/figures/restaurant.png" /></p>
+<p>Note that we’ve used “year” as a confounder here, but that’s a little imprecise: it isn’t really the year that causes the change in the other two variables, but rather the pandemic.</p>
+<p>The pandemic (as measured in this case by the year) affected the data in two ways:</p>
+<ol class="arabic simple">
+<li><p>In 2020, the critics rated a lot more dishes from restaurant A.</p></li>
+<li><p>In 2020, the critics were much harsher.</p></li>
+</ol>
+<p>When looking at the data separated by year, we can see that they preferred restaurant A in both years. But, because of the two factors above, when aggregating the data, restaurant A looks worse.</p>
+<p>Note that despite the name, this isn’t really a paradox: this happens entirely because of the confounding factor.</p>
+<section id="optional-visualizing-simpson-s-paradox-with-baker-kramer-plots">
+<h3>(Optional) Visualizing Simpson’s Paradox with Baker-Kramer Plots<a class="headerlink" href="#optional-visualizing-simpson-s-paradox-with-baker-kramer-plots" title="Link to this heading">#</a></h3>
 <p>We can visualize the percentages in the bullet points above on a graph. Let the <span class="math notranslate nohighlight">\(x\)</span>-axis represent the percent of dishes ordered in 2020, during the pandemic (confounding variable). Let the <span class="math notranslate nohighlight">\(y\)</span>-axis represent the proportion of dishes liked (outcome). We’ll draw one line for each restaurant: the different lines show us the effect of the treatment.</p>
 <p>For the data broken down by year, each table shows us data where the proportion ordered in 2020 is always 0 (for the 2019 data) or 1 (for the 2020 data). This corresponds to the four marked points (two blue circles and two orange squares):</p>
 <div class="cell tag_hide-input docutils container">
@@ -712,16 +727,7 @@ document.write(`
 </div>
 </div>
 <p>This plot is called a Baker-Kramer (or B-K) plot: it highlights that even though Restaurant A is better than Restaurant B, the confounding effect of the year makes Restaurant A look much worse.</p>
-<p>We can also represent this information in a directed graph, as we did earlier:</p>
-<p><img alt="" src="content/chapters/04/figures/restaurant.png" /></p>
-<p>Note that we’ve used “year” as a confounder here, but that’s a little imprecise: it isn’t really the year that causes the change in the other two variables, but rather the pandemic.</p>
-<p>The pandemic (as measured in this case by the year) affected the data in two ways:</p>
-<ol class="arabic simple">
-<li><p>In 2020, the critics rated a lot more dishes from restaurant A.</p></li>
-<li><p>In 2020, the critics were much harsher.</p></li>
-</ol>
-<p>When looking at the data separated by year, we can see that they preferred restaurant A in both years. But, because of the two factors above, when aggregating the data, restaurant A looks worse.</p>
-<p>Note that despite the name, this isn’t really a paradox: this happens entirely because of the confounding factor.</p>
+</section>
 </section>
 <section id="berkson-s-paradox-and-colliders">
 <h2>Berkson’s Paradox and Colliders<a class="headerlink" href="#berkson-s-paradox-and-colliders" title="Link to this heading">#</a></h2>
@@ -774,7 +780,7 @@ document.write(`
 <span class="n">ax_color</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
 <span class="n">ax_color</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 <span class="n">ax_color</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Flavor&#39;</span><span class="p">)</span>
-<span class="n">ax_color</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Appearance&#39;</span><span class="p">)</span>
+<span class="n">ax_color</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Appearance&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -880,7 +886,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-marshmallow-experiment">The Marshmallow Experiment</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpson-s-paradox">Simpson’s Paradox</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpson-s-paradox">Simpson’s Paradox</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-visualizing-simpson-s-paradox-with-baker-kramer-plots">(Optional) Visualizing Simpson’s Paradox with Baker-Kramer Plots</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#berkson-s-paradox-and-colliders">Berkson’s Paradox and Colliders</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples">More Examples</a></li>
 </ul>

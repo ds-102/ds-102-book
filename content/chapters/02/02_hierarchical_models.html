@@ -413,9 +413,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-in-the-kidney-cancer-dataset">Bias in the Kidney Cancer Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-gaussian-mixture-model-for-exoplanet-habitability">Example: Gaussian Mixture Model for Exoplanet Habitability</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-example-gaussian-mixture-model-for-exoplanet-habitability">(Optional) Example: Gaussian Mixture Model for Exoplanet Habitability</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exoplanet-data">Exoplanet Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-model-specifying-a-probability-model-for-the-exoplanet-data">Gaussian Mixture Model: Specifying a Probability Model for the Exoplanet Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-gaussian-mixture-model-specifying-a-probability-model-for-the-exoplanet-data">(Optional) Gaussian Mixture Model: Specifying a Probability Model for the Exoplanet Data</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-models-a-more-general-definition">Hierarchical Models: a more general definition</a></li>
@@ -728,7 +728,7 @@ p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9cb5569b20&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f62dd50f500&gt;
 </pre></div>
 </div>
 <img alt="../../../_images/81346b3d1e5ece2b7a4bfdb4152c971271438046f40a6b4d2fc7e3d14ede1e5e.png" src="../../../_images/81346b3d1e5ece2b7a4bfdb4152c971271438046f40a6b4d2fc7e3d14ede1e5e.png" />
@@ -760,10 +760,10 @@ y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots\}
 <p>From this, we can see that there are clearly racial disparities in kidney cancer occurrence. Further, any county-level effects that we see may have racial disparities as well. How might we solve this? Unfortunately, in this case, because we don’t have much insight into how the data were collected, and because they were collected so long ago, we can’t improve our analysis.</p>
 </section>
 </section>
-<section id="example-gaussian-mixture-model-for-exoplanet-habitability">
-<h2>Example: Gaussian Mixture Model for Exoplanet Habitability<a class="headerlink" href="#example-gaussian-mixture-model-for-exoplanet-habitability" title="Link to this heading">#</a></h2>
+<section id="optional-example-gaussian-mixture-model-for-exoplanet-habitability">
+<h2>(Optional) Example: Gaussian Mixture Model for Exoplanet Habitability<a class="headerlink" href="#optional-example-gaussian-mixture-model-for-exoplanet-habitability" title="Link to this heading">#</a></h2>
 <p><em>The model in this section is loosely based on work in the paper <a class="reference external" href="https://arxiv.org/abs/1708.00605">Classifying Exoplanets with Gaussian Mixture Model</a> by Kulkarni and Desai.</em></p>
-<p>In this section, we’ll look at a different kind of hierarchical model, where the groups are slightly less explicit. This kind of model is usually know as a <em>mixture model</em>.</p>
+<p>In this section, we’ll look at a different kind of hierarchical model, where the groups are slightly less explicit. This kind of model is usually known as a <em>mixture model</em>.</p>
 <section id="exoplanet-data">
 <h3>Exoplanet Data<a class="headerlink" href="#exoplanet-data" title="Link to this heading">#</a></h3>
 <p>We’ll work with a dataset of <a class="reference external" href="https://science.nasa.gov/exoplanets/">exoplanets</a>: planets outside our solar system. Each row in the <code class="docutils literal notranslate"><span class="pre">planets</span></code> dataframe contains information about 517 exoplanets from NASA. We’ll use it to explore which planets might be able to support life as we know it.</p>
@@ -889,7 +889,7 @@ y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots\}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9cb2062ba0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f62dd5bee40&gt;]
 </pre></div>
 </div>
 <img alt="../../../_images/ca690f940d308c62b7b3f43b6d8ad692bdaa7179b919ab76b86cbc0207862dba.png" src="../../../_images/ca690f940d308c62b7b3f43b6d8ad692bdaa7179b919ab76b86cbc0207862dba.png" />
@@ -910,8 +910,8 @@ y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots\}
         </div></div>
 </div>
 </section>
-<section id="gaussian-mixture-model-specifying-a-probability-model-for-the-exoplanet-data">
-<h3>Gaussian Mixture Model: Specifying a Probability Model for the Exoplanet Data<a class="headerlink" href="#gaussian-mixture-model-specifying-a-probability-model-for-the-exoplanet-data" title="Link to this heading">#</a></h3>
+<section id="optional-gaussian-mixture-model-specifying-a-probability-model-for-the-exoplanet-data">
+<h3>(Optional) Gaussian Mixture Model: Specifying a Probability Model for the Exoplanet Data<a class="headerlink" href="#optional-gaussian-mixture-model-specifying-a-probability-model-for-the-exoplanet-data" title="Link to this heading">#</a></h3>
 <p><em>Text coming soon: see video</em></p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1007,9 +1007,9 @@ y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots\}
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-in-the-kidney-cancer-dataset">Bias in the Kidney Cancer Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-gaussian-mixture-model-for-exoplanet-habitability">Example: Gaussian Mixture Model for Exoplanet Habitability</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-example-gaussian-mixture-model-for-exoplanet-habitability">(Optional) Example: Gaussian Mixture Model for Exoplanet Habitability</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exoplanet-data">Exoplanet Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-model-specifying-a-probability-model-for-the-exoplanet-data">Gaussian Mixture Model: Specifying a Probability Model for the Exoplanet Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-gaussian-mixture-model-specifying-a-probability-model-for-the-exoplanet-data">(Optional) Gaussian Mixture Model: Specifying a Probability Model for the Exoplanet Data</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-models-a-more-general-definition">Hierarchical Models: a more general definition</a></li>

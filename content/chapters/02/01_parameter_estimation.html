@@ -427,7 +427,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-continuous-example-estimating-heights">A continuous example: estimating heights</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mle-for-the-gaussian-likelihood">MLE for the Gaussian likelihood</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-estimation-mle-for-the-gaussian-likelihood">Frequentist estimation: MLE for the Gaussian likelihood</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-inference-for-heights">Bayesian inference for heights</a></li>
 </ul>
 </li>
@@ -832,7 +832,6 @@ p(\theta|x)
         <span class="n">posterior_lmse</span> <span class="o">=</span> <span class="n">posterior</span><span class="p">[</span><span class="n">lmse_index</span><span class="p">]</span>
         <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;LMSE estimate: </span><span class="si">{</span><span class="n">x_lmse</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_lmse</span><span class="p">,</span> <span class="n">x_lmse</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">posterior_lmse</span><span class="p">],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
-    <span class="c1">#plt.legend(bbox_to_anchor=(1.32, 1.02))</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">ymax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">prior</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">prior</span><span class="p">)]),</span> <span class="nb">max</span><span class="p">(</span><span class="n">posterior</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">posterior</span><span class="p">)]))</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">ymax</span><span class="o">+</span><span class="mf">0.3</span><span class="p">)</span>
@@ -997,7 +996,7 @@ So, under this prior, microwave B looks better.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2384/2433367669.py:1: DeprecationWarning: `trapz` is deprecated. Use `trapezoid` instead, or one of the numerical integration functions in `scipy.integrate`.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2430/2433367669.py:1: DeprecationWarning: `trapz` is deprecated. Use `trapezoid` instead, or one of the numerical integration functions in `scipy.integrate`.
   np.trapz(np.pi/2 * np.cos(thetas * np.pi/2), thetas)
 </pre></div>
 </div>
@@ -1026,8 +1025,8 @@ p(\theta|x)
 \[
 x_i|\theta \sim \mathcal{N}(\theta, \sigma^2)
 \]</div>
-<section id="mle-for-the-gaussian-likelihood">
-<h3>MLE for the Gaussian likelihood<a class="headerlink" href="#mle-for-the-gaussian-likelihood" title="Link to this heading">#</a></h3>
+<section id="frequentist-estimation-mle-for-the-gaussian-likelihood">
+<h3>Frequentist estimation: MLE for the Gaussian likelihood<a class="headerlink" href="#frequentist-estimation-mle-for-the-gaussian-likelihood" title="Link to this heading">#</a></h3>
 <p>We can go through a similar process as before to find the MLE for the Gaussian likelihood. Because the normalizing constant <span class="math notranslate nohighlight">\(\frac{1}{\sigma\sqrt{2\pi}}\)</span> doesn’t depend on <span class="math notranslate nohighlight">\(\theta\)</span> (and our goal is to optimize for <span class="math notranslate nohighlight">\(\theta\)</span>, we’ll leave it out for now.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1286,7 +1285,7 @@ p(\theta|x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n|\theta)p(\theta)}{p(x_1, \
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-continuous-example-estimating-heights">A continuous example: estimating heights</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mle-for-the-gaussian-likelihood">MLE for the Gaussian likelihood</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequentist-estimation-mle-for-the-gaussian-likelihood">Frequentist estimation: MLE for the Gaussian likelihood</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-inference-for-heights">Bayesian inference for heights</a></li>
 </ul>
 </li>
