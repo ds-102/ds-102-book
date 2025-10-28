@@ -520,8 +520,9 @@ Y = \alpha + \tau Z + \beta^TX + \epsilon,
 </div>
 <p>Note that in most of these examples, socioeconomic background is a confounder. This is particularly common in economics and econometrics, where most of the methods in this section originated.</p>
 <p>Let’s be a bit more precise about quantifying the effect of confounding. Specifically, we’ll assume the linear structural model above, and then see what happens when we naively try to fit a linear regression to <span class="math notranslate nohighlight">\(Y\)</span> using <span class="math notranslate nohighlight">\(Z\)</span>, without accounting for <span class="math notranslate nohighlight">\(X\)</span>.</p>
-<p>Let <span class="math notranslate nohighlight">\(\hat{\tau}_{OLS}\)</span> be the solution of the least squares problem <span class="math notranslate nohighlight">\(\min_{\tau,\alpha} \mathbb{E}[(\alpha + \tau Z - Y)^2]\)</span>. We then get
-$<span class="math notranslate nohighlight">\(
+<p>Let <span class="math notranslate nohighlight">\(\hat{\tau}_{OLS}\)</span> be the solution of the least squares problem <span class="math notranslate nohighlight">\(\min_{\tau,\alpha} \mathbb{E}[(\alpha + \tau Z - Y)^2]\)</span>. We then get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{align}
     \hat{\tau}_{OLS} 
     &amp; = \frac{\text{Cov}(Y,Z)}{\text{Var}(Z)} \\
@@ -529,7 +530,7 @@ $<span class="math notranslate nohighlight">\(
     &amp; = \frac{\text{Cov}(\tau Z,Z)}{\text{Var}(Z)} + \frac{\text{Cov}(\beta^TX,Z)}{\text{Var}(Z)} \\
     &amp; = \underbrace{\tau}_\text{true ATE} + \underbrace{\beta^T\frac{\text{Cov}(X,Z)}{\text{Var}(Z)}}_{\text{bias involving }X}.
 \end{align}
-\)</span>$</p>
+\end{split}\]</div>
 <p>The second term is a bias in the <span class="math notranslate nohighlight">\(\tau_{OLS}\)</span> estimator: in other words, it’s the difference between the true value and the estimator, and it depends on the omitted (i.e., unobserved) variable <span class="math notranslate nohighlight">\(X\)</span>. So, we’ll call this term <span class="math notranslate nohighlight">\(\beta^T\frac{\text{Cov}(X,Z)}{\text{Var}(Z)}\)</span> the <strong>omitted variable bias</strong>.</p>
 <p><em>Remark: <span class="math notranslate nohighlight">\(\frac{\text{Cov}(Y,Z)}{\text{Var}(Z)}\)</span> is the infinite population version of the typical formula <span class="math notranslate nohighlight">\(\hat{\tau}_{OLS} = (Z^TZ)^{-1}Z^TY\)</span>, where we now use <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> to denote matrices/vectors.</em></p>
 <p><strong>Why can’t we just adjust for confounding?</strong> Having such confounders is problematic because in order to avoid omitted variable bias, we need to have observed them, and added them to our regression (collection of such data may not always be feasible for a number of reasons.) Furthermore, there could always be <em>other</em> confounders that we are unaware of, which leaves our causal conclusions under an inescapable cloud of doubt.</p>
@@ -565,11 +566,12 @@ $<span class="math notranslate nohighlight">\(
 \hat{\tau}_{IV} = \frac{\overbrace{(W^TW)^{-1}W^TY}^{\text{OLS coeff. of W for Y}}}{\underbrace{(W^TW)^{-1}W^TZ}_{\text{OLS coeff. of W for Z}}},
 \]</div>
 <p>where again, abusing notation, <span class="math notranslate nohighlight">\(W\)</span>, <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> refer to the vectors of observations. If <span class="math notranslate nohighlight">\(\alpha' = 0\)</span>, then this is a plug-in estimator of <span class="math notranslate nohighlight">\(\tau\)</span>, and is consistent.</p>
-<p><strong>Further interpretation for binary <span class="math notranslate nohighlight">\(W\)</span>:</strong> When <span class="math notranslate nohighlight">\(W\)</span> is binary, we can show that
-$<span class="math notranslate nohighlight">\(
+<p><strong>Further interpretation for binary <span class="math notranslate nohighlight">\(W\)</span>:</strong> When <span class="math notranslate nohighlight">\(W\)</span> is binary, we can show that</p>
+<div class="math notranslate nohighlight">
+\[
 \tau = \frac{\mathbb{E}[Y|W=1] - \mathbb{E}[Y|W=0]}{\mathbb{E}[Z|W=1] - \mathbb{E}[Z|W=0]}.
-\)</span><span class="math notranslate nohighlight">\(
-Hence, we can think of IV as measuring the ratio of the prima facie treatment effect of \)</span>W<span class="math notranslate nohighlight">\( on \)</span>Y<span class="math notranslate nohighlight">\( and that of \)</span>W<span class="math notranslate nohighlight">\( on \)</span>Z$.</p>
+\]</div>
+<p>Hence, we can think of IV as measuring the ratio of the prima facie treatment effect of <span class="math notranslate nohighlight">\(W\)</span> on <span class="math notranslate nohighlight">\(Y\)</span> and that of <span class="math notranslate nohighlight">\(W\)</span> on <span class="math notranslate nohighlight">\(Z\)</span>.</p>
 <section id="causal-graph-for-instrumental-variables">
 <h3>Causal graph for instrumental variables<a class="headerlink" href="#causal-graph-for-instrumental-variables" title="Link to this heading">#</a></h3>
 <p>The relationships between <span class="math notranslate nohighlight">\(W, Z, X\)</span>, and <span class="math notranslate nohighlight">\(Y\)</span> can be represented as the following causal graph:</p>
