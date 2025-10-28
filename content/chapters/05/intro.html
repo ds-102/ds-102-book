@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Prediction &#8212; Data, Inference, and Decisions</title>
+    <title>Chapter 5: Tail Bounds and Concentration Inequalities &#8212; Data, Inference, and Decisions</title>
   
   
   
@@ -59,11 +59,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/03/intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/05/intro';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Prediction" href="01_prediction.html" />
-    <link rel="prev" title="Bayesian Inference with Sampling" href="../02/05_inference_with_sampling.html" />
+    <link rel="next" title="Tail Bounds and Concentration Inequalities" href="01_concentration.html" />
+    <link rel="prev" title="Instrumental variables" href="../04/06_instrumental_variables.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -192,14 +192,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../02/05_inference_with_sampling.html">Bayesian Inference with Sampling</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Chapter 3: Prediction</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="01_prediction.html">Prediction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_regression_review.html">Linear Regression Review</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_glms.html">Generalized Linear Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_model_checking.html">Model Checking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="06_nonparametric.html">Nonparametric Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="07_neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/06_nonparametric.html">Nonparametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/07_neural_networks.html">Neural Networks</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -211,8 +211,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../04/06_instrumental_variables.html">Causality in Observational Studies: Natural Experiments</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../05/intro.html">Chapter 5: Tail Bounds and Concentration Inequalities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../05/01_concentration.html">Tail Bounds and Concentration Inequalities</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Chapter 5: Tail Bounds and Concentration Inequalities</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_concentration.html">Tail Bounds and Concentration Inequalities</a></li>
 </ul>
 </details></li>
 </ul>
@@ -286,7 +286,7 @@
       
       
       
-      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/03/intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/05/intro.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -316,7 +316,7 @@
       
       
       
-      <li><a href="../../../_sources/content/chapters/03/intro.md" target="_blank"
+      <li><a href="../../../_sources/content/chapters/05/intro.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -398,7 +398,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Prediction</h1>
+    <h1>Chapter 5: Tail Bounds and Concentration Inequalities</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -412,9 +412,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="prediction">
-<h1>Prediction<a class="headerlink" href="#prediction" title="Link to this heading">#</a></h1>
-<p>This chapter will cover prediction with generalized linear models and nonparametric models.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-5-tail-bounds-and-concentration-inequalities">
+<h1>Chapter 5: Tail Bounds and Concentration Inequalities<a class="headerlink" href="#chapter-5-tail-bounds-and-concentration-inequalities" title="Link to this heading">#</a></h1>
+<p>This chapter covers tail bounds and concentration inequalities.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -432,7 +432,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./content/chapters/03"
+            path: "./content/chapters/05"
         },
         predefinedOutput: true
     }
@@ -450,20 +450,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../02/05_inference_with_sampling.html"
+       href="../04/06_instrumental_variables.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Bayesian Inference with Sampling</p>
+        <p class="prev-next-title">Instrumental variables</p>
       </div>
     </a>
     <a class="right-next"
-       href="01_prediction.html"
+       href="01_concentration.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Prediction</p>
+        <p class="prev-next-title">Tail Bounds and Concentration Inequalities</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -211,6 +211,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../04/06_instrumental_variables.html">Causality in Observational Studies: Natural Experiments</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/intro.html">Chapter 5: Tail Bounds and Concentration Inequalities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/01_concentration.html">Tail Bounds and Concentration Inequalities</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -714,7 +718,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/e5091008acdd039ddd71d1ce10cda8dd1e948d6de831d7c4b096d20183f138b5.png" src="../../../_images/e5091008acdd039ddd71d1ce10cda8dd1e948d6de831d7c4b096d20183f138b5.png" />
+<img alt="../../../_images/6a0590a8fefd155fd1e411356803f68fb04061473df6002297ff06882aff29e8.png" src="../../../_images/6a0590a8fefd155fd1e411356803f68fb04061473df6002297ff06882aff29e8.png" />
 </div>
 </div>
 <p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
@@ -786,7 +790,7 @@ P
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(-0.049319194537530316), np.float64(1.035869189459966), np.float64(1.5), np.float64(-0.5))
 </pre></div>
 </div>
-<img alt="../../../_images/3de40a9b33615429305005e719a04164313f1855db1fdc5242c4fd2f3f0444cb.png" src="../../../_images/3de40a9b33615429305005e719a04164313f1855db1fdc5242c4fd2f3f0444cb.png" />
+<img alt="../../../_images/8da144a6df22344d79456908d07f2eb0ed98a931bfd3e8e35bab9390654e469f.png" src="../../../_images/8da144a6df22344d79456908d07f2eb0ed98a931bfd3e8e35bab9390654e469f.png" />
 </div>
 </div>
 <p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
@@ -803,7 +807,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/5bbaf0cf05e3b1bf65c5665506330127f1a5d395934bffd51637e05692671923.png" src="../../../_images/5bbaf0cf05e3b1bf65c5665506330127f1a5d395934bffd51637e05692671923.png" />
+<img alt="../../../_images/e5b5b3846e9f5bf8bfc32b7f0fb24513907b2d88508abd97fcee728c8f025183.png" src="../../../_images/e5b5b3846e9f5bf8bfc32b7f0fb24513907b2d88508abd97fcee728c8f025183.png" />
 </div>
 </div>
 <p>For p-values smaller than our threshold (to the left of the line), our decision is 1. So:</p>
@@ -827,7 +831,7 @@ P
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/12baf150ea69b1082a3de334f409e42acfdf15f9e5e2f232be87c058dbf60d82.png" src="../../../_images/12baf150ea69b1082a3de334f409e42acfdf15f9e5e2f232be87c058dbf60d82.png" />
+<img alt="../../../_images/2dcb8070661018101b3218ddad3cc18af1ef0bf4142dff027fb6648f09b2f6d2.png" src="../../../_images/2dcb8070661018101b3218ddad3cc18af1ef0bf4142dff027fb6648f09b2f6d2.png" />
 </div>
 </div>
 <p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>
