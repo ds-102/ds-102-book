@@ -69,3 +69,8 @@ chapters:
       title: "Causality in Observational Studies: Unconfoundedness"
     - file: content/chapters/04/06_instrumental_variables
       title: "Causality in Observational Studies: Natural Experiments"
+- file: content/chapters/05/intro
+  title: "Chapter 5: Tail Bounds and Concentration Inequalities"
+  sections:
+    - file: content/chapters/05/01_concentration
+      title: "Tail Bounds and Concentration Inequalities"
