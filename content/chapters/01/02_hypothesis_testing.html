@@ -1,0 +1,1079 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Hypothesis Testing &#8212; Data, Inference, and Decisions</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/01/02_hypothesis_testing';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Multiple Hypothesis Testing" href="03_multiple_tests.html" />
+    <link rel="prev" title="Binary Decision-Making and Error Rates" href="01_decisions_and_errors.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Data, Inference, and Decisions</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data, Inference, and Decisions
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 1: Binary Decision-Making</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Hypothesis Testing and p-Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_binary_classification.html">Binary Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_decision_theory.html">Decision Theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02/01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/03_graphical_models.html">Graphical Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/04_inference.html">Bayesian Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/05_inference_with_sampling.html">Bayesian Inference with Sampling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/06_nonparametric.html">Nonparametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/07_neural_networks.html">Neural Networks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/03_causality_potential_outcomes.html">Causality and Potential Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/06_instrumental_variables.html">Causality in Observational Studies: Natural Experiments</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/intro.html">Chapter 5: Tail Bounds and Concentration Inequalities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/01_concentration.html">Tail Bounds and Concentration Inequalities</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/01/02_hypothesis_testing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/chapters/01/02_hypothesis_testing.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Hypothesis Testing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-and-binary-decision-making">Hypothesis testing and binary decision-making</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-binary-outlook-on-hypothesis-testing">Limitations of binary outlook on hypothesis testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-p-values-with-false-positive-rate">Connecting <span class="math notranslate nohighlight">\(p\)</span>-values with false positive rate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-uniformity-of-p-values-under-the-null-distribution-optional">Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#short-version">Short version</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-p-value-thresholds-for-e-commerce-website-optimization">Example: p-value thresholds for e-commerce website optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-and-composite-hypotheses">Simple and Composite Hypotheses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-p-values-to-decisions">From p-values to decisions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trading-off-between-different-row-wise-rates">Trading off between different row-wise rates</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-power-significance-tradeoff-in-hypothesis-testing">Understanding the power-significance tradeoff in hypothesis testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-pearson">Neyman-Pearson</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing">
+<h1>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">#</a></h1>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>  <span class="c1"># This helps make our plots look nicer</span>
+
+<span class="c1"># These make our figures bigger</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p><em>You may find it helpful to review <a class="reference external" href="https://inferentialthinking.com/chapters/11/Testing_Hypotheses.html">Chapter 11</a> and <a class="reference external" href="https://inferentialthinking.com/chapters/12/Comparing_Two_Samples.html">Chapter 12</a> of the Data 8 textbook, which cover the basics of hypothesis testing.</em></p>
+<p>Hypothesis testing is a specific kind of binary decision-making problem. Although the <strong>null hypothesis statistical test (NHST)</strong> framework has been criticized in recent years, it still provides a useful framework for making decisions from data. We’ll explore these criticisms later, but to start, here’s a quick refresher on how the process works:</p>
+<ol class="arabic simple">
+<li><p>Determine the viewpoint that you want to test, and decide on:</p>
+<ul class="simple">
+<li><p>Null hypothesis: a chance model under which you can either simulate data or analytically compute the distribution of data</p></li>
+<li><p>Alternative hypothesis: viewpoint from the question</p></li>
+<li><p>Test statistic: quantity computed from your data to help you decide between the two hypotheses (in this book, we’ll always use the convention that larger values of the test statistic should favor the alternative hypothesis, without loss of generality).</p></li>
+</ul>
+</li>
+<li><p>Compute the value of the test statistic on your data.</p></li>
+<li><p>Compute the distribution of the test statistic under the null distribution, either by simulation or analytically.</p></li>
+<li><p>Compute a p-value: this is the probability, if the null hypothesis is true, of obtaining a test statistic that is equal to or larger than the observed value.</p></li>
+<li><p>Compare that p-value to some threshold: if the p-value is smaller than the threshold, our test statistic was very unlikely under the null, so our data support the alternative hypothesis. If the p-value is larger, then the data support the null hypothesis.</p></li>
+</ol>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/g8NepbdUOBU"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<section id="hypothesis-testing-and-binary-decision-making">
+<h2>Hypothesis testing and binary decision-making<a class="headerlink" href="#hypothesis-testing-and-binary-decision-making" title="Link to this heading">#</a></h2>
+<p>We’ll frame hypothesis testing as a binary decision-making problem, where we decide between the null and alternative hypotheses, and we assume that one of them is true (note that this framing is flawed; see below for more). In this case, <strong>reality</strong> corresponds to which hypothesis is actually true, and we make our <strong>decision</strong> based on the p-values.</p>
+<p>In order to translate the p-values into binary decisions, we’ll have to decide on some threshold(s) for doing so: we’ll spend the rest of this chapter analyzing different ways to pick this threshold (or thresholds), and what assumptions are encoded in each one.</p>
+<p>Here are some important notes about conventions and vocabulary:</p>
+<ul class="simple">
+<li><p>By convention, we’ll always define the null hypothesis as 0, and the alternative hypothesis as 1.</p></li>
+<li><p>We’ll use the following terms interchangeably (in other words, they all mean the same thing):</p>
+<ul>
+<li><p>“reject the null hypothesis”</p></li>
+<li><p>“make a discovery”</p></li>
+<li><p>“make a decision of 1” (<span class="math notranslate nohighlight">\(D = 1\)</span>)</p></li>
+</ul>
+</li>
+</ul>
+<section id="limitations-of-binary-outlook-on-hypothesis-testing">
+<h3>Limitations of binary outlook on hypothesis testing<a class="headerlink" href="#limitations-of-binary-outlook-on-hypothesis-testing" title="Link to this heading">#</a></h3>
+<p>In many cases, the null and alternative hypotheses are not necessarily mutually exclusive! When we make a discovery, or equivalently, reject the null hypothesis, this only means that <strong>the data we observed are unlikely if the null hypothesis is true</strong>. In many cases, this doesn’t necessarily mean that the alternative hypothesis is true! A rejection of the null hypothesis is often only one step toward showing an alternative hypothesis that we’re interested in.</p>
+<p>For example, consider a blood pressure drug trial, where researchers want to show that the drug lowers blood pressure. They conduct a randomized experiment to measure the drug’s effects. They precisely state their null hypothesis, that the drug has no effect on blood pressure, as “there is no difference in the distribution of blood pressure changes between the population of people who take the drug and the population of people who don’t”. Since they’re interested in showing a decrease (rather than just a change), they state their alternative hypothesis, that the drug lowers blood pressure, as “the distribution of blood pressure changes in people who take the drug  is lower than the distribution for people who don’t”.</p>
+<p>In general, in this situation, consider the following four statements:</p>
+<ol class="arabic simple">
+<li><p>The null hypothesis: <em>the outcomes for treatment/control follow the same distribution</em></p></li>
+<li><p>The logical complement of the null hypothesis: <em>the outcomes for treatment/control do <strong>not</strong> follow the same distribution</em> (direct logical inversion of the null hypothesis)</p></li>
+<li><p>The alternative hypothesis: <em>the outcomes if treated follow a lower-mean distribution than the outcomes if untreated</em></p></li>
+<li><p>What the researchers actually want to show: <em>the drug lowers blood pressure in a clinically meaningful and beneficial way</em></p></li>
+</ol>
+<p>Let’s visualize the space of possible outcomes to help us understand the relationship between these four statements:</p>
+<p><img alt="nhst_outcomes_diagram.png" src="../../../_images/nhst_outcomes_diagram.png" /></p>
+<p>Consider the case where we reject the null hypothesis. Without knowing any other information, if we want to make a binary decision, we can only decide that statement 2 is true (i.e., that the truth lies somewhere in the entire blue-colored region on the right side). But in practice, we want to make a binary decision between statements 1 (orange-colored left side) and 4 (smallest dark blue oval): in other words, we want to show that either there is no effect, or there is a meaningful effect in the direction that we’re interested in. In order to do this, we must rule out all the other possibilities.</p>
+<p>We can rule out some of these possibilities through smart statistical choices. For example, the researchers decided on a one-tailed test (i.e., using the alternative hypothesis “the outcome is lower”) rather than a two-tailed test (i.e., using the alternative hypothesis “the outcome is different”), and chose a test statistic that reflects that (e.g., difference between treatment/control means, rather than absolute difference). This ensures that our binary decision is between statement 1, the null hypothesis (orange area on the left), and statement 3, the alternative hypothesis they chose (larger blue ellipse on the right).</p>
+<p>In order for our binary decision to be meaningful, we need to eliminate possibilities outside statement 4 (the small blue oval). In order to do this, we must ensure <strong>good experimental design</strong> and <strong>good statistical practices</strong>. This includes avoiding confounding variables, ensuring that our effect sizes are meaningful in the real world, avoiding practices such as p-hacking and multiple testing (see the next section for more on these), and so on.</p>
+<p><em>Exercise</em>: For each of the possible outcomes below, determine where they fall on the diagram above.</p>
+<ol class="arabic simple">
+<li><p>The drug consistently lowers blood pressure, but by an amount that is medically insignificant (i.e., the decrease has no meaningful impact on any other biological processes in the body, or any other clinical outcomes).</p></li>
+<li><p>The drug raises blood pressure.</p></li>
+<li><p>The drug lowers blood pressure by an amount that is potentially dangerous in certain individuals.</p></li>
+<li><p>The drug was originally designed to lower cholesterol, but after expensive and unsuccessful trials on cholesterol, the pharmaceutical company’s researchers decided to look at ten other factors, and found that blood pressure happened to be lower in the treatment group. However, this finding was due to chance.</p></li>
+</ol>
+<p>From these examples, we can see that conducting a hypothesis test is not a decisive statement: instead, it should be viewed as one step within a larger process.</p>
+</section>
+<section id="connecting-p-values-with-false-positive-rate">
+<h3>Connecting <span class="math notranslate nohighlight">\(p\)</span>-values with false positive rate<a class="headerlink" href="#connecting-p-values-with-false-positive-rate" title="Link to this heading">#</a></h3>
+<p><em>You may find it helpful to review <a class="reference external" href="http://prob140.org/textbook/content/Chapter_15/01_Density_and_CDF.html">Chapter 15</a> of the Data 140 textbook, which covers continuous random variables.</em></p>
+<p>We’ll work through a few exercises to help us understand the connection between <span class="math notranslate nohighlight">\(p\)</span>-values and the error rates described in the previous section. In the process, we’ll get some practice reasoning about probabilities, and learn some important facts about the distribution of <span class="math notranslate nohighlight">\(p\)</span>-values under the null hypothesis.</p>
+<p><strong>Exercise 1</strong>: Suppose the null hypothesis is true. In this case, what is the probability of obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than 0.05?</p>
+<p><strong>Solution</strong>: In order to answer this question, we’ll look at the distribution of the test statistic under the null hypothesis, and use what we know about probabilities. If the null hypothesis is true, then the test statistic comes from some distribution that we can either simulate or analytically compute. We’ll represent it visually as follows. Note that everything we’re about to conclude is true even if the shape of the distribution is very different: we’re only making it to facilitate easy visualization.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../../_images/a7b77bf554e874ffa3217116a2b29469567a4ef5971111e971e1ba0bd6d80d0a.png" src="../../../_images/a7b77bf554e874ffa3217116a2b29469567a4ef5971111e971e1ba0bd6d80d0a.png" />
+</div>
+</div>
+<p>What does it mean to obtain a <span class="math notranslate nohighlight">\(p\)</span>-value less than 0.05? This happens when our test statistic is large enough that it’s unlikely according to the null distribution. Specifically, let’s choose a particular value of the test statistic <span class="math notranslate nohighlight">\(a\)</span>, chosen such that the area under the curve to the right of <span class="math notranslate nohighlight">\(a\)</span> is 0.05:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../../_images/e7bb1a3dc3a444b865ea494ae4d9dfbf2abb9dd35933e85b236f7a96b256441e.png" src="../../../_images/e7bb1a3dc3a444b865ea494ae4d9dfbf2abb9dd35933e85b236f7a96b256441e.png" />
+</div>
+</div>
+<p>If our test statistic is <span class="math notranslate nohighlight">\(a\)</span>, then the <span class="math notranslate nohighlight">\(p\)</span>-value is the probability of getting a value greater than or equal to <span class="math notranslate nohighlight">\(a\)</span>. That probability is the area under the curve to the right of <span class="math notranslate nohighlight">\(a\)</span>. By construction, that area is 0.05 (in other words, we set things up and chose <span class="math notranslate nohighlight">\(a\)</span> to have an area of 0.05).</p>
+<p>So, a test statistic of <span class="math notranslate nohighlight">\(a\)</span> results in a <span class="math notranslate nohighlight">\(p\)</span>-value of 0.05. We also know that any test statistic greater than <span class="math notranslate nohighlight">\(a\)</span> will result in a <span class="math notranslate nohighlight">\(p\)</span>-value less than 0.05 (since there will be less area). Putting it all together, we can conclude that any test statistic greater than or equal to <span class="math notranslate nohighlight">\(a\)</span> will result in a <span class="math notranslate nohighlight">\(p\)</span>-value less than or equal to 0.05.</p>
+<p>Now, what is the probability of obtaining a test statistic greater than or equal to <span class="math notranslate nohighlight">\(a\)</span>, if the null hypothesis is true? The answer is just the area under the null distribution to the right of <span class="math notranslate nohighlight">\(a\)</span>. By construction, this area is <span class="math notranslate nohighlight">\(0.05\)</span>. So, the probability of obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than or equal to 0.05 is simply 0.05!</p>
+<p>To summarize what we did:</p>
+<ol class="arabic simple">
+<li><p>Chose a test statistic value <span class="math notranslate nohighlight">\(a\)</span> such that the area under the the null distribution to the right of <span class="math notranslate nohighlight">\(a\)</span> is 0.05</p></li>
+<li><p>Determined that “obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than or equal to 0.05” is exactly equivalent to “obtaining a test statistic greater than or equal to <span class="math notranslate nohighlight">\(a\)</span>”</p></li>
+<li><p>Computed that if the null is true, the probability of “obtaining a test statistic greater than or equal to <span class="math notranslate nohighlight">\(a\)</span>” is 0.05</p></li>
+<li><p>Found (by combining 2 and 3) that if the null is true, the probability of “obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than or equal to 0.05 is 0.05.</p></li>
+</ol>
+<p><strong>Exercise 3</strong>: Suppose the null hypothesis is true. In this case, what is the probability of obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than <span class="math notranslate nohighlight">\(\gamma\)</span> (assuming <span class="math notranslate nohighlight">\(0 &lt; \gamma \leq 1\)</span>)? <em>Note this is a generalization of the previous question, using <span class="math notranslate nohighlight">\(\gamma\)</span> instead of the specific value <span class="math notranslate nohighlight">\(0.05\)</span>.</em></p>
+<p><strong>Solution</strong>: Throughout our solution to the last exercise, there was nothing special about the value of 0.05 that we used. All of our conclusions are still valid even if we choose any other threshold between 0 and 1. So, we can safely conclude that this probability is <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
+<p><strong>Exercise 4</strong>: Suppose our <span class="math notranslate nohighlight">\(p\)</span>-value threshold is <span class="math notranslate nohighlight">\(\gamma\)</span>. What is the false positive rate for this test?</p>
+<p><strong>Solution</strong>: We know the following things:</p>
+<ul class="simple">
+<li><p>The false positive rate is <span class="math notranslate nohighlight">\(P(D=1 | R=0)\)</span>.</p></li>
+<li><p>In hypothesis testing, this is the probability of rejecting the null hypothesis given that the null hypothesis is true.</p></li>
+<li><p>We reject the null hypothesis whenever our <span class="math notranslate nohighlight">\(p\)</span>-value is below the threshold.</p></li>
+<li><p>From the last exercise: if the null is true, then the probability of obtaining a <span class="math notranslate nohighlight">\(p\)</span>-value less than or equal to <span class="math notranslate nohighlight">\(\gamma\)</span> is <span class="math notranslate nohighlight">\(\gamma\)</span>.</p></li>
+</ul>
+<p>Putting these facts together, the false positive rate is <span class="math notranslate nohighlight">\(\gamma\)</span>: in other words, <strong>the p-value threshold that we use for a test is the false positive rate for that test</strong>.</p>
+<p><strong>Exercise 5</strong>: If the null hypothesis is true, what is the distribution of the <span class="math notranslate nohighlight">\(p\)</span>-value? <em>Hint: the answer is a well-known distribution.</em></p>
+<p><strong>Solution</strong>: Let <span class="math notranslate nohighlight">\(p\)</span> be the <span class="math notranslate nohighlight">\(p\)</span>-value (this is a random variable).</p>
+<p>In Exercise 3, we showed that if the null hypothesis is true, <span class="math notranslate nohighlight">\(P(p \leq \gamma) = \gamma\)</span>. This is precisely the CDF of the random variable <span class="math notranslate nohighlight">\(p\)</span>! In other words, <span class="math notranslate nohighlight">\(F_p(p) = p\)</span>, as long as <span class="math notranslate nohighlight">\(0 \leq p \leq 1\)</span>. This is exactly the CDF of the uniform distribution! Therefore, we can conclude that if the null hypothesis is true, the <span class="math notranslate nohighlight">\(p\)</span>-value has a uniform distribution.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/H0fXEIwFBNE"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="proof-of-uniformity-of-p-values-under-the-null-distribution-optional">
+<h3>Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution (optional)<a class="headerlink" href="#proof-of-uniformity-of-p-values-under-the-null-distribution-optional" title="Link to this heading">#</a></h3>
+<p><em>For this subsection only, we’ll use more precise notation: random variables will be denoted with capital letters, values they can take on will be denoted with lowercase letters, and density functions and cumulative distribution functions will be subscripted with the corresponding random variables. For a refresher on this notation, see the Data 140 textbook.</em></p>
+<p><em>Additionally, note carefully the difference between the notation for random variable <span class="math notranslate nohighlight">\(P\)</span> and probability <span class="math notranslate nohighlight">\(\mathbb{P}\)</span>.</em></p>
+<p>Let <span class="math notranslate nohighlight">\(T\)</span> be a continuous random variable denoting our test statistic, and let <span class="math notranslate nohighlight">\(F_T\)</span> be the CDF of <span class="math notranslate nohighlight">\(T\)</span> under the null hypothesis: in other words, <span class="math notranslate nohighlight">\(F_T(t) = \mathbb{P}(T \leq t)\)</span>. Let <span class="math notranslate nohighlight">\(G_T\)</span> be the <em>tail CDF</em>: <span class="math notranslate nohighlight">\(G_T(t) = 1 - F_T(t) = \mathbb{P}(T \geq t)\)</span>. We’re being imprecise with our use of <span class="math notranslate nohighlight">\(\geq\)</span> rather than <span class="math notranslate nohighlight">\(&gt;\)</span> here, but the equality is still true since <span class="math notranslate nohighlight">\(T\)</span> is a continuous random variable and therefore <span class="math notranslate nohighlight">\(\mathbb{P}(T = t) = 0\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(G_T\)</span> is a tail cumulative distribution function, but we can also view it as just a function: we can plug in any number and obtain a number between 0 and 1. In general, we can apply any function to a random variable and, in doing so, obtain another random variable. For example, if we apply the function <span class="math notranslate nohighlight">\(h(x) = 7x\)</span> to <span class="math notranslate nohighlight">\(T\)</span>, we’d obtain a new random variable <span class="math notranslate nohighlight">\(h(T)\)</span> that takes on values seven times what <span class="math notranslate nohighlight">\(T\)</span> would. So, if we apply the function <span class="math notranslate nohighlight">\(G_T\)</span> to the random variable <span class="math notranslate nohighlight">\(T\)</span>, we get another random variable. Note the difference between <span class="math notranslate nohighlight">\(G_T(t)\)</span>, which is the function applied to a specific number <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(G_T(T)\)</span>, which is the function applied to the random variable <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p>The <span class="math notranslate nohighlight">\(p\)</span>-value associated with a particular test statistic <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(\mathbb{P}(T \geq t)\)</span>: this is simply <span class="math notranslate nohighlight">\(G_T(t)\)</span>. The <span class="math notranslate nohighlight">\(p\)</span>-value is a random variable <span class="math notranslate nohighlight">\(P\)</span> that depends on the random variable <span class="math notranslate nohighlight">\(T\)</span>: <span class="math notranslate nohighlight">\(P = G_T(T)\)</span>.</p>
+<p>What is the CDF of this random variable <span class="math notranslate nohighlight">\(P\)</span>?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+F_P(p) 
+    &amp;= \mathbb{P}(P \leq p) \\
+    &amp;= \mathbb{P}(G_T(T) \leq p)
+\end{align*}
+\end{split}\]</div>
+<p>Consider the function <span class="math notranslate nohighlight">\(G_T^{-1}\)</span>, the inverse of <span class="math notranslate nohighlight">\(G_T\)</span>. Both <span class="math notranslate nohighlight">\(G_T\)</span> and its inverse are monotonically non-increasing: in other words, if <span class="math notranslate nohighlight">\(a &gt; b\)</span>, then <span class="math notranslate nohighlight">\(G_T(a) \leq G_T(b)\)</span>, and <span class="math notranslate nohighlight">\(G_T^{-1}(a) \leq G_T^{-1}(b)\)</span>. So, we can apply the function <span class="math notranslate nohighlight">\(G_T^{-1}\)</span> to both sides of the inequality above, which flips the inequality:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+F_P(p) 
+    &amp;= \mathbb{P}(G_T(T) \leq p) \\
+    &amp;= \mathbb{P}(G_T^{-1}(G_T(T)) \geq G_T^{-1}(p)) \\
+    &amp;= \mathbb{P}(T \geq G_T^{-1}(p))
+\end{align*}
+\end{split}\]</div>
+<p>This is the probability that <span class="math notranslate nohighlight">\(T\)</span> is greater than some amount: that’s the definition of the tail CDF <span class="math notranslate nohighlight">\(G_T\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+F_P(p) 
+    &amp;= \mathbb{P}(T \geq G_T^{-1}(p)) \\
+    &amp;= G_T(G_T^{-1}(p)) \\
+    &amp;= p, \text{  for }0 \leq p \leq 1
+\end{align*}
+\end{split}\]</div>
+<p>We can then find the probability density function for random variable <span class="math notranslate nohighlight">\(P\)</span> by differentiating, which gives us that <span class="math notranslate nohighlight">\(f_P(p) = 1\)</span>, for <span class="math notranslate nohighlight">\(0 \leq p \leq 1\)</span>: in other words, under the null hypothesis, <span class="math notranslate nohighlight">\(P\)</span> is a uniform random variable.</p>
+<p>Note that we made no assumptions about the distribution of the test statistic: this is true regardless of which test statistic we choose.</p>
+<section id="short-version">
+<h4>Short version<a class="headerlink" href="#short-version" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+G_T(t) 
+    &amp;= \mathbb{P}(T \geq t) &amp; \text{(definition of tail CDF)}\\
+P
+    &amp;= G_T(T) &amp; \text{(definition of p-value)} \\
+F_P(p)
+    &amp;= \mathbb{P}(P \leq p)  &amp; \text{(definition of CDF)}\\
+    &amp;= \mathbb{P}(G_T(T) \leq p) &amp; \\
+    &amp;= \mathbb{P}(G_T^{-1}(G_T(T)) \geq G_T^{-1}(p)) &amp; \text{(applying }G_T^{-1}\text{ to both sides)} \\
+    &amp;= \mathbb{P}(T \geq G_T^{-1}(p)) &amp; \\
+    &amp;= G_T(G_T^{-1}(p))) &amp; \text{(using definition of }G_T\text{)} \\
+    &amp;= p, \quad 0 \leq p \leq 1 \\
+f_P(p)
+    &amp;= \frac{d}{dp}F_P(p) \\
+    &amp;= 1, \quad 0 \leq p \leq 1 \\
+P
+    &amp;\sim \mathrm{Uniform}(0, 1)
+\end{align*}
+\end{split}\]</div>
+</section>
+</section>
+<section id="example-p-value-thresholds-for-e-commerce-website-optimization">
+<h3>Example: p-value thresholds for e-commerce website optimization<a class="headerlink" href="#example-p-value-thresholds-for-e-commerce-website-optimization" title="Link to this heading">#</a></h3>
+<p>This example will explore how our choice of <span class="math notranslate nohighlight">\(p\)</span>-value thresholds leads to tradeoffs between the different error rates we discussed in the previous section.</p>
+<p>Suppose we are exploring ways to make our e-commerce site more appealing to customers. We make 100 different changes to the website (different colors, fonts, page layouts, etc.), and for each one, we use an A/B test to see whether customers are more likely to make a purchase. We define the following null and alternative hypotheses:</p>
+<ul class="simple">
+<li><p>Null hypothesis: the change to the website has no effect on whether or not customers make a purchase.</p></li>
+<li><p>Alternative hypothesis: the change increases the chance that customers will make a purchase.</p></li>
+</ul>
+<p>For each change, we randomly assign half the users of our website to the old version, and half to the new version: because this is a randomized experiment, we can determine whether our change <em>causes</em> customers to purchase products more. Our test statistic is the difference between the percentage of people who made a purchase in the treatment group (new version of website) and the same percentage in the control group (old version of website). We simulate the test statistic under the null hypothesis, and obtain a p-value for each test. These p-values are in the following dataframe:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;p_values.csv&#39;</span><span class="p">)</span>
+<span class="n">p_values</span><span class="p">[[</span><span class="s1">&#39;pvalue&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pvalue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.040131</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000436</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.251129</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can visualize the distribution of them using a strip plot, which gives us a scatterplot-like view. Each point represents one test, the x-axis represents the p-value, and the y-axis doesn’t have any meaning (it just helps spread out the points so they’re easier to see):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">p_values</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pvalue&#39;</span><span class="p">,</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">orient</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;P-values (as we&#39;d actually see them, without labels)&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/77cf6ce1b12b9045a291a0b1a567bff7328e2862420416961c5db541e53cf2fc.png" src="../../../_images/77cf6ce1b12b9045a291a0b1a567bff7328e2862420416961c5db541e53cf2fc.png" />
+</div>
+</div>
+<p>Normally, we wouldn’t know for certain whether or not each change actually affects customer behavior. Instead, we must decide from the p-values. In particular, our job is to decide, based on the p-values, for which tests the data favor the null hypothesis, and for which tests the data favor the alternative hypothesis. From the definition of the p-value, we know that smaller p-values should favor the alternative hypothesis, while larger p-values should favor the null hypothesis.</p>
+<p>What if we did magically know the true effect of each change? In this case, we could use that known truth to analyze our decision-making process and evaluate how well we do.</p>
+<p>This is an approach we’ll use many times throughout this book: when creating, designing, and evaluating our algorithms, we’ll suppose that we know the “true” values of reality, so that we can provide a quantitative analysis. Then, when we go apply those algorithms in the real world (where we don’t know reality), we can be confident in how well we’re doing.</p>
+<p>The column <code class="docutils literal notranslate"><span class="pre">is_alternative</span></code> contains the known true effects for each of these 100 A/B tests:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_values</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pvalue</th>
+      <th>is_alternative</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.040131</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000436</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.251129</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can visualize the p-values again, this time grouped by whether or not the website change actually affected customers’ purchase behavior (i.e., reality). The top row contains the points where the null is true, and the bottom row contains the points where the alternative is true.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">p_values</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pvalue&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> 
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">orient</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;P-values, with ground truth labels&#39;</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(-0.049319194537530316), np.float64(1.035869189459966), np.float64(1.5), np.float64(-0.5))
+</pre></div>
+</div>
+<img alt="../../../_images/2c3a597864d346da1f60733ed31e6a1c8666f3cf0cf5ec7f3538c9dfa9826566.png" src="../../../_images/2c3a597864d346da1f60733ed31e6a1c8666f3cf0cf5ec7f3538c9dfa9826566.png" />
+</div>
+</div>
+<p>We can now see that any particular threshold we choose will lead us to make some correct and some incorrect decisions. For example, suppose we use a p-value threshold of 0.1:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">p_values</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pvalue&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">orient</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;P-values, with ground truth labels&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/489921a97baa534434d26e1f1fc3e859ece69379175ab160dd246145d30cad02.png" src="../../../_images/489921a97baa534434d26e1f1fc3e859ece69379175ab160dd246145d30cad02.png" />
+</div>
+</div>
+<p>For p-values smaller than our threshold (to the left of the line), our decision is 1. So:</p>
+<ul class="simple">
+<li><p>For all the orange (bottom) points to the left of the line, we make a correct decision: in this case, reality and our decision are both 1 (alternative), so these are <em>true positives</em>.</p></li>
+<li><p>For all the orange (bottom) points to the right of the line, we make an incorrect decision: in this case, reality is 1 (alternative), but our decision is 0 (null). So, these are <em>false negatives</em>.</p></li>
+<li><p>For all the blue (top) points to the left of the line, we make an incorrect decision: in this case, reality is 0 (null), but our decision is 1 (alternative). So, these are <em>false positives</em>.</p></li>
+<li><p>For all the blue (top) points to the right of the line, we make a correct decision: in this case, reality and our decision are both 0 (null), so these are <em>true negatives</em>.</p></li>
+</ul>
+<p>Our goal should be to make as many true negatives and true positives as possible, while making as few false positives and false negatives as possible. But we can see from the graph that there is a tradeoff: as we make fewer false positives, we must necessarily make more false negatives. For example, suppose we wanted to have no false negatives at all. That means we want all the p-values from tests where the alternative is true to be below our threshold (all orange points to the left of the line).Let’s see what happens if we choose such a threshold of 0.42:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">p_values</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pvalue&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;is_alternative&#39;</span><span class="p">,</span> 
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">orient</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="mf">0.42</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;P-values, with ground truth labels&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/515dd32aeceba800a977aaed4b686a446ea4079c5a2c2d512504c1c7c4b970a5.png" src="../../../_images/515dd32aeceba800a977aaed4b686a446ea4079c5a2c2d512504c1c7c4b970a5.png" />
+</div>
+</div>
+<p>Even though we’ve dropped our false negative rate dramatically, we’ve unfortunately increased our false positive rate: there are now many more tests where the null is true but the p-value is below our threshold (blue points to the left of the line).</p>
+</section>
+</section>
+<section id="simple-and-composite-hypotheses">
+<h2>Simple and Composite Hypotheses<a class="headerlink" href="#simple-and-composite-hypotheses" title="Link to this heading">#</a></h2>
+<p>When conducting hypothesis testing, our null and alternative hypotheses fall into one of two categories:</p>
+<ul class="simple">
+<li><p>A <strong>simple</strong> hypothesis is precise, and states that the test statistic takes on a particular value. For example, hypotheses such as “there is no difference between the average values in the two groups (<span class="math notranslate nohighlight">\(\mu_1 - \mu_2 = 0\)</span>)” or “the true proportion is 0.5 (<span class="math notranslate nohighlight">\(q = 0.5\)</span>)” provide one single value for the test statistic.</p></li>
+<li><p>In contrast, a <strong>composite</strong> hypothesis is less specific, and usually describes the test statistic as being greater than, less than, or not equal to some reference value. For example, hypotheses such as “the average of the first group is greater than the average of the second group (<span class="math notranslate nohighlight">\(\mu_1 - \mu_2 &gt; 0\)</span>)” or “the true proportion is not equal to 0.5 (<span class="math notranslate nohighlight">\(q \neq 0.5\)</span>)” are composite.</p></li>
+</ul>
+<p>In most hypothesis tests you’ve seen so far, you’ve likely worked with a simple null hypothesis (i.e., one that’s specific that we can simulate or calculate under), and a composite alternative hypothesis. Later, we’ll explore what happens when we use a simple alternative hypothesis as well.</p>
+</section>
+<section id="from-p-values-to-decisions">
+<h2>From p-values to decisions<a class="headerlink" href="#from-p-values-to-decisions" title="Link to this heading">#</a></h2>
+<p>We’ve seen above that in order to make a binary decision from a single p-value, we must use some threshold. We’ll see several different ways to choose such a threshold:</p>
+<ul class="simple">
+<li><p>Classical null hypothesis significance testing (NHST): here, we choose a threshold based on our desired false positive rate. For example, the traditional (arbitrary) threshold of 0.05 corresponds to a 5% chance of making a false positive with each hypothesis test we conduct. In this setting, our null hypothesis will usually be a clearly specified simple hypothesis, but we usually use “vague” composite alternative hypotheses such as ‘there is no difference between the two groups’. This means that we can precisely analyze what happens when the null is true (<span class="math notranslate nohighlight">\(R=0\)</span>), and reason about the false positive rate and true negative rate. However, because our alternative hypothesis is composite, we can’t precisely define what happens in the alternative case, so we typically don’t reason about the true positive rate and false negative rate (i.e., the rates corresponding to <span class="math notranslate nohighlight">\(R=1\)</span>).</p></li>
+<li><p>In the Neyman-Pearson framework, we choose a simple alternative hypothesis, and reason about the true positive rate.</p></li>
+<li><p>When making multiple tests, we’ll need to choose thresholds that take into account error rates involving all the tests we conduct. We’ll examine these error rates and why they’re important in the next section.</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/WIrueFDjw64"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="trading-off-between-different-row-wise-rates">
+<h2>Trading off between different row-wise rates<a class="headerlink" href="#trading-off-between-different-row-wise-rates" title="Link to this heading">#</a></h2>
+<p>Analysis of <span class="math notranslate nohighlight">\(p\)</span>-values helps us understand what happens if the null is true: we saw earlier that the <span class="math notranslate nohighlight">\(p\)</span>-value threshold we choose is the false positive rate for the test. But what about if the alternative is true? For example, we may be interested in constructing a test where we want the false negative rate to be less than <span class="math notranslate nohighlight">\(0.1\)</span>, or we may want to numerically quantify how much the false negative rate would increase if we reduced our false positive rate by <span class="math notranslate nohighlight">\(0.01\)</span>.</p>
+<p>Composite alternative hypotheses don’t support the kind of analysis we did above: we can only reason about the alternative case if we choose a simple alternative hypothesis. So, for the remainder of this section, we’ll only consider the case where <strong>both the null and alternative hypotheses are simple</strong>.</p>
+<p>There are many ways to analyze the tradeoff, so we’ll focus on two of them:</p>
+<ol class="arabic simple">
+<li><p><strong>How do we quantify the tradeoff between false positive rate and false negative rate?</strong> In other words, how do we measure the tradeoff between the row-wise rates for <span class="math notranslate nohighlight">\(R=0\)</span> and the row-wise rates for <span class="math notranslate nohighlight">\(R=1\)</span>? We’ll use a receiver operating characteristic curve, commonly known as an <strong>ROC curve</strong>, to answer this. For more, see the binary classification section.</p></li>
+<li><p><strong>For a given false positive rate (i.e., significance threshold or <span class="math notranslate nohighlight">\(p\)</span>-value threshold), what test statistic should we choose to maximize the power, or true positive rate?</strong> In other words, if we fix a desired level of error for the case where <span class="math notranslate nohighlight">\(R=0\)</span>, how do we get the best possible performance when <span class="math notranslate nohighlight">\(R=1\)</span>? This is what we’ll turn our attention to now.</p></li>
+</ol>
+<section id="understanding-the-power-significance-tradeoff-in-hypothesis-testing">
+<h3>Understanding the power-significance tradeoff in hypothesis testing<a class="headerlink" href="#understanding-the-power-significance-tradeoff-in-hypothesis-testing" title="Link to this heading">#</a></h3>
+<p>When using the Neyman-Pearson lemma, our goal will be to find the most powerful test for any given level of significance. In other words, for any desired FPR we specify (i.e., we want to control our error probability if the null is true), we want to find the test with the highest possible power (i.e., we want to maximize our success probability if the alternative is true).</p>
+<p>We’ll do so by choosing a test statistic (i.e., a function of our observed data) that maximizes the power. Instead of computing a <span class="math notranslate nohighlight">\(p\)</span>-value as before, we’ll make a decision by applying a threshold to our test statistic: if it’s above our threshold, then we’ll reject the null, and if it’s below our threshold, we’ll fail to reject the null.</p>
+<p>Before we see what this test statistic is, let’s look at a few diagrams that help illustrate the trade-off between power and significance. Suppose we observe a single normally distributed data point <span class="math notranslate nohighlight">\(x\)</span>, and our test statistic is <span class="math notranslate nohighlight">\(t=x\)</span>. We’ll assume that <span class="math notranslate nohighlight">\(t \sim \mathcal{N}(\mu, 1)\)</span>, for some mean <span class="math notranslate nohighlight">\(\mu\)</span>. If our null hypothesis states that <span class="math notranslate nohighlight">\(\mu = 0\)</span>, then we can write <span class="math notranslate nohighlight">\(t | H_0 \sim \mathcal{N}(0, 1)\)</span>. Therefore, our distribution for <span class="math notranslate nohighlight">\(t\)</span> under the null hypothesis is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">make_null_alternative_plots</span><span class="p">(</span><span class="n">show_null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_alternative</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/3ae1ef84f69089cfeac7243c92628c9f8801a34500ba05ba8c84dc1afb643188.png" src="../../../_images/3ae1ef84f69089cfeac7243c92628c9f8801a34500ba05ba8c84dc1afb643188.png" />
+</div>
+</div>
+<p>The black vertical line shows one arbitrarily chosen decision threshold: if we use this threshold, the shaded areas show the FPR (right, red) and TNR (left, yellow) of our test. We can see that if we were to raise the threshold, we’d obtain a lower false positive rate (red).</p>
+<p>But what about the power? If we want to follow a similar process to compute the power (or TPR) of the test, we must use a simple alternative hypothesis. A compound alternative such as <span class="math notranslate nohighlight">\(\mu &gt; 0\)</span> won’t give us enough information to compute the error rates under the alternative. So, we’ll choose a specific alternative hypothesis: <span class="math notranslate nohighlight">\(T | H_1 \sim \mathcal{N}(2.5, 1)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">make_null_alternative_plots</span><span class="p">(</span><span class="n">show_null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_alternative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/3efc6a717e06fa105c41c2a3a17e63a0e6bd75a800b56a729836e9bcc8e13d21.png" src="../../../_images/3efc6a717e06fa105c41c2a3a17e63a0e6bd75a800b56a729836e9bcc8e13d21.png" />
+</div>
+</div>
+<p>For this choice of the alternative hypothesis, we can now see the power (TPR) and FNR as the green (right) and purple (left) areas, respectively. If we were to raise the threshold, we’d obtain a lower power (green).</p>
+<p>Now, we’ll visualize both hypotheses on the same graph:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">make_null_alternative_plots</span><span class="p">(</span><span class="n">show_null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_alternative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/df9a5187daaeedde07ad6c13c02d33d50f02dd2e912a1d02477458302c3d8ce7.png" src="../../../_images/df9a5187daaeedde07ad6c13c02d33d50f02dd2e912a1d02477458302c3d8ce7.png" />
+</div>
+</div>
+<p>Now, we can see the impact of our threshold in both cases: if the null is true, our error probability is the area under the red curve to the <strong>right</strong> of the threshold (make sure you convince yourself why this is true). If the alternative is true, our error probability is the area under the blue curve to the <strong>left</strong> of the threshold. Ideally, we want both of these areas to be as small as possible, but in practice, we often must trade off one for the other.</p>
+<p>The Neyman-Pearson lemma helps us quantify this tradeoff by choosing a good test statistic. Recall our testing framework: we first specify the distribution of the data under the null and the alternative (e.g., above, we chose <span class="math notranslate nohighlight">\(X | H_0 \sim \mathcal{N}(0, 1)\)</span> and <span class="math notranslate nohighlight">\(X | H_1 \sim \mathcal{N}(2.5, 1)\)</span>). Then, we choose a test statistic that helps us distinguish between the null and the alternative. In the very simple example above, where we only observed one data point, we just chose our test statistic to be the data point we observed. But in general, when we observe many data points and have to choose between more complex hypotheses, there are many possible test statistics we could choose.</p>
+<p>Note that above, we defined a distribution for our data given each hypothesis: these are called <strong>likelihood functions</strong>. They specify the distribution for our observed data given a certain unknown state of the world. In the conventional hypothesis testing setup, we only need to define the likelihood under the null (or be able to simulate it). When we want to reason about power, we need to specify the likelihood under the alternative as well. This usually requires us to make a specific assumption about the size of the difference or effect that we are looking for: any calculation of power is based on this assumption.</p>
+</section>
+<section id="neyman-pearson">
+<h3>Neyman-Pearson<a class="headerlink" href="#neyman-pearson" title="Link to this heading">#</a></h3>
+<p>The Neyman Pearson lemma states that for any desired level of significance (i.e., false positive rate) that we wish to achieve, we can achieve the highest possible power by computing the <strong>likelihood ratio</strong> as our test statistic, and then comparing it to a threshold that’s determined by our desired significance.</p>
+<p>Given observed data <span class="math notranslate nohighlight">\(x\)</span> (which can often represent multiple observations), and likelihood functions for the null and alternative, we compute the test statistic:</p>
+<div class="math notranslate nohighlight">
+\[
+LR = \frac{p(x|H_1)}{p(x|H_0)}
+\]</div>
+<p>and compare it to some threshold <span class="math notranslate nohighlight">\(\eta\)</span>. If the likelihood ratio is greater than the threshold, we reject the null, and if it’s below the threshold, we fail to reject. Intuitively, this test asks: “how many times more likely are the data under the alternative, compared to under the null?” Our threshold then determines how much more likely we require the data to be under the alternative before we decide to reject the null. For example, a threshold of 2 requires us to see data that are twice as likely under the alternative (relative to the null) before we decide to reject the null.</p>
+<p>Using the Neyman-Pearson lemma in practice typically involves the following sequence of steps:</p>
+<ol class="arabic simple">
+<li><p>Define the likelihood functions for the observed data according to the null and alternative hypothesis.</p></li>
+<li><p>Identify a desired level of significance (i.e., false positive rate that you are willing to tolerate).</p></li>
+<li><p>Use the significance level to compute a threshold by (a) expressing the false positive rate as a conditional probability based on the decision rule described above, (b) setting it equal to the desired significance level, and (c) solving for the threshold as a function of the significance level.</p></li>
+<li><p>Compute the power of the test by (a) expressing the power as a conditional probability based on the decision rule above and (b) plugging in the threshold computed in the previous step.</p></li>
+</ol>
+<p>By solving for the threshold in step (3) in terms of any desired significance level, we can use step (4) to explicitly relate the tradeoff between power and significance level.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/chapters/01"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_decisions_and_errors.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Binary Decision-Making and Error Rates</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_multiple_tests.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Multiple Hypothesis Testing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-and-binary-decision-making">Hypothesis testing and binary decision-making</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-binary-outlook-on-hypothesis-testing">Limitations of binary outlook on hypothesis testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-p-values-with-false-positive-rate">Connecting <span class="math notranslate nohighlight">\(p\)</span>-values with false positive rate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-uniformity-of-p-values-under-the-null-distribution-optional">Proof of Uniformity of <span class="math notranslate nohighlight">\(p\)</span>-values under the null distribution (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#short-version">Short version</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-p-value-thresholds-for-e-commerce-website-optimization">Example: p-value thresholds for e-commerce website optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-and-composite-hypotheses">Simple and Composite Hypotheses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-p-values-to-decisions">From p-values to decisions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trading-off-between-different-row-wise-rates">Trading off between different row-wise rates</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-power-significance-tradeoff-in-hypothesis-testing">Understanding the power-significance tradeoff in hypothesis testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-pearson">Neyman-Pearson</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Data 102 Staff
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

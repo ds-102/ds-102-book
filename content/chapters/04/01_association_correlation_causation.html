@@ -1,0 +1,953 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Association, Correlation, and Causation &#8212; Data, Inference, and Decisions</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/04/01_association_correlation_causation';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Quantifying Association" href="02_quantifying_association.html" />
+    <link rel="prev" title="Chapter 4: Causal Inference" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Data, Inference, and Decisions</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data, Inference, and Decisions
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/04_binary_classification.html">Binary Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/05_decision_theory.html">Decision Theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02/01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/03_graphical_models.html">Graphical Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/04_inference.html">Bayesian Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/05_inference_with_sampling.html">Bayesian Inference with Sampling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/06_nonparametric.html">Nonparametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/07_neural_networks.html">Neural Networks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 4: Causal Inference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Understanding Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_causality_potential_outcomes.html">Causality and Potential Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_instrumental_variables.html">Causality in Observational Studies: Natural Experiments</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/intro.html">Chapter 5: Tail Bounds and Concentration Inequalities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/01_concentration.html">Tail Bounds and Concentration Inequalities</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/04/01_association_correlation_causation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/chapters/04/01_association_correlation_causation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Association, Correlation, and Causation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-vs-causation">Prediction vs Causation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mistaking-correlation-and-association-for-causation">Mistaking correlation (and association) for causation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-variables">Confounding variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sunburns-and-ice-cream-sales">Sunburns and ice cream sales</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cameras-and-social-media-likes">Cameras and social media likes</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spurious-correlations">Spurious correlations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-marshmallow-experiment">The Marshmallow Experiment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpson-s-paradox">Simpson’s Paradox</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-visualizing-simpson-s-paradox-with-baker-kramer-plots">(Optional) Visualizing Simpson’s Paradox with Baker-Kramer Plots</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#berkson-s-paradox-and-colliders">Berkson’s Paradox and Colliders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples">More Examples</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="association-correlation-and-causation">
+<h1>Association, Correlation, and Causation<a class="headerlink" href="#association-correlation-and-causation" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;whitegrid&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="" src="https://imgs.xkcd.com/comics/correlation.png" /></p>
+<p>“<em>Correlation does not necessarily imply causation</em>.” You’ve surely heard this statement many times by now. In this section, we’ll understand the relationship between association, correlation, and causation. We’ll look at a few different problems that arise when thinking about these concepts.</p>
+<p>We’ll start by looking at three mistakes that one can make when thinking about association, correlation, and causation. Then, we’ll review a few different ways of measuring association, which we’ll use in our later discussion of causality.</p>
+<section id="prediction-vs-causation">
+<h2>Prediction vs Causation<a class="headerlink" href="#prediction-vs-causation" title="Link to this heading">#</a></h2>
+<p>In many applications, we may be interested in predicting a certain quantity from another quantity. We’ve already seen examples of this: GLMs help us predict one variable given many others. But it’s important to keep in mind the distinction between prediction and causation. Here’s an example that highlights the difference.</p>
+<p>Suppose we’re interested in using recorded audio data from a soccer match TV broadcast to predict how many people were applauding at any given time. Intuitively, this seems like a case where we can make a pretty good prediction: louder audio should be predictive of more people applauding. However, even though our prediction ability may be excellent, this does not imply a causal relationship at all: in fact, the data we observe (audio volume) is caused by the thing that we’re trying to predict (people applauding).</p>
+<p>In many cases, our goal may be predictive power, in which case the reverse causality here is fine. However, in cases where we’re trying to infer causality, high predictive power alone is not enough.</p>
+</section>
+<section id="mistaking-correlation-and-association-for-causation">
+<h2>Mistaking correlation (and association) for causation<a class="headerlink" href="#mistaking-correlation-and-association-for-causation" title="Link to this heading">#</a></h2>
+<p>It’s often easier to fall for the trap of conflating association and causation than you might think. For example, consider the following story:</p>
+<blockquote>
+<div><p>A Martian arrives on Earth, and after a year of study announces the discovery of a correlation between using an umbrella and getting wet: people who use umbrellas have a higher probability of getting wet (even if it’s just their pants) than people who don’t use an umbrella. The Martian infers that using an umbrella causes people to get wet.</p>
+</div></blockquote>
+<p>The correlation that the Martian observes is real, but the real causal story is a little more complex than this: we use umbrellas when it rains, and we get wet when it rains. While it’s easy to point to this example and laugh at how silly the Martian is, the reality is that we hear (and make) inferences like this all the time.</p>
+<section id="confounding-variables">
+<h3>Confounding variables<a class="headerlink" href="#confounding-variables" title="Link to this heading">#</a></h3>
+<p>A key problem that comes up when reasoning about causality is the existence of <strong>confounding</strong> variables.</p>
+<section id="sunburns-and-ice-cream-sales">
+<h4>Sunburns and ice cream sales<a class="headerlink" href="#sunburns-and-ice-cream-sales" title="Link to this heading">#</a></h4>
+<p>As an example, let’s suppose we collect daily data on sunburns and ice cream sales for an entire year. We find a strong positive association in the data: days with higher ice cream sales have much higher sunburn rates. Clearly, sunburn doesn’t cause increased ice cream sales, and increased ice cream sales don’t cause sunburns, either. This example fails to take into account the confounding effect of the weather: hot, sunny weather causes people to buy more ice cream, and also causes more sunburns. We can illustrate this using a directed graph, similar to the ones we used in Bayesian graphical models:</p>
+<p><img alt="" src="../../../_images/sunburn_icecream.png" /></p>
+<p>Here, the edges indicate <em>causal</em> relationships (we’ll formalize this idea in the next section). For example, this graph claims that sun causes a change in sunburn rates. Like the example with the Martian, the existence of a confounding variable (sunny weather) is clear in this example.</p>
+</section>
+<section id="cameras-and-social-media-likes">
+<h4>Cameras and social media likes<a class="headerlink" href="#cameras-and-social-media-likes" title="Link to this heading">#</a></h4>
+<p>Let’s look at an example with a more complex relationship. Suppose we want to know whether using a high-end DSLR camera causes increased likes on Instagram posts. If we collect data and find a strong positive association between DSLR cost and number of likes, does this let us conclude a causal relationship? In this case, the answer is a more nebulous “maybe”. There are other confounding factors here: for example, high-profile, well-financed accounts that already have a lot of followers are more likely to use high-end cameras than amateur accounts. In this case, the causal graph might look more like this:</p>
+<p><img alt="" src="../../../_images/instagram.png" /></p>
+<p>Without further information about the account’s size and budget, it’s hard to determine a causal relationship.</p>
+</section>
+</section>
+<section id="spurious-correlations">
+<h3>Spurious correlations<a class="headerlink" href="#spurious-correlations" title="Link to this heading">#</a></h3>
+<p>Sometimes, regardless of whether or not we’re trying to draw conclusions about causality, the correlations we observe might be <em>spurious</em>: that is, they could occur just by chance, or by a series of confounds that may negate any conclusions we would want to draw. One example from <a class="reference external" href="https://www.tylervigen.com/spurious-correlations">Tyler Vigen’s Spurious Correlations website</a> is shown below:</p>
+<p><img alt="" src="../../../_images/mozzarella_civile_phd.png" /></p>
+<p>We can draw a directed graph for these two variables: in this case, there are no edges between them because there’s no causal relationship either way, and no confounding variable:</p>
+<p><img alt="" src="../../../_images/spurious.png" /></p>
+</section>
+<section id="the-marshmallow-experiment">
+<h3>The Marshmallow Experiment<a class="headerlink" href="#the-marshmallow-experiment" title="Link to this heading">#</a></h3>
+<p>Another example is the famous so-called “<a class="reference external" href="https://en.wikipedia.org/wiki/Stanford_marshmallow_experiment">marshmallow study</a>”. In this study, researchers presented children with a choice: either they could have one marshmallow immediately, or, if they waited 15 minutes, they could have two marshmallows. They followed the students for 30 years, and found that students who waited for the extra payout achieved greater success in life (as measured by the researchers). Although the original researchers cautioned people to avoid direct causal interpretations, the most common and widespread interpretation was causal: that children’s ability to delay gratification (i.e., to wait 15 minutes for a double marshmallow payout) caused them to succeed throughout their lives. Schools implemented coaching programs to help students build self-control and resist the urge to eat the first marshmallow.</p>
+<p>However, followup studies have shown a much more <a class="reference external" href="https://anderson-review.ucla.edu/new-study-disavows-marshmallow-tests-predictive-powers/">complex and nuanced story</a>: while many follow-up studies have shown an association, the predictive effect of resisting a marshmallow seems to diminish or disappear when controlling for factors such as socioeconomic background or other measures of self-control. Many scientists have argued that <strong>rather than self-control, what the study really measures is behavior in response to middle-class or upper-class upbringings</strong>: in other words, responding to environments without shortages.</p>
+<p>Stories like this one illustrate both the importance and the difficulty of determining causality from observational studies. If we could somehow determine that teaching small children self-control is guaranteed to have a large impact on their eventual life outcomes, then this seems like a worthwhile policy goal. This is even more true if the effect is true regardless of socioeconomic background. However, the numerous confounding variables and unclear direction of causality highlight the need for methods that can determine causality in such environments, outside of a randomized controlled trial.</p>
+</section>
+</section>
+<section id="simpson-s-paradox">
+<h2>Simpson’s Paradox<a class="headerlink" href="#simpson-s-paradox" title="Link to this heading">#</a></h2>
+<p>One counterintuitive problem that can come up with confounding variables is <strong>Simpson’s Paradox</strong>. Let’s start with a hypothetical example: suppose a group of restaurant critics spends two years sampling dishes from two popular restaurants, A and B. They rate every dish that they order with either a 👎 (didn’t like) or a 👍 (liked). They summarize the data in the following table:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/restaurants.csv&#39;</span><span class="p">)</span>
+<span class="n">food</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+    <span class="n">values</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;Restaurant&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Dish rating&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_3207/3868366422.py:2: FutureWarning: The provided callable &lt;built-in function sum&gt; is currently using DataFrameGroupBy.sum. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;sum&quot; instead.
+  food.pivot_table(
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Dish rating</th>
+      <th>👍</th>
+      <th>👎</th>
+    </tr>
+    <tr>
+      <th>Restaurant</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>120</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>80</td>
+      <td>20</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Just looking at this data, it seems like they like restaurant B’s food much better (80% success rate compared to 60% for restaurant A).</p>
+<p>But now, let’s suppose we learn that they collected their data from 2019-2020, and that the critics were much harsher in 2020 than in 2019, perhaps due to pandemic-induced gloom. Furthermore, we learn that Restaurant A specializes in take-out and delivery, which was the safest and most common way to order food in 2020.</p>
+<p>Motivated by this additional context, let’s break down the data by year:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">food</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+    <span class="n">values</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;Restaurant&#39;</span><span class="p">,</span> 
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Dish rating&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="nb">sum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_3207/4015891934.py:1: FutureWarning: The provided callable &lt;built-in function sum&gt; is currently using DataFrameGroupBy.sum. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;sum&quot; instead.
+  food.pivot_table(
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th colspan="2" halign="left">2019</th>
+      <th colspan="2" halign="left">2020</th>
+    </tr>
+    <tr>
+      <th>Dish rating</th>
+      <th>👍</th>
+      <th>👎</th>
+      <th>👍</th>
+      <th>👎</th>
+    </tr>
+    <tr>
+      <th>Restaurant</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>20</td>
+      <td>0</td>
+      <td>100</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>70</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Looking at this data, Restaurant A now looks better in both years! This is known as <strong>Simpson’s Paradox</strong>: Restaurant B looks better in the aggregate data, but Restaurant A looks better when we look at each year separately. How can we resolve this conundrum?</p>
+<p>Let’s take a moment to look at the numbers:</p>
+<ul class="simple">
+<li><p>In 2019 (first two columns), Restaurant A had a 100% (20/20) success rate with the critics, while Restaurant B had a 87.5% (70/80) success rate.</p></li>
+<li><p>In 2020 (last two columns), Restaurant A had a 55.6% (100/180) success rate, while restaurant B had a 50% (10/20) success rate.</p></li>
+</ul>
+<p>Why does this happen? It’s because of the confounding effect of the year (i.e., the pandemic). Both restaurant’s ratings were hurt a lot by the critics’ harsh pandemic scores, but since Restaurant A saw a lot more orders in 2020, its overall numbers were hurt more.</p>
+<p>Before continuing, let’s frame this question in the language of causal inference, so that we can use the intuition we’ve built up around confounding variables. Our question can be slightly rewritten as: does the critics’ choice of restaurant (A vs B) affect whether they like the food (and therefore give it a 👍 rating)? In this setting, our treatment is the choice of restaurant: A or B. Our outcome is whether or not they liked a dish (i.e., whether they gave it a 👍 rating). The confounder is when they ordered the dish. Why is this a confounder? Because it has a causal effect on both treatment and outcome. Ordering dishes in 2020 caused the critics to choose a takeout-friendly option more often (B). Ordering dishes in 2020 also caused the critics to give positive reviews (👍) less often.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/4HI30EwghPk"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<p>We can also represent this information in a directed graph, as we did earlier:</p>
+<p><img alt="" src="../../../_images/restaurant.png" /></p>
+<p>Note that we’ve used “year” as a confounder here, but that’s a little imprecise: it isn’t really the year that causes the change in the other two variables, but rather the pandemic.</p>
+<p>The pandemic (as measured in this case by the year) affected the data in two ways:</p>
+<ol class="arabic simple">
+<li><p>In 2020, the critics rated a lot more dishes from restaurant A.</p></li>
+<li><p>In 2020, the critics were much harsher.</p></li>
+</ol>
+<p>When looking at the data separated by year, we can see that they preferred restaurant A in both years. But, because of the two factors above, when aggregating the data, restaurant A looks worse.</p>
+<p>Note that despite the name, this isn’t really a paradox: this happens entirely because of the confounding factor.</p>
+<section id="optional-visualizing-simpson-s-paradox-with-baker-kramer-plots">
+<h3>(Optional) Visualizing Simpson’s Paradox with Baker-Kramer Plots<a class="headerlink" href="#optional-visualizing-simpson-s-paradox-with-baker-kramer-plots" title="Link to this heading">#</a></h3>
+<p>We can visualize the percentages in the bullet points above on a graph. Let the <span class="math notranslate nohighlight">\(x\)</span>-axis represent the percent of dishes ordered in 2020, during the pandemic (confounding variable). Let the <span class="math notranslate nohighlight">\(y\)</span>-axis represent the proportion of dishes liked (outcome). We’ll draw one line for each restaurant: the different lines show us the effect of the treatment.</p>
+<p>For the data broken down by year, each table shows us data where the proportion ordered in 2020 is always 0 (for the 2019 data) or 1 (for the 2020 data). This corresponds to the four marked points (two blue circles and two orange squares):</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">20</span><span class="o">/</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="o">/</span><span class="mi">180</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Restaurant A&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">70</span><span class="o">/</span><span class="mi">80</span><span class="p">,</span> <span class="mi">10</span><span class="o">/</span><span class="mi">20</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Restaurant B&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Proportion of dishes ordered in 2020&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Proportion of dishes liked&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../../_images/db98c59cff214b750999c956b3c888a75e0fa5fb88c3973258bdd68cb08ca629.png" src="../../../_images/db98c59cff214b750999c956b3c888a75e0fa5fb88c3973258bdd68cb08ca629.png" />
+</div>
+</div>
+<p>This plot shows that the critics prefer Restaurant A (blue line) over Restaurant B (orange line). But when we looked at the aggregate data in the first table above, we were comparing restaurant A’s dishes, which were mostly from 2020, to restaurant B’s dishes, which were mostly from 2019. This is shown with the large circle/square:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">20</span><span class="o">/</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="o">/</span><span class="mi">180</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Restaurant A&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">70</span><span class="o">/</span><span class="mi">80</span><span class="p">,</span> <span class="mi">10</span><span class="o">/</span><span class="mi">20</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Restaurant B&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mf">.9</span><span class="p">,</span> <span class="mf">.6</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mf">.2</span><span class="p">,</span> <span class="mf">.8</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Percent of dishes ordered in 2020&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Percentage of dishes liked&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../../_images/f1ec9b2fd2848b015c0335ab792ca444b01c6f02aedaa1fa6f52aa999708750b.png" src="../../../_images/f1ec9b2fd2848b015c0335ab792ca444b01c6f02aedaa1fa6f52aa999708750b.png" />
+</div>
+</div>
+<p>This plot is called a Baker-Kramer (or B-K) plot: it highlights that even though Restaurant A is better than Restaurant B, the confounding effect of the year makes Restaurant A look much worse.</p>
+</section>
+</section>
+<section id="berkson-s-paradox-and-colliders">
+<h2>Berkson’s Paradox and Colliders<a class="headerlink" href="#berkson-s-paradox-and-colliders" title="Link to this heading">#</a></h2>
+<p>Suppose that a baker decides to put out some of his best loaves of bread on display in the front window, to help attract customers. For every batch of bread he bakes, he rates the bread in that batch on flavor and appearance (from 1-10). There isn’t any correlation between flavor and appearance, so the scores look like this:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2026</span><span class="p">)</span>
+<span class="n">flavor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">appearance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">f_gray</span><span class="p">,</span> <span class="n">ax_gray</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax_gray</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">flavor</span><span class="p">,</span> <span class="n">appearance</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.45</span><span class="p">)</span>
+<span class="n">ax_gray</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">ax_gray</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Flavor&#39;</span><span class="p">)</span>
+<span class="n">ax_gray</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Appearance&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Appearance&#39;)
+</pre></div>
+</div>
+<img alt="../../../_images/d07faeb341d90e92d1e590c9bcdd2ed1da7aabf1133e0a3c0b0b89595d769433.png" src="../../../_images/d07faeb341d90e92d1e590c9bcdd2ed1da7aabf1133e0a3c0b0b89595d769433.png" />
+</div>
+</div>
+<p>He then decides to add up the flavor and appearance scores: for any batch with a combined score greater than 10, he’ll display a loaf from that batch in the front window.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_color</span><span class="p">,</span> <span class="n">ax_color</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">is_on_display</span> <span class="o">=</span> <span class="p">(</span><span class="n">flavor</span> <span class="o">+</span> <span class="n">appearance</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ax_color</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">flavor</span><span class="p">[</span><span class="n">is_on_display</span><span class="p">],</span> <span class="n">appearance</span><span class="p">[</span><span class="n">is_on_display</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;On display&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.45</span>
+<span class="p">)</span>
+<span class="n">ax_color</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">flavor</span><span class="p">[</span><span class="o">~</span><span class="n">is_on_display</span><span class="p">],</span> <span class="n">appearance</span><span class="p">[</span><span class="o">~</span><span class="n">is_on_display</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;In the back&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.45</span>
+<span class="p">)</span>
+<span class="n">ax_color</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax_color</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="n">ax_color</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">ax_color</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Flavor&#39;</span><span class="p">)</span>
+<span class="n">ax_color</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Appearance&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../../_images/59e1d6473aecbfc289ea5d59b96d30b92b7ae829cefd92e64dd21de428a77507.png" src="../../../_images/59e1d6473aecbfc289ea5d59b96d30b92b7ae829cefd92e64dd21de428a77507.png" />
+</div>
+</div>
+<p>At the end of the day, he gives the loaves from the display case (shown in blue above) to his friends to eat. His friends notice that there’s a negative correlation between appearance and flavor: the loaves that look nicer tend to taste worse. When they bring this issue up with the baker, he shows them the first graph, and tells them that there isn’t any correlation.</p>
+<p>Who’s right?</p>
+<p>There are some similarities to the earlier example with Simpson’s Paradox: we have two variables (flavor/appearance) whose relationship changes when a third variable (display) is introduced. But there’s a very important difference here: the direction of causality. If we draw a causal graph for these variables, it would look like this:</p>
+<p><img alt="" src="../../../_images/berkson.png" /></p>
+<p>Because the direction of causality is different, display isn’t a confounder here: we instead call it a <strong>collider</strong>.</p>
+<p>If we include colliders such as this one in our analyses, we’re likely to draw incorrect conclusions. Here, the association observed by the baker’s friends does not reflect any causal relationship between flavor and appearance, but instead only is caused by how the baker chooses which loaves go into the display case.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/9qNIKKxQzIU"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="more-examples">
+<h2>More Examples<a class="headerlink" href="#more-examples" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Berkeley graduate admissions: The <a class="reference external" href="https://mlstory.org/causal.html#the-limitations-of-observation">Patterns, Predictions, and Actions</a> book has an excellent discussion of this well-known case of Simpson’s Paradox.</p></li>
+<li><p>Simpson’s Paradox also shows up in sports (e.g., <a class="reference external" href="http://www.math.kent.edu/~darci/simpson/bballexamples.html">basketball</a> and <a class="reference external" href="https://metro.co.uk/2014/01/17/roger-federer-is-rubbish-at-tennis-because-he-tries-too-hard-4264338/">tennis</a>), <a class="reference external" href="https://aip.scitation.org/doi/10.1063/1.4977784">physics</a>, <a class="reference external" href="http://causality.cs.ucla.edu/blog/index.php/2020/07/06/race-covid-mortality-and-simpsons-paradox-by-dana-mackenzie/">COVID-19 mortality rates</a>, and much more.</p></li>
+<li><p>Continuous data: <em>coming soon</em></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/chapters/04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 4: Causal Inference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_quantifying_association.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Quantifying Association</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-vs-causation">Prediction vs Causation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mistaking-correlation-and-association-for-causation">Mistaking correlation (and association) for causation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confounding-variables">Confounding variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sunburns-and-ice-cream-sales">Sunburns and ice cream sales</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cameras-and-social-media-likes">Cameras and social media likes</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spurious-correlations">Spurious correlations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-marshmallow-experiment">The Marshmallow Experiment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpson-s-paradox">Simpson’s Paradox</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-visualizing-simpson-s-paradox-with-baker-kramer-plots">(Optional) Visualizing Simpson’s Paradox with Baker-Kramer Plots</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#berkson-s-paradox-and-colliders">Berkson’s Paradox and Colliders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples">More Examples</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Data 102 Staff
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

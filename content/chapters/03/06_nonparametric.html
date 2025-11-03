@@ -1,0 +1,1212 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Nonparametric methods &#8212; Data, Inference, and Decisions</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/03/06_nonparametric';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Neural networks and backpropagation" href="07_neural_networks.html" />
+    <link rel="prev" title="Uncertainty Quantification" href="05_uncertainty_quantification.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Data, Inference, and Decisions</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data, Inference, and Decisions
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/04_binary_classification.html">Binary Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/05_decision_theory.html">Decision Theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02/intro.html">Chapter 2: Bayesian modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02/01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/02_hierarchical_models.html">Hierarchical Bayesian Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/03_graphical_models.html">Graphical Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/04_inference.html">Bayesian Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02/05_inference_with_sampling.html">Bayesian Inference with Sampling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 3: Prediction</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_prediction.html">Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_regression_review.html">Linear Regression Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_glms.html">Generalized Linear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_model_checking.html">Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Nonparametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_neural_networks.html">Neural Networks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/03_causality_potential_outcomes.html">Causality and Potential Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/06_instrumental_variables.html">Causality in Observational Studies: Natural Experiments</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/intro.html">Chapter 5: Tail Bounds and Concentration Inequalities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/01_concentration.html">Tail Bounds and Concentration Inequalities</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/03/06_nonparametric.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/chapters/03/06_nonparametric.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Nonparametric methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">Definitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-and-contrasting-logistic-regression-and-k-nearest-neighbors">Comparing and Contrasting: Logistic Regression and <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-toy-dataset">A Toy Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-logistic-regression-to-the-toy-dataset">Applying Logistic Regression to the Toy Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-a-k-nearest-neighbor-classifier-to-the-toy-dataset">Applying a <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbor Classifier to the Toy Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pros-and-cons-of-logistic-regression-and-k-nearest-neighbors">Pros and Cons of Logistic Regression and <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic regression</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors"><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees-and-random-forests">Decision trees and random forests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">Decision trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noisy-data-when-decision-trees-fail">Noisy Data: When Decision Trees Fail</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forests">Random Forests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-aggregation-bagging">Bootstrap Aggregation (Bagging)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-feature-selection">Random feature selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretability">Interpretability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-logistic-regression">Interpreting logistic regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-logistic-regression-with-feature-engineering">Interpreting logistic regression with feature engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explaining-predictions-from-k-nearest-neighbors">Explaining Predictions from k-Nearest Neighbors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpeting-a-decision-tree">Interpeting a Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-random-forests">Interpreting Random Forests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanations-for-black-box-models">Explanations for Black-Box Models</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="nonparametric-methods">
+<h1>Nonparametric methods<a class="headerlink" href="#nonparametric-methods" title="Link to this heading">#</a></h1>
+<section id="definitions">
+<h2>Definitions<a class="headerlink" href="#definitions" title="Link to this heading">#</a></h2>
+<p>The terms “parametric” and “nonparametric” have several different meanings. We’ll define two, and only focus on one of them:</p>
+<p><strong>Definition 1 (more often used in statistics): this is the version we’ll focus on in Data 102</strong></p>
+<ul class="simple">
+<li><p>A <strong>parametric</strong> method is one where we make specific assumptions about the relationships between data points: for example, in linear regression, we assume that the target variable <span class="math notranslate nohighlight">\(y\)</span> is a linear function of the input predictors <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span></p></li>
+<li><p>A <strong>nonparametric</strong> method is one where we do not make any assumptions about the relationships between the target and predictor variables: instead, we only aim to find the best possible way to make predictions.</p></li>
+</ul>
+<p>According to this definition, linear regression is an example of a parametric method, because we assume (a) a linear relationship between predictors, coefficients, and outcome, and (b) <a class="reference external" href="https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity">homoscedastic</a> normally-distributed noise around the average prediction. On the other hand, <span class="math notranslate nohighlight">\(k\)</span>-nearest neighbors is an example of a nonparametric method: instead of making any assumptions about the distribution of <span class="math notranslate nohighlight">\(x\)</span> or <span class="math notranslate nohighlight">\(y\)</span>, our prediction is based only on the <span class="math notranslate nohighlight">\(k\)</span> nearest neighbors in the training set.</p>
+<p><strong>Definition 2 (more often used in computer science):</strong></p>
+<ul class="simple">
+<li><p>A <strong>parametric</strong> model is one where the number of parameters (e.g., number of regression coefficients, etc.) is finite, and does not change with the size of the input data.</p></li>
+<li><p>A <strong>nonparametric</strong> model is one where the number of parameters is either infinite, or increases with the number of data points.</p></li>
+</ul>
+<p>Before we learn more about nonparametric methods, we’ll start by putting them in context against the backdrop of the parametric methods that we’ve discussed so far in this book (and that you’ve likely spent a lot of time learning about in your previous statistics and data science courses).</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/DcjHq-5jpko"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="comparing-and-contrasting-logistic-regression-and-k-nearest-neighbors">
+<h2>Comparing and Contrasting: Logistic Regression and <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors<a class="headerlink" href="#comparing-and-contrasting-logistic-regression-and-k-nearest-neighbors" title="Link to this heading">#</a></h2>
+<p>To understand the strengths and weaknesses of the two different approaches for classification, we’ll create a simple synthetic dataset and compare two models that we’re already familiar with: logistic regression (parametric) and <span class="math notranslate nohighlight">\(k\)</span>-nearest neighbor classification (nonparametric).</p>
+<section id="a-toy-dataset">
+<h3>A Toy Dataset<a class="headerlink" href="#a-toy-dataset" title="Link to this heading">#</a></h3>
+<p>We’ll set up a training dataset with points in a smaller range, and a test dataset with points in a larger range, to help us understand how well the methods generalize.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_test</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">N_train</span> <span class="o">=</span> <span class="mi">150</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2024</span><span class="p">)</span>
+
+<span class="c1"># Create a training dataset</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">N_train</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+<span class="c1"># Create a test dataset</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="n">N_test</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">X_test</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">draw_results</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">is_final</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">plot_title</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$x_1$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$x_2$&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">is_final</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_results</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;Training data&#39;</span><span class="p">)</span>
+<span class="n">draw_results</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;Test data (ground truth)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/c8006f4c30ec1d3688f7ca26d6dabd1332cf9784720c511f208bcf6e0b00c9c2.png" src="../../../_images/c8006f4c30ec1d3688f7ca26d6dabd1332cf9784720c511f208bcf6e0b00c9c2.png" />
+<img alt="../../../_images/5318dcf7901f44e9f97382172aa456e81afe91344d5567cf9942d113595bb8e2.png" src="../../../_images/5318dcf7901f44e9f97382172aa456e81afe91344d5567cf9942d113595bb8e2.png" />
+</div>
+</div>
+<p>We often call datasets like these “toy datasets”: they’re helpful for illustrating a problem, but they’re oversimplified. Real datasets are usually noiser, higher-dimensional, and more complex. Whenever you see an example on toy datasets, it’s important to keep in mind that there may be additional complications in your dataset.</p>
+</section>
+<section id="applying-logistic-regression-to-the-toy-dataset">
+<h3>Applying Logistic Regression to the Toy Dataset<a class="headerlink" href="#applying-logistic-regression-to-the-toy-dataset" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(p\)</span> be our predicted probability that <span class="math notranslate nohighlight">\(y\)</span> is 1 based on <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>. Then logistic regression says:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+p = \sigma(\beta_1 x_1 + \beta_2 x_2) \\
+\underbrace{\log\left(\frac{p}{1-p}\right)}_{\text{logit: inverse sigmoid}} = \beta_1 x_1 + \beta_2 x_2
+\end{split}\]</div>
+<p>Recall that logistic regression tries to find a linear function of <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> to use as the decision boundary. In this case, that corresponds to drawing a line on the graph above. Unfortunately, for this dataset it’s nearly impossible to find any linear decision boundary with an accuracy greater than <span class="math notranslate nohighlight">\(50\%\)</span> (i.e., random chance guessing): take a moment to convince yourself this is true by mentally drawing lines on the graph above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fit_and_predict_and_draw_results</span><span class="p">(</span>
+    <span class="n">model_class</span><span class="p">,</span> <span class="n">model_args</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+<span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model_class</span><span class="p">(</span><span class="o">**</span><span class="n">model_args</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="c1"># Use the model to predict on the test set</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_hat</span> <span class="o">=</span> <span class="p">(</span><span class="n">probs</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+    <span class="n">f</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+    <span class="c1"># Visualize the results</span>
+    <span class="n">draw_results</span><span class="p">(</span>
+        <span class="n">X_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">probs</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">plot_title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Predicted P(y=1) (</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+        <span class="n">is_final</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">draw_results</span><span class="p">(</span>
+        <span class="n">X_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">plot_title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Prediction (</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">)&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="n">y_hat</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy on test set: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="n">fit_and_predict_and_draw_results</span><span class="p">(</span>
+    <span class="n">LogisticRegression</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">),</span> <span class="s1">&#39;logistic regression&#39;</span><span class="p">,</span> 
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.626
+</pre></div>
+</div>
+<img alt="../../../_images/45cd8576b1e7aff7d9699130d368d57df376b613a365c1de916f5a5814b0e1a9.png" src="../../../_images/45cd8576b1e7aff7d9699130d368d57df376b613a365c1de916f5a5814b0e1a9.png" />
+</div>
+</div>
+<p>As expected, the overall accuracy is close to <span class="math notranslate nohighlight">\(0.5\)</span> (which is what we’d get if we predicted completely at random). Logistic regression (without any feature engineering) is a poor choice for this data.</p>
+</section>
+<section id="applying-a-k-nearest-neighbor-classifier-to-the-toy-dataset">
+<h3>Applying a <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbor Classifier to the Toy Dataset<a class="headerlink" href="#applying-a-k-nearest-neighbor-classifier-to-the-toy-dataset" title="Link to this heading">#</a></h3>
+<p>Recall that a <span class="math notranslate nohighlight">\(k\)</span>-nearest neighbor classifier classifies each point based on the label of the <span class="math notranslate nohighlight">\(k\)</span> nearest points in the training set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="n">fit_and_predict_and_draw_results</span><span class="p">(</span>
+    <span class="n">KNeighborsClassifier</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> <span class="s1">&#39;kNN&#39;</span><span class="p">,</span> 
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.952
+</pre></div>
+</div>
+<img alt="../../../_images/6d1d8bfc00c4a4da96c7ef13f02d5904923e00cce0c0530e9551b2820a70fa4d.png" src="../../../_images/6d1d8bfc00c4a4da96c7ef13f02d5904923e00cce0c0530e9551b2820a70fa4d.png" />
+</div>
+</div>
+<p>The kNN model does much better on this dataset. Best of all, we didn’t have to do any feature engineering or parameter tuning: it just worked out of the box.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/YCfdENsb_YI"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/AfBgttM7wFc"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="pros-and-cons-of-logistic-regression-and-k-nearest-neighbors">
+<h3>Pros and Cons of Logistic Regression and <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors<a class="headerlink" href="#pros-and-cons-of-logistic-regression-and-k-nearest-neighbors" title="Link to this heading">#</a></h3>
+<p>Let’s walk through a few of the pros and cons of these two methods. Note that this is far from an exhaustive list!</p>
+<section id="logistic-regression">
+<h4>Logistic regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h4>
+<p><strong>PROS</strong>:</p>
+<ul class="simple">
+<li><p>Simple model with only one parameter per input feature (in this case, 2).</p></li>
+<li><p>Parameters can be easily interpreted in a meaningful way: a coefficient <span class="math notranslate nohighlight">\(\beta_2\)</span> tells you “If feature <span class="math notranslate nohighlight">\(x_2\)</span> increases by a certain amount <span class="math notranslate nohighlight">\(a\)</span>, the log-odds of <span class="math notranslate nohighlight">\(y=1\)</span> increase by <span class="math notranslate nohighlight">\(\beta_2 a\)</span>.”</p></li>
+<li><p>The loss function is convex, so there’s one best answer and we’re guaranteed to get to it.</p></li>
+<li><p>Storing/saving the model is cheap, since there are only a few parameters</p></li>
+</ul>
+<p><strong>CONS</strong></p>
+<ul class="simple">
+<li><p>Makes an implicit assumption of linear interactions between the inputs (e.g., can’t model something like <span class="math notranslate nohighlight">\(y = \text{sign}(x_1 x_2)\)</span> as above)</p></li>
+<li><p>Modeling complex or nonlinear interactions requires good feature engineering</p></li>
+<li><p>Base model is limited in complexity: any complex/nonlinear interactions require lots of feature engineering</p></li>
+</ul>
+</section>
+<section id="k-nearest-neighbors">
+<h4><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors<a class="headerlink" href="#k-nearest-neighbors" title="Link to this heading">#</a></h4>
+<p><strong>PROS</strong>:</p>
+<ul class="simple">
+<li><p>Makes no assumptions whatsoever about the data (other than that the training data is a representative sample)</p></li>
+<li><p>Easy to implement and understand how it works</p></li>
+</ul>
+<p><strong>CONS</strong></p>
+<ul class="simple">
+<li><p>Predictions can be interpreted, but we can’t do any more meaningful analysis than “this new point looks like these 5 points I saw before, and 3 of those had <span class="math notranslate nohighlight">\(y=1\)</span>, so that’s why I predicted <span class="math notranslate nohighlight">\(y=1\)</span>”.</p></li>
+<li><p>Doesn’t work as well in high dimensions (but there are some ways around this)</p></li>
+<li><p>Saving the model requires saving all the training points (but there are some ways around this)</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/SoDiaODgEDQ"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+</section>
+</section>
+<section id="decision-trees-and-random-forests">
+<h2>Decision trees and random forests<a class="headerlink" href="#decision-trees-and-random-forests" title="Link to this heading">#</a></h2>
+<section id="decision-trees">
+<h3>Decision trees<a class="headerlink" href="#decision-trees" title="Link to this heading">#</a></h3>
+<p>A decision tree is a method for classification and regression that uses a tree-like structure to decide what value to predict for a point. We’ll start by taking the entire data. At the root of the tree, we’ll split the data based on a particular value of either <span class="math notranslate nohighlight">\(x_1\)</span> or <span class="math notranslate nohighlight">\(x_2\)</span>. We’ll then repeat the process for each split, building the tree as deep as we see fit. Our goal in splitting the points is to create as homogeneous a group as possible (in terms of <span class="math notranslate nohighlight">\(y\)</span>) at the leaves of the tree. Let’s look at how we might construct a decision tree for this problem.</p>
+<ol class="arabic simple">
+<li><p>Our first split is the hardest: we can see that no matter which value of <span class="math notranslate nohighlight">\(x_1\)</span> (or <span class="math notranslate nohighlight">\(x_2\)</span> we choose, both sides of the split will have half yellow points and half purple points. But, we know that there’s a meaningful difference between points where <span class="math notranslate nohighlight">\(x_1 &gt; 0\)</span> and points where <span class="math notranslate nohighlight">\(x_1 &lt; 0\)</span>, so let’s choose our first split at <span class="math notranslate nohighlight">\(x_1 = 0\)</span>. (We could have just as well chosen <span class="math notranslate nohighlight">\(x_2 = 0\)</span> too: the choice of <span class="math notranslate nohighlight">\(x_1\)</span> is arbitrary even though the choice of threshold value <span class="math notranslate nohighlight">\(0\)</span> was not).</p></li>
+<li><p>Let’s start by considering one half of the above split: points where <span class="math notranslate nohighlight">\(x_1 &gt; 0\)</span>, the right half of the plots above. For these points, there’s a very natural split at <span class="math notranslate nohighlight">\(x_2 = 0\)</span> that gives us completely homogeneous groups: everything above the split is yellow (<span class="math notranslate nohighlight">\(y=1\)</span>), and everything below is purple (<span class="math notranslate nohighlight">\(y=0\)</span>). At this point, we’re done splitting this branch of the tree: both sub-branches are completely homogeneous.</p></li>
+<li><p>Next, we’ll go back to the points where <span class="math notranslate nohighlight">\(x_1 &lt; 0\)</span>. It turns out that we can use the same split as before, at <span class="math notranslate nohighlight">\(x_2 = 0\)</span>. In general, decision trees give us the flexibility to make a different split on this side of the tree! It just so happens with this toy dataset that the same sub-split (<span class="math notranslate nohighlight">\(x_2 = 0\)</span>) works on both sides of our original split (<span class="math notranslate nohighlight">\(x_1 = 0\)</span>).</p></li>
+</ol>
+<p>And now, we’re done. Here’s the entire tree:</p>
+<p><img alt="" src="../../../_images/tree_small2.jpeg" /></p>
+<p>To predict the <span class="math notranslate nohighlight">\(y\)</span>-value for a new point, we start at the root (top), and continue down until we reach a leaf node. This tree ended up very symmetric, but in many problems that won’t be the case.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/sjfqHalgC9E"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<p>Here’s how it works in scikit-learn:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="n">fit_and_predict_and_draw_results</span><span class="p">(</span>
+    <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="p">{},</span> <span class="s1">&#39;decision tree&#39;</span><span class="p">,</span> 
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.99
+</pre></div>
+</div>
+<img alt="../../../_images/4002f6d80508f2f0b0ee90b1602393edb82a33f1277497843d51ec4a9ae0d98e.png" src="../../../_images/4002f6d80508f2f0b0ee90b1602393edb82a33f1277497843d51ec4a9ae0d98e.png" />
+</div>
+</div>
+<p>The decision tree is almost perfect.</p>
+</section>
+<section id="noisy-data-when-decision-trees-fail">
+<h3>Noisy Data: When Decision Trees Fail<a class="headerlink" href="#noisy-data-when-decision-trees-fail" title="Link to this heading">#</a></h3>
+<p>Small decision trees work great for problems where the underlying structure is simple. But what if we our data are noisier? Let’s randomly flip a few data points (<span class="math notranslate nohighlight">\(10\%\)</span> of our training data) and see what happens:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train_noisy</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">pts_to_flip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N_train</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span>
+<span class="n">y_train_noisy</span><span class="p">[</span><span class="n">pts_to_flip</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">y_train_noisy</span><span class="p">[</span><span class="n">pts_to_flip</span><span class="p">]</span>
+
+<span class="n">draw_results</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">y_train_noisy</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;Training data with noise&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/5aac230f57f67437dad985741066e946023c3456e7b3a268acb337cfb3807f2c.png" src="../../../_images/5aac230f57f67437dad985741066e946023c3456e7b3a268acb337cfb3807f2c.png" />
+</div>
+</div>
+<p>Now there are a small handful of points where the training label is wrong. Let’s try fitting a decision tree again: we’ll train on the noisy data, but we’ll test on the good data, so that we can evaluate whether the model learns the true pattern despite the noise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note that we use the noisy training data from above by passing in `y_train_noisy`</span>
+<span class="n">fit_and_predict_and_draw_results</span><span class="p">(</span>
+    <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="p">{},</span> <span class="s1">&#39;decision tree trained on noisy data&#39;</span><span class="p">,</span> 
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train_noisy</span><span class="p">,</span> <span class="n">y_test</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.746
+</pre></div>
+</div>
+<img alt="../../../_images/a494332918f47be60e5f62ebd07e14258e7c001a76149faeed8b9b4159108da4.png" src="../../../_images/a494332918f47be60e5f62ebd07e14258e7c001a76149faeed8b9b4159108da4.png" />
+</div>
+</div>
+<p>Changing just <span class="math notranslate nohighlight">\(10\%\)</span> of the points completely wrecked the tree! Our accuracy dropped to around <span class="math notranslate nohighlight">\(75\%\)</span>. While this is a toy dataset, it’s not uncommon in real-world datasets to see <span class="math notranslate nohighlight">\(10\%\)</span> of the data be corrupted by noise.</p>
+</section>
+</section>
+<section id="random-forests">
+<h2>Random Forests<a class="headerlink" href="#random-forests" title="Link to this heading">#</a></h2>
+<p>We’ll solve this problem by using a random forest instead of a decision tree. Random forests use are built using decision trees, and apply two key ideas: <strong>bootstrap aggregation, or bagging</strong> and <strong>random feature selection</strong>.</p>
+<section id="bootstrap-aggregation-bagging">
+<h3>Bootstrap Aggregation (Bagging)<a class="headerlink" href="#bootstrap-aggregation-bagging" title="Link to this heading">#</a></h3>
+<p>We’ll fix this by using many trees instead of just one: this is known as an <strong>ensemble</strong>. We’ll train each tree separately, and then combine their decisions when making a prediction. Ideally, we would get a fresh dataset for each one, and train each tree separately. outUnfortunately, we usually can’t get that many separate datasets, and if we divide our training dataset into 100, we’re losing out on valuable data we could use to train each of the trees.</p>
+<p>But, we’ve already seen a way around this: we can use the bootstrap! Notice that here, we’re using bootstrap for a completely different purpose than before: instead of using it to quantify uncertainty, we’re using it to mitigate the effect of noise in our data. This is called <strong>Bootstrap AGGregation</strong>, or <strong>bagging</strong>.</p>
+</section>
+<section id="random-feature-selection">
+<h3>Random feature selection<a class="headerlink" href="#random-feature-selection" title="Link to this heading">#</a></h3>
+<p>The second big idea is <strong>random feature selection</strong>. In this toy example, we’ve been working with 2 features <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>. But in many real problems, you may have hundreds or even thousands of features. Using the algorithm we have above, for a decision tree to properly deal with that many features, it would have to be extremely deep (since we’d need one node/split for every feature that’s relevant). Since we’re using multiple trees, we don’t need each tree to be perfect. So, we’ll just choose a subset of the features for each tree.</p>
+<p>In practice, for <span class="math notranslate nohighlight">\(K\)</span> features, people use <span class="math notranslate nohighlight">\(K/3\)</span> features per tree for <strong>regression</strong> and <span class="math notranslate nohighlight">\(\sqrt{K}\)</span> features per tree for <strong>classification</strong>.</p>
+<p>So, here’s how the random forest algorithm works: we train a large number of trees independently, where each one is trained on a bootstrap sample of the data and on a smaller number of features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(150, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="n">fit_and_predict_and_draw_results</span><span class="p">(</span>
+    <span class="n">RandomForestClassifier</span><span class="p">,</span> <span class="p">{},</span> <span class="s1">&#39;random forest trained on noisy data&#39;</span><span class="p">,</span> 
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train_noisy</span><span class="p">,</span> <span class="n">y_test</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.958
+</pre></div>
+</div>
+<img alt="../../../_images/b937227f5d4d3f07c0a4ee30f297cbed366fe238023c05b537b8be6454ecee38.png" src="../../../_images/b937227f5d4d3f07c0a4ee30f297cbed366fe238023c05b537b8be6454ecee38.png" />
+</div>
+</div>
+<p>The random forest achieves <span class="math notranslate nohighlight">\(95\%\)</span> training accuracy. Remember that the labels in our training data was only <span class="math notranslate nohighlight">\(90\%\)</span> accurate, so <span class="math notranslate nohighlight">\(95\%\)</span> here is very impressive!</p>
+<p>There are a lot of important details that we haven’t covered here. Some of these (e.g., choosing the number of trees) are hyperparameters that we have to decide on using something like cross-validation, while others (e.g., how we decide the best place to split at each iteration while building a tree) are an important part of the algorithm that’s beyond what we’ll cover in this class.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/CZObqvT_gWU"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+</section>
+<section id="interpretability">
+<h2>Interpretability<a class="headerlink" href="#interpretability" title="Link to this heading">#</a></h2>
+<p>How do we interpret the models we’ve developed? Let’s look at the results we already computed before, but now we’ll also interpret the models themselves.</p>
+<section id="interpreting-logistic-regression">
+<h3>Interpreting logistic regression<a class="headerlink" href="#interpreting-logistic-regression" title="Link to this heading">#</a></h3>
+<p>In logistic regression (or any GLM), the main way we interpret the model is by looking at the coefficients. As discussed in previous sections, we can interpret a coefficient <span class="math notranslate nohighlight">\(\beta_i\)</span> by saying “if <span class="math notranslate nohighlight">\(x_i\)</span> increases by <span class="math notranslate nohighlight">\(t\)</span>, then <span class="math notranslate nohighlight">\(LinkFunction(y)\)</span> increases by <span class="math notranslate nohighlight">\(\beta_i \times t\)</span>. In the case of logistic regression, this corresopnds to the log-odds increasing by <span class="math notranslate nohighlight">\(t \times \beta_i\)</span>. So, let’s look at the coefficients for our logistic regression model, by using the <code class="docutils literal notranslate"><span class="pre">.coef_</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> linear models:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logistic_model</span> <span class="o">=</span> <span class="n">fit_and_predict_and_draw_results</span><span class="p">(</span>
+    <span class="n">LogisticRegression</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">),</span> <span class="s1">&#39;logistic regression&#39;</span><span class="p">,</span> 
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+<span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients:&#39;</span><span class="p">,</span> <span class="n">logistic_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.626
+Coefficients: [[-0.03462649  0.05539163]]
+</pre></div>
+</div>
+<img alt="../../../_images/45cd8576b1e7aff7d9699130d368d57df376b613a365c1de916f5a5814b0e1a9.png" src="../../../_images/45cd8576b1e7aff7d9699130d368d57df376b613a365c1de916f5a5814b0e1a9.png" />
+</div>
+</div>
+<p>This tells us that for an increase of 1 in <span class="math notranslate nohighlight">\(x_1\)</span>, the log-odds decreases by <span class="math notranslate nohighlight">\(0.03\)</span>. Unfortunately, this interpretion is meaningless, because the model does not accurately reflect the patterns in the data! This is an important lesson: the interpretation of a model is, at best, only as good as the model itself.</p>
+</section>
+<section id="interpreting-logistic-regression-with-feature-engineering">
+<h3>Interpreting logistic regression with feature engineering<a class="headerlink" href="#interpreting-logistic-regression-with-feature-engineering" title="Link to this heading">#</a></h3>
+<p>Up until now, we’ve painted logistic regression as being a poor choice for this problem. But in reality, linear models are more than capable of making predictions when there are nonlinear patterns: we just need to use <strong>feature engineering</strong> to define good features.</p>
+<p>For this particular problem, the feature <span class="math notranslate nohighlight">\(x_1 \times x_2\)</span> would be particularly useful, since it captures the nonlinear interaction that’s most important to the problem. We’ll add this as a third column in our matrix of predictors, and then try logistic regression:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="c1"># Create a new feature: x1 * x2</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_mult_feature</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns an array like X, but with a new feature that&#39;s X1 * X2&quot;&quot;&quot;</span>
+    <span class="n">new_feature</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">new_feature</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]])</span>
+
+<span class="c1"># Define new versions of X with the extra feature</span>
+<span class="n">X_train_feat</span> <span class="o">=</span> <span class="n">add_mult_feature</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_feat</span> <span class="o">=</span> <span class="n">add_mult_feature</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">logistic_model_feats</span> <span class="o">=</span> <span class="n">fit_and_predict_and_draw_results</span><span class="p">(</span>
+    <span class="n">LogisticRegression</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">),</span> <span class="s1">&#39;logistic regression w/ $x_1 * x_2$ feat&#39;</span><span class="p">,</span> 
+    <span class="n">X_train_feat</span><span class="p">,</span> <span class="n">X_test_feat</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.996
+</pre></div>
+</div>
+<img alt="../../../_images/28f4b799df4e6b4277d81c9e98b5909ac215a4b0b09e44b1b7efb9528056b3ea.png" src="../../../_images/28f4b799df4e6b4277d81c9e98b5909ac215a4b0b09e44b1b7efb9528056b3ea.png" />
+</div>
+</div>
+<p>Unsurprisingly, this model does <em>much</em> better! Now that we’ve resolved our issues with the model’s accuracy, let’s see if we can interpret the coefficients:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logistic_model_feats</span><span class="o">.</span><span class="n">coef_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 139.23624127,  -30.04770306, 9686.74207127]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This tells us that increases in <span class="math notranslate nohighlight">\(x_1\)</span> or <span class="math notranslate nohighlight">\(x_2\)</span> by themselves result in relatively small changes in the log-odds. But, the third feature, <span class="math notranslate nohighlight">\(x_1 \times x_2\)</span>, has a coefficient that’s three orders of magnitude larger! We can interpret this as saying that an increase in <span class="math notranslate nohighlight">\(x_1 \times x_2\)</span> leads to very large increases in the log-odds, which is exactly the pattern we observe when looking at the data: positive values of <span class="math notranslate nohighlight">\(x_1 \times x_2\)</span> are labeled with “1”, while negative values are labeled with “0”.</p>
+</section>
+<section id="explaining-predictions-from-k-nearest-neighbors">
+<h3>Explaining Predictions from k-Nearest Neighbors<a class="headerlink" href="#explaining-predictions-from-k-nearest-neighbors" title="Link to this heading">#</a></h3>
+<p>When looking at a prediction from a kNN model, it’s much harder to draw the same broad conclusions we did above by using the GLM coefficients. To make general statements about what the kNN classifier will do, we’d have to be able to understand all the training data points. In this simple two-dimensional example, this might be feasible by looking at the decision boundaries. But, in higher dimensions, this is much more difficult! Because of this, we say that kNN classifiers are less easily <strong>interpretable</strong>.</p>
+<p>Instead of trying to interpret the model holistically, we’ll focus only on individual predictions. For any individual prediction made by a kNN classifier, we can always provide the <span class="math notranslate nohighlight">\(k\)</span> nearest neighbors in the training set that contributed to that decision, along with the labels for each. This can often provide important insights into why a prediction was made in a particular way. We’ll call these <strong>explanations</strong> for each individual prediction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="n">fit_and_predict_and_draw_results</span><span class="p">(</span>
+    <span class="n">KNeighborsClassifier</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> <span class="s1">&#39;kNN&#39;</span><span class="p">,</span> 
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.952
+</pre></div>
+</div>
+<img alt="../../../_images/6d1d8bfc00c4a4da96c7ef13f02d5904923e00cce0c0530e9551b2820a70fa4d.png" src="../../../_images/6d1d8bfc00c4a4da96c7ef13f02d5904923e00cce0c0530e9551b2820a70fa4d.png" />
+</div>
+</div>
+<p>Consider the misclassified point around <span class="math notranslate nohighlight">\((0.2, -2.9)\)</span>. If we ask why this point has been misclassified, the answer is in the training set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_results</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">plot_title</span><span class="o">=</span><span class="s1">&#39;Training data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/c8006f4c30ec1d3688f7ca26d6dabd1332cf9784720c511f208bcf6e0b00c9c2.png" src="../../../_images/c8006f4c30ec1d3688f7ca26d6dabd1332cf9784720c511f208bcf6e0b00c9c2.png" />
+</div>
+</div>
+<p>We can see that the bottom-left portion of quadrant IV is rather sparse in our training datsaset. If we consider the point at <span class="math notranslate nohighlight">\((0.2, -2.9)\)</span>, we can see that it’s likely to be equidistant to the “1” (yellow) points toward the bottom of quadrant III! This is the cause of the misclassification.</p>
+<p>So, for any prediction obtained from a k-nearest neighbors classifier, we can obtain an <strong>explanation</strong>, even if the model itself isn’t as amenable to <strong>interpretation</strong>.</p>
+</section>
+<section id="interpeting-a-decision-tree">
+<h3>Interpeting a Decision Tree<a class="headerlink" href="#interpeting-a-decision-tree" title="Link to this heading">#</a></h3>
+<p>Are decision trees interpretable? We’ll see that the answer depends on the size of the tree. We’ll start with the tree trained on the clean (non-noisy) dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="n">tree_model</span> <span class="o">=</span> <span class="n">fit_and_predict_and_draw_results</span><span class="p">(</span>
+    <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="p">{},</span> <span class="s1">&#39;decision tree&#39;</span><span class="p">,</span> 
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.99
+</pre></div>
+</div>
+<img alt="../../../_images/4002f6d80508f2f0b0ee90b1602393edb82a33f1277497843d51ec4a9ae0d98e.png" src="../../../_images/4002f6d80508f2f0b0ee90b1602393edb82a33f1277497843d51ec4a9ae0d98e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_tree</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plot_tree</span><span class="p">(</span><span class="n">tree_model</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;x2&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/6cc660fd2be8f1ef3e337b9268d1a3ac83aa4430281177526c51258270375c80.png" src="../../../_images/6cc660fd2be8f1ef3e337b9268d1a3ac83aa4430281177526c51258270375c80.png" />
+</div>
+</div>
+<p>While the top of the tree is somewhat counterintuitive due to the arbitrary nature of the initial split, we can see that the lower layers are easy to interpret: we split at <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> values close to 0.</p>
+<p>What about the tree that was trained on the noisy version of the data?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="n">tree_model_from_noisy_y</span> <span class="o">=</span> <span class="n">fit_and_predict_and_draw_results</span><span class="p">(</span>
+    <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="p">{},</span> <span class="s1">&#39;decision tree&#39;</span><span class="p">,</span> 
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train_noisy</span><span class="p">,</span> <span class="n">y_test</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test set: 0.746
+</pre></div>
+</div>
+<img alt="../../../_images/367de13a701b88db31ff239bf525d189f020dc856a623dbfe32029bf0a45bab4.png" src="../../../_images/367de13a701b88db31ff239bf525d189f020dc856a623dbfe32029bf0a45bab4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">plot_tree</span><span class="p">(</span>
+    <span class="n">tree_model_from_noisy_y</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> 
+    <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">feature_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;x2&#39;</span><span class="p">]</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/e853e0ffa910ae352148e8f3ffc3a2abae22e79f55e727eb61f5d089ab11f375.png" src="../../../_images/e853e0ffa910ae352148e8f3ffc3a2abae22e79f55e727eb61f5d089ab11f375.png" />
+</div>
+</div>
+<p>This tree is <strong>much</strong> more difficult to interpret! Tracing any individual prediction may require us to go down up to 15 levels deep: and, this is just for a simple two-dimensional toy dataset! In real-world datasets in higher dimensions, trees can be even deeper.</p>
+</section>
+<section id="interpreting-random-forests">
+<h3>Interpreting Random Forests<a class="headerlink" href="#interpreting-random-forests" title="Link to this heading">#</a></h3>
+<p>Unfortunately, random forests are even worse: instead of interpreting one potentially large tree, we must simultaneously interpret hundreds of them! This is a critical weakness of random forests: while they often achieve excellent accuracy, they are often difficult to interpret.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/5vrzxIyGU4w"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="explanations-for-black-box-models">
+<h3>Explanations for Black-Box Models<a class="headerlink" href="#explanations-for-black-box-models" title="Link to this heading">#</a></h3>
+<p><em>Coming soon</em></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/1odBKmKSPG0"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/chapters/03"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_uncertainty_quantification.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Uncertainty Quantification</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07_neural_networks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Neural networks and backpropagation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">Definitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-and-contrasting-logistic-regression-and-k-nearest-neighbors">Comparing and Contrasting: Logistic Regression and <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-toy-dataset">A Toy Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-logistic-regression-to-the-toy-dataset">Applying Logistic Regression to the Toy Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-a-k-nearest-neighbor-classifier-to-the-toy-dataset">Applying a <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbor Classifier to the Toy Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pros-and-cons-of-logistic-regression-and-k-nearest-neighbors">Pros and Cons of Logistic Regression and <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic regression</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors"><span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees-and-random-forests">Decision trees and random forests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">Decision trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noisy-data-when-decision-trees-fail">Noisy Data: When Decision Trees Fail</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forests">Random Forests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-aggregation-bagging">Bootstrap Aggregation (Bagging)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-feature-selection">Random feature selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretability">Interpretability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-logistic-regression">Interpreting logistic regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-logistic-regression-with-feature-engineering">Interpreting logistic regression with feature engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explaining-predictions-from-k-nearest-neighbors">Explaining Predictions from k-Nearest Neighbors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpeting-a-decision-tree">Interpeting a Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-random-forests">Interpreting Random Forests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanations-for-black-box-models">Explanations for Black-Box Models</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Data 102 Staff
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

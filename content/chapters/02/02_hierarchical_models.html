@@ -1,0 +1,1085 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bayesian Hierarchical Models &#8212; Data, Inference, and Decisions</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/chapters/02/02_hierarchical_models';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Graphical Models, Probability Distributions, and Independence" href="03_graphical_models.html" />
+    <link rel="prev" title="Parameter estimation and Bayesian Inference Fundamentals" href="01_parameter_estimation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Data, Inference, and Decisions</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data, Inference, and Decisions
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/intro.html">Chapter 1: Binary Decision-Making</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/01_decisions_and_errors.html">Binary Decision-Making and Error Rates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/02_hypothesis_testing.html">Hypothesis Testing and p-Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/03_multiple_tests.html">Multiple Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/04_binary_classification.html">Binary Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/05_decision_theory.html">Decision Theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Chapter 2: Bayesian modeling</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_parameter_estimation.html">Parameter Estimation and Bayesian Inference Fundamentals</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Hierarchical Bayesian Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_graphical_models.html">Graphical Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_inference.html">Bayesian Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_inference_with_sampling.html">Bayesian Inference with Sampling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/intro.html">Chapter 3: Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/01_prediction.html">Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/02_regression_review.html">Linear Regression Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/03_glms.html">Generalized Linear Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/04_model_checking.html">Model Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/05_uncertainty_quantification.html">Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/06_nonparametric.html">Nonparametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/07_neural_networks.html">Neural Networks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/intro.html">Chapter 4: Causal Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/01_association_correlation_causation.html">Understanding Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/02_quantifying_association.html">Quantifying Association</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/03_causality_potential_outcomes.html">Causality and Potential Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/04_randomized_experiments.html">Causality in Randomized Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/05_observational_studies_unconfoundedness.html">Causality in Observational Studies: Unconfoundedness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/06_instrumental_variables.html">Causality in Observational Studies: Natural Experiments</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/intro.html">Chapter 5: Tail Bounds and Concentration Inequalities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/01_concentration.html">Tail Bounds and Concentration Inequalities</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ds-102/ds-102-book/issues/new?title=Issue%20on%20page%20%2Fcontent/chapters/02/02_hierarchical_models.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/chapters/02/02_hierarchical_models.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bayesian Hierarchical Models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-understanding-kidney-cancer-death-risk">Example: Understanding Kidney Cancer Death Risk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-hierarchical-modeling-as-a-middle-ground">Bayesian Hierarchical Modeling as a Middle Ground</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-prior">Choosing the Prior</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#uninformative-prior">Uninformative Prior</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#educated-guess">Educated Guess</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-bayes">Empirical Bayes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#full-hierarchical-model">Full Hierarchical Model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-in-the-kidney-cancer-dataset">Bias in the Kidney Cancer Dataset</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-example-gaussian-mixture-model-for-exoplanet-habitability">(Optional) Example: Gaussian Mixture Model for Exoplanet Habitability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exoplanet-data">Exoplanet Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-gaussian-mixture-model-specifying-a-probability-model-for-the-exoplanet-data">(Optional) Gaussian Mixture Model: Specifying a Probability Model for the Exoplanet Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-models-a-more-general-definition">Hierarchical Models: a more general definition</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bayesian-hierarchical-models">
+<h1>Bayesian Hierarchical Models<a class="headerlink" href="#bayesian-hierarchical-models" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">YouTubeVideo</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ve seen so far that a Bayesian approach can be useful in cases where we have prior domain knowledge that we want to incorporate into our model. We’ve also seen that the effect of choosing a prior depends heavily on how much data we have: the less data we have, the more our conclusions tilt toward the prior.</p>
+<p>In many cases, we may not have as much external prior knowledge, and we want to rely on parts of the dataset that are larger to help offset parts of the dataset that are smaller. We’ll make this (very) abstract idea concrete with an example looking at kidney cancer deaths in the US between 1980 and 1989. The data used in this section, as well as inspiration for the modeling and analysis, comes from <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian Data Analysis</a> pp 47-51. The cleaned version of the data came from <a class="reference external" href="https://github.com/robinryder/BDA-kidney">Robin Ryder</a>. Note that the dataset suffers from a severe bias: it only contains information on white men. We’ll discuss issues with this later in this section.</p>
+<p>We’ll walk through the process of setting up a model for this more complex dataset, and in the process see several advantages and perspectives on Bayesian models.</p>
+<section id="example-understanding-kidney-cancer-death-risk">
+<h2>Example: Understanding Kidney Cancer Death Risk<a class="headerlink" href="#example-understanding-kidney-cancer-death-risk" title="Link to this heading">#</a></h2>
+<p>Before we can start modeling, we must first understand the data. We’ll focus on the following columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code>: the US state</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Location</span></code>: the county and state as a string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fips</span></code>, which provides the <a class="reference external" href="https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code">FIPS code</a> for each county: this is a standard identifier that can often be used to join datasets with county-level information.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dc</span></code> and <code class="docutils literal notranslate"><span class="pre">dc.2</span></code>: the number of kidney cancer deaths between 1980-1984 and 1985-1989, respectively</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pop</span></code> and <code class="docutils literal notranslate"><span class="pre">pop.2</span></code>: the population between 1980-1984 and 1985-1989, respectively</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kc_full</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;kidney_cancer_1980.csv&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="c1"># There are many other interesting columns, but we&#39;ll focus on these:</span>
+<span class="n">kc</span> <span class="o">=</span> <span class="n">kc_full</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;dc&#39;</span><span class="p">,</span> <span class="s1">&#39;dc.2&#39;</span><span class="p">,</span> <span class="s1">&#39;pop&#39;</span><span class="p">,</span> <span class="s1">&#39;pop.2&#39;</span><span class="p">]]</span>
+<span class="n">kc</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>Location</th>
+      <th>dc</th>
+      <th>dc.2</th>
+      <th>pop</th>
+      <th>pop.2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ALABAMA</td>
+      <td>Autauga County, Alabama</td>
+      <td>2</td>
+      <td>1</td>
+      <td>61921</td>
+      <td>64915</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ALABAMA</td>
+      <td>Baldwin County, Alabama</td>
+      <td>7</td>
+      <td>15</td>
+      <td>170945</td>
+      <td>195253</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ALABAMA</td>
+      <td>Barbour County, Alabama</td>
+      <td>0</td>
+      <td>1</td>
+      <td>33316</td>
+      <td>33987</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ALABAMA</td>
+      <td>Bibb County, Alabama</td>
+      <td>0</td>
+      <td>1</td>
+      <td>30152</td>
+      <td>31175</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ALABAMA</td>
+      <td>Blount County, Alabama</td>
+      <td>3</td>
+      <td>5</td>
+      <td>88342</td>
+      <td>91547</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>For simplicity, we’ll focus our analysis on 1980-1984. Our goal will be to understand <strong>in which counties people are at the highest risk of kidney cancer death</strong>. This could help inform public health actions, or could reveal information about underlying carcinogens (e.g., proximity to chemical treatment plants, etc.) that should be investigated and remedied.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kc</span><span class="p">[</span><span class="s1">&#39;rate_nopool&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kc</span><span class="p">[</span><span class="s1">&#39;dc&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">kc</span><span class="p">[</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">kc</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;rate_nopool&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;rate_nopool&#39;, ylabel=&#39;Count&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/8a0c7f2fb0e4ac7472171324c6f7a4e71d50dd08c21fd8aec37813c334f3fe17.png" src="../../../_images/8a0c7f2fb0e4ac7472171324c6f7a4e71d50dd08c21fd8aec37813c334f3fe17.png" />
+</div>
+</div>
+<p>From this, it appears that most counties have a rate between 1 in 100,000 (<span class="math notranslate nohighlight">\(0.00001\)</span>) and 1 in 10,000 (<span class="math notranslate nohighlight">\(0.0001\)</span>), but a sizeable number have a rate of 0.</p>
+<p>If our goal is merely to characterize exactly what happened in each county from 1980-1984, this visualization could be enough. However, our goal is to understand the risk of kidney cancer death in each county, in a way that could help inform public health. This motivates the definition of our parameter of interest: <strong>for county <span class="math notranslate nohighlight">\(i\)</span>, what is each person’s average risk of dying from kidney cancer?</strong></p>
+<p>Intuitively, we can see that in counties with very low population, this dataset will provide a poor estimate of this parameter. Take, for example, a hypothetical county with only 10 people. Because the rate we’re interested in is close to 1 in 10,000, we’re very likely to see 0 deaths, but that doesn’t mean that the risk for these 10 people is 0! We can see this empirically:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">kc</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pop&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;rate_nopool&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/5375fc6a131901611b7a32149ef4a8849b498ec2f3fd4b40fd973a79afc95a03.png" src="../../../_images/5375fc6a131901611b7a32149ef4a8849b498ec2f3fd4b40fd973a79afc95a03.png" />
+</div>
+</div>
+<p>For larger counties, our estimates are consistently between <span class="math notranslate nohighlight">\(0.00002\)</span> and <span class="math notranslate nohighlight">\(0.00008\)</span>, but for the small counties, the estimates have much higher variability.</p>
+<p>Here, we have a situation where we have a very large amount of data (in fact, our dataset contains a census of the entire population of interest), but we’re trying to quantify a relatively rare phenomenon. Next, we’ll see how Bayesian inference can help us leverage the more certain information from large counties to make good inferences for small counties.</p>
+</section>
+<section id="bayesian-hierarchical-modeling-as-a-middle-ground">
+<h2>Bayesian Hierarchical Modeling as a Middle Ground<a class="headerlink" href="#bayesian-hierarchical-modeling-as-a-middle-ground" title="Link to this heading">#</a></h2>
+<p>We can consider the approach we took earlier as one extreme of a spectrum: we estimated the death rate for each county separately, and didn’t pool or share any information across counties at all.</p>
+<p>On the opposite extreme of the spectrum, we could pool all the data from all the counties together:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_pop</span> <span class="o">=</span> <span class="n">kc</span><span class="p">[</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">total_dc</span> <span class="o">=</span> <span class="n">kc</span><span class="p">[</span><span class="s1">&#39;dc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">overall_rate</span> <span class="o">=</span> <span class="n">total_dc</span> <span class="o">/</span> <span class="n">total_pop</span>
+<span class="n">overall_rate</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(4.856485743364176e-05)
+</pre></div>
+</div>
+</div>
+</div>
+<p>While this provides a good estimate of the rate overall, it obscures variability across counties, and prevents us from making county-level inferences or finding locations most in need of targeting.</p>
+<p>To achieve a middle ground between these two extremes, we’ll use a <strong>Bayesian hierarchical model</strong>:</p>
+<ul class="simple">
+<li><p>For each county, let <span class="math notranslate nohighlight">\(\theta_i \in [0, 1]\)</span> be a random variable indicating the risk of kidney cancer death for an individual in that county.</p></li>
+<li><p>We’ll use the same prior distribution for each county: a Beta<span class="math notranslate nohighlight">\((a, b)\)</span> (for values of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> yet to be determined), but each is a separate random variable and will have a separate posterior distribution.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(y_i\)</span> be a <strong>binomial</strong> random variable for each county indicating the number of kidney cancer deaths for that county, with parameters <span class="math notranslate nohighlight">\(n_i\)</span> (the county population) and <span class="math notranslate nohighlight">\(\theta_i\)</span> (the county-level risk).</p></li>
+</ul>
+<p>Notationally, we can write the above bullet points as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\theta_i &amp;\sim \mathrm{Beta}(a, b), &amp; i \in \{1, 2, \ldots\} \\
+y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots, C\}
+\end{align*}
+\end{split}\]</div>
+<p>We saw in the last section that if the likelihood for a sequence of random variables <span class="math notranslate nohighlight">\(x_i\)</span> is Bernoulli<span class="math notranslate nohighlight">\((\theta)\)</span> and the prior for <span class="math notranslate nohighlight">\(\theta\)</span> is Beta<span class="math notranslate nohighlight">\((a, b)\)</span>, then the posterior for <span class="math notranslate nohighlight">\(\theta\)</span> is Beta<span class="math notranslate nohighlight">\(\left(a + \sum x_i, b + n - \sum x_i\right)\)</span>. We can also show that <strong>if the likelihood a random variable <span class="math notranslate nohighlight">\(y\)</span> is Binomial<span class="math notranslate nohighlight">\((n, \theta)\)</span> and the prior for <span class="math notranslate nohighlight">\(\theta\)</span> is Beta<span class="math notranslate nohighlight">\((a, b)\)</span>, then the posterior for <span class="math notranslate nohighlight">\(\theta\)</span> is Beta<span class="math notranslate nohighlight">\((a + y, b + n - y)\)</span>.</strong> In other words, just as the beta distribution is the conjugate prior for the Bernoulli likelihood, it is also the conjugate prior for the binomial likelihood. (It also happens to be the conjugate prior for the geometric likelihood as well!)</p>
+<p>Putting all this together, we can now compute the posterior distribution. Instead of a single parameter <span class="math notranslate nohighlight">\(\theta\)</span>, we now have <span class="math notranslate nohighlight">\(C\)</span> parameters, <span class="math notranslate nohighlight">\(\theta_1, \ldots, \theta_C\)</span>. The posterior distribution is the joint distribution of all of these random variables, conditioned on all of the observed data:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C) 
+    &amp;\propto \overbrace{p(y_1, \ldots, y_c | \theta_1, \ldots, \theta_C)}^{\text{likelihood}}\,
+             \overbrace{p(\theta_1, \ldots, \theta_C)}^{\text{prior}} \\
+    &amp;= \prod_{i=1}^C \theta_i^{a+y_i-1}(1-\theta_i)^{b + n_i - y_i - 1}
+\end{align*}
+\end{split}\]</div>
+<p>From this, we can conclude that we can compute the posterior independently for every county:</p>
+<div class="math notranslate nohighlight">
+\[
+\theta_i | y_i \sim \mathrm{Beta}(a + y_i, b + n_i - y_i)
+\]</div>
+<p>Note that according to the posterior distribution <span class="math notranslate nohighlight">\(p(\theta_1, \ldots, \theta_C | y_1, \ldots, y_C)\)</span>, the distribution for each county’s parameter is independent of all other counties, because the joint distribution can be written as a product of the marginal distributions. But, they all share the parameters <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> in common.</p>
+<section id="choosing-the-prior">
+<h3>Choosing the Prior<a class="headerlink" href="#choosing-the-prior" title="Link to this heading">#</a></h3>
+<p>Just as in the earlier example, we’re now left with a critically important question: <strong>how do we choose <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span></strong>? We’ll examine four approaches, in increasing order of complexity and sophistication:</p>
+<ol class="arabic simple">
+<li><p>Uninformative prior</p></li>
+<li><p>Educated guess</p></li>
+<li><p>Empirical Bayes</p></li>
+<li><p>Hierarchical model</p></li>
+</ol>
+<section id="uninformative-prior">
+<h4>Uninformative Prior<a class="headerlink" href="#uninformative-prior" title="Link to this heading">#</a></h4>
+<p>If we don’t know anything about the data, we can choose an <strong>uninformative prior</strong>: in other words, one that provides as little information as possible. In this example, we might choose a uniform distribution over <span class="math notranslate nohighlight">\([0, 1]\)</span> (i.e., <span class="math notranslate nohighlight">\(a = b = 1\)</span>). While this avoids the problem of specifying a prior, it also isn’t particularly useful. If we use such a weak prior, we’re saying that risk values closer to <span class="math notranslate nohighlight">\(0.8\)</span> are just as likely as values closer to <span class="math notranslate nohighlight">\(0.0001\)</span>: this clearly does not align with what we already know about the problem. If we take this approach and then compute the posterior distributions, we would see results similar to the no-pooling estimates earlier.</p>
+</section>
+<section id="educated-guess">
+<h4>Educated Guess<a class="headerlink" href="#educated-guess" title="Link to this heading">#</a></h4>
+<p>A good prior distribution should encode our knowledge about the quantity of interest. In this case, everything we know comes from what we’ve done here: above, we estimated an overall rate of about 4.9 in 10,000. If we choose <span class="math notranslate nohighlight">\(a = 5\)</span> and <span class="math notranslate nohighlight">\(b = 9995\)</span>, then the mean of the prior is <span class="math notranslate nohighlight">\(5 \times 10^{-5}\)</span>. So, one possible option is Beta<span class="math notranslate nohighlight">\((5, 9995)\)</span>.</p>
+<p>Note that this is somewhat arbitrary: we could have just as easily chosen <span class="math notranslate nohighlight">\(a = 10\)</span> and <span class="math notranslate nohighlight">\(b = 19990\)</span>, or <span class="math notranslate nohighlight">\(a = 50\)</span> and <span class="math notranslate nohighlight">\(b = 99950\)</span>, and obtained the same mean.</p>
+</section>
+<section id="empirical-bayes">
+<h4>Empirical Bayes<a class="headerlink" href="#empirical-bayes" title="Link to this heading">#</a></h4>
+<p>Empirical Bayes is a hybrid Bayesian-frequentist approach that uses frequentist methods to find guesses or prior distributions for quantities of interest. In this case, we’ll use a frequentist approach to make a better guess for <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<p>In particular, we saw earlier that the smaller counties produced naive estimates that varied too much. What if we just looked at the larger counties? We’ll start by deciding on a (somewhat arbitrary) threshold of big versus small counties. From the scatterplot above, we can see that after a certain size, the non-pooled estimates seem to be much less variable. We can zoom in to decide on a threshold:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">kc</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pop&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;rate_nopool&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="mf">3e5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.0004</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.0004</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/ddc43810e7653d32d616c8264b6c78bed6cee08b649243160acabdc75e21f1f8.png" src="../../../_images/ddc43810e7653d32d616c8264b6c78bed6cee08b649243160acabdc75e21f1f8.png" />
+</div>
+</div>
+<p>Based on this, we’ll use 300,000 as a cutoff (the dotted line), and ignore counties smaller than this when estimating the parameters of the prior:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kc_large_counties</span> <span class="o">=</span> <span class="n">kc</span><span class="p">[</span><span class="n">kc</span><span class="p">[</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">300000</span><span class="p">]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">kc_large_counties</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;rate_nopool&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;rate_nopool&#39;, ylabel=&#39;Count&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/4150bd9d7f9c55c4d1e72bc8390e564d190ca9b95ac5c0d2dd40a380a2477fd1.png" src="../../../_images/4150bd9d7f9c55c4d1e72bc8390e564d190ca9b95ac5c0d2dd40a380a2477fd1.png" />
+</div>
+</div>
+<p>We’ll use this empirical distribution (or rather, a slightly modified version of it) as our prior: this is where the “empirical” in empirical Bayes comes from. Since we want to use a beta prior, we need to fit a beta distribution to this data. In other words, we need to find parameters <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> that are a good fit for this sequence of observations (in the histogram above).</p>
+<p>This is exactly the problem we solved in the last section using maximum likelihood! We’ll use maximum likelihood to fit a beta distribution to these data. This time, instead of deriving the MLEs for the Beta distribution, we’ll use scipy to do it for us:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="c1"># The last two arguments tell scipy that it shouldn&#39;t try to shift or scale our beta distribution</span>
+<span class="n">a_hat</span><span class="p">,</span> <span class="n">b_hat</span><span class="p">,</span> <span class="n">loc_</span><span class="p">,</span> <span class="n">scale_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">kc_large_counties</span><span class="p">[</span><span class="s1">&#39;rate_nopool&#39;</span><span class="p">],</span> <span class="n">floc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fscale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_hat</span><span class="p">,</span> <span class="n">b_hat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.27022825069773 195581.04128336947
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using this approach, our prior would be Beta<span class="math notranslate nohighlight">\((9.27, 195581)\)</span>. To summarize what we did:</p>
+<ul class="simple">
+<li><p>We want to find the parameters <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> of the prior, using our data to help us since we don’t have any domain knowledge</p></li>
+<li><p>We determined that we trust the data from the large counties, but not the smaller counties (because they are too variable). Note that this is an implicit <strong>assumption</strong> which could lead us astray: for example, if larger counties are biased toward lower or higher rates, then using them to estimate parameters of the prior is a bad idea.</p></li>
+<li><p>We looked at the naively estimated rates for the large counties only, and fit a beta distribution to those, and then used that beta distribution as our prior.</p></li>
+</ul>
+<p>Let’s compare the results for these two approaches. For ease of visualization, we’ll look at a histogram of each county’s LMSE estimate:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_guess</span><span class="p">,</span> <span class="n">b_guess</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">19995</span>  <span class="c1"># educated guess</span>
+<span class="n">a_eb</span><span class="p">,</span> <span class="n">b_eb</span> <span class="o">=</span> <span class="n">a_hat</span><span class="p">,</span> <span class="n">b_hat</span>  <span class="c1"># empirical bayes</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_posterior</span><span class="p">(</span><span class="n">kc</span><span class="p">,</span> <span class="n">prior_a</span><span class="p">,</span> <span class="n">prior_b</span><span class="p">):</span>
+    <span class="n">posterior_a</span> <span class="o">=</span> <span class="n">prior_a</span> <span class="o">+</span> <span class="n">kc</span><span class="p">[</span><span class="s1">&#39;dc&#39;</span><span class="p">]</span>
+    <span class="n">posterior_b</span> <span class="o">=</span> <span class="n">prior_b</span> <span class="o">+</span> <span class="p">(</span><span class="n">kc</span><span class="p">[</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">kc</span><span class="p">[</span><span class="s1">&#39;dc&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">posterior_a</span><span class="p">,</span> <span class="n">posterior_b</span>
+<span class="n">kc</span><span class="p">[</span><span class="s1">&#39;posterior_a_guess&#39;</span><span class="p">],</span> <span class="n">kc</span><span class="p">[</span><span class="s1">&#39;posterior_b_guess&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_posterior</span><span class="p">(</span><span class="n">kc</span><span class="p">,</span> <span class="n">a_guess</span><span class="p">,</span> <span class="n">b_guess</span><span class="p">)</span>
+<span class="n">kc</span><span class="p">[</span><span class="s1">&#39;posterior_a_eb&#39;</span><span class="p">],</span> <span class="n">kc</span><span class="p">[</span><span class="s1">&#39;posterior_b_eb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_posterior</span><span class="p">(</span><span class="n">kc</span><span class="p">,</span> <span class="n">a_eb</span><span class="p">,</span> <span class="n">b_eb</span><span class="p">)</span>
+
+<span class="c1"># For a Beta(a, b) distribution, the mean is a / (a + b)</span>
+<span class="n">kc</span><span class="p">[</span><span class="s1">&#39;lmse_guess&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kc</span><span class="p">[</span><span class="s1">&#39;posterior_a_guess&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">kc</span><span class="p">[</span><span class="s1">&#39;posterior_a_guess&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">kc</span><span class="p">[</span><span class="s1">&#39;posterior_b_guess&#39;</span><span class="p">])</span>
+<span class="n">kc</span><span class="p">[</span><span class="s1">&#39;lmse_eb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kc</span><span class="p">[</span><span class="s1">&#39;posterior_a_eb&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">kc</span><span class="p">[</span><span class="s1">&#39;posterior_a_eb&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">kc</span><span class="p">[</span><span class="s1">&#39;posterior_b_eb&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.0003</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">kc</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;lmse_eb&#39;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Empirical Bayes prior&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">kc</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;lmse_guess&#39;</span><span class="p">,</span>  <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Educated guess prior&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.0003</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;LMSE estimate for each county&#39;s risk&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd044ab3920&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/81346b3d1e5ece2b7a4bfdb4152c971271438046f40a6b4d2fc7e3d14ede1e5e.png" src="../../../_images/81346b3d1e5ece2b7a4bfdb4152c971271438046f40a6b4d2fc7e3d14ede1e5e.png" />
+</div>
+</div>
+<p>In both cases, we no longer see estimates of 0. Note that because the empirical Bayes prior was stronger (i.e., less variable due to larger values of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>), the posterior estimates fall in a narrower range.</p>
+</section>
+<section id="full-hierarchical-model">
+<h4>Full Hierarchical Model<a class="headerlink" href="#full-hierarchical-model" title="Link to this heading">#</a></h4>
+<p>Philosophically, taking a Bayesian approach means that we’re deciding to treat unknown quantities as random variables, rather than fixed parameters. From what we’ve seen so far, in this model, <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are important unknown quantities that have a fairly significant effect on the outcome of our inference. So, we’ll now try treating them as random variables. Note that we now have two levels of unknown random variables: <span class="math notranslate nohighlight">\(\theta_i\)</span>, which we’ve already established, are the county-level risk probabilities. <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are now US-level average parameters that reflect the risk across all counties. This is a common feature of hierarchical models: one set of variables is closely linked to the data for each group (in this case, county), and one set of variables represents more global information (in this case, the entire US).</p>
+<p>But this leads to yet another modeling question: <strong>what prior distribution do we choose for <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span></strong>?</p>
+<p>Unfortunately, there is no convenient distribution that is a conjugate prior for the parameters of the beta distribution. While there are many possible distributions we could use, we’ll use a uniform distribution out of simplicity and convenience. But, we’re still left with the question of how to choose the parameters of that uniform distribution! Since we know that <span class="math notranslate nohighlight">\(b &gt;&gt; a\)</span>, we’ll make the somewhat arbitrary choice of saying <span class="math notranslate nohighlight">\(a \sim \mathrm{Uniform}(0, 50)\)</span> and <span class="math notranslate nohighlight">\(b \sim \mathrm{Uniform}(0, 300000)\)</span>. We can then write out the full model:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+a &amp;\sim \mathrm{Uniform}(0, 50) \\
+b &amp;\sim \mathrm{Uniform}(0, 300000) \\
+\theta_i &amp;\sim \mathrm{Beta}(a, b), &amp; i \in \{1, 2, \ldots\} \\
+y_i &amp;\sim \mathrm{Binomial}(\theta_i, n_i), &amp; i \in \{1, 2, \ldots\}
+\end{align*}
+\end{split}\]</div>
+<p>Unfortunately, there is no convenient way to compute the posterior distribution here: we must resort to approximate techniques. We’ll return to this model in the next section, after we develop tools for approximate inference.</p>
+</section>
+</section>
+<section id="bias-in-the-kidney-cancer-dataset">
+<h3>Bias in the Kidney Cancer Dataset<a class="headerlink" href="#bias-in-the-kidney-cancer-dataset" title="Link to this heading">#</a></h3>
+<p><em>The content in this section is under active development and is subject to change.</em></p>
+<p>As mentioned earlier, the dataset as provided only contains data about white men. However, kidney cancer risk is not uniform, as seen in this data from the NIH’s National Cancer Institute:</p>
+<p><img alt="explorer-graph.png" src="../../../_images/explorer-graph.png" /></p>
+<p>From this, we can see that there are clearly racial disparities in kidney cancer occurrence. Further, any county-level effects that we see may have racial disparities as well. How might we solve this? Unfortunately, in this case, because we don’t have much insight into how the data were collected, and because they were collected so long ago, we can’t improve our analysis.</p>
+</section>
+</section>
+<section id="optional-example-gaussian-mixture-model-for-exoplanet-habitability">
+<h2>(Optional) Example: Gaussian Mixture Model for Exoplanet Habitability<a class="headerlink" href="#optional-example-gaussian-mixture-model-for-exoplanet-habitability" title="Link to this heading">#</a></h2>
+<p><em>The model in this section is loosely based on work in the paper <a class="reference external" href="https://arxiv.org/abs/1708.00605">Classifying Exoplanets with Gaussian Mixture Model</a> by Kulkarni and Desai.</em></p>
+<p>In this section, we’ll look at a different kind of hierarchical model, where the groups are slightly less explicit. This kind of model is usually known as a <em>mixture model</em>.</p>
+<section id="exoplanet-data">
+<h3>Exoplanet Data<a class="headerlink" href="#exoplanet-data" title="Link to this heading">#</a></h3>
+<p>We’ll work with a dataset of <a class="reference external" href="https://science.nasa.gov/exoplanets/">exoplanets</a>: planets outside our solar system. Each row in the <code class="docutils literal notranslate"><span class="pre">planets</span></code> dataframe contains information about 517 exoplanets from NASA. We’ll use it to explore which planets might be able to support life as we know it.</p>
+<p>The dataset contains the following columns.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: the name of the exoplanet</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">orbital_period</span></code>: how many days it takes for the planet to orbit its star</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mass</span></code>: the mass of the planet, in multiples of Earth’s mass (e.g., the second planet, 55 Cnc e, has a mass 73.6% of Earth’s)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius</span></code>: the radius of the planet, in multiples of Earth’s radius (e.g., the second planet, 55 Cnc e, has a radius almost twice the size of Earth’s)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">star_temperature</span></code>: the temperature of the star that the planet orbits, in Kelvin</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">density</span></code>: the density of the planet, in g/cm^3</p></li>
+</ul>
+<p>Note that in astronomy, it’s more common to measure mass and radius in terms of the planet Jupiter rather than Earth (Jupiter is about 11 times the radius of earth and about 317 times the mass), but we’re using Earth-based measurements since we’re going to use Earth as a standard for habitability.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">planets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;exoplanets.csv&#39;</span><span class="p">)</span>
+<span class="n">planets</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>orbital_period</th>
+      <th>mass</th>
+      <th>radius</th>
+      <th>star_temperature</th>
+      <th>density</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2MASS J21402931+1625183 A b</td>
+      <td>7336.500000</td>
+      <td>6657.910000</td>
+      <td>10.312188</td>
+      <td>2300.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>55 Cnc e</td>
+      <td>0.736539</td>
+      <td>8.078476</td>
+      <td>1.905513</td>
+      <td>5196.0</td>
+      <td>6.40</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BD+20 594 b</td>
+      <td>41.685500</td>
+      <td>16.299962</td>
+      <td>2.230571</td>
+      <td>5766.0</td>
+      <td>7.89</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CoRoT-1 b</td>
+      <td>1.508956</td>
+      <td>327.334000</td>
+      <td>16.701261</td>
+      <td>5950.0</td>
+      <td>0.38</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CoRoT-10 b</td>
+      <td>13.240600</td>
+      <td>873.950000</td>
+      <td>10.872633</td>
+      <td>5075.0</td>
+      <td>3.70</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We’ll focus our analysis on the radius:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">planets</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;radius&#39;, ylabel=&#39;Density&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/e6f59fee12d6669029d031cbc8e970cbeacbb790a857ca67d0394819daaf8022.png" src="../../../_images/e6f59fee12d6669029d031cbc8e970cbeacbb790a857ca67d0394819daaf8022.png" />
+</div>
+</div>
+<p>We can see that there are two groups of planets: those with relatively small radii (closer to Earth-sized), and those with larger radii (closer to Jupiter-sized). We can see that if we try to fit a single Gaussian distribution to this data, the resulting fit is rather poor:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">radii</span> <span class="o">=</span> <span class="n">planets</span><span class="p">[</span><span class="s1">&#39;radius&#39;</span><span class="p">]</span>
+<span class="n">radius_mean</span><span class="p">,</span> <span class="n">radius_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">radii</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">radii</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">planets</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">radius_mean</span><span class="p">,</span> <span class="n">radius_std</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fd070f99df0&gt;]
+</pre></div>
+</div>
+<img alt="../../../_images/ca690f940d308c62b7b3f43b6d8ad692bdaa7179b919ab76b86cbc0207862dba.png" src="../../../_images/ca690f940d308c62b7b3f43b6d8ad692bdaa7179b919ab76b86cbc0207862dba.png" />
+</div>
+</div>
+<p>Visually, the result is somewhat obvious: the data fall into two distinct groups, so trying to impose one Gaussian distribution produces a poor fit. Instead, what we want is a more sophisticated model that can directly model these two groups, and help us infer properties of each group separately.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/lCbn8UrJ8-U"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="optional-gaussian-mixture-model-specifying-a-probability-model-for-the-exoplanet-data">
+<h3>(Optional) Gaussian Mixture Model: Specifying a Probability Model for the Exoplanet Data<a class="headerlink" href="#optional-gaussian-mixture-model-specifying-a-probability-model-for-the-exoplanet-data" title="Link to this heading">#</a></h3>
+<p><em>Text coming soon: see video</em></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/KaD7uJeK_JI"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+</section>
+<section id="hierarchical-models-a-more-general-definition">
+<h2>Hierarchical Models: a more general definition<a class="headerlink" href="#hierarchical-models-a-more-general-definition" title="Link to this heading">#</a></h2>
+<p><em>Coming soon</em></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/chapters/02"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_parameter_estimation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Parameter estimation and Bayesian Inference Fundamentals</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_graphical_models.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Graphical Models, Probability Distributions, and Independence</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-understanding-kidney-cancer-death-risk">Example: Understanding Kidney Cancer Death Risk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-hierarchical-modeling-as-a-middle-ground">Bayesian Hierarchical Modeling as a Middle Ground</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-prior">Choosing the Prior</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#uninformative-prior">Uninformative Prior</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#educated-guess">Educated Guess</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-bayes">Empirical Bayes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#full-hierarchical-model">Full Hierarchical Model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-in-the-kidney-cancer-dataset">Bias in the Kidney Cancer Dataset</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-example-gaussian-mixture-model-for-exoplanet-habitability">(Optional) Example: Gaussian Mixture Model for Exoplanet Habitability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exoplanet-data">Exoplanet Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-gaussian-mixture-model-specifying-a-probability-model-for-the-exoplanet-data">(Optional) Gaussian Mixture Model: Specifying a Probability Model for the Exoplanet Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-models-a-more-general-definition">Hierarchical Models: a more general definition</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Data 102 Staff
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
