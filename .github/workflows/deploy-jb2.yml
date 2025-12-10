@@ -28,7 +28,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     defaults:
-      working-directory: ds-102-book
+      run:
+        working-directory: ds-102-book
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
