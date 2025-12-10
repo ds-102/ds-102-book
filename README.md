@@ -1,5 +1,7 @@
 # Data, Inference, and Decisions
 
+[![Jupyter Book (via myst) GitHub Pages Deploy](https://github.com/ds-102/ds-102-book/actions/workflows/deploy-jb2.yml/badge.svg)](https://github.com/ds-102/ds-102-book/actions/workflows/deploy-jb2.yml) [![Accessibility Checks](https://github.com/ds-102/ds-102-book/actions/workflows/a11y.yml/badge.svg)](https://github.com/ds-102/ds-102-book/actions/workflows/a11y.yml)
+
 Textbook for Berkeley's Data 102 course
 
 ## Usage
