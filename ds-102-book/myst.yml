@@ -1,0 +1,74 @@
+version: 1
+project:
+  title: Data, Inference, and Decisions
+  authors:
+    - name: Data 102 Staff
+  github: ds-102/ds-102-book
+  license: CC-BY-SA-4.0
+  settings:
+    output_matplotlib_strings: remove
+  toc:
+    - file: content/intro.md
+    - file: content/chapters/01/intro.md
+      children:
+        - file: content/chapters/01/01_decisions_and_errors.ipynb
+          title: Binary Decision-Making and Error Rates
+        - file: content/chapters/01/02_hypothesis_testing.ipynb
+          title: Hypothesis Testing and p-Values
+        - file: content/chapters/01/03_multiple_tests.ipynb
+          title: Multiple Hypothesis Testing
+        - file: content/chapters/01/04_binary_classification.ipynb
+          title: Binary Classification
+        - file: content/chapters/01/05_decision_theory.ipynb
+          title: Decision Theory
+    - file: content/chapters/02/intro.md
+      children:
+        - file: content/chapters/02/01_parameter_estimation.ipynb
+          title: Parameter Estimation and Bayesian Inference Fundamentals
+        - file: content/chapters/02/02_hierarchical_models.ipynb
+          title: Hierarchical Bayesian Models
+        - file: content/chapters/02/03_graphical_models.ipynb
+          title: Graphical Models
+        - file: content/chapters/02/04_inference.ipynb
+          title: Bayesian Inference
+        - file: content/chapters/02/05_inference_with_sampling.ipynb
+          title: Bayesian Inference with Sampling
+    - file: content/chapters/03/intro.md
+      children:
+        - file: content/chapters/03/01_prediction.ipynb
+          title: Prediction
+        - file: content/chapters/03/02_regression_review.ipynb
+          title: Linear Regression Review
+        - file: content/chapters/03/03_glms.ipynb
+          title: Generalized Linear Models
+        - file: content/chapters/03/04_model_checking.ipynb
+          title: Model Checking
+        - file: content/chapters/03/05_uncertainty_quantification.ipynb
+          title: Uncertainty Quantification
+        - file: content/chapters/03/06_nonparametric.ipynb
+          title: Nonparametric Methods
+        - file: content/chapters/03/07_neural_networks.ipynb
+          title: Neural Networks
+    - file: content/chapters/04/intro.md
+      children:
+        - file: content/chapters/04/01_association_correlation_causation.ipynb
+          title: Understanding Association
+        - file: content/chapters/04/02_quantifying_association.ipynb
+          title: Quantifying Association
+        - file: content/chapters/04/03_causality_potential_outcomes.ipynb
+          title: Causality and Potential Outcomes
+        - file: content/chapters/04/04_randomized_experiments.ipynb
+          title: Causality in Randomized Experiments
+        - file: content/chapters/04/05_observational_studies_unconfoundedness.ipynb
+          title: 'Causality in Observational Studies: Unconfoundedness'
+        - file: content/chapters/04/06_instrumental_variables.ipynb
+          title: 'Causality in Observational Studies: Natural Experiments'
+    - file: content/chapters/05/intro.md
+      children:
+        - file: content/chapters/05/01_concentration.ipynb
+          title: Tail Bounds and Concentration Inequalities
+site:
+  options:
+    folders: true
+    hide_authors: true
+  template: book-theme
