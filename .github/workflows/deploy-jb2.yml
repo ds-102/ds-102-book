@@ -27,6 +27,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    defaults:
+      working-directory: ds-102-book
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,8 +39,6 @@ jobs:
           node-version: 18.x
       - name: Install Jupyter Book (via myst)
         run: npm install -g jupyter-book
-      - name: Navigate to Jupyter Book files
-        run: cd ds-102-book
       - name: Build HTML Assets
         run: jupyter-book build --html
       - name: Install uv
@@ -50,7 +50,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './_build/html'
+          path: 'ds-102-book/_build/html'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
