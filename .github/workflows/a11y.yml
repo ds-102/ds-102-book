@@ -16,11 +16,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 1. Setup Python & Build the Book
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
+      # 1. Install Jupyter Book & Build
+      - name: Install Jupyter Book (via myst)
+        run: npm install -g jupyter-book
 
       - name: Build Jupyter Book
         run: jupyter-book build --html
