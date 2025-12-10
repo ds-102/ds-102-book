@@ -4,12 +4,12 @@ project:
   authors:
     - name: Data 102 Staff
   github: ds-102/ds-102-book
+  license: CC-BY-SA-4.0
   settings:
     output_matplotlib_strings: remove
   toc:
     - file: content/intro.md
     - file: content/chapters/01/intro.md
-      title: 'Chapter 1: Binary Decision-Making'
       children:
         - file: content/chapters/01/01_decisions_and_errors.ipynb
           title: Binary Decision-Making and Error Rates
@@ -22,7 +22,6 @@ project:
         - file: content/chapters/01/05_decision_theory.ipynb
           title: Decision Theory
     - file: content/chapters/02/intro.md
-      title: 'Chapter 2: Bayesian modeling'
       children:
         - file: content/chapters/02/01_parameter_estimation.ipynb
           title: Parameter Estimation and Bayesian Inference Fundamentals
@@ -35,7 +34,6 @@ project:
         - file: content/chapters/02/05_inference_with_sampling.ipynb
           title: Bayesian Inference with Sampling
     - file: content/chapters/03/intro.md
-      title: 'Chapter 3: Prediction'
       children:
         - file: content/chapters/03/01_prediction.ipynb
           title: Prediction
@@ -52,7 +50,6 @@ project:
         - file: content/chapters/03/07_neural_networks.ipynb
           title: Neural Networks
     - file: content/chapters/04/intro.md
-      title: 'Chapter 4: Causal Inference'
       children:
         - file: content/chapters/04/01_association_correlation_causation.ipynb
           title: Understanding Association
@@ -67,7 +64,6 @@ project:
         - file: content/chapters/04/06_instrumental_variables.ipynb
           title: 'Causality in Observational Studies: Natural Experiments'
     - file: content/chapters/05/intro.md
-      title: 'Chapter 5: Tail Bounds and Concentration Inequalities'
       children:
         - file: content/chapters/05/01_concentration.ipynb
           title: Tail Bounds and Concentration Inequalities
