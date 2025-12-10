@@ -37,6 +37,8 @@ jobs:
           node-version: 18.x
       - name: Install Jupyter Book (via myst)
         run: npm install -g jupyter-book
+      - name: Navigate to Jupyter Book files
+        run: cd ds-102-book
       - name: Build HTML Assets
         run: jupyter-book build --html
       - name: Install uv
