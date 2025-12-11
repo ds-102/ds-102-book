@@ -73,5 +73,5 @@ site:
     hide_authors: true
     fav_icon: ../favicon.ico
     logo: ../logo.png
-    logo_alt: "Data 102: Data, Inference, and Decisions Textbook"
+    logo_text: "Data 102: Data, Inference, and Decisions Textbook"
   template: book-theme
