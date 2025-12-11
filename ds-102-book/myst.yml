@@ -71,4 +71,7 @@ site:
   options:
     folders: true
     hide_authors: true
+    fav_icon: ../favicon.ico
+    logo: ../logo.png
+    logo_alt: "Data 102: Data, Inference, and Decisions Text "
   template: book-theme
