@@ -13,3 +13,4 @@ jobs:
         with:
           working_directory: ds-102-book
           base_url: '/${{ github.event.repository.name }}'
+          exclude: "iframe[src*='youtube.com'], #movie_player"
