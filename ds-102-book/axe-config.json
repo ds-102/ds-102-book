@@ -1,6 +1,0 @@
-{
-  "exclude": [
-    ["#movie_player"],
-    ["iframe[src*='youtube.com']"]
-  ]
-}
